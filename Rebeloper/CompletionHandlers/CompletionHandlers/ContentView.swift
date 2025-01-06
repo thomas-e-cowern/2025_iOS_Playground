@@ -7,6 +7,25 @@
 
 import SwiftUI
 
+enum CustomError: Error {
+    case connectionError
+    case loginError
+    case unknownError
+}
+
+extension CustomError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .connectionError:
+            return "Couldn't connect to server"
+        case .loginError:
+            return "Couldn't log in"
+        case .unknownError:
+            return "Unknown error"
+        }
+    }
+}
+
 struct ContentView: View {
     
     @State private var name: String = "World!"
@@ -91,7 +110,8 @@ struct ContentView: View {
     func delayedResult(completion: @escaping ((Result<String, Error>)) -> Void) {
 
         delay(2) {
-            completion(.success("Delayed"))
+//            completion(.success("Delayed"))
+            completion(.failure(CustomError.loginError))
         }
     }
     
