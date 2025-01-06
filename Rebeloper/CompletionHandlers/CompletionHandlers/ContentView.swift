@@ -17,11 +17,11 @@ extension CustomError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .connectionError:
-            return "Couldn't connect to server"
+            return "Unfortunatley we couldn't connect to server"
         case .loginError:
-            return "Couldn't log in"
+            return "Unfortunatley we couldn't log you in"
         case .unknownError:
-            return "Unknown error"
+            return " An unknown error has occured"
         }
     }
 }
