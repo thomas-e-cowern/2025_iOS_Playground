@@ -37,12 +37,29 @@ struct ContentView: View {
 //            self.name = name
 //        }
         
-        delayedWithError { result in
-            if result.1 != nil {
-                print("Error: \(result.1!.localizedDescription)")
-                return
+//        delayedWithError { result in
+//            if result.1 != nil {
+//                print("Error: \(result.1!.localizedDescription)")
+//                return
+//            }
+//            self.name = result.0
+//        }
+        
+//        delayedResult { result in
+//            switch result {
+//            case .success(let value):
+//                self.name = value
+//            case .failure(let error):
+//                print("Error: \(error.localizedDescription)")
+//            }
+//        }
+        
+        Task {
+            do {
+                name = try await delayedResult()
+            } catch {
+                print(error.localizedDescription)
             }
-            self.name = result.0
         }
     }
     
@@ -68,6 +85,21 @@ struct ContentView: View {
 
         delay(2) {
             completion(("Wow", nil))
+        }
+    }
+    
+    func delayedResult(completion: @escaping ((Result<String, Error>)) -> Void) {
+
+        delay(2) {
+            completion(.success("Delayed"))
+        }
+    }
+    
+    func delayedResult() async throws -> String {
+        try await withCheckedThrowingContinuation { continuation in
+            delayedResult { result in
+                continuation.resume(with: result)
+            }
         }
     }
     
