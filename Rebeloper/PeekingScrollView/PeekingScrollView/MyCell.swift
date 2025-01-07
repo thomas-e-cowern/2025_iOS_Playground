@@ -41,6 +41,6 @@ struct MyCell: View {
 }
 
 #Preview {
-    MyCell(index: 0, imageName: "7AD9C9B8-C9C2-4080-83A9-F66FB004F64F_1_105_c")
+    MyCell(index: 0, imageName: "Rainbow")
         .frame(width: 360, height: 200)
 }
