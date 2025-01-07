@@ -29,7 +29,6 @@ struct MyCell: View {
         .background {
             Image(imageName)
                 .resizable()
-                .scaledToFit()
         }
         .contentShape(
             RoundedRectangle(cornerRadius: 15)

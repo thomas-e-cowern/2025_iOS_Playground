@@ -18,15 +18,9 @@ struct ContentView: View {
     ]
     
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                ForEach(images, id: \.self) { image in
-                    MyCell(index: image.count, imageName: image.description)
-//                    Image(image)
-//                        .resizable()
-//                        .scaledToFit()
-//                        .padding()
-                }
+        ScrollView {
+            PeekingScrollView(images, contentMargins: 20) { index, image in
+                MyCell(index: index, imageName: image)
             }
         }
         .scrollIndicators(.hidden)
