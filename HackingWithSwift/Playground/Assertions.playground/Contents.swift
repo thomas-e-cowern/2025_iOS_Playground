@@ -18,3 +18,22 @@ default:
     assertionFailure("Rolling a 3 sided dice is never a good idea...")
 }
 
+extension Array {
+    mutating func removeRandom(_ number: Int) {
+        precondition(count > number, "Can't remove \(number) items from an array with \(count) items")
+        
+        for _ in 0..<number {
+            remove(at: Int.random(in: 0..<count))
+        }
+    }
+}
+
+func updateStatus(to newStatus: String) -> String {
+    if newStatus == "active" || newStatus == "inactive" {
+        return "Updating status"
+    }
+    
+    preconditionFailure("Unknown status: \(newStatus)")
+}
+
+updateStatus(to: "New")
