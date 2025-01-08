@@ -30,10 +30,15 @@ extension Array {
 
 func updateStatus(to newStatus: String) -> String {
     if newStatus == "active" || newStatus == "inactive" {
+        print("Status: \(newStatus)")
         return "Updating status"
     }
     
     preconditionFailure("Unknown status: \(newStatus)")
 }
 
-updateStatus(to: "New")
+updateStatus(to: "active")
+
+//guard let url = Bundle.main.url(forResource: "input", withExtension: "json") else {
+//    fatalError("Faliled to locate input.json in bundle")
+//}
