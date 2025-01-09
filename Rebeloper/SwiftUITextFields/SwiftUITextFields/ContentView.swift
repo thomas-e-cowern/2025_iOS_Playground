@@ -41,17 +41,45 @@ extension View {
     }
 }
 
+struct NumericTextField<Value: Numeric>: View {
+    
+    let title: String
+    let mode: NumericTextInputMode
+    @Binding var value: Value
+    
+    
+    init(title: String, mode: NumericTextInputMode = .number, value: Binding<Value>) {
+        self.title = title
+        self.mode = mode
+        self._value = value
+    }
+    
+    @State private var text: String = ""
+    
+    var body: some View {
+        TextField(title, text: $text)
+            .numericTextInput(mode, text: $text)
+            .onChange(of: text) { _, newValue in
+                guard let numericValue = newValue as? Value else { return }
+                value = numericValue
+            }
+    }
+}
+
 struct ContentView: View {
     
     @State private var intText = ""
+    @State private var doubleValue: Double = 0.0
     
     var body: some View {
         VStack {
             TextField("Int", text: $intText)
                 .numericTextInput(.decimal, text: $intText)
+            Spacer()
+                .frame(height: 20)
+            NumericTextField(title: "Double", mode: .decimal, value: $doubleValue)
         }
         .padding()
-        .textFieldStyle(.roundedBorder)
     }
 }
 
