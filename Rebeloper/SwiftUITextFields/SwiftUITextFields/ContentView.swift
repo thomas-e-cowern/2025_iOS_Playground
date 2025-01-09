@@ -20,6 +20,18 @@ struct NumericTextInputViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .keyboardType(mode == .number ? .numberPad : .decimalPad)
+            .onChange(of: text) { _, newValue in
+                let decimalSeparator = Locale.current.decimalSeparator ?? "."
+                let numbers = "0123456789\(mode == .decimal ? decimalSeparator : "")"
+                if newValue.components(separatedBy: decimalSeparator).count - 1 > 1 {
+                    text = String(newValue.dropLast())
+                } else {
+                    let filtered = newValue.filter { numbers.contains($0) }
+                    if filtered != newValue {
+                        text = filtered
+                    }
+                }
+            }
     }
 }
 
@@ -36,6 +48,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             TextField("Int", text: $intText)
+                .numericTextInput(.decimal, text: $intText)
         }
         .padding()
         .textFieldStyle(.roundedBorder)
