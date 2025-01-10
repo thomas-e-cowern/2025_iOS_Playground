@@ -48,3 +48,13 @@ final class Box<T> {
 struct User3 {
     var friend: Box<User3>?
 }
+
+// Custom optional
+indirect enum CustomOptional<Wrapped> {
+    case none
+    case some(Wrapped)
+}
+
+struct User4 {
+    var friend: CustomOptional<User4>
+}
