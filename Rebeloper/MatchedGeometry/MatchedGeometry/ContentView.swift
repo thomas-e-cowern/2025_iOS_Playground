@@ -17,11 +17,11 @@ struct ContentView: View {
             HStack {
                 Circle()
                     .fill(.red)
-                    .matchedGeometryEffect(id: "circle", in: namespace)
+                    .matchedGeometryEffect(id: "circle", in: namespace, properties: .frame, anchor: .center, isSource: true)
                     .frame(width: 200, height: 200)
                 Circle()
                     .fill(.green)
-                    .matchedGeometryEffect(id: "\(isActive   ? "circle" : "")", in: namespace)
+                    .matchedGeometryEffect(id: "\(isActive   ? "circle" : "")", in: namespace, properties:.position ,anchor: .center, isSource: false)
                     .frame(width: 100, height: 100)
             }
             .padding()
