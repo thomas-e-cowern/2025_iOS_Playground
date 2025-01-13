@@ -8,20 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var isActive: Bool = false
+    @Namespace private var namespace
+    
     var body: some View {
         VStack {
             HStack {
                 Circle()
                     .fill(.red)
+                    .matchedGeometryEffect(id: "circle", in: namespace)
                     .frame(width: 200, height: 200)
                 Circle()
                     .fill(.green)
+                    .matchedGeometryEffect(id: "\(isActive   ? "circle" : "")", in: namespace)
                     .frame(width: 100, height: 100)
             }
             .padding()
             Button("Click Me 👆") {
                 withAnimation {
-                    // do something
+                    isActive.toggle()
                 } completion: {
                     // more here
                 }
