@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import TipKit
 
 struct ContentView: View {
+    
+    // Tips
+    private let imageTip: ImageTip = ImageTip()
     
     @State private var imageName = "globe"
     @State private var textValue = "Hello World"
@@ -15,6 +19,18 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            TipView(imageTip, arrowEdge: .bottom) { actions in
+                switch actions.id {
+                case "change":
+                    imageName = "dog"
+                    imageTip.invalidate(reason: .actionPerformed)
+                case "close":
+                    print("Closed")
+                    imageTip.invalidate(reason: .tipClosed)
+                default:
+                    break
+                }
+            }
             Image(systemName: imageName)
                 .imageScale(.large)
                 .foregroundStyle(.tint)
