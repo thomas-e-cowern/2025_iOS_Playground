@@ -12,6 +12,7 @@ struct ContentView: View {
     
     // Tips
     private let imageTip: ImageTip = ImageTip()
+    private let textTip: TextTip = TextTip()
     
     @State private var imageName = "globe"
     @State private var textValue = "Hello World"
@@ -35,6 +36,18 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text(textValue)
+                .popoverTip(textTip, arrowEdge: .top) { actions in
+                    switch actions.id {
+                    case "change":
+                        textValue = "Hello TipKit"
+                        textTip.invalidate(reason: .actionPerformed)
+                    case "close":
+                        print("Closed")
+                        textTip.invalidate(reason: .tipClosed)
+                    default:
+                        break
+                    }
+                }
         }
         .padding()
         
