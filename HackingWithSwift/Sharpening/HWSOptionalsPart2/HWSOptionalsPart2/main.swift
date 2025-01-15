@@ -26,3 +26,31 @@ let username: String? = nil
 let unsafe = username.unsafelyUnwrapped
 
 print(unsafe)
+
+func reverse(_ string: String) -> String {
+    String(string.reversed())
+}
+
+print(reverse("This is in order"))
+
+func reverse(_ string: String?) -> String? {
+    if let string = string {
+        return String(string.reversed())
+    } else {
+        return nil
+    }
+}
+
+func reverseMap(_ string: String?) -> String? {
+    string.map { String($0.reversed()) }
+}
+
+let names = ["Cheetah", "Puma", "Jaguar", "Panther"]
+
+let first = names.first.map { "This first version of macOS was \($0)" }
+
+print(reverse("This is in order"))
+print(reverse(nil))
+print(reverseMap("This is in order"))
+print(reverseMap(nil))
+print(first ?? "No name found")
