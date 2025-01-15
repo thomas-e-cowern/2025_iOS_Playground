@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Message {
+struct Message: Codable {
     var userId: Int
     var id: Int
     var title: String
