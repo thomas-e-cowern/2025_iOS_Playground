@@ -49,8 +49,15 @@ let names = ["Cheetah", "Puma", "Jaguar", "Panther"]
 
 let first = names.first.map { "This first version of macOS was \($0)" }
 
+let scores = ["100", "88", "80"]
+let latestScoreMap = scores.last.map(Int.init)  // this createss two optionals, one from last, and one from the Int.init
+let latestScoreFlatmap = scores.last.flatMap(Int.init)  // creates only one optional
+
 print(reverse("This is in order"))
 print(reverse(nil))
 print(reverseMap("This is in order"))
 print(reverseMap(nil))
 print(first ?? "No name found")
+print(latestScoreMap)
+print(latestScoreFlatmap)
+
