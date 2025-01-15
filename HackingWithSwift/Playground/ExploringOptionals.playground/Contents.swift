@@ -58,3 +58,4 @@ indirect enum CustomOptional<Wrapped> {
 struct User4 {
     var friend: CustomOptional<User4>
 }
+
