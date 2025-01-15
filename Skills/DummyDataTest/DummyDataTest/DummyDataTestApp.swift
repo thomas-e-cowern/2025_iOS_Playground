@@ -11,7 +11,7 @@ import SwiftUI
 struct DummyDataTestApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(messages: PreviewData.load(name: "Messages"))
         }
     }
 }

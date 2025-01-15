@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    let messages: [Message]
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            List(messages, id: \.id) { message in
+                Text(message.title)
+            }
         }
         .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(messages: PreviewData.load(name: "Messages"))
 }
