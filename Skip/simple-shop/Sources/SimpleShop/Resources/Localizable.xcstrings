@@ -204,9 +204,6 @@
         }
       }
     },
-    "Product %lld" : {
-
-    },
     "Settings" : {
       "extractionState" : "stale",
       "localizations" : {

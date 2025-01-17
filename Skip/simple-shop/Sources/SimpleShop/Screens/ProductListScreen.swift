@@ -8,9 +8,19 @@
 import SwiftUI
 
 struct ProductListScreen: View {
+    
+    @Environment(ProductStore.self) private var productStore
+    
     var body: some View {
-        List(1...50, id: \.self) { index in
-            Text("Product \(index)")
+        List(productStore.products, id: \.id) { product in
+            Text(product.title)
+        }
+        .task {
+            do {
+                try await productStore.loadProducts()
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 }
