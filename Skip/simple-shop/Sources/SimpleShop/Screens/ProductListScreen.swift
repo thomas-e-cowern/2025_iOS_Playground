@@ -13,7 +13,7 @@ struct ProductListScreen: View {
     
     var body: some View {
         List(productStore.products, id: \.id) { product in
-            Text(product.title)
+            ProductCellView(product: product)
         }
         .task {
             do {
