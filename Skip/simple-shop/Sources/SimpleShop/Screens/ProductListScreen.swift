@@ -9,8 +9,13 @@ import SwiftUI
 
 struct ProductListScreen: View {
     
+    // MARK: - Environment Variables
     @Environment(ProductStore.self) private var productStore
     
+    // MARK: - State Variables
+    @State private var showAddProductSheet: Bool = false
+    
+    // MARK: - Body
     var body: some View {
         List(productStore.products, id: \.id) { product in
             ProductCellView(product: product)
@@ -21,6 +26,16 @@ struct ProductListScreen: View {
             } catch {
                 print(error.localizedDescription)
             }
+        }
+        .toolbar {
+            ToolbarItem {
+                Button("Add Product") {
+                    showAddProductSheet = true
+                }
+            }
+        }
+        .sheet(isPresented: $showAddProductSheet) {
+            // MARK: TODO - add show sheet
         }
     }
 }
