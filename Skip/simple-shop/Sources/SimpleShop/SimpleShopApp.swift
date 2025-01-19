@@ -18,12 +18,14 @@ public struct RootView : View {
     }
 
     public var body: some View {
-        ProductListScreen()
-            .environment(productStore)
-            .task {
-                logger.log("Welcome to Skip on \(androidSDK != nil ? "Android" : "Darwin")!")
-                logger.warning("Skip app logs are viewable in the Xcode console for iOS; Android logs can be viewed in Studio or using adb logcat")
-            }
+        NavigationStack {
+            ProductListScreen()
+        }
+        .environment(productStore)
+        .task {
+            logger.log("Welcome to Skip on \(androidSDK != nil ? "Android" : "Darwin")!")
+            logger.warning("Skip app logs are viewable in the Xcode console for iOS; Android logs can be viewed in Studio or using adb logcat")
+        }
     }
 }
 

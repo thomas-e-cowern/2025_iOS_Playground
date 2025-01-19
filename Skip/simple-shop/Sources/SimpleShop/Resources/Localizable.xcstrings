@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Add Product" : {
+
+    },
+    "Add Product Screen" : {
+
+    },
     "Appearance" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -206,6 +212,9 @@
           }
         }
       }
+    },
+    "Products" : {
+
     },
     "Settings" : {
       "extractionState" : "stale",

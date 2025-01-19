@@ -35,8 +35,9 @@ struct ProductListScreen: View {
             }
         }
         .sheet(isPresented: $showAddProductSheet) {
-            // MARK: TODO - add show sheet
+            AddProductScreen()
         }
+        .navigationTitle("Products")
     }
 }
 
