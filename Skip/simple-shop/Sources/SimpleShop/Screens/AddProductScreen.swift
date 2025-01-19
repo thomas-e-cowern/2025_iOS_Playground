@@ -9,6 +9,10 @@ import SwiftUI
 
 struct AddProductScreen: View {
     
+    // MARK: - Environment values
+    @Environment(ProductStore.self) private var productStore
+    @Environment(\.dismiss) private var dismiss
+    
     // MARK: - Variables
     @State private var title: String = ""
     @State private var price: String = ""
@@ -33,6 +37,15 @@ struct AddProductScreen: View {
             Button("Add Product") {
                 guard let price = Double(price) else { return }
                 let product = Product(title: title, price: price, category: category, description: description, image: URL(string: "https://picsum.photos/200/200")!)
+                
+                Task {
+                    do {
+                        try await productStore.saveProduct(product)
+                        dismiss()
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
             }
         }
     }

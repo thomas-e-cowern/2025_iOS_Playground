@@ -14,7 +14,7 @@ struct HTTPClient {
     }
     
     func saveProduct(product: Product) async throws -> Product? {
-        var request = URLRequest(url: URL(string: "https://example.com/api/products")!)
+        var request = URLRequest(url: URL(string: "https://fakestoreapi.com/products")!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try JSONEncoder().encode(product)
