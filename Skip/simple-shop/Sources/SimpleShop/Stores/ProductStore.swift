@@ -24,4 +24,13 @@ class ProductStore {
         
         products = try await httpClient.fetchProducts(url: productsUrl)
     }
+    
+    func saveProduct(_ product: Product) async throws {
+        let newProduct = try await httpClient.saveProduct(product: product)
+        
+        guard let unwrappedNewProduct = newProduct else {
+            return
+        }
+        products.append(unwrappedNewProduct)
+    }
 }
