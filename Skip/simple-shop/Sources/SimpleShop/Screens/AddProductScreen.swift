@@ -15,15 +15,24 @@ struct AddProductScreen: View {
     @State private var category: String = ""
     @State private var description: String = ""
     
+    let categories: [String] = ["Electronics", "jewelery", "men's clothing", "women's clothing"]
+    
     var body: some View {
         Form {
             TextField("Title", text: $title)
             TextField("Price", text: $price)
-            TextField("Category", text: $category)
+            Picker("Category", selection: $category) {
+                Text("Choose Category").tag("choose")
+                ForEach(categories, id: \.self) { category in
+                    Text(category)
+                        .tag(category)
+                }
+            }
             TextEditor(text: $description)
                 .frame(height: 200)
             Button("Add Product") {
-                // MARK: TODO - add product code here
+                guard let price = Double(price) else { return }
+                let product = Product(title: title, price: price, category: category, description: description, image: URL(string: "https://picsum.photos/200/200")!)
             }
         }
     }
