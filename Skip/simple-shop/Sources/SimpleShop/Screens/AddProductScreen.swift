@@ -36,7 +36,7 @@ struct AddProductScreen: View {
                 .frame(height: 200)
             Button("Add Product") {
                 guard let price = Double(price) else { return }
-                let product = Product(title: title, price: price, category: category, description: description, image: URL(string: "https://picsum.photos/200/200")!)
+                let product = Product(title: title, price: price, category: category, description: description, image: URL(string: "https://picsum.photos/200/200")!, rating: Rating(rate: 4.5, count: 150))
                 
                 Task {
                     do {

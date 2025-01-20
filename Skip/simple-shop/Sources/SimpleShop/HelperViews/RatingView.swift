@@ -10,14 +10,14 @@ import SwiftUI
 struct RatingView: View {
     
     // MARK: - Variables
-    let rating: Int
+    let rating: Double
     let imageSize: Double = 40
     
     // MARK: - Body
     var body: some View {
         HStack {
-            ForEach(1...5, id: \.self) { index in
-                Image(systemName: starType(index))
+            ForEach(0...5, id: \.self) { i in
+                Image(systemName: starType(rating))
                     .foregroundStyle(.yellow)
                     .font(.largeTitle)
             }
@@ -25,10 +25,10 @@ struct RatingView: View {
     }
     
     // MARK: - Functions and methods
-    private func starType(_ index: Int) -> String {
+    private func starType(_ index: Double) -> String {
         
         if index <= rating {
-            if index <= Int(rating) {
+            if index <= rating {
                 return "star.fill"
             } else {
                 return "star.leadinghalf.fill"
