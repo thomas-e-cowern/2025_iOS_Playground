@@ -17,11 +17,16 @@ struct ProductListScreen: View {
     
     // MARK: - Body
     var body: some View {
-        List(productStore.products, id: \.id) { product in
-            NavigationLink {
-                ProductDetailScreen(product: product)
-            } label: {
-                ProductCellView(product: product)
+        List {
+            ForEach(productStore.products, id: \.id) { product in
+                NavigationLink {
+                    ProductDetailScreen(product: product)
+                } label: {
+                    ProductCellView(product: product)
+                }
+            }
+            .onDelete { product in
+                <#code#>
             }
         }
         .task {
@@ -42,6 +47,10 @@ struct ProductListScreen: View {
             AddProductScreen()
         }
         .navigationTitle("Products")
+    }
+    
+    private func deleteProduct(_ indexSet: IndexSet) {
+        <#function body#>
     }
 }
 

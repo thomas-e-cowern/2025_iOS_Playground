@@ -9,8 +9,10 @@ import SwiftUI
 
 struct ProductDetailScreen: View {
     
+    // MARK: - Variables
     let product: Product
     
+    // MARK: - Body
     var body: some View {
         ScrollView {
             VStack {

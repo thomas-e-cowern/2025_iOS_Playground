@@ -21,6 +21,7 @@ struct AddProductScreen: View {
     
     let categories: [String] = ["Electronics", "jewelery", "men's clothing", "women's clothing"]
     
+    // MARK: - Body
     var body: some View {
         Form {
             TextField("Title", text: $title)
