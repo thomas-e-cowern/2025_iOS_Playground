@@ -14,10 +14,7 @@ struct Product: Codable, Identifiable {
     var category: String
     var description: String
     var image: URL
-    
-    var rating: Int {
-        Int.random(in: 1...5)
-    }
+    var rating: Rating
 }
 
 
