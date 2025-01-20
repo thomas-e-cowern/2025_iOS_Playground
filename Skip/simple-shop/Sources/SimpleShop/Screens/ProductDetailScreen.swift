@@ -29,7 +29,9 @@ struct ProductDetailScreen: View {
                 Text(product.description)
                     .font(.subheadline)
                 
-                RatingView(rating: product.rating)
+                if product.rating != nil {
+                    RatingView(rating: product.rating ?? Rating(rate: 0.0, count: 0))
+                }
             }
             .padding()
         }

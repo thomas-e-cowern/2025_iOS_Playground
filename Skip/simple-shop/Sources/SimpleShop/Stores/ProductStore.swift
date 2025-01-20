@@ -33,4 +33,9 @@ class ProductStore {
         }
         products.append(unwrappedNewProduct)
     }
+    
+    func deleteProduct(product: Product) async throws {
+        let deletedProduct = try await httpClient.deleteProduct(product: product)
+        products = products.filter { $0.id != deletedProduct.id }
+    }
 }

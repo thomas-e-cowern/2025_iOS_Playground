@@ -23,4 +23,15 @@ struct HTTPClient {
         let newProduct = try JSONDecoder().decode(Product.self, from: data)
         return newProduct
     }
+    
+    func deleteProduct(product: Product) async throws -> Product {
+        
+        var request = URLRequest(url: URL(string: "https://fakestoreapi.com/products/\(product.id)")!)
+        request.httpMethod = "DELETE"
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        let deletedProduct = try JSONDecoder().decode(Product.self, from: data)
+        return deletedProduct
+        
+    }
 }

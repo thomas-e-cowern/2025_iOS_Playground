@@ -25,9 +25,7 @@ struct ProductListScreen: View {
                     ProductCellView(product: product)
                 }
             }
-            .onDelete { product in
-                <#code#>
-            }
+            .onDelete(perform: deleteProduct)
         }
         .task {
             do {
@@ -50,7 +48,16 @@ struct ProductListScreen: View {
     }
     
     private func deleteProduct(_ indexSet: IndexSet) {
-        <#function body#>
+        Task {
+            do {
+                for index in indexSet {
+                    let product = productStore.products[index]
+                    try await productStore.deleteProduct(product: product)
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
