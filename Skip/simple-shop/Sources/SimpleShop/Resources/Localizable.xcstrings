@@ -193,6 +193,9 @@
         }
       }
     },
+    "Number of Rating: %lld" : {
+
+    },
     "Powered by Skip and %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -223,6 +226,12 @@
       }
     },
     "Price" : {
+
+    },
+    "Product Rating: %@" : {
+
+    },
+    "Product Rating: %lf" : {
 
     },
     "Products" : {

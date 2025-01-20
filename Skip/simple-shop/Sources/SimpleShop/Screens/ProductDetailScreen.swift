@@ -27,8 +27,9 @@ struct ProductDetailScreen: View {
                 Text(product.description)
                     .font(.subheadline)
                 
-                RatingView(rating: product.rating.rate)
+                RatingView(rating: product.rating)
             }
+            .padding()
         }
     }
 }

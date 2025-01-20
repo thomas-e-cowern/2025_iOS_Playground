@@ -18,7 +18,11 @@ struct ProductListScreen: View {
     // MARK: - Body
     var body: some View {
         List(productStore.products, id: \.id) { product in
-            ProductCellView(product: product)
+            NavigationLink {
+                ProductDetailScreen(product: product)
+            } label: {
+                ProductCellView(product: product)
+            }
         }
         .task {
             do {
