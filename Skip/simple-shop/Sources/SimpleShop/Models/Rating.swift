@@ -10,4 +10,12 @@ import Foundation
 struct Rating: Codable {
     let rate: Double
     let count: Int
+    
+    func rateToString() -> String {
+        return "Rating: " + String(format: "%.1f", rate)
+    }
+    
+    func countToString() -> String {
+        return "Ratings: \(count)"
+    }
 }

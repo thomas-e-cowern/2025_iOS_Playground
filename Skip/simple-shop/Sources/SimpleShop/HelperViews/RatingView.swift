@@ -15,8 +15,8 @@ struct RatingView: View {
     // MARK: - Body
     var body: some View {
         VStack {
-            Text("Product Rating: \(rating.rate, format: .number.rounded(increment: 0.1))")
-            Text("Number of Rating: \(rating.count)")
+            Text(rating.rateToString())
+            Text(rating.countToString())
 //            ForEach(0...5, id: \.self) { i in
 //                Image(systemName: starType(rating))
 //                    .foregroundStyle(.yellow)
