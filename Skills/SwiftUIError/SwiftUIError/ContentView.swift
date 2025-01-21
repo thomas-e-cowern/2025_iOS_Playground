@@ -17,6 +17,8 @@ struct ContentView: View {
         NavigationStack {
             VStack {
                 NavigationLink("Whole Error View", destination: WholeErrorView())
+                NavigationLink("Alert Modifier Error View", destination: AlertModifierErrorView())
+                
             }
             .navigationTitle("Three Ways to Show Errors")
         }

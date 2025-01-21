@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ErrorView: View {
     
-    let errorTitle: String
+    let errorTitle: String?
+    
     @ObservedObject var usersViewModel: UsersViewModel
     
     var body: some View {
@@ -18,7 +19,7 @@ struct ErrorView: View {
             .overlay {
                 
                 VStack {
-                    Text(errorTitle)
+                    Text(errorTitle ?? "")
                         .font(.largeTitle)
                         .foregroundColor(.white)
                     
