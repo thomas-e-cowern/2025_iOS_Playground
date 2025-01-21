@@ -26,7 +26,7 @@ struct HTTPClient {
     
     func deleteProduct(product: Product) async throws -> Product {
         
-        var request = URLRequest(url: URL(string: "https://fakestoreapi.com/products/\(product.id)")!)
+        var request = URLRequest(url: URL(string: "https://fakestoreapi.com/products/\(product.id!)")!)
         request.httpMethod = "DELETE"
         
         let (data, _) = try await URLSession.shared.data(for: request)
