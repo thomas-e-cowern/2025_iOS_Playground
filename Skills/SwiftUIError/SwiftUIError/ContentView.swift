@@ -12,13 +12,19 @@ struct ContentView: View {
     @ObservedObject var usersViewModel = UsersViewModel()
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            List(usersViewModel.listUsers, id: \.self) { user in
+                Text(user)
+            }
+            
+            if let error = usersViewModel.userError { // << error handling here
+                ErrorView(errorTitle: error.description, usersViewModel: usersViewModel)
+            }
         }
-        .padding()
+        .task {
+            try? await Task.sleep(for: .seconds(2)) // timer to fake the network request
+            await usersViewModel.loadUsers(withError: true) // calling the fake function with error
+        }
     }
 }
 
