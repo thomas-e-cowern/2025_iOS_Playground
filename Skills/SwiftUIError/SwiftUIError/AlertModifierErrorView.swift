@@ -22,11 +22,12 @@ struct AlertModifierErrorView: View {
             try? await Task.sleep(for: .seconds(2))
             await usersViewModel.loadUsers(withError: true)
         }
-        .onChange(of: usersViewModel.userError, { _, newValue in
+        .onChange(of: usersViewModel.userError,
+                  perform: { newValue in
             showAlert = newValue != nil
         })
         .alert(usersViewModel.userError?.description ?? "", isPresented: $showAlert) {
-            WholeErrorView(usersViewModel: usersViewModel)
+            AlertErrorView(usersViewModel: usersViewModel)
         }
     }
 }

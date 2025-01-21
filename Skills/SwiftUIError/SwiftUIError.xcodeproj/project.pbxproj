@@ -11,7 +11,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		4D6612A72D3FE4F400F719C8 /* SwiftUIError */ = {
+		4D6612E52D4023F400F719C8 /* SwiftUIError */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = SwiftUIError;
 			sourceTree = "<group>";
@@ -32,8 +32,8 @@
 		4D66129C2D3FE4F400F719C8 = {
 			isa = PBXGroup;
 			children = (
-				4D6612A72D3FE4F400F719C8 /* SwiftUIError */,
 				4D6612A62D3FE4F400F719C8 /* Products */,
+				4D6612E52D4023F400F719C8 /* SwiftUIError */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,7 +61,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				4D6612A72D3FE4F400F719C8 /* SwiftUIError */,
+				4D6612E52D4023F400F719C8 /* SwiftUIError */,
 			);
 			name = SwiftUIError;
 			packageProductDependencies = (
