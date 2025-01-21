@@ -26,7 +26,7 @@ struct AlertModifierErrorView: View {
             showAlert = newValue != nil
         })
         .alert(usersViewModel.userError?.description ?? "", isPresented: $showAlert) {
-            ErrorView(errorTitle: "", usersViewModel: usersViewModel)
+            WholeErrorView(usersViewModel: usersViewModel)
         }
     }
 }

@@ -5,10 +5,17 @@
 //  Created by Thomas Cowern on 1/21/25.
 //
 
+
 import SwiftUI
+
+enum ErrorType {
+    case alertModifierError
+    case wholeError
+}
 
 struct ErrorView: View {
     
+    let errorType: ErrorType
     let errorTitle: String?
     
     @ObservedObject var usersViewModel: UsersViewModel
@@ -18,11 +25,17 @@ struct ErrorView: View {
             .foregroundColor(.red)
             .overlay {
                 
-                VStack {
-                    Text(errorTitle ?? "")
-                        .font(.largeTitle)
-                        .foregroundColor(.white)
-                    
+                switch errorType {
+                case .alertModifierError:
+                    VStack {
+                        Button("Reload Users") {
+                            Task {
+                                await usersViewModel.loadUsers(withError: false)
+                            }
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
+                case .wholeError:
                     Button("Reload Users") {
                         Task {
                             await usersViewModel.loadUsers(withError: false)
@@ -30,7 +43,6 @@ struct ErrorView: View {
                     }
                     .buttonStyle(.borderedProminent)
                 }
-                
             }
     }
 }

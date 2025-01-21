@@ -18,7 +18,7 @@ struct WholeErrorView: View {
             }
             
             if let error = usersViewModel.userError { // << error handling here
-                ErrorView(errorTitle: error.description, usersViewModel: usersViewModel)
+                WholeErrorView(usersViewModel: usersViewModel)
             }
         }
         .task {
