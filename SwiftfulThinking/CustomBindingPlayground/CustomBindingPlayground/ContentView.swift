@@ -30,17 +30,11 @@ struct ContentView: View {
             }))
             
             Button("Click Me") {
-                errorTitle = "Oh, no!"
+                errorTitle = "Something went wrong!"
             }
         }
         .padding()
-        .alert(errorTitle ?? "Error - Something Went Wrong" , isPresented: Binding(get: {
-            return errorTitle != nil
-        }, set: { newValue in
-            if !newValue {
-                errorTitle = nil
-            }
-        })) {
+        .alert(errorTitle ?? "Error - Something Went Wrong" , isPresented: Binding(value: $errorTitle)) {
             Button("OK") {
                 
             }
