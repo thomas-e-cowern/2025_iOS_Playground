@@ -8,14 +8,45 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var username: String = ""
+    @State private var password: String = ""
+    
+    @State private var validationErrors: [String] = []
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {
+                Form {
+                    TextField("Username", text: $username)
+                    SecureField("Password", text: $password)
+                    Button("Login") {
+                        if validateForm() {
+                            // authenticate user
+                        }
+                    }
+                    
+                    ForEach(validationErrors, id: \.self) { error in
+                        Text(error)
+                    }
+                }
+            }
+            .navigationTitle("Login")
         }
-        .padding()
+    }
+    
+    private func validateForm() ->  Bool {
+        validationErrors.removeAll()
+        
+        if username.trimmingCharacters(in: .whitespaces).isEmpty {
+            validationErrors.append("Username is required.")
+        }
+        
+        if password.trimmingCharacters(in: .whitespaces).isEmpty {
+            validationErrors.append("Password is required.")
+        }
+        
+        return validationErrors.isEmpty
     }
 }
 
