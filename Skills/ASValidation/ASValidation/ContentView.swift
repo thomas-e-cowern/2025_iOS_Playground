@@ -26,8 +26,8 @@ struct ContentView: View {
                         }
                     }
                     
-                    ForEach(validationErrors, id: \.self) { error in
-                        Text(error)
+                    if !validationErrors.isEmpty {
+                        ValidationSummaryView(validationErrors: validationErrors)
                     }
                 }
             }

@@ -12,9 +12,17 @@ struct ValidationSummaryView: View {
     let validationErrors: [String]
     
     var body: some View {
-        ForEach(validationErrors, id: \.self) { error in
-            Text(error)
+        VStack(alignment: .leading, spacing: 8) { // Organize errors vertically
+            ForEach(validationErrors, id: \.self) { error in
+                Text(error)
+                    .font(.body) // Set a readable font size
+                    .foregroundColor(.red) // Highlight errors in red
+                    .padding(.vertical, 4) // Add vertical padding
+                    .background(Color(.systemGray6)) // Add a light background for contrast
+                    .cornerRadius(8) // Round the corners of the background
+            }
         }
+        .padding() // Add padding around the VStack
     }
 }
 
