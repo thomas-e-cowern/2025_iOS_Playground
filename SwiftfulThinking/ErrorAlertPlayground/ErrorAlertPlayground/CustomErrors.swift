@@ -25,7 +25,8 @@ enum CustomErrors: Error, LocalizedError {
     }
 }
 
-enum CustomAlertss: Error, LocalizedError {
+enum CustomAlertss: Error, LocalizedError, AppAlert {
+    
     case noInternetConnection
     case dataNotAvailable
     case urlError(error: Error)
@@ -61,6 +62,10 @@ enum CustomAlertss: Error, LocalizedError {
         case .urlError(let error):
             return "The url you gave us is shit.... \(error.localizedDescription)"
         }
+    }
+    
+    var buttons: AnyView {
+        AnyView(alertFormat())
     }
     
     @ViewBuilder
