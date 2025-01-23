@@ -8,10 +8,10 @@
 import SwiftUI
 
 extension View {
-    func showCustomAlert(alert: Binding<CustomAlertss?>) -> some View {
+    func showCustomAlert<T: AppAlert>(alert: Binding<T?>) -> some View {
         self
             .alert(alert.wrappedValue?.title ?? "Unknow Error", isPresented: Binding(value: alert)) {
-                alert.wrappedValue?.alertFormat()
+                alert.wrappedValue?.buttons
             } message: {
                 if let subtitle = alert.wrappedValue?.subtitle {
                     Text(subtitle)

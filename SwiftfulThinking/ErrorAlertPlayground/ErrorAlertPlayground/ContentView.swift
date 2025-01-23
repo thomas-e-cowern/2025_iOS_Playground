@@ -19,21 +19,7 @@ struct ContentView: View {
             Button("Click to Show Error") {
                 saveData()
             }
-//            .alert(error?.localizedDescription ?? "Unknown Error", isPresented: Binding(value: $error)) {
-//                Button("OK") {
-//                    
-//                }
-//            }
-            .alert(alert?.title ?? "Unknow Error", isPresented: Binding(value: $alert)) {
-                if let alert {
-                    alert.alertFormat()
-                }
-               
-            } message: {
-                if let subtitle = alert?.subtitle {
-                    Text(subtitle)
-                }
-            }
+            .showCustomAlert(alert: $alert)
 
         }
         .padding()
@@ -46,9 +32,7 @@ struct ContentView: View {
         if isSuccessful {
             // do something
         } else {
-            // error
-//            let myError: Error = CustomErrors.dataNotAvailable
-            let myAlert: CustomAlertss = .dataNotAvailable
+            let myAlert: CustomAlertss = .noInternetConnection
             alert = myAlert
         }
     }
