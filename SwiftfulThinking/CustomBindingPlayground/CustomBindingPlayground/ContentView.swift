@@ -11,6 +11,7 @@ struct ContentView: View {
     
     @State var title: String = "Hello, Blevinss"
     
+    @State private var count: Int? = nil
     @State private var errorTitle: String? = nil
 //    @State private var showError: Bool = false
     
@@ -31,11 +32,17 @@ struct ContentView: View {
             
             Button("Click Me") {
                 errorTitle = "Something went wrong!"
+                count = 46
             }
         }
         .padding()
         .alert(errorTitle ?? "Error - Something Went Wrong" , isPresented: Binding(value: $errorTitle)) {
             Button("OK") {
+                
+            }
+        }
+        .alert("Count is \(count ?? 0)", isPresented: Binding(value: $count)) {
+            Button("Cool") {
                 
             }
         }
