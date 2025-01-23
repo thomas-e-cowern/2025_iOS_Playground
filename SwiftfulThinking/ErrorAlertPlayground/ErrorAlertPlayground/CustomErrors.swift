@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum CustomErrors: Error, LocalizedError {
     case noInternetConnection
@@ -59,6 +60,24 @@ enum CustomAlertss: Error, LocalizedError {
             return nil
         case .urlError(let error):
             return "The url you gave us is shit.... \(error.localizedDescription)"
+        }
+    }
+    
+    @ViewBuilder
+    func alertFormat() -> some View {
+        switch self {
+        case .noInternetConnection:
+            Button("Ok") {
+                    
+            }
+        case .dataNotAvailable:
+            Button("Retry") {
+                    
+            }
+        default:
+            Button("Delete", role: .destructive) {
+                    
+            }
         }
     }
 }

@@ -25,9 +25,10 @@ struct ContentView: View {
 //                }
 //            }
             .alert(alert?.title ?? "Unknow Error", isPresented: Binding(value: $alert)) {
-                Button("Ok") {
-                        
+                if let alert {
+                    alert.alertFormat()
                 }
+               
             } message: {
                 if let subtitle = alert?.subtitle {
                     Text(subtitle)
@@ -47,7 +48,7 @@ struct ContentView: View {
         } else {
             // error
 //            let myError: Error = CustomErrors.dataNotAvailable
-            let myAlert: CustomAlertss = .urlError(error: URLError.notConnectedToInternet as! Error)
+            let myAlert: CustomAlertss = .dataNotAvailable
             alert = myAlert
         }
     }
