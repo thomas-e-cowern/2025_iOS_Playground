@@ -58,7 +58,7 @@ enum CustomAlertss: Error, LocalizedError {
         case .dataNotAvailable:
             return nil
         case .urlError(let error):
-            return "The url you gave us is shit...."
+            return "The url you gave us is shit.... \(error.localizedDescription)"
         }
     }
 }

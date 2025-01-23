@@ -11,6 +11,7 @@ struct ContentView: View {
     
     // MARK: - Properties
     @State private var error: Error? = nil
+    @State private var alert: CustomAlertss? = nil
     
     // MARK: - Body
     var body: some View {
@@ -23,12 +24,14 @@ struct ContentView: View {
 //                    
 //                }
 //            }
-            .alert(error?.localizedDescription ?? "Unknow Error", isPresented: Binding(value: $error)) {
+            .alert(alert?.title ?? "Unknow Error", isPresented: Binding(value: $alert)) {
                 Button("Ok") {
                         
                 }
             } message: {
-                Text("Error message goes here...")
+                if let subtitle = alert?.subtitle {
+                    Text(subtitle)
+                }
             }
 
         }
@@ -43,8 +46,9 @@ struct ContentView: View {
             // do something
         } else {
             // error
-            let myError: Error = CustomErrors.dataNotAvailable
-            error = myError
+//            let myError: Error = CustomErrors.dataNotAvailable
+            let myAlert: CustomAlertss = .urlError(error: URLError.notConnectedToInternet as! Error)
+            alert = myAlert
         }
     }
 }
