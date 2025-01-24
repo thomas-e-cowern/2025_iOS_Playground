@@ -10,26 +10,20 @@ import SwiftUI
 struct ContentView: View {
     
     // MARK: - Properties
-    @State private var errorWrapper: ErrorWrapper?
-    @State private var showError: Bool = false
+    @Environment(\.showError) private var showError
     
+    // MARK: - Body
     var body: some View {
         VStack {
             Button("Throw Error") {
                 do {
                     throw ErrorType.operationFailed
                 } catch {
-                    errorWrapper = ErrorWrapper(error: error, guidance: "Please try again later.")
-                    showError.toggle()
+                    showError(error, "Please try again later.")
                 }
             }
         }
         .padding()
-        .sheet(item: $errorWrapper) { errorWrapper in
-            VStack {
-                ErrorView(errorWrapper: errorWrapper)
-            }
-        }
 //        .alert(errorWrapper?.error.localizedDescription ?? "There was an unknown error", isPresented: $showError) {
 //            Button("Ok") {
 //                
@@ -40,6 +34,23 @@ struct ContentView: View {
     }
 }
 
+// MARK: - Preview
+struct ContentViewContainer: View {
+    
+    @State var errorWrapper: ErrorWrapper?
+    
+    var body: some View {
+        ContentView()
+            .environment(\.showError) { error, guidance in
+                errorWrapper = ErrorWrapper(error: error, guidance: guidance)
+            }
+            .sheet(item: $errorWrapper) { errorWrapper in
+                ErrorView(errorWrapper: errorWrapper)
+            }
+    }
+}
+
+
 #Preview {
-    ContentView()
+    ContentViewContainer()
 }
