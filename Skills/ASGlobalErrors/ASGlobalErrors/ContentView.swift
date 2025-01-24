@@ -25,10 +25,9 @@ struct ContentView: View {
             }
         }
         .padding()
-        .sheet(item: $errorWrapper) { error in
+        .sheet(item: $errorWrapper) { errorWrapper in
             VStack {
-                Text(error.error.localizedDescription)
-                Text(error.guidance ?? "")
+                ErrorView(errorWrapper: errorWrapper)
             }
         }
 //        .alert(errorWrapper?.error.localizedDescription ?? "There was an unknown error", isPresented: $showError) {
