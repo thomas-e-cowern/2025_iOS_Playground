@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct Item {
+struct Item: Identifiable {
+    var id = UUID()
     var price: Int
     var count: Int
 }
