@@ -9,11 +9,15 @@ import SwiftUI
 
 @main
 struct ShortSwiftUIApp: App {
+    
+    @State private var appService = AppService()
+    
     var body: some Scene {
         WindowGroup {
             NavigationStack {
                 ContentView()
             }
+            .environment(appService)
         }
     }
 }
