@@ -11,6 +11,8 @@ import SwiftUI
 class AppService {
     var posts = [Post]()
     
+    var isDestinationShowing: Bool = false
+    
     func fetchPosts() async throws {
         guard let url = URL(string: "https://jsonplaceholder.typicode.com/posts") else {
             return

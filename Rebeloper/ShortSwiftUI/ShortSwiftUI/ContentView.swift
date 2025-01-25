@@ -9,32 +9,50 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var name = ""
+    @Environment(AppService.self) var appService
     
     var body: some View {
         VStack {
-            Image(systemName: "sun.max.circle")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Spacer()
-            Text(name)
-                .foregroundStyle(.red)
-                .background(.orange)
-//            Divider()
-//            Color.green
-                .font(.largeTitle)
-            Button("Tap Me") {
-                print("Tapped")
+            List {
+                ForEach(appService.posts) { post in
+                    NavigationLink {
+                        DetailView(post: post)
+                    } label: {
+                        cell(post: post)
+                    }
+                }
             }
-//            .overlay(alignment: .bottomLeading) {
-//                Text("Hey There!")
-//            }
-            TextField("Name", text: $name)
+        }
+        .task {
+            do {
+                try await appService.fetchPosts()
+            } catch {
+                print(error.localizedDescription)
+            }
             
         }
-        .padding()
-        .onAppear {
-            print("948 jklahsflhs")
+        .navigationTitle("SwiftUI")
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    appService.isDestinationShowing.toggle()
+                } label: {
+                    Image(systemName: "plus")
+                }
+
+            }
+        }
+        .sheet(isPresented: Bindable(appService).isDestinationShowing) {
+            DestinationView()
+        }
+    }
+    
+    func cell(post: Post) -> some View {
+        VStack(alignment: .leading) {
+            Text(post.title)
+            Text(post.body)
+                .foregroundStyle(.gray)
+                .font(.caption)
         }
     }
 }
