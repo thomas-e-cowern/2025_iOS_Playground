@@ -8,19 +8,33 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var name = ""
+    
+    @State private var viewModel = ContentViewModel()
+    
     var body: some View {
         VStack(spacing: 0) {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-                .background(.yellow)
-            Text("Hello, world!")
-                .background(.yellow)
-            Color.red
-            Color.blue
+            Text(viewModel.name)
+//            Image("mountain")
+//                .resizable()
+//                .scaledToFill()
+            MyTextField(name: $viewModel.name)
+            Button("Tap Me") {
+//                viewModel.name = "What's up dude..."
+                viewModel.chageToThomas()
+            }
         }
-        
         .padding()
+    }
+}
+
+@Observable
+class ContentViewModel {
+    var name = ""
+    
+    func chageToThomas() {
+        name = "Thomas"
     }
 }
 
