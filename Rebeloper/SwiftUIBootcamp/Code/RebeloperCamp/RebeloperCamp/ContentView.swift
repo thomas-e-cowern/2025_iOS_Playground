@@ -9,35 +9,33 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var name = ""
+//    @State private var name = ""
     
-    @State private var viewModel = ContentViewModel()
+//    @State private var viewModel = ContentViewModel()
+    
+    @Environment(AppController.self) private var appController
     
     var body: some View {
+        
+        @Bindable var appController = appController
+        
         VStack(spacing: 0) {
-            Text(viewModel.name)
+            Text(appController.profile.name)
 //            Image("mountain")
 //                .resizable()
 //                .scaledToFill()
-            MyTextField(name: $viewModel.name)
+            TextField("Enter your name", text: $appController.profile.name)
+//            MyTextField(name: $appController.profile.name)
             Button("Tap Me") {
 //                viewModel.name = "What's up dude..."
-                viewModel.chageToThomas()
+                appController.changeName()
             }
         }
         .padding()
     }
 }
 
-@Observable
-class ContentViewModel {
-    var name = ""
-    
-    func chageToThomas() {
-        name = "Thomas"
-    }
-}
-
 #Preview {
     ContentView()
+        .environment(AppController())
 }

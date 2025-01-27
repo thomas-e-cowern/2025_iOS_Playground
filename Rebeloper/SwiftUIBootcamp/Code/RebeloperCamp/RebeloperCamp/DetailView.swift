@@ -9,11 +9,11 @@ import SwiftUI
 
 struct DetailView: View {
     
-    @State private var viewModel = ContentViewModel()
+    @State private var viewModel = AppController()
     
     var body: some View {
         VStack {
-            Text("Hello, \(viewModel.name)!")
+            Text("Hello, \(viewModel.profile.name)!")
         }
     }
 }
