@@ -12,6 +12,8 @@ struct RebeloperCampApp: App {
     
     @State private var appController = AppController()
     
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
