@@ -18,7 +18,11 @@ struct ProfilesView: View {
             } else {
                 List {
                     ForEach(appController.profiles) { profile in
-                        Text(profile.name)
+                        HStack {
+                            Text("Name: " + profile.name)
+                            Spacer()
+                            Text("Score: \(profile.score)")
+                        }
                     }
                 }
             }
