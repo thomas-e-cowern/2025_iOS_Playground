@@ -10,10 +10,12 @@ import SwiftUI
 struct ContentView: View {
     
 //    @State private var name = ""
-    
 //    @State private var viewModel = ContentViewModel()
     
     @Environment(AppController.self) private var appController
+    
+    // To store user defaults if necessary
+    @AppStorage("isLoggedIn") private var isLoggedIn: Bool = false
     
     var body: some View {
         
@@ -21,13 +23,8 @@ struct ContentView: View {
         
         VStack(spacing: 0) {
             Text(appController.profile.name)
-//            Image("mountain")
-//                .resizable()
-//                .scaledToFill()
-            TextField("Enter your name", text: $appController.profile.name)
-//            MyTextField(name: $appController.profile.name)
+            MyTextField(name: $appController.profile.name)
             Button("Tap Me") {
-//                viewModel.name = "What's up dude..."
                 appController.changeName()
             }
         }
