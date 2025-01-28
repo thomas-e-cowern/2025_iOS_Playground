@@ -14,4 +14,15 @@ class AppController {
     func changeName() {
         profile.name = "New Name"
     }
+    
+    // MARK: - Firestore
+    var profiles: [Profile] = []
+    
+    func createProfile(_ profile: Profile) throws {
+        try APIService.createProfile(profile)
+    }
+    
+    func fetchProfiles() async throws {
+        profiles = try await APIService.fetchProfiles()
+    }
 }
