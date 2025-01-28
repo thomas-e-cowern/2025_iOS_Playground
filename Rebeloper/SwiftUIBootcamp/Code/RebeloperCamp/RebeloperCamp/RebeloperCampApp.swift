@@ -16,8 +16,10 @@ struct RebeloperCampApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(appController)
+            NavigationStack {
+                ProfilesView()
+                    .environment(appController)
+            }
         }
     }
 }
