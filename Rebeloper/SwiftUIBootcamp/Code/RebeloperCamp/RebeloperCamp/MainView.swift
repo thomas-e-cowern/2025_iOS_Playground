@@ -23,22 +23,32 @@ struct MainView: View {
         .init(color: .black)
     ]
     
+    @State private var gridItems = [GridItem(spacing: nil), GridItem(spacing: nil), GridItem(spacing: nil)]
+    
     var body: some View {
-        GeometryReader { proxy in
-            ScrollView {
-                LazyVGrid(columns: [GridItem(spacing: nil), GridItem(spacing: nil), GridItem(spacing: nil)], alignment: .center, spacing: 20, pinnedViews: [.sectionFooters, .sectionHeaders]) {
-                    //                Section {
-                    ForEach(colors) { colorItem in
-                        cell(colorItem, proxy: proxy)
+        VStack {
+            GeometryReader { proxy in
+                ScrollViewReader { readerProxy in
+                    Button("Scroll To") {
+                        readerProxy.scrollTo(Color.orange, anchor: .center)
                     }
-                    //                } header: {
-                    //                    Text("This is the header")
-                    //                } footer: {
-                    //                    Text("This is the footer")
-                    //                }
+                    ScrollView(.horizontal) {
+                        LazyHGrid(rows: gridItems, alignment: .center, spacing: 20, pinnedViews: [.sectionFooters, .sectionHeaders]) {
+                            //                Section {
+                            ForEach(colors) { colorItem in
+                                cell(colorItem, proxy: proxy)
+                                    .id(colorItem.color)
+                            }
+                            //                } header: {
+                            //                    Text("This is the header")
+                            //                } footer: {
+                            //                    Text("This is the footer")
+                            //                }
+                        }
+                    }
+                    .scrollIndicators(.hidden)
                 }
             }
-            .scrollIndicators(.hidden)
         }
     }
     
@@ -46,7 +56,7 @@ struct MainView: View {
         ZStack {
             colorItem.color
                 .padding(20)
-                .frame(height: proxy.size.width / 3)
+                .frame(width: proxy.size.height / CGFloat(gridItems.count))
             Text(colorItem.color.description)
                 .foregroundStyle(Color.white)
         }
