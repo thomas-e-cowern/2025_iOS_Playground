@@ -11,15 +11,46 @@ struct MainView: View {
     
     @ScaledMetric var spacingSize: CGFloat = 10
     
-    @State private var colors: [Color] = [.red, .blue, .green, .yellow, .orange]
+    @State private var colors: [ColorItem] = [
+        .init(color: .red),
+        .init(color: .blue),
+        .init(color: .green),
+        .init(color: .yellow),
+        .init(color: .purple),
+        .init(color: .orange),
+        .init(color: .pink),
+        .init(color: .brown),
+        .init(color: .black)
+    ]
     
     var body: some View {
-        LazyVGrid(columns: [GridItem()/*, GridItem()*/], alignment: .leading, spacing: 10, pinnedViews: [.sectionFooters, .sectionHeaders]) {
-            ForEach(colors, id: \.self) { color in
-                color
+        GeometryReader { proxy in
+            ScrollView {
+                LazyVGrid(columns: [GridItem(spacing: nil), GridItem(spacing: nil), GridItem(spacing: nil)], alignment: .center, spacing: 20, pinnedViews: [.sectionFooters, .sectionHeaders]) {
+                    //                Section {
+                    ForEach(colors) { colorItem in
+                        cell(colorItem, proxy: proxy)
+                    }
+                    //                } header: {
+                    //                    Text("This is the header")
+                    //                } footer: {
+                    //                    Text("This is the footer")
+                    //                }
+                }
             }
+            .scrollIndicators(.hidden)
         }
-        .padding()
+    }
+    
+    func cell(_ colorItem: ColorItem, proxy: GeometryProxy) -> some View {
+        ZStack {
+            colorItem.color
+                .padding(20)
+                .frame(height: proxy.size.width / 3)
+            Text(colorItem.color.description)
+                .foregroundStyle(Color.white)
+        }
+        
     }
 }
 
