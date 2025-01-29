@@ -11,15 +11,15 @@ struct MainView: View {
     
     @ScaledMetric var spacingSize: CGFloat = 10
     
+    @State private var colors: [Color] = [.red, .blue, .green, .yellow, .orange]
+    
     var body: some View {
-        ZStack(alignment: .center) {
-            Color.green.ignoresSafeArea()
-            
+        LazyVGrid(columns: [GridItem()/*, GridItem()*/], alignment: .leading, spacing: 10, pinnedViews: [.sectionFooters, .sectionHeaders]) {
+            ForEach(colors, id: \.self) { color in
+                color
+            }
         }
-//        .background(.red)
-        .overlay {
-            Text("Hello, World!")
-        }
+        .padding()
     }
 }
 
