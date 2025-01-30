@@ -32,9 +32,9 @@ struct MainView: View {
         VStack(spacing: nil) {
             List() {
                 ForEach(colors) { colorItem in
-//                    colorCell(color: colorItem.color, text: colorItem.color.description)
-                    Text(colorItem.color.description)
-                        .frame(width: .infinity, height: 100)
+                    colorCell(color: colorItem.color, text: colorItem.color.description)
+//                    Text(colorItem.color.description)
+//                        .frame(width: .infinity, height: 100)
 //                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
 //                            Button {
 //                                print("Deleted")
@@ -50,12 +50,12 @@ struct MainView: View {
 //                            .tint(Color.yellow)
 //                        }
                 }
-//                .listRowSeparator(.hidden)
                 .onDelete { indexSet in
                     print(colors.count)
                     colors.remove(at: indexSet.first!)
                     print(colors.count)
                 }
+                .listRowSeparator(.hidden)
             }
             .listStyle(.plain)
    
