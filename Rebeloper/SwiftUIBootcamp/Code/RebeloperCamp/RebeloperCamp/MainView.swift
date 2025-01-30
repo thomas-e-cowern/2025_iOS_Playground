@@ -34,17 +34,31 @@ struct MainView: View {
                 ForEach(colors) { colorItem in
 //                    colorCell(color: colorItem.color, text: colorItem.color.description)
                     Text(colorItem.color.description)
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button("Delete") {
-                                print(colorItem.color.hashValue)
-                            }
-                        }
+                        .frame(width: .infinity, height: 100)
+//                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+//                            Button {
+//                                print("Deleted")
+//                            } label: {
+//                                Label("Delete", systemImage: "trash")
+//                            }
+//                            .tint(Color.red)
+//                            Button {
+//                                print("Edit")
+//                            } label: {
+//                                Label("Edit", systemImage: "pencil")
+//                            }
+//                            .tint(Color.yellow)
+//                        }
                 }
-//                .onDelete { indexSet in
-//                    colors.remove(at: indexSet.first!)
-//                }
+//                .listRowSeparator(.hidden)
+                .onDelete { indexSet in
+                    print(colors.count)
+                    colors.remove(at: indexSet.first!)
+                    print(colors.count)
+                }
             }
-            .listStyle(.grouped)
+            .listStyle(.plain)
+   
         }
         
         //        VStack {
