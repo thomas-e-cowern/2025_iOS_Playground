@@ -8,10 +8,18 @@
 import SwiftUI
 
 struct NavRoot: View {
+    
+    @State private var navigation = Navigation()
+    
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigation.stack) {
             MyView1()
+                .navigationDestination(for: Destination.self) { destination in
+                    destination
+                }
+            // can also be written as .navigationDestination(for: Destination.self) { $0 }
         }
+        .environment(navigation)
     }
 }
 

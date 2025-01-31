@@ -10,14 +10,20 @@ import SwiftUI
 struct MyView2: View {
     
     @Environment(\.dismiss) private var dismiss
+    @Environment(Navigation.self) private var navigation
+    
+    let title: String
     
     var body: some View {
         VStack {
-            Text("Hello MyView2")
-            NavigationLink {
-                MyView3()
-            } label: {
-                Text("Go to View 3")
+            Text(title)
+//            NavigationLink {
+//                MyView3()
+//            } label: {
+//                Text("Go to View 3")
+//            }
+            Button("Go to View3") {
+                navigation.stack.append(Destination.view3)
             }
         }
         .navigationTitle("MyView2")
@@ -34,6 +40,6 @@ struct MyView2: View {
 
 #Preview {
     NavigationStack {
-        MyView2()
+        MyView2(title: "title")
     }
 }
