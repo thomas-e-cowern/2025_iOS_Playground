@@ -8,10 +8,20 @@ import SwiftUI
 
 struct MyView1: View {
     var body: some View {
-        Text("Hello, MyView1!")
+        VStack {
+            Text("Hello, MyView1!")
+            NavigationLink {
+                MyView2()
+            } label: {
+                Text("Go to View 2")
+            }
+        }
+        .navigationTitle("MyView1")
     }
 }
 
 #Preview {
-    MyView1()
+    NavigationStack {
+        MyView1()
+    }
 }

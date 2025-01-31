@@ -10,16 +10,17 @@ import SwiftUI
 @main
 struct RebeloperCampApp: App {
     
-    @State private var appController = AppController()
+//    @State private var appController = AppController()
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                ProfilesView()
-                    .environment(appController)
-            }
+//            NavigationStack {
+//                ProfilesView()
+//                    .environment(appController)
+//            }
+            NavRoot()
         }
     }
 }
