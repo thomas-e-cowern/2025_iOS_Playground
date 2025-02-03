@@ -12,10 +12,13 @@ struct MyView1: View {
     
     @State private var isPresented = false
     
+    @State private var names: [String] = ["Alice", "Bob", "Charlie"]
+    @State private var selectedName: String?
+    
     var body: some View {
         VStack {
             List {
-                Text("Hello, MyView1!")
+//                Text("Hello, MyView1!")
     //            NavigationLink {
     //                MyView2()
     //            } label: {
@@ -26,12 +29,21 @@ struct MyView1: View {
 //                    navigation.stack.append(Destination.view2(title: "View 2"))
 //                }
                 
-                Button("View 2") {
-                    isPresented.toggle()
+//                Button("View 2") {
+//                    isPresented.toggle()
+//                }
+                
+                ForEach(names, id: \.self) { name in
+                    Button(name) {
+                        selectedName = name
+                    }
                 }
             }
             .navigationDestination(isPresented: $isPresented) {
                 MyView2(title: "What a view!")
+            }
+            .navigationDestination(item: $selectedName) { name in
+                MyView2(title: name)
             }
         }
         .navigationTitle("MyView1")
@@ -39,7 +51,11 @@ struct MyView1: View {
 }
 
 #Preview {
+    
+    @Previewable @Environment(Navigation.self) var navigation
+    
     NavigationStack {
         MyView1()
     }
+    .environment(navigation)
 }

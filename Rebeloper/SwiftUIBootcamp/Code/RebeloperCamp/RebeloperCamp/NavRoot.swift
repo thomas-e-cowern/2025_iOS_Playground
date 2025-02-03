@@ -24,7 +24,11 @@ struct NavRoot: View {
 }
 
 #Preview {
+    
+    @Previewable @Environment(Navigation.self) var navigation
+    
     NavigationStack {
         NavRoot()
+            .environment(navigation)
     }
 }
