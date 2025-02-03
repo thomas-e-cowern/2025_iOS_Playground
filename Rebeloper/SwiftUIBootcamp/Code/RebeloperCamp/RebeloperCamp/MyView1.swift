@@ -33,18 +33,31 @@ struct MyView1: View {
 //                    isPresented.toggle()
 //                }
                 
-                ForEach(names, id: \.self) { name in
-                    Button(name) {
-                        selectedName = name
-                    }
+//                ForEach(names, id: \.self) { name in
+//                    Button(name) {
+//                        selectedName = name
+//                    }
+//                }
+                Button("Sheet") {
+                    isPresented.toggle()
                 }
+                .sheet(isPresented: $isPresented) {
+                    print("Sheet is dismissed")
+                } content: {
+                    NavigationStack {
+                        MyView2(title: "Sheet...")
+                    }
+//                    .presentationDetents([.medium])
+                    .interactiveDismissDisabled()
+                }
+
             }
-            .navigationDestination(isPresented: $isPresented) {
-                MyView2(title: "What a view!")
-            }
-            .navigationDestination(item: $selectedName) { name in
-                MyView2(title: name)
-            }
+//            .navigationDestination(isPresented: $isPresented) {
+//                MyView2(title: "What a view!")
+//            }
+//            .navigationDestination(item: $selectedName) { name in
+//                MyView2(title: name)
+//            }
         }
         .navigationTitle("MyView1")
     }
