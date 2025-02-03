@@ -11,13 +11,30 @@ struct NavRoot: View {
     
     @State private var navigation = Navigation()
     
+//    @State var selectedTab: TabNavigation = .home
+    
     var body: some View {
-        NavigationStack(path: $navigation.stack) {
-            MyView1()
-                .navigationDestination(for: Destination.self) { destination in
-                    destination
+        NavigationStack {
+            TabView(selection: $navigation.selectedTab) {
+                Tab("View 1", systemImage: "person", value: .home) {
+                    MyView1()
                 }
-            // can also be written as .navigationDestination(for: Destination.self) { $0 }
+                Tab("View 2", systemImage: "star", value: .profile) {
+//                    MyView2(title: "From tabs...")
+                    VStack {
+                        Button("Switch to tab 3") {
+                            navigation.selectedTab = .settings
+                        }
+                    }
+                }
+                Tab("View 3", systemImage: "house", value: .settings) {
+                    MyView3()
+                }
+            }
+            .navigationDestination(for: Destination.self) { destination in
+                destination
+            }
+            .tabViewStyle(.page(indexDisplayMode: .always))
         }
         .environment(navigation)
     }

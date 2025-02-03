@@ -15,7 +15,7 @@ struct MyView3: View {
         VStack {
             Text("Hello MyView3")
             Button("Back Home") {
-                navigation.stack = NavigationPath()
+                navigation.selectedTab = .home
             }
         }
         .navigationTitle("MyView3")

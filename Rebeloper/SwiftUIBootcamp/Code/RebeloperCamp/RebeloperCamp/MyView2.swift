@@ -22,12 +22,12 @@ struct MyView2: View {
 //            } label: {
 //                Text("Go to View 3")
 //            }
-//            Button("Go to View3") {
-//                navigation.stack.append(Destination.view3)
-//            }
-            NavigationLink(value: Destination.view3) {
-                Text("Go to view3")
+            Button("Go to View3") {
+                navigation.stack.append(Destination.view3)
             }
+//            NavigationLink(value: Destination.view3) {
+//                Text("Go to view3")
+//            }
         }
         .navigationTitle("MyView2")
         .navigationBarBackButtonHidden()
