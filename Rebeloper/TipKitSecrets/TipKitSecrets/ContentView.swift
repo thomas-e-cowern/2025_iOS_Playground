@@ -14,6 +14,11 @@ struct ContentView: View {
     private let imageTip: ImageTip = ImageTip()
     private let textTip: TextTip = TextTip()
     
+    private let tipGroup = TipGroup {
+        ImageTip()
+        TextTip()
+    }
+    
     @State private var imageName = "globe"
     @State private var textValue = "Hello World"
     @State private var count = 0
