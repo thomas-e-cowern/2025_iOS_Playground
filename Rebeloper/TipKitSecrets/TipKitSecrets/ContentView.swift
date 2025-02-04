@@ -11,14 +11,16 @@ import TipKit
 struct ContentView: View {
     
     // Tips
-    private let imageTip: ImageTip = ImageTip()
-    private let textTip: TextTip = TextTip()
+//    private let imageTip: ImageTip = ImageTip()
+//    private let textTip: TextTip = TextTip()
     
     
     private let tipGroup = TipGroup {
         TextTip()
         ImageTip()
     }
+    
+    var countTip = CountTip()
     
     @State private var imageName = "globe"
     @State private var textValue = "Hello World"
@@ -56,9 +58,10 @@ struct ContentView: View {
                 }
         }
         .padding()
-        
+        TipView(countTip)
         Button("\(count)") {
             count += 1
+            CountTip.isButtonTapped.toggle()
         }
         .buttonStyle(.borderedProminent)
         .font(.largeTitle)
