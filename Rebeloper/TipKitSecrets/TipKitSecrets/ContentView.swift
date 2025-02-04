@@ -14,9 +14,10 @@ struct ContentView: View {
     private let imageTip: ImageTip = ImageTip()
     private let textTip: TextTip = TextTip()
     
+    
     private let tipGroup = TipGroup {
-        ImageTip()
         TextTip()
+        ImageTip()
     }
     
     @State private var imageName = "globe"
@@ -25,14 +26,14 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            TipView(imageTip, arrowEdge: .bottom) { actions in
+            TipView(tipGroup.currentTip as? ImageTip, arrowEdge: .bottom) { actions in
                 switch actions.id {
                 case "change":
                     imageName = "dog"
-                    imageTip.invalidate(reason: .actionPerformed)
+                    tipGroup.currentTip?.invalidate(reason: .actionPerformed)
                 case "close":
                     print("Closed")
-                    imageTip.invalidate(reason: .tipClosed)
+                    tipGroup.currentTip?.invalidate(reason: .tipClosed)
                 default:
                     break
                 }
@@ -41,14 +42,14 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text(textValue)
-                .popoverTip(textTip, arrowEdge: .top) { actions in
+                .popoverTip(tipGroup.currentTip as? TextTip, arrowEdge: .top) { actions in
                     switch actions.id {
                     case "change":
                         textValue = "Hello TipKit"
-                        textTip.invalidate(reason: .actionPerformed)
+                        tipGroup.currentTip?.invalidate(reason: .actionPerformed)
                     case "close":
                         print("Closed")
-                        textTip.invalidate(reason: .tipClosed)
+                        tipGroup.currentTip?.invalidate(reason: .tipClosed)
                     default:
                         break
                     }
