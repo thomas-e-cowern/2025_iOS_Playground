@@ -20,7 +20,7 @@ struct ContentView: View {
         ImageTip()
     }
     
-    var countTip = CountTip()
+    private let countTip = CountTip()
     
     @State private var imageName = "globe"
     @State private var textValue = "Hello World"
@@ -61,7 +61,7 @@ struct ContentView: View {
         TipView(countTip)
         Button("\(count)") {
             count += 1
-            CountTip.isButtonTapped.toggle()
+//            CountTip.isButtonTapped.toggle()
         }
         .buttonStyle(.borderedProminent)
         .font(.largeTitle)
