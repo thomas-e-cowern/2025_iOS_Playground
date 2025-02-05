@@ -20,7 +20,7 @@ struct ContentView: View {
         ImageTip()
     }
     
-    private let countTip = CountTip()
+    let countTip = CountTip()
     
     @State private var imageName = "globe"
     @State private var textValue = "Hello World"
@@ -69,6 +69,16 @@ struct ContentView: View {
         .buttonStyle(.borderedProminent)
         .font(.largeTitle)
         .bold()
+        .task {
+            for await status in countTip.statusUpdates {
+                print("Status:", status)
+            }
+        }
+        .task {
+            for await shouldDisplay in countTip.shouldDisplayUpdates {
+                print("Display:", shouldDisplay)
+            }
+        }
     }
 }
 

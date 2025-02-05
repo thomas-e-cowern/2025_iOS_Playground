@@ -28,12 +28,12 @@ struct CountTip: Tip {
     
     var rules: [Rule] {
         [
-//            #Rule(Self.$isButtonTapped) {
-//                $0 == true
-//            }
-            #Rule(Self.didTriggerButtonEvent) {
-                $0.donations.count > 5
+            #Rule(Self.$isButtonTapped) {
+                $0
             }
+//            #Rule(Self.didTriggerButtonEvent) {
+//                $0.donations.count > 5
+//            }
         ]
     }
 }
