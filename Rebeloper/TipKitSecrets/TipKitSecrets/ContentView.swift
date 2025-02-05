@@ -62,6 +62,9 @@ struct ContentView: View {
         Button("\(count)") {
             count += 1
 //            CountTip.isButtonTapped.toggle()
+            Task {
+                await CountTip.didTriggerButtonEvent.donate()
+            }
         }
         .buttonStyle(.borderedProminent)
         .font(.largeTitle)
