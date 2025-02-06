@@ -22,17 +22,22 @@ struct ContentView: View {
         NavigationStack {
             List {
                 ForEach(wishes) { wish in
-                    Text(wish.title)
-                        .font(.title.weight(.light))
-                        .padding(.vertical, 2)
-                        .swipeActions {
-                            Button("Delete", role: .destructive) {
-                                modelContext.delete(wish)
+                    NavigationLink(value: wish) {
+                        Text(wish.title)
+                            .font(.title.weight(.light))
+                            .padding(.vertical, 2)
+                            .swipeActions {
+                                Button("Delete", role: .destructive) {
+                                    modelContext.delete(wish)
+                                }
                             }
-                        }
+                    }
                 }
             }  // MARK: End of list
             .navigationTitle("Wishes")
+            .navigationDestination(for: Wish.self, destination: { wish in
+                EditWishView(wish: wish)
+            })
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
