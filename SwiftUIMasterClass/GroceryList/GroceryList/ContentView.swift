@@ -13,6 +13,10 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
     
+    @State private var item: String = ""
+    
+    @FocusState private var isFocused: Bool
+    
     var body: some View {
         NavigationStack {
             List {
@@ -29,6 +33,12 @@ struct ContentView: View {
                             } label: {
                                 Label("Delete", systemImage: "trash")
                             }
+                        }
+                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                            Button("Done", systemImage: item.isCompleted == false ? "checkmark.circle" : "x.circle") {
+                                item.isCompleted.toggle()
+                            }
+                            .tint(item.isCompleted == false ? .green : .blue)
                         }
                 }
             }
@@ -48,6 +58,34 @@ struct ContentView: View {
                 if items.isEmpty {
                     ContentUnavailableView("Enpty Cart", systemImage: "cart.circle", description: Text("Add some items to the shopping list!"))
                 }
+            }
+            .safeAreaInset(edge: .bottom) {
+                VStack(spacing: 12) {
+                    TextField("", text: $item)
+                        .textFieldStyle(.plain)
+                        .padding(12)
+                        .background(.tertiary)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .font(.title.weight(.light))
+                        .focused($isFocused)
+                    
+                    Button {
+                        guard !item.isEmpty else { return }
+                        let newItem = Item(title: item, isCompleted: false)
+                        modelContext.insert(newItem)
+                        item = ""
+                        isFocused = false
+                    } label: {
+                        Text("Save")
+                            .font(.title2.weight(.medium))
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .buttonBorderShape(.roundedRectangle)
+                    .controlSize(.extraLarge)
+                }
+                .padding()
+                .background(.bar)
             }
         }
     }
