@@ -23,12 +23,30 @@ struct ContentView: View {
                         .foregroundStyle(item.isCompleted == false ? Color.primary : Color.accentColor)
                         .strikethrough(item.isCompleted)
                         .italic(item.isCompleted)
+                        .swipeActions {
+                            Button(role: .destructive) {
+                                modelContext.delete(item)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
                 }
             }
             .navigationTitle("Grocery List")
+            .toolbar {
+                if items.isEmpty {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            addEssentialFoods()
+                        } label: {
+                            Label("Essentials", systemImage: "carrot")
+                        }
+                    }
+                }
+            }
             .overlay {
                 if items.isEmpty {
-                    ContentUnavailableView("Enpty Cart", image: "cart.circle", description: Text("Add some items to the shopping list!"))
+                    ContentUnavailableView("Enpty Cart", systemImage: "cart.circle", description: Text("Add some items to the shopping list!"))
                 }
             }
         }
