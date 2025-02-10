@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension EnvironmentValues {
-    var showError: (Error, String) -> Void {
+    var showError: (Error, String, String) -> Void {
         get { self[ShowErrorEnvironmentKey.self] }
         set { self[ShowErrorEnvironmentKey.self] = newValue }
     }

@@ -19,33 +19,34 @@ struct ContentView: View {
                 do {
                     throw ErrorType.operationFailed
                 } catch {
-                    showError(error, "Please try again later.")
+//                    showError(error, "")
+                    showError(error)
                 }
             }
         }
         .padding()
-//        .alert(errorWrapper?.error.localizedDescription ?? "There was an unknown error", isPresented: $showError) {
-//            Button("Ok") {
-//                
-//            }
-//        } message: {
-//            Text(errorWrapper?.guidance ?? "")
-//        }
     }
 }
 
 // MARK: - Preview
 struct ContentViewContainer: View {
     
-    @State var errorWrapper: ErrorWrapper?
+//    @State var errorWrapper: ErrorWrapper?
+    @State var errorModel: ErrorModel?
     
     var body: some View {
         ContentView()
-            .environment(\.showError) { error, guidance in
-                errorWrapper = ErrorWrapper(error: error, guidance: guidance)
+//            .environment(\.showError) { error, guidance in
+//                errorWrapper = ErrorWrapper(error: error, guidance: guidance)
+//            }
+//            .sheet(item: $errorWrapper) { errorWrapper in
+//                ErrorView(errorWrapper: errorWrapper)
+//            }
+            .environment(\.showError) { error, guidance, contactSupport in
+                errorModel = ErrorModel(error: error, guidance: guidance, contactSupport: contactSupport)
             }
-            .sheet(item: $errorWrapper) { errorWrapper in
-                ErrorView(errorWrapper: errorWrapper)
+            .sheet(item: $errorModel) { errorModel in
+                ErrorView(errorModel: errorModel)
             }
     }
 }

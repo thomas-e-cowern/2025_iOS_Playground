@@ -8,5 +8,5 @@
 import SwiftUI
 
 struct ShowErrorEnvironmentKey: EnvironmentKey {
-    static let defaultValue: (Error, String) -> Void = { _, _ in }
+    static let defaultValue: (Error, String, String) -> Void = { _, _, _ in }
 }
