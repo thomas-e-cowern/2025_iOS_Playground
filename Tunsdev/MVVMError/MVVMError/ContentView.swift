@@ -8,12 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var users: [User] = []
+    private var vm = UsersViewModel()
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button("Get Users") {
+                Task{
+                     do{
+                         users = try await vm.fetchUsers()
+                     }catch{
+                          print(error)
+                          //handle the error
+                     }
+                }
+            }
         }
         .padding()
     }
