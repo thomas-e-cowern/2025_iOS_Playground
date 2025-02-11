@@ -9,28 +9,37 @@ import SwiftUI
 import Foundation
 
 @Observable
-final class UsersViewModel {
+final class UsersViewModel: Error {
+    
+    var hasError: Bool = false
+    var error: Error?
+    
     func fetchUsers() async throws -> [User] {
         
+        hasError = false
+        
         //create the new url
-        let url = URL(string: "https://jsonplaceholder.typicode.com/users1")
+        let url = URL(string: "https://jsonplaceholder.typicode.com/usersx")
         
         //create a new urlRequest passing the url
-        let request = URLRequest(url: url!)
-        
-        //run the request and retrieve both the data and the response of the call
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        print("Response: \(response)")
-        
-        //checks if there are errors regarding the HTTP status code and decodes using the passed struct
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        
-        let fetchedData = try JSONDecoder().decode([User].self, from: ResponseHandler().handelResponse(response: (data, response)))
-        
-        print("Fetched Data: \(fetchedData)")
-        
-        return []
+        if let url = url {
+            let request = URLRequest(url: url)
+            
+            //run the request and retrieve both the data and the response of the call
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            //checks if there are errors regarding the HTTP status code and decodes using the passed struct
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            
+            let fetchedData = try JSONDecoder().decode([User].self, from: ErrorResponseHandler().handleResponse(response: (data, response)))
+
+            return fetchedData
+        } else {
+            // Return url error
+            self.hasError = true
+            self.error = URLError.invalidURL
+            throw URLError.invalidURL
+        }
     }
 }

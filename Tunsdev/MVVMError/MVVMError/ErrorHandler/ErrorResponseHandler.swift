@@ -6,7 +6,28 @@
 //
 import Foundation
 
-struct ResponseHandler {
+public enum NetworkError: Error, LocalizedError {
+    case missingRequiredFields(String)
+    case invalidParameters(operation: String, parameters: [Any])
+    case badRequest
+    case unauthorized
+    case paymentRequired
+    case forbidden
+    case notFound
+    case requestEntityTooLarge
+    case unprocessableEntity
+    case http(httpResponse: HTTPURLResponse, data: Data)
+    case invalidResponse(Data)
+    case deleteOperationFailed(String)
+    case network(URLError)
+    case unknown(Error?)
+}
+
+public enum URLError: Error, LocalizedError {
+    case invalidURL
+}
+
+struct ErrorResponseHandler: Error, LocalizedError {
     
     func handleResponse(response: (data: Data, response: URLResponse)) throws -> Data {
         guard let httpResponse = response.response as? HTTPURLResponse else {
@@ -34,23 +55,13 @@ struct ResponseHandler {
             throw NetworkError.http(httpResponse: httpResponse, data: response.data)
         }
     }
-
-    public enum NetworkError: Error, LocalizedError {
-        case missingRequiredFields(String)
-        case invalidParameters(operation: String, parameters: [Any])
-        case badRequest
-        case unauthorized
-        case paymentRequired
-        case forbidden
-        case notFound
-        case requestEntityTooLarge
-        case unprocessableEntity
-        case http(httpResponse: HTTPURLResponse, data: Data)
-        case invalidResponse(Data)
-        case deleteOperationFailed(String)
-        case network(URLError)
-        case unknown(Error?)
-    }
-
 }
 
+extension URLError {
+    public var errorDescription: String? {
+        switch self {
+        case .invalidURL:
+            return "The URL provided was invalid"
+        }
+    }
+}
