@@ -6,7 +6,7 @@
 //
 import Foundation
 
-public enum NetworkError: Error, LocalizedError {
+enum NetworkError: Error {
     case missingRequiredFields(String)
     case invalidParameters(operation: String, parameters: [Any])
     case badRequest
@@ -21,19 +21,60 @@ public enum NetworkError: Error, LocalizedError {
     case deleteOperationFailed(String)
     case network(URLError)
     case unknown(Error?)
+    
+    var description: String {
+        switch self {
+        case .missingRequiredFields:
+            return "Missing required fields"
+        case .invalidParameters:
+            return ("Someting is wrong with the parameters")
+        case .badRequest:
+            return "The server could not process a request because of a client error"
+        case .unauthorized:
+            return "Unauthorized"
+        case .paymentRequired:
+            return "Payment Required"
+        case .forbidden:
+            return "Forbidden"
+        case .notFound:
+            print("Not Found")
+            return "Not Found"
+        case .requestEntityTooLarge:
+            return "Request Entity Too Large"
+        case .unprocessableEntity:
+            return "Unprocessable Entity"
+        case .http:
+            return "HTTP response error"
+        case .invalidResponse:
+            return "Invalid Response"
+        case .deleteOperationFailed:
+            return "Delete operation failed"
+        case .network:
+            return "Network Error"
+        case .unknown(let error):
+            return "Unknown Error: \(String(describing: error))"
+        }
+    }
+
 }
 
-public enum URLError: Error, LocalizedError {
+enum URLError: Error {
     case invalidURL
+    
+    var description: String {
+        switch self {
+        case .invalidURL:
+            return "The URL provided was invalid"
+        }
+    }
 }
 
-struct ErrorResponseHandler: Error, LocalizedError {
+struct ErrorResponseHandler: Error {
     
     func handleResponse(response: (data: Data, response: URLResponse)) throws -> Data {
         guard let httpResponse = response.response as? HTTPURLResponse else {
             return response.data
         }
-        
         switch httpResponse.statusCode {
         case 200..<300:
             return response.data
@@ -46,6 +87,7 @@ struct ErrorResponseHandler: Error, LocalizedError {
         case 403:
             throw NetworkError.forbidden
         case 404:
+            print("Not Found")
             throw NetworkError.notFound
         case 413:
             throw NetworkError.requestEntityTooLarge
@@ -57,11 +99,14 @@ struct ErrorResponseHandler: Error, LocalizedError {
     }
 }
 
-extension URLError {
-    public var errorDescription: String? {
-        switch self {
-        case .invalidURL:
-            return "The URL provided was invalid"
-        }
+enum ErrorType: Error {
+    case networkError
+    case userError
+}
+
+struct ErrorNotification {
+    
+    func showError(errorType: ErrorType, error: Error) {
+        print("errorType: \(errorType), error: \(error)")
     }
 }

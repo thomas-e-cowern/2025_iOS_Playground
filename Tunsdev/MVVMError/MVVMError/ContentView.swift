@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var errorMessage: String? = nil
+    @State var errorMessage: String? = ""
     @State private var users: [User] = []
     @State private var vm = UsersViewModel()
     
@@ -20,10 +20,12 @@ struct ContentView: View {
                     Text(user.name)
                 }
             }
-            .alert("There was a problem fetching users", isPresented: $vm.hasError) {
-                Button("Ok") {}
+            .alert("Uh oh, something went wrong!", isPresented: $vm.hasError) {
+                Button("Ok") {
+                    
+                }
             } message: {
-                Text(errorMessage ?? "Something went wrong")
+                Text(vm.networkError?.description ?? "")
             }
 
             
@@ -32,11 +34,11 @@ struct ContentView: View {
                 Task{
                      do{
                          users = try await vm.fetchUsers()
-                     }catch{
-                         print(error.localizedDescription)
+                     } catch {
+//                         print(vm.error?.localizedDescription)
                           //handle the error
                          vm.hasError = true
-                         errorMessage = vm.error?.localizedDescription
+                         errorMessage = vm.networkError?.localizedDescription
                      }
                 }
             }

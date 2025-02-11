@@ -12,14 +12,17 @@ import Foundation
 final class UsersViewModel: Error {
     
     var hasError: Bool = false
-    var error: Error?
+    var networkError: NetworkError?
+    var urlError: URLError?
     
     func fetchUsers() async throws -> [User] {
+        
+        print(networkError)
         
         hasError = false
         
         //create the new url
-        let url = URL(string: "https://jsonplaceholder.typicode.com/usersx")
+        let url = URL(string: "https://jsonplaceholder.typicode.com/users/x")
         
         //create a new urlRequest passing the url
         if let url = url {
@@ -35,10 +38,11 @@ final class UsersViewModel: Error {
             let fetchedData = try JSONDecoder().decode([User].self, from: ErrorResponseHandler().handleResponse(response: (data, response)))
 
             return fetchedData
+            
         } else {
             // Return url error
             self.hasError = true
-            self.error = URLError.invalidURL
+            self.urlError = URLError.invalidURL
             throw URLError.invalidURL
         }
     }
