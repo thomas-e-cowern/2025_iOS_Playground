@@ -33,18 +33,23 @@ struct ContentView: View {
                         // Process data
                     } catch let error as NetworkError {
                         hasError = true
-                        switch error {
-                        case .invalidURL:
-                            print("Invalid URL")
-                            errorMessage = "The URL appears to be invalid."
-                        case .noData:
-                            print("No data received")
-                            errorMessage = "No data was recieved from the server"
+                        if error == .invalidURL {
+                            errorMessage = "Uh oh, something went wrong..."
                         }
-                    } catch {
-                        print("Error: \(error.localizedDescription)")
+                    } catch let error as URLError {
                         hasError = true
-                        errorMessage = "The data is not in the correct format"
+                        switch error.code {
+                        case .badURL:
+                            errorMessage = "Something is wrong with the URL..."
+                        case .unsupportedURL:
+                            errorMessage = "The URL is not supported at this time...."
+                        case .cannotConnectToHost:
+                            errorMessage = "We were not able to connect to the host..."
+                        case .notConnectedToInternet:
+                            errorMessage = "You do not appear to have internet access"
+                        default:
+                            errorMessage = "An unknown error occurred..."
+                        }
                     }
                 }
             }

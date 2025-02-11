@@ -13,9 +13,11 @@ class UserViewModel {
     func fetchUsers() async throws -> [User] {
         
         //create a new urlRequest passing the url
-        guard let url = URL(string: "https://jsonplaceholder.typicode.com/users") else {
+        guard let url = URL(string: "") else {
             throw NetworkError.invalidURL
         }
+        
+        print("URL: \(url)")
         
         let request = URLRequest(url: url)
         
@@ -35,4 +37,5 @@ class UserViewModel {
 enum NetworkError: Error {
     case invalidURL
     case noData
+    case unsupportedUrl
 }
