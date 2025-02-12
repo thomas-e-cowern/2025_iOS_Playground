@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
+    @StateObject private var viewModel = ContentViewModel()
+       
+       var body: some View {
+           NavigationStack {
+               List {
+                   ForEach(viewModel.coins) { coin in
+                       CoinRowView(coin: coin)
+                   }
+               }
+               .navigationTitle("Live Prices")
+           }
+       }
 }
 
 #Preview {
