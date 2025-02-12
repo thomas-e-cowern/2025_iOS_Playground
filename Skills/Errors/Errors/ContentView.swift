@@ -13,6 +13,7 @@ struct ContentView: View {
     @State var errorMessage: String?
     @State private var users: [User] = []
     @State private var vm = UserViewModel()
+    @State var eh: ErrorHandler
     
     var body: some View {
         VStack {
@@ -21,7 +22,7 @@ struct ContentView: View {
                     Text(user.name)
                 }
             }
-            .alert(errorMessage ?? "Nada", isPresented: $hasError) {
+            .alert(eh.errorTitle, isPresented: $eh.showError) {
                 Button("OK") {
                         
                 }
@@ -38,18 +39,7 @@ struct ContentView: View {
                         }
                     } catch let error as URLError {
                         hasError = true
-                        switch error.code {
-                        case .badURL:
-                            errorMessage = "Something is wrong with the URL..."
-                        case .unsupportedURL:
-                            errorMessage = "The URL is not supported at this time...."
-                        case .cannotConnectToHost:
-                            errorMessage = "We were not able to connect to the host..."
-                        case .notConnectedToInternet:
-                            errorMessage = "You do not appear to have internet access"
-                        default:
-                            errorMessage = "An unknown error occurred..."
-                        }
+                        let error = eh.handleUrlError(errorCode: error.code)
                     }
                 }
             }
@@ -58,5 +48,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(eh: ErrorHandler(errorTitle: "Preview Error", errorDescription: "Preview Description", showError: false))
 }
