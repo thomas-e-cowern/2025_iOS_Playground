@@ -17,9 +17,40 @@ class ContentViewModel: ObservableObject {
     }
     
     init() {
-        fetchCoinsWithURLSession()
+//        fetchCoinsWithURLSession()
+        loadData()
     }
 }
+// MARK: - Async Await
+extension ContentViewModel {
+    
+    @MainActor
+    func fetchCoinsAsync() async throws {
+        guard let url = URL(string: urlString) else {
+            print("DEBUG: Invalid URL")
+            return
+        }
+        
+        let (data, response) = try await URLSession.shared.data(from: url)
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+            print( "DEBUG: Response error \((response as? HTTPURLResponse)?.statusCode ?? 0)")
+            return
+        }
+        guard let coins = try? JSONDecoder().decode([Coin].self, from: data) else {
+            print( "DEBUG: Failed to decode JSON")
+            return
+        }
+        
+        self.coins = coins
+    }
+    
+    func loadData() {
+        Task(priority: .medium) {
+            try await fetchCoinsAsync()
+        }
+    }
+}
+
 
 // MARK: - URLSession
 
