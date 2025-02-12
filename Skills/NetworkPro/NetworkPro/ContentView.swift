@@ -16,8 +16,16 @@ struct ContentView: View {
                List {
                    ForEach(viewModel.coins) { coin in
                        CoinRowView(coin: coin)
+                           .onAppear {
+                               if coin.id == viewModel.coins.last?.id {
+                                   viewModel.loadData()
+                               }
+                           }
                    }
                }
+               .refreshable(action: {
+                   viewModel.hanldeRefresh()
+               })
                .onReceive(viewModel.$error, perform: { error in
                    if error != nil {
                        showAlert.toggle()
