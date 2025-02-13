@@ -8,14 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var vegatables: [Vegetable] = []
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            List {
+                ForEach(vegatables) { vegetable in
+                    Text(vegetable.name)
+                }
+            }
         }
-        .padding()
+        .task {
+            do {
+                let client = HTTPService()
+                vegatables = try await client.fetchVegatables()
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+        }
     }
 }
 
