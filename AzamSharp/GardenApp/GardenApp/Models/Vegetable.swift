@@ -36,6 +36,10 @@ class Vegetable: Decodable, Identifiable {
     var daysToHarvestSeedlings: Int
     var healthBenefits: String
     
+    var imageUrl: URL? {
+        return URL(string: thumbnailImage)
+    }
+    
     @Relationship(deleteRule: .nullify)
     var pests: [Pest]?
     
