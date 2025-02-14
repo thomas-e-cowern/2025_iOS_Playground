@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  VegetableListView.swift
 //  GardenApp
 //
 //  Created by Thomas Cowern on 2/13/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct VegetableListView: View {
     
     @State private var vegatables: [Vegetable] = []
     
@@ -15,10 +15,12 @@ struct ContentView: View {
         VStack {
             List {
                 ForEach(vegatables) { vegetable in
-                    Text(vegetable.name)
+                    VegetableRowView(vegetable: vegetable)
                 }
             }
+            .listStyle(.plain)
         }
+        .navigationTitle("Vegetables")
         .task {
             do {
                 let client = HTTPService()
@@ -31,6 +33,16 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
+#Preview("Light Mode") {
+    NavigationStack {
+        VegetableListView()
+            .preferredColorScheme(.light)
+    }
+}
+
+#Preview("Dark Mode") {
+    NavigationStack {
+        VegetableListView()
+            .preferredColorScheme(.dark)
+    }
 }
