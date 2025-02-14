@@ -7,27 +7,35 @@
 
 import SwiftUI
 
-@Observable
-class HTTPService {
+class HTTPService: ObservableObject {
     
     let BASE_URL = "https://azamsharp.com/vegetables.json"
     
+    @MainActor
     func fetchVegatables() async throws -> [Vegetable] {
-        
-        guard let url = URL(string: BASE_URL) else {
-            throw VegetableError.invalidUrl
+        do {
+            guard let url = URL(string: BASE_URL) else {
+                print("Bad Url")
+                throw VegetableError.invalidUrl
+            }
+            
+            let (data, response) = try await URLSession.shared.data(from: url)
+            
+            guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+                print("Bad Response")
+                throw VegetableError.serverError
+            }
+            
+            guard let decodedVegetables = try? JSONDecoder().decode([Vegetable].self, from: data) else {
+                print("Decoding Error")
+                throw VegetableError.invalidData
+            }
+            
+            return decodedVegetables
+            
+        } catch {
+            print("Unknown")
+            throw VegetableError.unknown(error)
         }
-        
-        let (data, response) = try await URLSession.shared.data(from: url)
-        
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-            throw VegetableError.serverError
-        }
-        
-        guard let decodedVegetables = try? JSONDecoder().decode([Vegetable].self, from: data) else {
-            throw VegetableError.invalidData
-        }
-        
-        return decodedVegetables
     }
 }

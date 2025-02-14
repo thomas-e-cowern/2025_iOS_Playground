@@ -22,7 +22,7 @@ enum VegetableError: Error, LocalizedError {
         case .invalidData:
             return "The vegetable was invalid. Please try again later"
         case .unknown(let error):
-            return "\(error.localizedDescription)"
+            return "An unknown error occured: \(error)"
         }
     }
 }

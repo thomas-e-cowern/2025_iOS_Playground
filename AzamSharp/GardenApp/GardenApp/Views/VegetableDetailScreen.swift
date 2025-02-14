@@ -34,13 +34,6 @@ struct VegetableDetailScreen: View {
                 .frame(maxWidth: .infinity, maxHeight: 300)
                 .padding(.bottom, 8)
                 
-                Text(vegetable.name)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .multilineTextAlignment(.center)
-                    .padding()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
                 Text(vegetable.body)
                     .font(.body)
                     .foregroundStyle(.secondary)

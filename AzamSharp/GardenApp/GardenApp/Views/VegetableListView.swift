@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct VegetableListView: View {
-    
-    @State private var vegatables: [Vegetable] = []
+
+    @State private var showAlert: Bool = false
+    @StateObject private var vlViewModel = VegetableListViewModel()
     
     var body: some View {
         VStack {
             List {
-                ForEach(vegatables) { vegetable in
+                ForEach(vlViewModel.vegetables) { vegetable in
                     NavigationLink {
                         VegetableDetailScreen(vegetable: vegetable)
                     } label: {
@@ -26,14 +27,17 @@ struct VegetableListView: View {
             .listStyle(.plain)
         }
         .navigationTitle("Vegetables")
-        .task {
-            do {
-                let client = HTTPService()
-                vegatables = try await client.fetchVegatables()
-            } catch {
-                print(error.localizedDescription)
+        .onReceive(vlViewModel.$error, perform: { error in
+            if error != nil {
+                print("Error")
+                showAlert.toggle()
+            } else {
+                print("No Error")
             }
-            
+        })
+        .alert("Error", isPresented: $showAlert) {
+            Text(vlViewModel.error?.localizedDescription ?? "")
+            Button("Ok") {}
         }
     }
 }
