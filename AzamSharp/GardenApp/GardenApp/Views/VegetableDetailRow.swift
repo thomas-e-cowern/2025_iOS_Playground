@@ -32,5 +32,5 @@ struct VegetableDetailRow: View {
 }
 
 #Preview {
-    VegetableDetailRow(icon: "leaf", title: "Seed Depth", value: "3 in")
+    VegetableDetailRow(icon: "leaf", title: "Seed Depth", value: "2 in")
 }

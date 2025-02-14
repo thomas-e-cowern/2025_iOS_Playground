@@ -48,9 +48,52 @@ struct VegetableDetailScreen: View {
                     .lineSpacing(4)
                     .padding()
                     .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Divider()
+                
+                VStack(alignment: .leading) {
+                    Text("Quick Facts")
+                        .font(.title2.weight(.bold))
+                    
+                    VegetableDetailRow(icon: "leaf", title: "Seed Depth", value: vegetable.seedDepth)
+                    VegetableDetailRow(icon: "thermometer", title: "Germination Temp", value: vegetable.germinationSoilTemp)
+                    VegetableDetailRow(icon: "calendar", title: "Days to Germination", value: "\(vegetable.daysToGermination) days")
+                    VegetableDetailRow(icon: "sun.max", title: "Light Requirement", value: vegetable.light)
+                    VegetableDetailRow(icon: "drop", title: "Watering", value: vegetable.watering)
+                    VegetableDetailRow(icon: "leaf.arrow.triangle.circlepath", title: "Companions", value: vegetable.goodCompanions)
+                    VegetableDetailRow(icon: "exclamationmark.triangle", title: "Bad Companions", value: vegetable.badCompanions)
+                    VegetableDetailRow(icon: "heart.fill", title: "Health Benefits", value: vegetable.healthBenefits.isEmpty ? "N/A" : vegetable.healthBenefits)
+                }
+                .padding()
+                
+                Divider()
+                
+                SectionHeader(title: "Growing Tips")
+                Text(vegetable.growingDescription)
+                    .font(.body)
+                    .foregroundStyle(.secondary)
+                
+                SectionHeader(title: "harvesting Tips")
+                Text(vegetable.harvestDescription)
+                    .font(.body)
+                    .foregroundStyle(.secondary)
             }
             .scrollIndicators(.hidden)
+            .padding()
         }
+    }
+}
+
+struct SectionHeader: View {
+    
+    let title: String
+    
+    var body: some View {
+        Text(title)
+            .font(.headline)
+            .foregroundStyle(.primary)
+            .padding(.top)
+            .padding(.bottom)
     }
 }
 
