@@ -15,20 +15,17 @@ class HTTPService {
     func fetchVegatables() async throws -> [Vegetable] {
         
         guard let url = URL(string: BASE_URL) else {
-            print("DEBUG: Bad URL")
-            return []
+            throw VegetableError.invalidUrl
         }
         
         let (data, response) = try await URLSession.shared.data(from: url)
         
         guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-            print("DEBUG: Error in response")
-            return []
+            throw VegetableError.serverError
         }
         
         guard let decodedVegetables = try? JSONDecoder().decode([Vegetable].self, from: data) else {
-            print ("DEBUG: Could not decode JSON")
-            return []
+            throw VegetableError.invalidData
         }
         
         return decodedVegetables
