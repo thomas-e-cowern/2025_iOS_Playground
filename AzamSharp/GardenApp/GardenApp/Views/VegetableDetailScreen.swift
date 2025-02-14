@@ -81,6 +81,7 @@ struct VegetableDetailScreen: View {
             .scrollIndicators(.hidden)
             .padding()
         }
+        .navigationTitle(vegetable.name)
     }
 }
 

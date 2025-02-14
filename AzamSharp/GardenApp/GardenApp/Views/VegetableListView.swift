@@ -15,7 +15,12 @@ struct VegetableListView: View {
         VStack {
             List {
                 ForEach(vegatables) { vegetable in
-                    VegetableRowView(vegetable: vegetable)
+                    NavigationLink {
+                        VegetableDetailScreen(vegetable: vegetable)
+                    } label: {
+                        VegetableRowView(vegetable: vegetable)
+                    }
+
                 }
             }
             .listStyle(.plain)
