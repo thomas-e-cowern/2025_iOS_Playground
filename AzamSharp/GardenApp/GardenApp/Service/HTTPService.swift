@@ -15,27 +15,23 @@ class HTTPService: ObservableObject {
     func fetchVegatables() async throws -> [Vegetable] {
         do {
             guard let url = URL(string: BASE_URL) else {
-                print("Bad Url")
                 throw VegetableError.invalidUrl
             }
             
             let (data, response) = try await URLSession.shared.data(from: url)
             
             guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-                print("Bad Response")
                 throw VegetableError.serverError
             }
             
             guard let decodedVegetables = try? JSONDecoder().decode([Vegetable].self, from: data) else {
-                print("Decoding Error")
                 throw VegetableError.invalidData
             }
             
             return decodedVegetables
             
         } catch {
-            print("Unknown")
-            throw VegetableError.unknown(error)
+            self.error = error
         }
     }
 }

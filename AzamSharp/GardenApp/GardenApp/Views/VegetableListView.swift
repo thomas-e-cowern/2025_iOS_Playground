@@ -29,11 +29,8 @@ struct VegetableListView: View {
         .navigationTitle("Vegetables")
         .onReceive(vlViewModel.$error, perform: { error in
             if error != nil {
-                print("Error")
                 showAlert.toggle()
-            } else {
-                print("No Error")
-            }
+            } 
         })
         .alert("Error", isPresented: $showAlert) {
             Text(vlViewModel.error?.localizedDescription ?? "")
