@@ -16,12 +16,13 @@ let package = Package(
     dependencies: [
         .package(url: "https://source.skip.tools/skip.git", from: "1.2.27"),
         .package(url: "https://source.skip.tools/skip-ui.git", from: "1.0.0"),
-        .package(url: "https://github.com/skiptools/skip-sql.git", "0.0.0"..<"2.0.0")
+        .package(url: "https://source.skip.tools/skip-sql.git", "0.0.0"..<"2.0.0")
         
     ],
     targets: [
         .target(name: "SkipBudget", dependencies: [
-            .product(name: "SkipUI", package: "skip-ui")
+            .product(name: "SkipUI", package: "skip-ui"),
+            .product(name: "SkipSQLPlus", package: "skip-sql")
         ], resources: [.process("Resources")], plugins: [.plugin(name: "skipstone", package: "skip")]),
         .testTarget(name: "SkipBudgetTests", dependencies: [
             "SkipBudget",
