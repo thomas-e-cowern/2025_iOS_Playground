@@ -7,7 +7,7 @@
 import Foundation
 
 struct Budget {
-    var id: Int
+    var id: Int64
     var name: String
     var amount: Double
 }
