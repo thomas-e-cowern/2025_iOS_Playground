@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%.2f" : {
+
+    },
+    "%@" : {
+
+    },
     "%lf" : {
 
     },

@@ -31,7 +31,7 @@ public struct ContentView: View {
                 HStack {
                     Text(budget.name)
                     Spacer()
-                    Text("\(budget.amount)")
+                    Text("\(budget.amount, format: .number)")
                 }
                 .padding()
             }
@@ -45,3 +45,16 @@ public struct ContentView: View {
         }
     }
 }
+
+//struct ShortNumberFormat: FormatStyle {
+//    let maxFractionLength: Int
+//    func format(_ value: Double) -> String {
+//        value.formatted(.number.precision(.fractionLength(0...maxFractionLength)))
+//    }
+//}
+//
+//extension FormatStyle where Self == ShortNumberFormat {
+//    static func short(maxFractionLength: Int = 1) -> ShortNumberFormat {
+//        .init(maxFractionLength: maxFractionLength)
+//    }
+//}
