@@ -6,8 +6,8 @@
 //
 import Foundation
 
-struct Budget {
-    var id: Int64
+struct Budget: Identifiable {
+    var id: Int64?
     var name: String
     var amount: Double
 }

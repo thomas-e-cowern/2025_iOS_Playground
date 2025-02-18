@@ -1,13 +1,11 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%lld Items" : {
-
-    },
-    "Add" : {
+    "%lf" : {
 
     },
     "Appearance" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -35,10 +33,8 @@
         }
       }
     },
-    "Cancel" : {
-
-    },
     "Dark" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -66,13 +62,14 @@
         }
       }
     },
-    "Date" : {
+    "Enter Amount" : {
 
     },
-    "Favorite" : {
+    "Enter Name" : {
 
     },
     "Hello [%@](https://skip.tools)!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -101,6 +98,7 @@
       }
     },
     "Home" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -129,6 +127,7 @@
       }
     },
     "Light" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -157,6 +156,7 @@
       }
     },
     "Name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -183,12 +183,6 @@
           }
         }
       }
-    },
-    "Notes" : {
-
-    },
-    "Powered by [Skip](https://skip.tools)" : {
-
     },
     "Powered by Skip and %@" : {
       "extractionState" : "stale",
@@ -223,6 +217,7 @@
 
     },
     "Settings" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -251,6 +246,7 @@
       }
     },
     "System" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -278,20 +274,8 @@
         }
       }
     },
-    "Title" : {
-
-    },
-    "Version %@ (%@)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Version %1$@ (%2$@)"
-          }
-        }
-      }
-    },
     "Welcome" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
