@@ -36,5 +36,12 @@ public struct ContentView: View {
                 .padding()
             }
         }
+        .onAppear() {
+            do {
+                try dataStore.loadBudgets()
+            } catch {
+                print("Error in onAppear: \(error.localizedDescription)")
+            }
+        }
     }
 }

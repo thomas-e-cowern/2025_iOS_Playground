@@ -43,5 +43,19 @@ class DataStore {
         }
     }
     
-    
+    func loadBudgets() throws {
+        
+        
+        let statement = try context.prepare(sql: "SELECT * FROM Budgets;")
+        
+        while try statement.next() {
+            let id = statement.integer(at: 0)
+            let name = statement.string(at: 1) ?? ""
+            let amount = statement.double(at: 2)
+            
+            budgets.append(Budget(id: id, name: name, amount: amount))
+        }
+        
+        self.budgets = budgets
+    }
 }
