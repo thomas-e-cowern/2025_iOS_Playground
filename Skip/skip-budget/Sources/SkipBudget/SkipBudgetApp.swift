@@ -12,6 +12,25 @@ let androidSDK = ProcessInfo.processInfo.environment["android.os.Build.VERSION.S
 /// The default implementation merely loads the `ContentView` for the app and logs a message.
 public struct RootView : View {
     public init() {
+        initializeSchema()
+    }
+    
+    private func initializeSchema() {
+        do {
+            let sqlContext = SQLContextProvider.sharedSQLContent
+            try sqlContext.exec(sql:
+            """
+            CREATE TABLE IF NOT EXISTS Budgets (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            amount REAL NOT NULL
+            );
+            """
+            )
+        } catch {
+            print("Error in initializeSchema: \(error.localizedDescription)")
+        }
+        
     }
 
     public var body: some View {
