@@ -9,13 +9,32 @@ import SwiftUI
 
 struct OptionView: View {
     
-    
+    let option: PlantOption
+    let action: (PlantOption) -> Void
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button {
+            action(option)
+        } label: {
+            HStack(spacing: 8) {
+                Image(systemName: option.icon)
+                    .foregroundStyle(Color.green)
+                Text(option.title)
+                    .font(.subheadline)
+            }
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(Color.gray.opacity(0.1))
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+        }
+
     }
 }
 
-#Preview {
-    OptionView()
+#Preview("Seed Option") {
+    OptionView(option: PlantOption.seed, action: { _ in })
+}
+
+#Preview("Seedling Option") {
+    OptionView(option: PlantOption.seedling, action: { _ in })
 }
