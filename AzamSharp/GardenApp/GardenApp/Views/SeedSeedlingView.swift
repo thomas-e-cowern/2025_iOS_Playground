@@ -41,9 +41,21 @@ struct SeedSeedlingView: View {
                 .font(.headline)
             
             HStack(spacing: 24) {
-                Text("Option view goes here....")
+                OptionView(option: .seed) { option in
+                    onSelected(option)
+                    dismiss()
+                }
+                
+                OptionView(option: .seedling) { option in
+                    onSelected(option)
+                    dismiss()
+                }
             }
-        }
+        } //: End of VStack
+        .padding()
+        .background(Color(.systemGray6))
+        .clipShape(RoundedRectangle(cornerRadius: 16.0, style: .continuous))
+        .padding()
     }
 }
 

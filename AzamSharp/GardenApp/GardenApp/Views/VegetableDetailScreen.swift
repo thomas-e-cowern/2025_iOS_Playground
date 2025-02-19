@@ -10,6 +10,8 @@ import SwiftUI
 struct VegetableDetailScreen: View {
     
     let vegetable: Vegetable
+
+    @State private var showSeedOrSeedlingMenu: Bool = false
     
     var body: some View {
         VStack(spacing: 16) {
@@ -75,6 +77,23 @@ struct VegetableDetailScreen: View {
             .padding()
         }
         .navigationTitle(vegetable.name)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    showSeedOrSeedlingMenu = true
+                } label: {
+                    Image(systemName: "plus")
+                        .font(.title2)
+                        .foregroundStyle(Color.green)
+                }
+
+            }
+        }
+        .sheet(isPresented: $showSeedOrSeedlingMenu) {
+            SeedSeedlingView(onSelected: { option in
+                print(option.title)
+            })
+        }
     }
 }
 
@@ -92,5 +111,7 @@ struct SectionHeader: View {
 }
 
 #Preview {
-    VegetableDetailScreen(vegetable: PreviewData.loadPreviewVegetables()[9])
+    NavigationStack {
+        VegetableDetailScreen(vegetable: PreviewData.loadPreviewVegetables()[9])
+    }
 }
