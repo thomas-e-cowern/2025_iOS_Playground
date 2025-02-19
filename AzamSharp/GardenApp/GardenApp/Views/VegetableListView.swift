@@ -33,7 +33,7 @@ struct VegetableListView: View {
             } 
         })
         .alert("Error", isPresented: $showAlert) {
-            Text(vlViewModel.error?.localizedDescription ?? "")
+            Text(vlViewModel.error?.localizedDescription ?? "An unknow error occured.  Please try again later")
             Button("Ok") {}
         }
     }

@@ -16,7 +16,7 @@ enum VegetableError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
             case .invalidUrl:
-            return ""
+            return "We are unable to connect to the server."
         case .serverError:
             return "There was an error with the server.  Please try again later"
         case .invalidData:

@@ -9,7 +9,8 @@ import SwiftUI
 
 class HTTPService: ObservableObject {
     
-    let BASE_URL = "https://azamsharp.com/vegetables.json"
+    @Published var error: Error?
+    let BASE_URL = "https://azamsharp.com/vegetables"
     
     @MainActor
     func fetchVegatables() async throws -> [Vegetable] {
@@ -31,7 +32,9 @@ class HTTPService: ObservableObject {
             return decodedVegetables
             
         } catch {
+            print("Caught error: \(error)")
             self.error = error
+            throw VegetableError.invalidUrl
         }
     }
 }

@@ -9,14 +9,13 @@ import SwiftUI
 
 class VegetableListViewModel: ObservableObject {
     
-    //    var httpService = HTTPService()
+//    var httpService = HTTPService()
     @Published var vegetables = [Vegetable]()
     @Published var error: Error?
     
     init() {
         loadData()
     }
-    
 }
 
 extension VegetableListViewModel {
@@ -44,6 +43,7 @@ extension VegetableListViewModel {
             self.vegetables = vegetables
         } catch {
             self.error = error
+            throw VegetableError.invalidUrl
         }
     }
     
