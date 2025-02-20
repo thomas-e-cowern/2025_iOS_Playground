@@ -93,6 +93,8 @@ struct VegetableDetailScreen: View {
             SeedSeedlingView(onSelected: { option in
                 print(option.title)
             })
+            .presentationDetents([.fraction(0.25)])
+            .presentationBackground(Color(.systemGray6))
         }
     }
 }
