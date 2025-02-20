@@ -12,6 +12,7 @@ struct GardenAppApp: App {
     var body: some Scene {
         WindowGroup {
             VegetableTabBarView()
+                .modelContainer(for: [Vegetable.self, MyGardenVegetable.self])
         }
     }
 }
