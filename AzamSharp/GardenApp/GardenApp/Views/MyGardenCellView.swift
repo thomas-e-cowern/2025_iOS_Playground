@@ -17,6 +17,7 @@ struct MyGardenCellView: View {
             if let imageUrl = myGardenVegetable.vegetable.imageUrl {
                 VegetableImageView(vegetableImageUrl: imageUrl)
             }
+                
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(myGardenVegetable.vegetable.name)
@@ -31,6 +32,8 @@ struct MyGardenCellView: View {
             Spacer()
             
             // HarvestCountdownView
+            HarvestCountdownView(plantingDate: myGardenVegetable.datePlanted, harvestDays: myGardenVegetable.daysToHarvest)
+                .frame(width: 120, height: 120)
         }
     }
 }
