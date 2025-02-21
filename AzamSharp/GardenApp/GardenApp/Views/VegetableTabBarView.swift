@@ -18,7 +18,7 @@ struct VegetableTabBarView: View {
             
             Tab("My Garden", systemImage: "house") {
                 NavigationStack {
-                    Text("My Garden View")
+                    MyGardenView()
                 }
             }
             
@@ -34,4 +34,5 @@ struct VegetableTabBarView: View {
 
 #Preview {
     VegetableTabBarView()
+        .modelContainer(previewContainer)
 }

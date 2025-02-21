@@ -13,8 +13,10 @@ struct MyGardenView: View {
     @Query private var myGardenVegetabes: [MyGardenVegetable]
     var body: some View {
         List(myGardenVegetabes) { myVeggy in
-            Text(myVeggy.vegetable.name)
+            MyGardenCellView(myGardenVegetable: myVeggy)
         }
+        .listStyle(.plain)
+        .navigationTitle("My Garden")
     }
 }
 

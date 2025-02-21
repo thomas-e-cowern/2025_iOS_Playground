@@ -13,6 +13,13 @@ struct HarvestCountdownView: View {
     }
 }
 
-#Preview {
+#Preview("Light View") {
     HarvestCountdownView()
+        .preferredColorScheme(.light)
 }
+
+#Preview("Dark Mode") {
+    MyGardenCellView(myGardenVegetable: MyGardenVegetable.sampleVegetables[1])
+        .preferredColorScheme(.dark)
+}
+
