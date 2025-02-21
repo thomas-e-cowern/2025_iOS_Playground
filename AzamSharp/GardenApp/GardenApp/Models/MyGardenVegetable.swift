@@ -19,3 +19,15 @@ class MyGardenVegetable {
         self.plantOption = plantOption
     }
 }
+
+extension MyGardenVegetable {
+    static var sampleVegetables: [MyGardenVegetable] {
+        [
+            MyGardenVegetable(vegetable: PreviewData.loadPreviewVegetables()[0], plantOption: .seed),
+            MyGardenVegetable(vegetable: PreviewData.loadPreviewVegetables()[4], plantOption: .seedling),
+            MyGardenVegetable(vegetable: PreviewData.loadPreviewVegetables()[8], plantOption: .seedling),
+            MyGardenVegetable(vegetable: PreviewData.loadPreviewVegetables()[3], plantOption: .seed),
+            MyGardenVegetable(vegetable: PreviewData.loadPreviewVegetables()[11], plantOption: .seedling)
+        ]
+    }
+}
