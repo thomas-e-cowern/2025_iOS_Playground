@@ -15,7 +15,7 @@ class MyGardenVegetable {
     var datePlanted: Date = Date()
     
     @Relationship(deleteRule: .cascade)
-    var note: [Note]?
+    var notes: [Note]?
     
     init(vegetable: Vegetable, plantOption: PlantOption) {
         self.vegetable = vegetable

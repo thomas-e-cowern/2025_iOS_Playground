@@ -13,7 +13,11 @@ struct MyGardenView: View {
     @Query private var myGardenVegetabes: [MyGardenVegetable]
     var body: some View {
         List(myGardenVegetabes) { myVeggy in
-            MyGardenCellView(myGardenVegetable: myVeggy)
+            NavigationLink {
+                NoteListView(myGardenVegetable: myVeggy)
+            } label: {
+                MyGardenCellView(myGardenVegetable: myVeggy)
+            }
         }
         .listStyle(.plain)
         .navigationTitle("My Garden")
