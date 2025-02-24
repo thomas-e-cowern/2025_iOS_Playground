@@ -9,6 +9,7 @@ import SwiftData
 
 struct AddNoteView: View {
     
+    @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     
     let myGardenVegetable: MyGardenVegetable
@@ -31,10 +32,19 @@ struct AddNoteView: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Save") {
-                    // MARK: TODO - Save the note
+                    saveNote()
                 }
             }
         }
+    }
+    
+    // MARK: - Methods and functions
+    private func saveNote() {
+        // MARK: TODO - Save a new note
+        let note = Note(title: noteTitle, body: noteBody)
+        myGardenVegetable.notes?.append(note)
+        //        context.insert(note)
+        dismiss()
     }
 }
 
@@ -42,6 +52,7 @@ struct AddNoteView: View {
     NavigationStack {
         AddNoteView(myGardenVegetable: MyGardenVegetable.sampleVegetables[2])
             .preferredColorScheme(.light)
+            .modelContainer(previewContainer)
     }
 }
 
@@ -49,5 +60,6 @@ struct AddNoteView: View {
     NavigationStack {
         AddNoteView(myGardenVegetable: MyGardenVegetable.sampleVegetables[2])
             .preferredColorScheme(.dark)
+            .modelContainer(previewContainer)
     }
 }
