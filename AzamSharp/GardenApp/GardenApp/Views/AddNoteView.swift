@@ -81,6 +81,7 @@ struct AddNoteView: View {
     private func saveNote() {
         // MARK: TODO - Save a new note
         let note = Note(title: noteTitle, body: noteBody)
+        note.photo = imageData
         myGardenVegetable.notes?.append(note)
         //        context.insert(note)
         dismiss()
