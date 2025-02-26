@@ -22,6 +22,7 @@ struct ButtonImageView: View {
                 Circle()
                     .fill(.ultraThickMaterial)
             )
+            .frame(width: 80)
     }
 }
 
