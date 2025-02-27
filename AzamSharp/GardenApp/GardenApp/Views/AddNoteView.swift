@@ -21,6 +21,8 @@ struct AddNoteView: View {
     @State private var uiImage: UIImage?
     @State private var imageData: Data?
     
+    @State private var isCameraSelected: Bool = false
+    
     var body: some View {
         Form {
             TextField("Title", text: $noteTitle)
@@ -28,19 +30,40 @@ struct AddNoteView: View {
                 .frame(minHeight: 200)
                 .multilineTextAlignment(.leading)
             
-            HStack(spacing: 20) {
-                PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()) {
+            HStack {
+                // Camera
+                Button {
+                    // action
+                    if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                        isCameraSelected = true
+                    }
+                } label: {
                     ZStack {
                         Circle()
-                            .fill(Color.blue.opacity(0.2))
+                            .fill(Color.green.opacity(0.2))
                             .frame(width: 60, height: 60)
-                        Image(systemName: "photo.on.rectangle.angled.fill")
+                        Image(systemName: "camera.fill")
                             .font(.title)
-                            .foregroundStyle(Color.blue)
+                            .foregroundColor(.green)
                     }
                 }
+                
+                //Image picker
+                HStack(spacing: 20) {
+                    PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()) {
+                        ZStack {
+                            Circle()
+                                .fill(Color.blue.opacity(0.2))
+                                .frame(width: 60, height: 60)
+                            Image(systemName: "photo.on.rectangle.angled.fill")
+                                .font(.title)
+                                .foregroundStyle(Color.blue)
+                        }
+                    }
+                }
+                .buttonStyle(.borderless)
             }
-            .buttonStyle(.borderless)
+
             
             if let uiImage {
                 Image(uiImage: uiImage)
@@ -62,6 +85,13 @@ struct AddNoteView: View {
                 }
             }
         }
+        .sheet(isPresented: $isCameraSelected, content: {
+            ImagePicker(image: $uiImage, sourceType: .camera)
+        })
+        .onChange(of: uiImage, {
+            imageData = uiImage?.pngData()
+        })
+        
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button("Cancel") {
