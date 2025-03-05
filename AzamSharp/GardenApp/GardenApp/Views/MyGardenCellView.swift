@@ -25,8 +25,11 @@ struct MyGardenCellView: View {
                     .foregroundStyle(Color.primary)
                 HStack {
                     Image(systemName: myGardenVegetable.plantOption.icon)
-                        .foregroundStyle(Color.green)
+                    Image(systemName: myGardenVegetable.notes?.count == 0 ? "" : "list.clipboard")
+                    // remove comment lines to show number of notes...
+//                    Text("\(myGardenVegetable.notes?.count ?? 0)")
                 }
+                .foregroundStyle(Color.green)
             }
             
             Spacer()
