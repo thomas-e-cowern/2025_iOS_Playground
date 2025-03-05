@@ -27,9 +27,10 @@ struct NoteListView: View {
                     }
                 }
             } else {
-                Text("You have not notes yet.  Let's add some...")
+                Text("You have no notes yet.  Let's add some...")
             }
         } //: End of VStack
+        .navigationTitle(myGardenVegetable.vegetable.name)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Add Note") {
