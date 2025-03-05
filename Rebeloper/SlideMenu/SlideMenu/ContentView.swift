@@ -8,20 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject private var slideInMenuService = SlideInMenuService()
+    
     var body: some View {
-        TabView {
-            Tab("Home", systemImage: "house") {
-                NavigationStack {
-                   HomeView()
+        Group {
+            TabView {
+                Tab("Home", systemImage: "house") {
+                    NavigationStack {
+                        HomeView()
+                    }
                 }
-            }
-            
-            Tab("Person", systemImage: "person") {
-                NavigationStack {
-                    Profile()
+                
+                Tab("Person", systemImage: "person") {
+                    NavigationStack {
+                        Profile()
+                    }
                 }
             }
         }
+        .environmentObject(slideInMenuService)
     }
 }
 

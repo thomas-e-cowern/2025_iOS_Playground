@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @EnvironmentObject private var slideInMenuService: SlideInMenuService
+    
     var body: some View {
         List {
             ForEach(SampleData.sampleData) { item in
@@ -30,7 +33,7 @@ struct HomeView: View {
     }
     
     func didTapMenuButton() {
-        
+        slideInMenuService.isPresented.toggle()
     }
 }
 
