@@ -28,7 +28,7 @@ struct ContentView: View {
             }
         }
         .environmentObject(slideInMenuService)
-        .slideInView(isActive: $slideInMenuService.isPresented) {
+        .slideInView(isActive: $slideInMenuService.isPresented, edge: .trailing) {
             MenuView()
         }
     }

@@ -27,16 +27,12 @@ struct HomeView: View {
                 } label: {
                     Image(systemName: "filemenu.and.selection")
                 }
-
             }
         }
     }
     
     func didTapMenuButton() {
-        print("Tapped")
-        print(slideInMenuService.isPresented)
         slideInMenuService.isPresented.toggle()
-        print(slideInMenuService.isPresented)
     }
 }
 

@@ -9,7 +9,17 @@ import SwiftUI
 
 struct MenuView: View {
     var body: some View {
-        Text("Menu View")
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                Text("Menu View")
+                Spacer()
+            }
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.background)
     }
 }
 
