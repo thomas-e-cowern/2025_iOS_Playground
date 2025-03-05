@@ -23,7 +23,7 @@ struct HomeView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    // More to come
+                    didTapMenuButton()
                 } label: {
                     Image(systemName: "filemenu.and.selection")
                 }
@@ -33,7 +33,10 @@ struct HomeView: View {
     }
     
     func didTapMenuButton() {
+        print("Tapped")
+        print(slideInMenuService.isPresented)
         slideInMenuService.isPresented.toggle()
+        print(slideInMenuService.isPresented)
     }
 }
 

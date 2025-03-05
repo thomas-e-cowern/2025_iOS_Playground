@@ -28,6 +28,9 @@ struct ContentView: View {
             }
         }
         .environmentObject(slideInMenuService)
+        .slideInView(isActive: $slideInMenuService.isPresented) {
+            MenuView()
+        }
     }
 }
 
