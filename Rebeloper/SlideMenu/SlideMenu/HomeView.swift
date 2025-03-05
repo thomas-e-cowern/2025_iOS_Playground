@@ -22,11 +22,15 @@ struct HomeView: View {
                 Button {
                     // More to come
                 } label: {
-                    Image(systemName: "plus")
+                    Image(systemName: "filemenu.and.selection")
                 }
 
             }
         }
+    }
+    
+    func didTapMenuButton() {
+        
     }
 }
 
