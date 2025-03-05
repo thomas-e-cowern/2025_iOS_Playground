@@ -23,6 +23,10 @@ struct AddNoteView: View {
     
     @State private var isCameraSelected: Bool = false
     
+    private var isFormValid: Bool {
+        return false
+    }
+    
     var body: some View {
         Form {
             TextField("Title", text: $noteTitle)
@@ -72,6 +76,7 @@ struct AddNoteView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 12))
             }
         }
+        .navigationTitle("Add Note for \(myGardenVegetable.vegetable.name)")
         .task(id: selectedPhoto) {
             if let selectedPhoto {
                 do {
