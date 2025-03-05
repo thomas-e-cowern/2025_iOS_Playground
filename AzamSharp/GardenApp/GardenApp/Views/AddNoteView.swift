@@ -24,7 +24,7 @@ struct AddNoteView: View {
     @State private var isCameraSelected: Bool = false
     
     private var isFormValid: Bool {
-        return false
+        !noteTitle.isEmptyOrWhitespace && !noteBody.isEmptyOrWhitespace
     }
     
     var body: some View {
@@ -108,6 +108,7 @@ struct AddNoteView: View {
                 Button("Save") {
                     saveNote()
                 }
+                .disabled(!isFormValid)
             }
         }
     }
