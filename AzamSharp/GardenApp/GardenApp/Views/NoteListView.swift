@@ -16,15 +16,7 @@ struct NoteListView: View {
         VStack {
             if myGardenVegetable.notes != nil {
                 List(myGardenVegetable.notes ?? []) { note in
-                    HStack {
-                        if let photoData = note.photo, let uiImage = UIImage(data: photoData) {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .frame(width: 44, height: 44)
-                                .clipShape(Circle())
-                        }
-                        Text(note.title)
-                    }
+                    NoteCellView(note: note, placeholderImage: myGardenVegetable.vegetable.imageUrl)
                 }
             } else {
                 Text("You have no notes yet.  Let's add some...")

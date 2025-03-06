@@ -28,7 +28,7 @@ struct NoteCellView: View {
                 if let photoData = note.photo, let uiImage = UIImage(data: photoData) {
                     Image(uiImage: uiImage)
                         .resizable()
-                        .frame(width: 44, height: 44)
+                        .frame(width: 75, height: 75)
                         .clipShape(Circle())
                 } else {
                     AsyncImage(url: placeholderImage) { image in
