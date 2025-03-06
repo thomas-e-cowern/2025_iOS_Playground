@@ -36,8 +36,18 @@ struct ContentView: View {
                     ForEach(movies) { movie in
                         HStack {
                             Text(movie.title)
+                                .font(.title.weight(.light))
+                                .padding(.vertical, 2)
                             Spacer()
                             Text(movie.genre.name)
+                                .font(.footnote.weight(.medium))
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 3)
+                                .background(
+                                    Capsule()
+                                        .stroke(lineWidth: 1)
+                                )
+                                .foregroundStyle(.tertiary)
                         }
                         .swipeActions {
                             Button(role: .destructive) {
