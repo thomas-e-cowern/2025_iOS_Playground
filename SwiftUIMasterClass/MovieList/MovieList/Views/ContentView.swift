@@ -16,6 +16,7 @@ struct ContentView: View {
     
     @State private var isSheetPresented: Bool = false
     @State private var randomMovie: String = ""
+    @State private var isShowingAlert: Bool = false
     
     // MARK: - Methods and functions
     private func randomMovieGenerator() {
@@ -77,9 +78,15 @@ struct ContentView: View {
                 if movies.count >= 2 {
                     Button {
                         randomMovieGenerator()
+                        isShowingAlert.toggle()
                     } label: {
                         ButtonImageView(symbolName: "arrow.trianglehead.2.clockwise.rotate.90.circle.fill")
                     }
+                    .alert(randomMovie, isPresented: $isShowingAlert) {
+                        Button("OK", role: .cancel) {}
+                    }
+                    .accessibilityLabel("Random Movie")
+                    .sensoryFeedback(.success, trigger: isShowingAlert)
                 }
                 
                 Spacer()
@@ -89,6 +96,8 @@ struct ContentView: View {
                 } label: {
                     ButtonImageView(symbolName: "plus.circle.fill")
                 }
+                .accessibilityLabel("New Movie")
+                .sensoryFeedback(.success, trigger: isSheetPresented)
             } //: End of HStack
             .padding(.horizontal)
         } //: End of safeAreaInset
