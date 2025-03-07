@@ -13,7 +13,14 @@ struct ContentView: View {
     // MARK: - Properties
     @Environment(\.modelContext) var modelContext
     @Query private var movies: [Movie]
+    
     @State private var isSheetPresented: Bool = false
+    @State private var randomMovie: String = ""
+    
+    // MARK: - Methods and functions
+    private func randomMovieGenerator() {
+        randomMovie = movies.randomElement()!.title
+    }
     
     var body: some View {
         List {
@@ -66,12 +73,25 @@ struct ContentView: View {
             }
         }
         .safeAreaInset(edge: .bottom, alignment: .center) {
-            Button {
-                isSheetPresented.toggle()
-            } label: {
-                ButtonImageView(symbolName: "plus.circle.fill")
-            }
-        }
+            HStack {
+                if movies.count >= 2 {
+                    Button {
+                        randomMovieGenerator()
+                    } label: {
+                        ButtonImageView(symbolName: "arrow.trianglehead.2.clockwise.rotate.90.circle.fill")
+                    }
+                }
+                
+                Spacer()
+                
+                Button {
+                    isSheetPresented.toggle()
+                } label: {
+                    ButtonImageView(symbolName: "plus.circle.fill")
+                }
+            } //: End of HStack
+            .padding(.horizontal)
+        } //: End of safeAreaInset
         .sheet(isPresented: $isSheetPresented) {
             NewMovieView()
         }
