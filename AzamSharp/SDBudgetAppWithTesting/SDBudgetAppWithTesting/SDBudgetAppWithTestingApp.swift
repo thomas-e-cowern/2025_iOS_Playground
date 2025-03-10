@@ -11,7 +11,7 @@ import SwiftUI
 struct SDBudgetAppWithTestingApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            BudgetListScreen()
         }
     }
 }
