@@ -13,6 +13,9 @@ final class Budget {
     var name: String
     var limit: Double
     
+    @Relationship(deleteRule: .cascade)
+    var transactions: [Transaction] = []
+    
     init(name: String, limit: Double) {
         self.name = name
         self.limit = limit
