@@ -49,9 +49,9 @@ struct BudgetListScreen: View {
                         Spacer()
                             .frame(height: 200)
                         ContentUnavailableView {
-                            Label("No Transactions Found", systemImage: "person.circle")
+                            Label("No Budgets Found", systemImage: "person.circle")
                         } description: {
-                            Text("You have budgets created. Click the button below to add a new budget.")
+                            Text("You have no budgets. Click the button below to add a new budget.")
                         }
                     }
                 }
