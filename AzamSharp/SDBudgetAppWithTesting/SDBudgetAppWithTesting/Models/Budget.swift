@@ -20,6 +20,11 @@ final class Budget {
         self.name = name
         self.limit = limit
     }
+    
+    func addTransaction(_ transaction: Transaction) {
+        
+        self.transactions.append(transaction)
+    }
 }
 
 
