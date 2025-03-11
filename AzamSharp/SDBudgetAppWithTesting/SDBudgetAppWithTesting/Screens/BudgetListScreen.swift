@@ -43,6 +43,19 @@ struct BudgetListScreen: View {
                     } //: End of list
                 }  // MARK: - End of Section
             } // MARK: - End of form
+            .overlay {
+                if budgets.isEmpty {
+                    VStack {
+                        Spacer()
+                            .frame(height: 200)
+                        ContentUnavailableView {
+                            Label("No Transactions Found", systemImage: "person.circle")
+                        } description: {
+                            Text("You have budgets created. Click the button below to add a new budget.")
+                        }
+                    }
+                }
+            }  // MARK: - End of Overlay
             
             VStack {
                 Button("Add Budget") {

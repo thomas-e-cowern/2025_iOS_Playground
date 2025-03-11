@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct BudgetDetailScreen: View {
-        
+    
     // MARK: - Properties
     let budget: Budget
     
@@ -25,17 +25,43 @@ struct BudgetDetailScreen: View {
     // MARK: - Body
     var body: some View {
         Form {
-            TextField("Note", text: $note)
-            TextField("Amount", value: $amount, format: .number)
-            DatePicker("Date", selection: $date)
-            Toggle("Receipt", isOn: $hasReceipt)
-            Button("Save Transaction") {
-                // MARK: TODO - Add saveTransaction here...
+            Section("Add Transaction to \(budget.name)") {
+                TextField("Note", text: $note)
+                TextField("Amount", value: $amount, format: .number)
+                DatePicker("Date", selection: $date)
+                Toggle("Receipt", isOn: $hasReceipt)
+                Button("Save Transaction") {
+                    saveTransaction()
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
+                .disabled(!isFormValid)
+            } // MARK: - End of Section
+            
+            Section("Transactions for \(budget.name)") {
+                List(budget.transactions) { transaction in
+                    HStack {
+                        Text(transaction.note)
+                        Spacer()
+                        Text(transaction.amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    }
+                }// MARK: - End of list
+                
             }
-            .frame(maxWidth: .infinity, alignment: .center)
-            .disabled(!isFormValid)
-        }
-        .navigationTitle("Add Transaction")
+        }// MARK: - End of form
+        .navigationTitle(budget.name)
+        .overlay {
+            if budget.transactions.isEmpty {
+                VStack {
+                    Spacer()
+                        .frame(height: 200)
+                    ContentUnavailableView {
+                        Label("No Transactions Found", systemImage: "person.circle")
+                    } description: {
+                        Text("You have no transactions for your \(budget.name)")
+                    }
+                }
+            }
+        }  // MARK: - End of Overlay
     }
     
     // MARK: - Methods and functions
