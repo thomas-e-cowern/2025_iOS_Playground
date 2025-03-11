@@ -11,7 +11,10 @@ import SwiftUI
 struct SDBudgetAppWithTestingApp: App {
     var body: some Scene {
         WindowGroup {
-            BudgetListScreen()
+            NavigationStack {
+                BudgetListScreen()
+            }
         }
+        .modelContainer(for: Budget.self)
     }
 }
