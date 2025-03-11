@@ -9,7 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct BudgetDetailScreen: View {
-    
+        
+    // MARK: - Properties
     let budget: Budget
     
     @State private var note: String = ""
@@ -21,6 +22,7 @@ struct BudgetDetailScreen: View {
         !note.trimmingCharacters(in: .whitespaces).isEmpty && amount != nil
     }
     
+    // MARK: - Body
     var body: some View {
         Form {
             TextField("Note", text: $note)
@@ -33,16 +35,19 @@ struct BudgetDetailScreen: View {
             .frame(maxWidth: .infinity, alignment: .center)
             .disabled(!isFormValid)
         }
+        .navigationTitle("Add Transaction")
     }
     
     // MARK: - Methods and functions
     private func saveTransaction() {
         let transaction = Transaction(note: note, amount: amount ?? 0.0, date: date, hasReceipt: hasReceipt)
         transaction.budget = budget
-        budget.transactions.append(transaction)
+        budget.addTransaction(transaction)
     }
 }
 
 #Preview {
-    BudgetDetailScreen(budget: Budget(name: "Europe Trip", limit: 5700))
+    NavigationStack {
+        BudgetDetailScreen(budget: Budget(name: "Europe Trip", limit: 5700))
+    }
 }

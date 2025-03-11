@@ -33,24 +33,28 @@ struct BudgetListScreen: View {
                 
                 Section("Budgets") {
                     List(budgets) { budget in
-                        HStack {
-                            Text(budget.name)
-                            Spacer()
-                            Text(budget.limit, format: .currency(code: Locale.current.identifier))
+                        NavigationLink(value: budget) {
+                            HStack {
+                                Text(budget.name)
+                                Spacer()
+                                Text(budget.limit, format: .currency(code: Locale.current.identifier))
+                            }
                         }
-                    }
+                    } //: End of list
+                }  // MARK: - End of Section
+            } // MARK: - End of form
+            
+            VStack {
+                Button("Add Budget") {
+                    saveBudget()
                 }
+                .disabled(!isFormValid)
+            }
+            .navigationTitle("Budgets")
+            .navigationDestination(for: Budget.self) { budget in
+                BudgetDetailScreen(budget: budget)
             }
         }
-        
-        VStack {
-            Button("Add Budget") {
-                saveBudget()
-            }
-            .disabled(!isFormValid)
-        }
-        .navigationTitle("Budgets")
-        
     }
     
     // MARK: - Methods and functions
@@ -63,6 +67,8 @@ struct BudgetListScreen: View {
 }
 
 #Preview {
-    BudgetListScreen()
-        .modelContainer(for: Budget.self)
+    NavigationStack {
+        BudgetListScreen()
+            .modelContainer(for: Budget.self)
+    }
 }
