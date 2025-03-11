@@ -12,8 +12,34 @@ struct BudgetDetailScreen: View {
     
     let budget: Budget
     
+    @State private var note: String = ""
+    @State private var amount: Double?
+    @State private var date: Date = Date()
+    @State private var hasReceipt: Bool = false
+    
+    private var isFormValid: Bool {
+        !note.trimmingCharacters(in: .whitespaces).isEmpty && amount != nil
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Form {
+            TextField("Note", text: $note)
+            TextField("Amount", value: $amount, format: .number)
+            DatePicker("Date", selection: $date)
+            Toggle("Receipt", isOn: $hasReceipt)
+            Button("Save Transaction") {
+                // MARK: TODO - Add saveTransaction here...
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
+            .disabled(!isFormValid)
+        }
+    }
+    
+    // MARK: - Methods and functions
+    private func saveTransaction() {
+        let transaction = Transaction(note: note, amount: amount ?? 0.0, date: date, hasReceipt: hasReceipt)
+        transaction.budget = budget
+        budget.transactions.append(transaction)
     }
 }
 
