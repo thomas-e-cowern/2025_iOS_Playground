@@ -7,15 +7,29 @@
 
 import SwiftUI
 
+extension View  {
+    @warn_unqualified_access
+    func titleStyle() -> some View {
+        self
+            .font(.largeTitle)
+            .fontWeight(.heavy)
+            .foregroundStyle(.red)
+        
+    }
+}
+
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
             Text("Hello, world!")
+                .padding()
+                .background(Color.blue)
+                .clipShape(.capsule)
+                .titleStyle()
         }
         .padding()
+        
+        
     }
 }
 
