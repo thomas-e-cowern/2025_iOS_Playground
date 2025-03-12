@@ -72,8 +72,22 @@ struct BudgetDetailScreen: View {
     }
 }
 
-#Preview {
-    NavigationStack {
-        BudgetDetailScreen(budget: Budget(name: "Europe Trip", limit: 5700))
+struct BudgetDetailContainerView: View {
+    
+    @Query private var budgets: [Budget]
+    
+    var body: some View {
+        NavigationStack {
+            BudgetDetailScreen(budget: budgets.first!)
+        }
     }
+}
+
+#Preview {
+//    NavigationStack {
+//        BudgetDetailScreen(budget: Budget(name: "Europe Trip", limit: 5700))
+//    }
+    
+    BudgetDetailContainerView()
+        .modelContainer(previewContainer)
 }
