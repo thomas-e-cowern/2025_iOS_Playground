@@ -32,7 +32,7 @@ struct MessageView: View {
                 }
             }
         }
-        .clipShape(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 25.0, style: .continuous))
         .padding()
         .foregroundColor(.white)
         .task {
@@ -43,5 +43,6 @@ struct MessageView: View {
 }
 
 #Preview {
-    MessageView()
+    @Previewable @State var message = MessageWrapper(messageType: .info("This is an info message"))
+    MessageView(messageWrapper:.constant(message))
 }
