@@ -65,4 +65,10 @@ struct AddBudgetCategoryScreen: View {
     }
 }
 
-
+#Preview {
+    NavigationStack {
+        AddBudgetCategoryScreen()
+            .modelContainer(for: [BudgetCategory.self])
+            .withMessageWrapper()
+    }
+}

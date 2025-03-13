@@ -60,6 +60,14 @@ struct BudgetListView: View {
     }
 }
 
+#Preview { @MainActor in
+    NavigationStack {
+        BudgetListView()
+            .modelContainer(previewContainer)
+            .withMessageWrapper()
+    }
+}
+
 struct BudgetCategoryView: View {
     
     let budgetCategory: BudgetCategory
