@@ -7,7 +7,7 @@
 import SwiftUI
 import SwiftData
 
-struct BudgetListScreen: View {
+struct BudgetListView: View {
     
     @Query private var budgetCategories: [BudgetCategory]
     @State private var isPresented: Bool = false

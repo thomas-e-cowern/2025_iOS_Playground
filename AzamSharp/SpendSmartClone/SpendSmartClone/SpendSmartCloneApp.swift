@@ -33,7 +33,10 @@ struct SpendSmartCloneApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                BudgetListView()
+            }.withMessageWrapper()
         }
+        .modelContainer(container)
     }
 }
