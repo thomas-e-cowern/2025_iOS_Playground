@@ -26,6 +26,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Models/BudgetCategory.swift,
+				Models/Transaction.swift,
 			);
 			target = 4DEF6D802D84726D003ABD49 /* SpendSmartCloneTests */;
 		};
