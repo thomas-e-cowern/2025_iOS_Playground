@@ -27,6 +27,7 @@ class Transaction {
     }
     
     func delete(context: ModelContext) {
+        print("deleting transaction")
         context.delete(self)
     }
 }

@@ -78,4 +78,8 @@ class BudgetCategory {
             throw BudgetCategoryError.titleAlreadyExists
         }
     }
+    
+    func delete(context: ModelContext) {
+        context.delete(self)
+    }
 }

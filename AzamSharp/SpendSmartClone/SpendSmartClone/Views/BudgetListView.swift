@@ -11,6 +11,7 @@ struct BudgetListView: View {
     
     @Query private var budgetCategories: [BudgetCategory]
     @State private var isPresented: Bool = false
+    @Environment(\.modelContext) private var context
     
     private var total: Decimal {
         budgetCategories.reduce(0) { result, budgetCategory in
@@ -24,6 +25,13 @@ struct BudgetListView: View {
         }
     }
     
+    private func deleteBudget(_ indexSet: IndexSet) {
+        indexSet.forEach { index in
+            let budget = budgetCategories[index]
+            budget.delete(context: context)
+        }
+    }
+    
     var body: some View {
         List {
             ForEach(budgetCategories) { budgetCategory in
@@ -32,7 +40,7 @@ struct BudgetListView: View {
                 } label: {
                     BudgetCategoryView(budgetCategory: budgetCategory)
                 }
-            }
+            }.onDelete(perform: deleteBudget)
             
             VStack {
                 Text("Total: \(String(describing: total.formatted(.currency(code: Locale.currencyCode))))")
