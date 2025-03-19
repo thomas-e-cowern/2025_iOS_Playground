@@ -22,10 +22,30 @@ class FirstTestingTests: XCTestCase {
     }
     
     func testPerformanceExample() {
-        self.measure {
-            
-        }
+//        self.measure {
+//            
+//        }
     }
     
+    func testHaterStartsNicely() {
+        let hater = Hater()
+
+        XCTAssertFalse(hater.hating)
+    }
     
+    func testHaterHatesAfterBadDay() {
+        var hater = Hater()
+
+        hater.hadABadDay()
+
+        XCTAssertTrue(hater.hating)
+    }
+
+    func testHaterHappyAfterGoodDay() {
+        var hater = Hater()
+
+        hater.hadAGoodDay()
+
+        XCTAssertFalse(hater.hating)
+    }
 }
