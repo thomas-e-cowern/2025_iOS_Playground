@@ -24,16 +24,25 @@ class ThrowingTests: XCTestCase {
         }
     }
     
+//    func testPlayingBlastazapThrows() {
+//        let game = Game(name: "Blastazap")
+//
+//        do {
+//            try game.play()
+//            XCTFail()
+//        } catch GameError.notInstalled {
+//            // success!
+//        } catch {
+//            XCTFail()
+//        }
+//    }
+    
+    // Second way of testing throwing errors....
     func testPlayingBlastazapThrows() {
         let game = Game(name: "Blastazap")
 
-        do {
-            try game.play()
-            XCTFail()
-        } catch GameError.notInstalled {
-            // success!
-        } catch {
-            XCTFail()
+        XCTAssertThrowsError(try game.play()) { error in
+            XCTAssertEqual(error as? GameError, GameError.notInstalled)
         }
     }
     
@@ -58,5 +67,11 @@ class ThrowingTests: XCTestCase {
         } catch {
             XCTFail()
         }
+    }
+    
+    // Better way of testing no throws...
+    func testPlayingExplodingMonkeysDoesntThrow() {
+        let game = Game(name: "Exploding Monkeys")
+        XCTAssertNoThrow(try game.play())
     }
 }
