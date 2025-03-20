@@ -23,4 +23,40 @@ class ThrowingTests: XCTestCase {
             XCTFail()
         }
     }
+    
+    func testPlayingBlastazapThrows() {
+        let game = Game(name: "Blastazap")
+
+        do {
+            try game.play()
+            XCTFail()
+        } catch GameError.notInstalled {
+            // success!
+        } catch {
+            XCTFail()
+        }
+    }
+    
+    func testPlayingDeadStormRisingThrows() {
+        let game = Game(name: "Dead Storm Rising")
+
+        do {
+            try game.play()
+            XCTFail()
+        } catch GameError.parentalControlsDisallowed {
+            // success!
+        } catch {
+            XCTFail()
+        }
+    }
+    
+    func testPlayingMarioBrothersDoesNotThrow() {
+        let game = Game(name: "Mario Brothers")
+
+        do {
+            try game.play()
+        } catch {
+            XCTFail()
+        }
+    }
 }
