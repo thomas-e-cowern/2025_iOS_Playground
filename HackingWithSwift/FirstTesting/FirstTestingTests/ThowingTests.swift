@@ -59,6 +59,17 @@ class ThrowingTests: XCTestCase {
         }
     }
     
+    // Turn the test into a throwing function that throws if a failure
+    func testDeadStormRisingThrows() throws {
+        let game = Game(name: "Dead Storm Rising")
+        try game.play()
+    }
+    
+    func testCrashyPlaneDoesntThrow() throws {
+        let game = Game(name: "CrashyPlane")
+        try game.play()
+    }
+    
     func testPlayingMarioBrothersDoesNotThrow() {
         let game = Game(name: "Mario Brothers")
 
