@@ -68,5 +68,16 @@ class UnitTestingPlaygroundTests: XCTestCase {
             XCTAssertEqual(vm.isPremium, userIsPremium)
         }
     }
+    
+    func test_UnitTestingPlaygroundViewModel_dataArray_ShouldBeEmpty() {
+        // Given
+        
+        // When
+        let vm = UnitTestingPlaygroundViewModel(isPremium: Bool.random())
+        
+        // Then
+        XCTAssertTrue(vm.dataArray.isEmpty)
+        XCTAssertEqual(vm.dataArray.count, 0)
+    }
 
 }
