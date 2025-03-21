@@ -71,13 +71,59 @@ class UnitTestingPlaygroundTests: XCTestCase {
     
     func test_UnitTestingPlaygroundViewModel_dataArray_ShouldBeEmpty() {
         // Given
+        let isPremium = Bool.random()
         
         // When
-        let vm = UnitTestingPlaygroundViewModel(isPremium: Bool.random())
+        let vm = UnitTestingPlaygroundViewModel(isPremium: isPremium)
         
         // Then
         XCTAssertTrue(vm.dataArray.isEmpty)
         XCTAssertEqual(vm.dataArray.count, 0)
     }
+    
+    func test_UnitTestingPlaygroundViewModel_dataArray_ShouldAddItem() {
+        // Given
+        let vm = UnitTestingPlaygroundViewModel(isPremium: Bool.random())
+        let randomInt = TestHelpers().randomInt()
+        
+        // When
+//        vm.addItem(item: UUID().uuidString)
+        // or
+        vm.addItem(item: TestHelpers().randomString(length: randomInt))
+        
+        // Then
+        XCTAssertTrue(!vm.dataArray.isEmpty)
+        XCTAssertFalse(vm.dataArray.isEmpty)
+        XCTAssertEqual(vm.dataArray.count, 1)
+        XCTAssertNotEqual(vm.dataArray.count, 0)
+        XCTAssertGreaterThan(vm.dataArray.count, 0)
+    }
+    
+    func test_UnitTestingPlaygroundViewModel_dataArray_ShouldNotAddItemEmptyString() {
+        // Given
+        let vm = UnitTestingPlaygroundViewModel(isPremium: Bool.random())
+        
+        // When
+        vm.addItem(item: "")
+        
+        // Then
+        XCTAssertTrue(vm.dataArray.isEmpty)
+        XCTAssertFalse(!vm.dataArray.isEmpty)
+        XCTAssertEqual(vm.dataArray.count, 0)
+        XCTAssertNotEqual(vm.dataArray.count, 1)
+    }
 
 }
+
+// Random string and int for testing
+struct TestHelpers {
+    func randomString(length: Int) -> String {
+      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+    
+    func randomInt() -> Int {
+        Int.random(in: 0..<25)
+    }
+}
+
