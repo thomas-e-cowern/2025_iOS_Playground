@@ -85,16 +85,22 @@ class UnitTestingPlaygroundTests: XCTestCase {
         // Given
         let vm = UnitTestingPlaygroundViewModel(isPremium: Bool.random())
         let randomInt = TestHelpers().randomInt()
+        let loopCount = Int.random(in: 1..<50)
         
         // When
 //        vm.addItem(item: UUID().uuidString)
         // or
-        vm.addItem(item: TestHelpers().randomString(length: randomInt))
+        
+//        vm.addItem(item: TestHelpers().randomString(length: randomInt))
+        
+        for _ in 0..<loopCount {
+            vm.addItem(item: TestHelpers().randomString(length: randomInt))
+        }
         
         // Then
         XCTAssertTrue(!vm.dataArray.isEmpty)
         XCTAssertFalse(vm.dataArray.isEmpty)
-        XCTAssertEqual(vm.dataArray.count, 1)
+        XCTAssertEqual(vm.dataArray.count, loopCount)
         XCTAssertNotEqual(vm.dataArray.count, 0)
         XCTAssertGreaterThan(vm.dataArray.count, 0)
     }
