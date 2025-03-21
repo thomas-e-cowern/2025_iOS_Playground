@@ -118,6 +118,55 @@ class UnitTestingPlaygroundTests: XCTestCase {
         XCTAssertEqual(vm.dataArray.count, 0)
         XCTAssertNotEqual(vm.dataArray.count, 1)
     }
+    
+    func test_UnitTestingPlaygroundViewModel_dataArray_selectedItemIsNilWhenEmptyStringAdded() {
+        // Given
+        let vm = UnitTestingPlaygroundViewModel(isPremium: Bool.random())
+        
+        // When
+        vm.addItem(item: "")
+        
+        // Then
+        XCTAssertNil(vm.selectedItem)
+        
+    }
+    
+    func test_UnitTestingPlaygroundViewModel_dataArray_selectedItemStartsNil() {
+        // Given
+        let vm = UnitTestingPlaygroundViewModel(isPremium: Bool.random())
+        
+        // When
+        // Skipped
+        
+        // Then
+        XCTAssertNil(vm.selectedItem)
+        
+    }
+    
+    func test_UnitTestingPlaygroundViewModel_dataArray_selectedItemIsNilWhenSelectingInvalidItem() {
+        // Given
+        let vm = UnitTestingPlaygroundViewModel(isPremium: Bool.random())
+        
+        // When
+        vm.selectItem(item: UUID().uuidString)
+        
+        // Then
+        XCTAssertNil(vm.selectedItem)
+    }
+    
+    func test_UnitTestingPlaygroundViewModel_dataArray_selectedItemIsSelected() {
+        // Given
+        let vm = UnitTestingPlaygroundViewModel(isPremium: Bool.random())
+        
+        // When
+        let newItem = UUID().uuidString
+        vm.addItem(item: newItem)
+        vm.selectItem(item: newItem)
+        
+        // Then
+        XCTAssertNotNil(vm.selectedItem)
+        XCTAssertEqual(vm.selectedItem, newItem)
+    }
 
 }
 
@@ -129,7 +178,7 @@ struct TestHelpers {
     }
     
     func randomInt() -> Int {
-        Int.random(in: 0..<25)
+        Int.random(in: 1..<25)
     }
 }
 
