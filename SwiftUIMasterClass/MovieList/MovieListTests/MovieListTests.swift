@@ -49,7 +49,11 @@ final class MovieListTests: XCTestCase {
         
         let newMovie = Movie(title: "Test Movie", genre: .action)
         
-        sut.addNewMovie()
+        sut.addNewMovie(
+        
+        let cvSut = ContentView()
+        
+        XCTAssertEqual(cvSut._movies.wrappedValue.count, 1)
     }
 
 }
