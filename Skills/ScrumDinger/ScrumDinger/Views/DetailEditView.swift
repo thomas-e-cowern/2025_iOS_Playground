@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DetailEditView: View {
     
-    @State private var scrum = DailyScrum.emptyScrum
+    @Binding var scrum: DailyScrum
     @State private var newAttendeeName: String = ""
     
     var body: some View {
@@ -26,7 +26,10 @@ struct DetailEditView: View {
                     
                     Text("\(scrum.lengthInMinutes) minutes")
                         .accessibilityHidden(true)
-                }
+                } // MARK: - End of HStack
+                
+                ThemePickerView(selection: $scrum.theme)
+                
             } header: {
                 Text("Meeting Info")
             }  //: End of Section
@@ -61,5 +64,5 @@ struct DetailEditView: View {
 }
 
 #Preview {
-    DetailEditView()
+    DetailEditView(scrum: .constant(DailyScrum.sampleData[1]))
 }
