@@ -34,13 +34,13 @@ struct MeetingHeaderView: View {
                 VStack(alignment: .leading) {
                     Text("Seconds Elapsed")
                         .font(.caption)
-                    Label("300", systemImage: "hourglass.tophalf.fill")
+                    Label(secondsElapsed.description, systemImage: "hourglass.tophalf.fill")
                 }
                 Spacer()
                 VStack(alignment: .trailing) {
                     Text("Seconds Remaining")
                         .font(.caption)
-                    Label("600", systemImage: "hourglass.bottomhalf.fill")
+                    Label(minutesRemaining.description, systemImage: "hourglass.bottomhalf.fill")
                         .labelStyle(.trailingIcon)
                 }
             } // MARK: - End of HStack
