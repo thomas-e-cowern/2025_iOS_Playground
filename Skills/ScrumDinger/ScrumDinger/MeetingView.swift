@@ -52,6 +52,8 @@ struct MeetingView: View {
             
         } //: End of ZStack
         .padding()
+        .foregroundStyle(scrum.theme.accentColor)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
