@@ -49,7 +49,20 @@ struct DetailView: View {
                 ForEach(scrum.attendees) { attendee in
                     Label(attendee.name, systemImage: "person")
                 }
+            }  // MARK: - End of Section
+            
+            Section(header: Text("Hostory")) {
+                if scrum.hsitory.isEmpty {
+                    Label("No Meetings yet", systemImage: "calendar.badge.exclamationmark")
+                }
+                ForEach(scrum.hsitory) { history in
+                    HStack {
+                        Image(systemName: "calendar")
+                        Text(history.date, style: .date)
+                    }
+                }
             }
+            
         } // MARK: - End of list
         .navigationTitle(scrum.title)
         .toolbar {
