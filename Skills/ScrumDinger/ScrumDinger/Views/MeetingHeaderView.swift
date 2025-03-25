@@ -28,7 +28,7 @@ struct MeetingHeaderView: View {
     
     var body: some View {
         VStack {
-            ProgressView(value: 17, total: 50)
+            ProgressView(value: Double(secondsElapsed), total: Double(totalSeconds))
                 .progressViewStyle(ScrumProgressViewStyle(theme: theme))
             HStack {
                 VStack(alignment: .leading) {
@@ -40,7 +40,7 @@ struct MeetingHeaderView: View {
                 VStack(alignment: .trailing) {
                     Text("Seconds Remaining")
                         .font(.caption)
-                    Label(minutesRemaining.description, systemImage: "hourglass.bottomhalf.fill")
+                    Label(secondsRemaining.description, systemImage: "hourglass.bottomhalf.fill")
                         .labelStyle(.trailingIcon)
                 }
             } // MARK: - End of HStack
