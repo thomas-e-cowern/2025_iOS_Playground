@@ -9,8 +9,13 @@ import SwiftUI
 
 struct DetailEditView: View {
     
+    @Environment(\.dismiss) private var dismiss
+    
     @Binding var scrum: DailyScrum
+    
     @State private var newAttendeeName: String = ""
+    
+    let saveEdits: (DailyScrum) -> Void
     
     var body: some View {
         Form {
@@ -64,5 +69,5 @@ struct DetailEditView: View {
 }
 
 #Preview {
-    DetailEditView(scrum: .constant(DailyScrum.sampleData[1]))
+    DetailEditView(scrum: .constant(DailyScrum.sampleData[1]), saveEdits: { _ in })
 }

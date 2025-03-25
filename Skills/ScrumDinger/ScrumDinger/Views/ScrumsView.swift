@@ -10,6 +10,7 @@ import SwiftUI
 struct ScrumsView: View {
     
     @Binding var scrums: [DailyScrum]
+    @State private var isPresentingNewScrumView: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -22,7 +23,7 @@ struct ScrumsView: View {
             .navigationTitle("Daily Scrums")
             .toolbar {
                 Button {
-                    // More to come...
+                    isPresentingNewScrumView = true
                 } label: {
                     Image(systemName: "plus")
                 }
@@ -30,6 +31,9 @@ struct ScrumsView: View {
 
             }
         } // MARK: - End of Navigation
+        .sheet(isPresented: $isPresentingNewScrumView) {
+            // More to come...
+        }
     }
 }
 
