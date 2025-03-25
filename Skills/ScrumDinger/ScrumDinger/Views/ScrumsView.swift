@@ -32,7 +32,7 @@ struct ScrumsView: View {
             }
         } // MARK: - End of Navigation
         .sheet(isPresented: $isPresentingNewScrumView) {
-            // More to come...
+            NewScrumView(scrums: $scrums)
         }
     }
 }
