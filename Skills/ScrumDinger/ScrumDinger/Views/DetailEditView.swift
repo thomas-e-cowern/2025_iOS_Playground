@@ -64,6 +64,20 @@ struct DetailEditView: View {
                 Text("Attendees")
             }  // MARK: - End of Section
 
+        } // MARK: - End of form
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel") {
+                    dismiss()
+                }
+            }
+            
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Done") {
+                    saveEdits(scrum)
+                    dismiss()
+                }
+            }
         }
     }
 }
