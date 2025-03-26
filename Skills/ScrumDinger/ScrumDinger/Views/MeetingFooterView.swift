@@ -45,7 +45,3 @@ struct MeetingFooterView: View {
         .padding([.bottom, .horizontal])
     }
 }
-
-#Preview(traits: .sizeThatFitsLayout) {
-    MeetingFooterView(speakers: DailyScrum.sampleData[1].attendees.speakers, skipAction: {})
-}

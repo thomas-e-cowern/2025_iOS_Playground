@@ -14,7 +14,8 @@ struct ScrumDingerApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ScrumsView(scrums: $scrums)
+            ScrumsView()
         }
+        .modelContainer(for: DailyScrum.self)
     }
 }

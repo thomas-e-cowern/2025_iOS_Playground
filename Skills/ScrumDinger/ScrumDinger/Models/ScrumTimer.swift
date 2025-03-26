@@ -54,9 +54,9 @@ final class ScrumTimer: ObservableObject {
      - lengthInMinutes: The meeting length.
      -  attendees: A list of attendees for the meeting.
      */
-    init(lengthInMinutes: Int = 0, attendees: [DailyScrum.Attendee] = []) {
+    init(lengthInMinutes: Int = 0, attendees: [Attendee] = []) {
         self.lengthInMinutes = lengthInMinutes
-        self.speakers = attendees.speakers
+//        self.speakers = attendees.speakers
         secondsRemaining = lengthInSeconds
         activeSpeaker = speakerText
     }
@@ -125,20 +125,20 @@ final class ScrumTimer: ObservableObject {
      - lengthInMinutes: The meeting length.
      - attendees: The name of each attendee.
      */
-    func reset(lengthInMinutes: Int, attendees: [DailyScrum.Attendee]) {
+    func reset(lengthInMinutes: Int, attendees: [Attendee]) {
         self.lengthInMinutes = lengthInMinutes
-        self.speakers = attendees.speakers
+//        self.speakers = attendees.speakers
         secondsRemaining = lengthInSeconds
         activeSpeaker = speakerText
     }
 }
 
-extension Array<DailyScrum.Attendee> {
-    var speakers: [ScrumTimer.Speaker] {
-        if isEmpty {
-            return [ScrumTimer.Speaker(name: "Speaker 1", isCompleted: false)]
-        } else {
-            return map { ScrumTimer.Speaker(name: $0.name, isCompleted: false) }
-        }
-    }
-}
+//extension Array<DailyScrum.Attendee> {
+//    var speakers: [ScrumTimer.Speaker] {
+//        if isEmpty {
+//            return [ScrumTimer.Speaker(name: "Speaker 1", isCompleted: false)]
+//        } else {
+//            return map { ScrumTimer.Speaker(name: $0.name, isCompleted: false) }
+//        }
+//    }
+//}

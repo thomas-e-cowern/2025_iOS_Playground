@@ -10,8 +10,10 @@ import AVFoundation
 
 struct MeetingView: View {
     
-    @Binding var scrum: DailyScrum
-    @StateObject var scrumTimer = ScrumTimer()
+    @Environment(\.modelContext) private var context
+    
+    let scrum: DailyScrum
+    @State var scrumTimer = ScrumTimer()
     
     private var player: AVPlayer {
         AVPlayer.sharedDingPlayer
@@ -55,10 +57,12 @@ struct MeetingView: View {
     private func endScrum() {
         scrumTimer.stopScrum()
         let newHistory = History(attendees: scrum.attendees)
-        scrum.hsitory.append(newHistory)
+        scrum.history.insert(newHistory, at: 0)
+        try? context.save()
     }
 }
 
-#Preview {
-    MeetingView(scrum: .constant(DailyScrum.sampleData[1]))
+#Preview() {
+    let scrum = DailyScrum.sampleData[0]
+    MeetingView(scrum: scrum)
 }
