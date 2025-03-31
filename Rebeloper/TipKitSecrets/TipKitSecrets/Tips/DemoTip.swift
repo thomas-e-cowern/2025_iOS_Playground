@@ -12,7 +12,7 @@ struct DemoTip: Tip {
     var title: Text = .init("Hello World")
 
     @Parameter
-    static var show: Bool = false
+    static var show: Bool = true
 
     var rules: [Rule] {
         #Rule(Self.$show) {
