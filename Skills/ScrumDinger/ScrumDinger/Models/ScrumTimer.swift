@@ -25,7 +25,7 @@ final class ScrumTimer: ObservableObject {
     /// The number of seconds until all attendees have had a turn to speak.
     @Published var secondsRemaining = 0
     /// All meeting attendees, listed in the order they will speak.
-    private(set) var speakers: [Speaker] = []
+    private(set) var speakers: [Attendee] = []
     
     /// The scrum meeting length.
     private(set) var lengthInMinutes: Int
@@ -42,6 +42,7 @@ final class ScrumTimer: ObservableObject {
     private var secondsElapsedForSpeaker: Int = 0
     private var speakerIndex: Int = 0
     private var speakerText: String {
+        print("Speakers: \(speakers)")
         return "Speaker \(speakerIndex + 1): " + speakers[speakerIndex].name
     }
     private var startDate: Date?
@@ -56,7 +57,7 @@ final class ScrumTimer: ObservableObject {
      */
     init(lengthInMinutes: Int = 0, attendees: [Attendee] = []) {
         self.lengthInMinutes = lengthInMinutes
-//        self.speakers = attendees.speakers
+        self.speakers = attendees
         secondsRemaining = lengthInSeconds
         activeSpeaker = speakerText
     }
@@ -127,7 +128,7 @@ final class ScrumTimer: ObservableObject {
      */
     func reset(lengthInMinutes: Int, attendees: [Attendee]) {
         self.lengthInMinutes = lengthInMinutes
-//        self.speakers = attendees.speakers
+        self.speakers = []
         secondsRemaining = lengthInSeconds
         activeSpeaker = speakerText
     }
