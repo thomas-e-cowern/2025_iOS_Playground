@@ -14,7 +14,7 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text("Hello, world!")
-                .privacySensitive(.blur)
+                .privacySensitive(.custom(color: .blue, cornerRadius: 12))
         }
         .padding()
     }
@@ -46,9 +46,34 @@ struct BlurPrivacyViewModifier: ViewModifier {
     }
 }
 
-#Preview {
-    Text("Hello, world!")
-        .modifier(RedactedPrivacyViewModifier())
+struct OpacityPrivacyViewModifier: ViewModifier {
+    
+    @Environment(\.scenePhase) var scenePhase
+    
+    func body(content: Content) -> some View {
+        content
+            .opacity((scenePhase != .active) ? 0 : 1)
+            .animation(.default, value: scenePhase)
+    }
+}
+
+struct ColorPrivacyViewModifier: ViewModifier {
+    
+    @Environment(\.scenePhase) var scenePhase
+    
+    var color: Color
+    var cornerRadius: CGFloat
+    
+    func body(content: Content) -> some View {
+        content
+            .overlay {
+                color
+                    .opacity((scenePhase == .active ? 0 : 1))
+                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+                    
+            }
+            .animation(.default, value: scenePhase)
+    }
 }
 
 extension View {
@@ -64,9 +89,9 @@ extension View {
             case .blur:
                 modifier(BlurPrivacyViewModifier())
             case .opacity:
-                modifier(RedactedPrivacyViewModifier())
+                modifier(OpacityPrivacyViewModifier())
             case .custom(let color, let cornerRadius):
-                modifier(RedactedPrivacyViewModifier())
+                modifier(ColorPrivacyViewModifier(color: color, cornerRadius: cornerRadius))
             }
         }
     }
