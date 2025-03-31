@@ -21,7 +21,7 @@ struct ContentView: View {
         CountTip()
     }
     
-//    private let countTip = CountTip()
+    private let countTip = CountTip()
     
     @State private var imageName = "globe"
     @State private var textValue = "Hello World"
@@ -59,24 +59,29 @@ struct ContentView: View {
                 }
         }
         .padding()
-//        TipView(countTip)
+        
+        TipView(countTip)
         Button("\(count)") {
             count += 1
+            CountTip.isButtonTapped.toggle()
         }
         .buttonStyle(.borderedProminent)
         .font(.largeTitle)
         .bold()
-        .popoverTip(tipGroup.currentTip as? CountTip, arrowEdge: .top)
-//        .task {
-//            for await status in countTip.statusUpdates {
-//                print("Status:", status)
-//            }
+//        .popoverTip(tipGroup.currentTip as? CountTip, arrowEdge: .top) { actions in
+//            print("In action")
+//            CountTip.isButtonTapped.toggle()
 //        }
-//        .task {
-//            for await shouldDisplay in countTip.shouldDisplayUpdates {
-//                print("Display:", shouldDisplay)
-//            }
-//        }
+        .task {
+            for await status in countTip.statusUpdates {
+                print("Status:", status)
+            }
+        }
+        .task {
+            for await shouldDisplay in countTip.shouldDisplayUpdates {
+                print("Display:", shouldDisplay)
+            }
+        }
     }
 }
 

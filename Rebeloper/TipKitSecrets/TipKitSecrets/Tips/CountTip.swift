@@ -22,18 +22,29 @@ struct CountTip: Tip {
     }
     
 //    @Parameter
-//    static var isButtonTapped: Bool = false
-//    
-//    static let didTriggerButtonEvent = Event(id: "didTriggerButtonEvent")
+//    static var isButtonTapped: Bool = true
 //    
 //    var rules: [Rule] {
 //        [
 //            #Rule(Self.$isButtonTapped) {
-//                $0
+//                $0 == true
 //            }
-////            #Rule(Self.didTriggerButtonEvent) {
-////                $0.donations.count > 5
-////            }
 //        ]
 //    }
+    
+    @Parameter
+    static var isButtonTapped: Bool = false
+    
+    static let didTriggerButtonEvent = Event(id: "didTriggerButtonEvent")
+    
+    var rules: [Rule] {
+        [
+            #Rule(Self.$isButtonTapped) {
+                $0
+            },
+            #Rule(Self.didTriggerButtonEvent) {
+                $0.donations.count > 5
+            }
+        ]
+    }
 }
