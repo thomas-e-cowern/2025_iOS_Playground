@@ -14,7 +14,7 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text("Hello, world!")
-                .privacySensitive()
+                .privacySensitive(.blur)
         }
         .padding()
     }
@@ -35,6 +35,17 @@ struct RedactedPrivacyViewModifier: ViewModifier {
     }
 }
 
+struct BlurPrivacyViewModifier: ViewModifier {
+    
+    @Environment(\.scenePhase) var scenePhase
+    
+    func body(content: Content) -> some View {
+        content
+            .blur(radius: (scenePhase != .active) ? 5 : 0)
+            .animation(.default, value: scenePhase)
+    }
+}
+
 #Preview {
     Text("Hello, world!")
         .modifier(RedactedPrivacyViewModifier())
@@ -51,7 +62,7 @@ extension View {
             case .redacted:
                 modifier(RedactedPrivacyViewModifier())
             case .blur:
-                modifier(RedactedPrivacyViewModifier())
+                modifier(BlurPrivacyViewModifier())
             case .opacity:
                 modifier(RedactedPrivacyViewModifier())
             case .custom(let color, let cornerRadius):
