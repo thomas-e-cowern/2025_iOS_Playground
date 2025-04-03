@@ -14,7 +14,8 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Button("Present Toast") {
-                toast.present(title: "Toast title...", message: "This is the toast message...", icon: AnyView(icon()), actions: AnyView(confirm()), alignment: .bottom, dismissAfter: .seconds(1))
+                toast.present(type:.info, title: "Toast title...", message: "This is the toast message...", actions: AnyView(confirm()), alignment: .bottom, dismissAfter: .seconds(1))
+//                toast.present(type: .info)
             }
             .buttonStyle(.borderedProminent)
             
