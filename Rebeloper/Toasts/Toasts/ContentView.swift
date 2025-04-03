@@ -10,12 +10,32 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button("Present Toast") {
+                
+            }
+            .buttonStyle(.borderedProminent)
+            
+            Button("Dismiss Toast") {
+                
+            }
+            .buttonStyle(.bordered)
         }
         .padding()
+    }
+    
+    // MARK: - Methods and functions
+    func icon() -> some View {
+        Image(systemName: "exclamationmark.triangle.fill")
+            .foregroundStyle(.orange)
+    }
+    
+    func actions() -> some View {
+        Button {
+            
+        } label: {
+            Text("Dismiss")
+        }
+        .buttonStyle(.borderedProminent)
     }
 }
 
