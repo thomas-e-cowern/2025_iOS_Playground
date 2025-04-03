@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @Environment(\.toast) private var toast
+    
     var body: some View {
         VStack {
             Button("Present Toast") {
@@ -16,7 +19,7 @@ struct ContentView: View {
             .buttonStyle(.borderedProminent)
             
             Button("Dismiss Toast") {
-                
+                toast.dismiss()
             }
             .buttonStyle(.bordered)
         }
@@ -31,7 +34,7 @@ struct ContentView: View {
     
     func actions() -> some View {
         Button {
-            
+            toast.dismiss()
         } label: {
             Text("Dismiss")
         }
