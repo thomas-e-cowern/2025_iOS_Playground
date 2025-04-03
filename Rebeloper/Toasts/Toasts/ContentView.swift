@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Button("Present Toast") {
-                
+                toast.present(title: "Toast title...", message: "This is the toast message...", icon: AnyView(icon()), actions: AnyView(confirm()), alignment: .bottom, dismissAfter: .seconds(1))
             }
             .buttonStyle(.borderedProminent)
             
@@ -28,7 +28,7 @@ struct ContentView: View {
     
     // MARK: - Methods and functions
     func icon() -> some View {
-        Image(systemName: "exclamationmark.triangle.fill")
+        Image(systemName: "exclamationmark.arrow.trianglehead.2.clockwise.rotate.90")
             .foregroundStyle(.orange)
     }
     
@@ -37,6 +37,15 @@ struct ContentView: View {
             toast.dismiss()
         } label: {
             Text("Dismiss")
+        }
+        .buttonStyle(.borderedProminent)
+    }
+    
+    func confirm() -> some View {
+        Button {
+            toast.dismiss()
+        } label: {
+            Text("Agree")
         }
         .buttonStyle(.borderedProminent)
     }
