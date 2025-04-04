@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct VegetableTabBarView: View {
+    
+    @State private var vegetables: [Vegetable] = []
+    
+    
     var body: some View {
         TabView {
             Tab("Vegetables", systemImage: "leaf") {
