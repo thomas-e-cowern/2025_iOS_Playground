@@ -9,16 +9,21 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Button {
+            //
+        } label: {
+            Text("Tap Me")
+                .foregroundStyle(.borderProminentLabel)
         }
-        .padding()
+        .buttonStyle(.borderedProminent)
     }
 }
 
-#Preview {
+#Preview("Light Mode") {
     ContentView()
+}
+
+#Preview("Dark Mode") {
+    ContentView()
+        .preferredColorScheme(.dark)
 }
