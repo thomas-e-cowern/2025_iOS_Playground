@@ -14,9 +14,11 @@ struct PestListView: View {
     var body: some View {
         List {
             ForEach(vlViewModel.pests) { pest in
-                Text(pest.name)
+                PestCellView(pest: pest)
             }
         }
+        .listStyle(.plain)
+        .navigationTitle("Pests")
     }
 }
 
