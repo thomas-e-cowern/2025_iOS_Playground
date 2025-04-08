@@ -11,6 +11,7 @@ class VegetableListViewModel: ObservableObject {
     
 //    var httpService = HTTPService()
     @Published var vegetables = [Vegetable]()
+    @Published var pests = [Pest]()
     @Published var error: Error?
     
     init() {
@@ -41,6 +42,7 @@ extension VegetableListViewModel {
             }
             
             self.vegetables = vegetables
+            getPests()
         } catch {
             self.error = error
             throw VegetableError.invalidUrl
@@ -50,6 +52,12 @@ extension VegetableListViewModel {
     func loadData() {
         Task {
             try await fetchVegetables()
+        }
+    }
+    
+    func getPests() {
+        pests = vegetables.flatMap {
+            $0.pests ?? []
         }
     }
 }
