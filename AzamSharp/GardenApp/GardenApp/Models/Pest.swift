@@ -14,7 +14,7 @@ class Pest: Decodable {
     var body: String
     var symptoms: String
     var treatment: String
-    var photo: String
+    var photo: URL
     var vegetable: Vegetable?
     
     required init(from decoder: Decoder) throws {
@@ -23,7 +23,7 @@ class Pest: Decodable {
         self.body = try container.decode(String.self, forKey: .body)
         self.symptoms = try container.decode(String.self, forKey: .symptoms)
         self.treatment = try container.decode(String.self, forKey: .treatment)
-        self.photo = try container.decode(String.self, forKey: .photo)
+        self.photo = try container.decode(URL.self, forKey: .photo)
     }
     
     enum CodingKeys: String, CodingKey {
