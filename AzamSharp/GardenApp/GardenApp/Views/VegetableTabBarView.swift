@@ -33,7 +33,14 @@ struct VegetableTabBarView: View {
     }
 }
 
-#Preview {
+#Preview("Light Mode") {
     VegetableTabBarView()
         .modelContainer(previewContainer)
+        .preferredColorScheme(.light)
+}
+
+#Preview("Dark Mode") {
+    VegetableTabBarView()
+        .modelContainer(previewContainer)
+        .preferredColorScheme(.dark)
 }
