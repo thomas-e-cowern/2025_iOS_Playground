@@ -133,15 +133,6 @@ class Vegetable: Decodable, Identifiable {
     }
 }
 
-// MARK: - Pest
-struct Pest: Codable {
-    var name: String
-    var description: String
-    var symptoms: String
-    var treatment: String
-    var photo: String
-}
-
 extension Vegetable {
     static var sampleVegetable = Vegetable(
         id: 1, vegetableCode: "002", name: "Hot Pepper", body: "A vibrant and fiery vegetable that adds spice to any dish. Hot peppers are prized for their heat levels, ranging from mild to extreme, and are rich in vitamin C and capsaicin.", thumbnailImage: "https://www.azamsharp.com/images/carrot.png", seedDepth: "1/4-1/2 (6-13 mm)", germinationSoilTemp: "75 F (24 C)", daysToGermination: 6, sowIndoors: "Not recommended", sowOutdoors: "Spring to summer", phRange: "5.5-6.5", growingSoilTemp: "60-70 F (16-21 C)", spacingBeds: "2 (5 cm)", watering: "Moderate", light: "Full sun", goodCompanions: "Bean, cabbage, chive, leaf vartuce", badCompanions: "Celery, dill, parsnip", sowingDescription: "\r", growingDescription: "The seeds will start to sprout in couple of weeks. When watering the seeds make sure to avoid getting the leaves wet. The wetting of leaves can result in burning holes into the leaves from the sun.", harvestDescription: "Harvest the carrots when bit that sticks out of the ground is the diameter of a quarter. Dig them up carefully so as not to damage the root.", active: false, season: "Spring,Fall,Summer,Winter", daysToHarvestSeeds: 90, daysToHarvestSeedlings: 70, healthBenefits: "Rich in beta-carotene, carrots promote eye health, boost immunity, and support healthy skin.", pests:
