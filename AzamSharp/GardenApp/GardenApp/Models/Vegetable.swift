@@ -132,19 +132,3 @@ class Vegetable: Decodable, Identifiable {
         case pests = "Pests"
     }
 }
-
-extension Vegetable {
-    static var sampleVegetable = Vegetable(
-        id: 1, vegetableCode: "002", name: "Hot Pepper", body: "A vibrant and fiery vegetable that adds spice to any dish. Hot peppers are prized for their heat levels, ranging from mild to extreme, and are rich in vitamin C and capsaicin.", thumbnailImage: "https://www.azamsharp.com/images/carrot.png", seedDepth: "1/4-1/2 (6-13 mm)", germinationSoilTemp: "75 F (24 C)", daysToGermination: 6, sowIndoors: "Not recommended", sowOutdoors: "Spring to summer", phRange: "5.5-6.5", growingSoilTemp: "60-70 F (16-21 C)", spacingBeds: "2 (5 cm)", watering: "Moderate", light: "Full sun", goodCompanions: "Bean, cabbage, chive, leaf vartuce", badCompanions: "Celery, dill, parsnip", sowingDescription: "\r", growingDescription: "The seeds will start to sprout in couple of weeks. When watering the seeds make sure to avoid getting the leaves wet. The wetting of leaves can result in burning holes into the leaves from the sun.", harvestDescription: "Harvest the carrots when bit that sticks out of the ground is the diameter of a quarter. Dig them up carefully so as not to damage the root.", active: false, season: "Spring,Fall,Summer,Winter", daysToHarvestSeeds: 90, daysToHarvestSeedlings: 70, healthBenefits: "Rich in beta-carotene, carrots promote eye health, boost immunity, and support healthy skin.", pests:
-            [
-                Pest(
-                    name: "Carrot Fly", description: "The carrot fly (Psila rosae) is a small, black-bodied insect with an orange head and legs. It is a common pest affecting carrots, parsnips, celery, and other Apiaceae plants. The larvae burrow into the roots of these plants, causing damage that results in stunted growth, discoloration, and increased susceptibility to secondary infections.", symptoms: "Rust-colored tunnels in the roots, yellowing and wilting foliage, and cracking of roots. Severely infested plants may rot and fail to thrive.", treatment: "Use fine mesh netting to cover plants and prevent adult flies from laying eggs. Practice crop rotation to disrupt the lifecycle of the pest. Remove and destroy infested plants immediately to prevent the spread of larvae. Companion planting with strong-smelling plants such as onions or garlic can also deter carrot flies.", photo: "https://www.azamsharp.com/images/carrotfly.png"
-                ),
-                Pest(
-                    name: "Aphids", description: "Aphids are tiny, soft-bodied insects that can vary in color, including green, yellow, brown, red, or black. They feed on plant sap by piercing leaves and stems with their mouthparts. Aphids are a common pest in gardens and farms, often forming large colonies on new growth.", symptoms: "Infested plants may show curling or yellowing leaves, stunted growth, and sticky honeydew residue on foliage. The honeydew can attract ants and lead to the development of sooty mold on the plant surfaces.", treatment: "Introduce natural predators such as ladybugs and lacewings to control aphid populations. Spray plants with a strong jet of water to dislodge the insects. Apply neem oil or insecticidal soap for organic pest management. Remove and destroy heavily infested parts of the plant to prevent further spread.", photo: "https://www.azamsharp.com/images/aphids.png"
-                )
-            ]
-    )
-}
-
-

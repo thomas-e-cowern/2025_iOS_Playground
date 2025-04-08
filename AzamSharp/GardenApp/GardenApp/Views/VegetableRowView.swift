@@ -35,7 +35,7 @@ struct VegetableRowView: View {
 
 // Preview using Model sample data extension
 #Preview("Extension Data") {
-    VegetableRowView(vegetable: Vegetable.sampleVegetable)
+    VegetableRowView(vegetable: PreviewData.loadPreviewVegetables()[9])
 }
 
 

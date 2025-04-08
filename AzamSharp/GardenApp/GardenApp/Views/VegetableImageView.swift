@@ -58,5 +58,5 @@ struct VegetableImageView: View {
 }
 
 #Preview {
-    VegetableImageView(vegetableImageUrl: Vegetable.sampleVegetable.imageUrl!)
+    VegetableImageView(vegetableImageUrl: PreviewData.loadPreviewVegetables()[9].imageUrl!)
 }

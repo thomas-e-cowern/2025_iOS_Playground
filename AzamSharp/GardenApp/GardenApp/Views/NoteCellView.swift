@@ -69,5 +69,5 @@ struct NoteCellView: View {
 }
 
 #Preview {
-    NoteCellView(note: Note(title: "New note", body: "This is a new note body that could be longer"), placeholderImage: Vegetable.sampleVegetable.imageUrl)
+    NoteCellView(note: Note(title: "New note", body: "This is a new note body that could be longer"), placeholderImage: PreviewData.loadPreviewVegetables()[9].imageUrl)
 }
