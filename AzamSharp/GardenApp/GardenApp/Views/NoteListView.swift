@@ -9,15 +9,30 @@ import SwiftUI
 
 struct NoteListView: View {
     
+    @Environment(\.modelContext) private var context
+    
     let myGardenVegetable: MyGardenVegetable
     @State private var addNotePresented: Bool = false
     @State private var searchText: String = ""
     
+    private var filteredNotes: [Note] {
+        if searchText.isEmpty {
+            return myGardenVegetable.notes ?? []
+        } else {
+            return myGardenVegetable.notes?.filter {
+                    $0.title.localizedCaseInsensitiveContains(searchText)
+            } ?? []
+        }
+    }
+    
     var body: some View {
         VStack {
             if myGardenVegetable.notes != nil {
-                List(filteredNotes) { note in
-                    NoteCellView(note: note, placeholderImage: myGardenVegetable.vegetable.imageUrl)
+                List {
+                    ForEach(filteredNotes) { note in
+                        NoteCellView(note: note, placeholderImage: myGardenVegetable.vegetable.imageUrl)
+                    }
+                    .onDelete(perform: deleteMyNote)
                 }
                 .searchable(text: $searchText)
             } else {
@@ -40,13 +55,12 @@ struct NoteListView: View {
     }
     
     // MARK: - Methods and functions
-    private var filteredNotes: [Note] {
-        if searchText.isEmpty {
-            return myGardenVegetable.notes ?? []
-        } else {
-            return myGardenVegetable.notes?.filter {
-                    $0.title.localizedCaseInsensitiveContains(searchText)
-            } ?? []
+    
+    private func deleteMyNote(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let noteToDelete = myGardenVegetable.notes![index]
+            context.delete(noteToDelete)
+            try? context.save()
         }
     }
 }
