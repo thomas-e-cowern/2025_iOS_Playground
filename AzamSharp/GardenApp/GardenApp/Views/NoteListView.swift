@@ -11,13 +11,15 @@ struct NoteListView: View {
     
     let myGardenVegetable: MyGardenVegetable
     @State private var addNotePresented: Bool = false
+    @State private var searchText: String = ""
     
     var body: some View {
         VStack {
             if myGardenVegetable.notes != nil {
-                List(myGardenVegetable.notes ?? []) { note in
+                List(filteredNotes) { note in
                     NoteCellView(note: note, placeholderImage: myGardenVegetable.vegetable.imageUrl)
                 }
+                .searchable(text: $searchText)
             } else {
                 Text("You have no notes yet.  Let's add some...")
             }
@@ -34,6 +36,17 @@ struct NoteListView: View {
             NavigationStack {
                 AddNoteView(myGardenVegetable: myGardenVegetable)
             }
+        }
+    }
+    
+    // MARK: - Methods and functions
+    private var filteredNotes: [Note] {
+        if searchText.isEmpty {
+            return myGardenVegetable.notes ?? []
+        } else {
+            return myGardenVegetable.notes?.filter {
+                    $0.title.localizedCaseInsensitiveContains(searchText)
+            } ?? []
         }
     }
 }
