@@ -10,12 +10,23 @@ import SwiftUI
 struct VegetableListView: View {
 
     @State private var showAlert: Bool = false
+    @State private var searchText: String = ""
     @StateObject private var vlViewModel = VegetableListViewModel()
+    
+    private var filteredVegetables: [Vegetable] {
+        if searchText.isEmpty {
+            return vlViewModel.vegetables
+        } else {
+            return vlViewModel.vegetables.filter {
+                $0.name.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
     
     var body: some View {
         VStack {
             List {
-                ForEach(vlViewModel.vegetables) { vegetable in
+                ForEach(filteredVegetables) { vegetable in
                     NavigationLink {
                         VegetableDetailScreen(vegetable: vegetable)
                     } label: {
@@ -24,6 +35,7 @@ struct VegetableListView: View {
 
                 }
             }
+            .searchable(text: $searchText)
             .listStyle(.plain)
         }
         .navigationTitle("Vegetables")
