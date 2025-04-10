@@ -17,16 +17,17 @@ struct ContentView: View {
                 .fill(.orange)
                 .frame(width: isExpanded ? 300 : 100, height: 100)
                 // Specific to this view
-                //.animation(.default, value: isExpanded)
+                .animation(.default, value: isExpanded)
+                .disablesAnimations(true)
             
             Rectangle()
                  .fill(.mint)
                  .frame(width: isExpanded ? 300 : 100, height: 100)
-                 //.animation(.bouncy, value: isExpanded)
+//                 .animation(.bouncy, value: isExpanded)
                 // opts out of animation with transaction
-                 .transaction { transaction in
-                     transaction.animation = nil
-                 }
+//                 .transaction { transaction in
+//                     transaction.animation = nil
+//                 }
             
             Button("Toggle") {
                 // Will apply to both views
@@ -42,4 +43,19 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+}
+
+// extension to disable animation
+extension View {
+    func disablesAnimations(_ value: Bool) -> some View {
+        transaction { transaction in
+            transaction.disablesAnimations = true
+        }
+    }
+    
+    func disablesWithAnimation() -> some View {
+        transaction { transaction in
+            transaction.animation = nil
+        }
+    }
 }
