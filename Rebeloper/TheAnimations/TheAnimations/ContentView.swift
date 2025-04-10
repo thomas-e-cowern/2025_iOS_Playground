@@ -16,13 +16,19 @@ struct ContentView: View {
            Rectangle()
                 .fill(.orange)
                 .frame(width: isExpanded ? 300 : 100, height: 100)
+                // Specific to this view
+//                .animation(.bouncy, value: isExpanded)
             
             Rectangle()
                  .fill(.mint)
                  .frame(width: isExpanded ? 300 : 100, height: 100)
             
             Button("Toggle") {
-                isExpanded.toggle()
+                // Will apply to both views
+                withAnimation() {
+                    isExpanded.toggle()
+                }
+                
             }
         }
         .padding()
