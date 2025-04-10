@@ -8,12 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var isExpanded: Bool = false
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+           Rectangle()
+                .fill(.orange)
+                .frame(width: isExpanded ? 300 : 100, height: 100)
+            
+            Rectangle()
+                 .fill(.mint)
+                 .frame(width: isExpanded ? 300 : 100, height: 100)
+            
+            Button("Toggle") {
+                isExpanded.toggle()
+            }
         }
         .padding()
     }
