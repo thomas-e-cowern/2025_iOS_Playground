@@ -25,7 +25,7 @@ struct ContentView: View {
             
             Button("Toggle") {
                 // Will apply to both views
-                withAnimation() {
+                withAnimation(.easeInOut(duration: 1.5)) {
                     isExpanded.toggle()
                 }
                 
