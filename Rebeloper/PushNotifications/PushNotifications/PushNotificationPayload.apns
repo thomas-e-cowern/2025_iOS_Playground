@@ -1,7 +1,11 @@
-//
-//  PushNotificationPayload.swift
-//  PushNotifications
-//
-//  Created by Thomas Cowern on 4/11/25.
-//
-
+{
+    "Simulator Target Bundle": "mobilesoftwareservices.PushNotifications",
+    "aps": {
+        "alert": {
+            "title": "This is the optional Title",
+            "subtitle": "Optional subtitle goes here...",
+            "body": "If you see this message, something went right, or something went wrong..."
+        },
+        "badge": 5
+    }
+}

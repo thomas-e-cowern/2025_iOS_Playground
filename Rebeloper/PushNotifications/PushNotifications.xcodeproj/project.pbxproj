@@ -15,16 +15,28 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				PushNotificationPayload.apns,
 			);
 			target = 4D93A0E52DA949270071749F /* PushNotifications */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		4D93A0F82DA95BDA0071749F /* Exceptions for "PushNotifications" folder in "Compile Sources" phase from "PushNotifications" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 4D93A0E22DA949270071749F /* Sources */;
+			membershipExceptions = (
+				PushNotificationPayload.apns,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4D93A0E82DA949270071749F /* PushNotifications */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				4D93A0F52DA94A6B0071749F /* Exceptions for "PushNotifications" folder in "PushNotifications" target */,
+				4D93A0F82DA95BDA0071749F /* Exceptions for "PushNotifications" folder in "Compile Sources" phase from "PushNotifications" target */,
 			);
 			path = PushNotifications;
 			sourceTree = "<group>";

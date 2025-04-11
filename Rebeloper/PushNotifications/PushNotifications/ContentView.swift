@@ -17,8 +17,7 @@ struct ContentView: View {
             Button {
                 Task {
                     do {
-                        print("doing...")
-                        try await notificationCenter.requestAuthorization(options: [.alert, .badge, .sound])
+                        try await notificationCenter.requestAuthorization(options: [.criticalAlert, .provisional, .sound])
                     } catch {
                         print(error.localizedDescription)
                     }
