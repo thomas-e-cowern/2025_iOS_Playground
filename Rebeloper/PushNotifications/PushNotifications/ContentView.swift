@@ -6,12 +6,23 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct ContentView: View {
+    
+    let notificationCenter = UNUserNotificationCenter.current()
+    
     var body: some View {
         VStack {
             Button {
-                // 
+                Task {
+                    do {
+                        print("doing...")
+                        try await notificationCenter.requestAuthorization(options: [.alert, .badge, .sound])
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
             } label: {
                 Text("Request Push Notification Access")
             }
