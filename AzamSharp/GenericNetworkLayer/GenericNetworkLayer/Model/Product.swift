@@ -14,3 +14,15 @@ struct Product: Codable {
     let image: String
     let category: String
 }
+
+extension Product {
+    static var all: Resource<[Product]> {
+        return Resource(url: URL.forAllProducts)
+    }
+}
+
+extension URL {
+    static var forAllProducts: URL {
+        return URL(string: "https://fakestoreapi.com/products")!
+    }
+}
