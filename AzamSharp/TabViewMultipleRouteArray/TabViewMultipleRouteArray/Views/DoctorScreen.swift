@@ -7,11 +7,14 @@
 import SwiftUI
 
 struct DoctorScreen: View {
+    
+    @Environment(Router.self) private var router
+    
     var body: some View {
         VStack {
             Text("Doctor Screen")
             Button("Go to List") {
-                // more to come...
+                router.doctorRoutes.append(.list)
             }
         }
     }

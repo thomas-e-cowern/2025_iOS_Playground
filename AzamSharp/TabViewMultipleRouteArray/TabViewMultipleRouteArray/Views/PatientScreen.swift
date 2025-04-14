@@ -7,8 +7,16 @@
 import SwiftUI
 
 struct PatientScreen: View {
+    
+    @Environment(Router.self) private var router
+    
     var body: some View {
-        Text("Patient Screen")
+        VStack {
+            Text("Patient Screen")
+            Button("Go to create scree") {
+                router.patientRoutes.append(.create)
+            }
+        }
     }
 }
 

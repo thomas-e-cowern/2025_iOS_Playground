@@ -8,15 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @Environment(Router.self) private var router
+    
     var body: some View {
+        
+        @Bindable var router = router
+        
         VStack {
             TabView {
                 Tab("Doctor", systemImage: "plus") {
-                    DoctorScreen()
+                    NavigationStack(path: $router.doctorRoutes) {
+                        DoctorScreen()
+                            .navigationDestination(for: DoctorRoutes.self) { route in
+                                route.destination
+                            }
+                    }
                 }
                 
                 Tab("Patient", systemImage: "heart") {
-                    PatientScreen()
+                    NavigationStack(path: $router.patientRoutes) {
+                        PatientScreen()
+                            .navigationDestination(for: PatientRoutes.self) { route in
+                                route.destination
+                            }
+                    }
                 }
             }
         }
@@ -26,4 +42,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environment(Router())
 }

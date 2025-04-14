@@ -7,25 +7,27 @@
 
 import SwiftUI
 
+@Observable
 class Router {
-    
+    var doctorRoutes: [DoctorRoutes] = []
+    var patientRoutes: [PatientRoutes] = []
 }
 
 
-enum Route: Hashable {
-    case doctor(DoctorRoutes)
-    case patient(PatientRoutes)
-    
-    @ViewBuilder
-    var destination: some View {
-        switch self {
-        case .doctor(let route):
-            route.destination
-        case .patient(let route):
-            route.destination
-        }
-    }
-}
+//enum Route: Hashable {
+//    case doctor(DoctorRoutes)
+//    case patient(PatientRoutes)
+//    
+//    @ViewBuilder
+//    var destination: some View {
+//        switch self {
+//        case .doctor(let route):
+//            route.destination
+//        case .patient(let route):
+//            route.destination
+//        }
+//    }
+//}
 
 enum DoctorRoutes: Hashable {
     case list
