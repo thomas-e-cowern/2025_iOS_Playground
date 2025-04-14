@@ -16,6 +16,15 @@ struct Product: Codable {
 }
 
 extension Product {
+    
+    static func forProductId(_ id: Int) -> URL? {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "fakestoreapi.com"
+        components.path = "/products/\(id)"
+        return components.url
+    }
+    
     static var all: Resource<[Product]> {
         return Resource(url: URL.forAllProducts)
     }
