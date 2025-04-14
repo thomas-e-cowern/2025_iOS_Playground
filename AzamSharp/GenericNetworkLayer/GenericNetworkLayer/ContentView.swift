@@ -9,30 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var products: [Product] = []
-    
     var body: some View {
-        VStack {
-            if !products.isEmpty {
-                ForEach(products, id: \.id) { product in
-                    Text(product.title)
-                }
-            } else {
-                ProgressView()
+        TabView {
+            Tab("Products", systemImage: "bag") {
+                ProductsView()
             }
-        }
-        .padding()
-        .task {
-            await loadProducts()
-        }
-    }
-        
-    
-    func loadProducts() async {
-        do {
-            products = try await Webservice().load(Product.all)
-        } catch {
-            print("There was a problem getting the products")
+            
+            Tab("Product", systemImage: "cone") {
+                Text("One Product")
+            }
         }
     }
 }
