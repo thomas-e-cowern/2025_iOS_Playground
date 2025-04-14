@@ -8,14 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var products: [Product] = []
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            if !products.isEmpty {
+                ForEach(products, id: \.id) { product in
+                    Text(product.title)
+                }
+            } else {
+                ProgressView()
+            }
         }
         .padding()
+        .task {
+            await loadProducts()
+        }
+    }
+        
+    
+    func loadProducts() async {
+        do {
+            products = try await Webservice().load(Product.all)
+        } catch {
+            print("There was a problem getting the products")
+        }
     }
 }
 

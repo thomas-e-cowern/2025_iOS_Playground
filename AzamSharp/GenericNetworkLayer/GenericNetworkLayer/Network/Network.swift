@@ -20,6 +20,7 @@ class Webservice {
             var components = URLComponents(url: resource.url, resolvingAgainstBaseURL: false)
             components?.queryItems = queryItems
             guard let url = components?.url else {
+                print("Bad URL Error")
                 throw NetworkingError.badUrl
             }
             request = URLRequest(url: url)
@@ -35,11 +36,13 @@ class Webservice {
         
         // Check the network response
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            print("Network Response Error")
             throw NetworkingError.invalidResponse
         }
         
         // Decode the data
         guard let decodedData = try? JSONDecoder().decode(T.self, from: data) else {
+            print("Network Decoding Error")
             throw NetworkingError.decodingError
         }
         
