@@ -44,3 +44,8 @@ struct ContentView: View {
     ContentView()
         .environment(Router())
 }
+
+// MARK: TODO - Add persistence
+// MARK: TODO - update models with more data
+// MARK: TODO - add list screen
+// MARK: TODO - add details
