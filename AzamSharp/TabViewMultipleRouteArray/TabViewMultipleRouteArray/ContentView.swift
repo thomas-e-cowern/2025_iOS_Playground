@@ -11,12 +11,12 @@ struct ContentView: View {
     var body: some View {
         VStack {
             TabView {
-                Tab {
-                    Text("Doctor Screen")
+                Tab("Doctor", systemImage: "plus") {
+                    DoctorScreen()
                 }
                 
-                Tab {
-                    Text("Patient Screen")
+                Tab("Patient", systemImage: "heart") {
+                    PatientScreen()
                 }
             }
         }
