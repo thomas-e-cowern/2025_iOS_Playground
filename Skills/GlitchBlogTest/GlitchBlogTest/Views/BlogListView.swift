@@ -29,6 +29,18 @@ struct BlogListView: View {
         } //: End of VStack
         .padding()
         .frame(maxWidth: .infinity)
+        .task {
+            await loadBlogs()
+        }
+    }
+    
+    // MARK: - Methods and functions
+    func loadBlogs() async {
+        do {
+            blogs = try await Webservice().load(Blog.allBlogs)
+        } catch {
+            print("Error in BlogListView getting blogs: \(error.localizedDescription)")
+        }
     }
 }
 
