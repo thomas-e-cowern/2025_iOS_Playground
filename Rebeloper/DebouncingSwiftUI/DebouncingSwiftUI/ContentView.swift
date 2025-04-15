@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var text: String = ""
+    @State private var debouncdedText: String = ""
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ScrollView {
+            VStack(alignment: .leading) {
+                TextField("Text", text: $text)
+                    .textFieldStyle(.roundedBorder)
+                
+                Text(debouncdedText)
+                    .bold()
+                    .padding(.horizontal, 6)
+            }
+            .padding()
         }
-        .padding()
+        .navigationTitle("Debounce Text Input")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
