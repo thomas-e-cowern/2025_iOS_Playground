@@ -10,15 +10,19 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var text: String = ""
-    @State private var debouncdedText: String = ""
+    @State private var debouncedText: String = ""
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
                 TextField("Text", text: $text)
                     .textFieldStyle(.roundedBorder)
+//                    .onChange(of: text) { _, newValue in
+//                        debouncedText = newValue
+//                    }
+                    .debounced(text: $text, debouncedText: $debouncedText)
                 
-                Text(debouncdedText)
+                Text(debouncedText)
                     .bold()
                     .padding(.horizontal, 6)
             }
