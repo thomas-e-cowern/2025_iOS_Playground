@@ -16,7 +16,7 @@ struct ContentView: View {
             }
             
             Tab("Product", systemImage: "cone") {
-                Text("One Product")
+                ProductView(productId: 1)
             }
         }
     }
