@@ -30,10 +30,13 @@ struct ContentView: View {
         }
         .navigationTitle("Debounce Text Input")
         .navigationBarTitleDisplayMode(.inline)
-        .searchable(debouncedText: $debouncedText)
-        .onChange(of: debouncedText) { oldValue, newValue in
-            print(newValue)
+        .searchable(debouncedText: $debouncedText) { value in
+            print(value) // make your api call here...
         }
+//        .searchable(debouncedText: $debouncedText)
+//        .onChange(of: debouncedText) { oldValue, newValue in
+//            print(newValue)
+//        }
 //        .debounced(text: $text, debouncedText: $debouncedText)
     }
 }
