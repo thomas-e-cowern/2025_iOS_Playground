@@ -15,12 +15,12 @@ struct ContentView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                TextField("Text", text: $text)
-                    .textFieldStyle(.roundedBorder)
+//                TextField("Text", text: $text)
+//                    .textFieldStyle(.roundedBorder)
 //                    .onChange(of: text) { _, newValue in
 //                        debouncedText = newValue
 //                    }
-                    .debounced(text: $text, debouncedText: $debouncedText)
+//                    .debounced(text: $text, debouncedText: $debouncedText)
                 
                 Text(debouncedText)
                     .bold()
@@ -30,9 +30,13 @@ struct ContentView: View {
         }
         .navigationTitle("Debounce Text Input")
         .navigationBarTitleDisplayMode(.inline)
+//        .searchable(text: $text)
+//        .debounced(text: $text, debouncedText: $debouncedText)
     }
 }
 
 #Preview {
-    ContentView()
+    NavigationStack {
+        ContentView()
+    }
 }
