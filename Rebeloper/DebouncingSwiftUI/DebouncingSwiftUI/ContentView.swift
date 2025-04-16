@@ -30,7 +30,10 @@ struct ContentView: View {
         }
         .navigationTitle("Debounce Text Input")
         .navigationBarTitleDisplayMode(.inline)
-//        .searchable(text: $text)
+        .searchable(debouncedText: $debouncedText)
+        .onChange(of: debouncedText) { oldValue, newValue in
+            print(newValue)
+        }
 //        .debounced(text: $text, debouncedText: $debouncedText)
     }
 }

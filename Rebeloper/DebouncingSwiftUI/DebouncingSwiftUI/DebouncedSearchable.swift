@@ -19,3 +19,9 @@ struct DebouncedSearchable: ViewModifier {
             .debounced(text: $text, debouncedText: $debouncedText, debouncedSeconds: debouncedSeconds)
     }
 }
+
+extension View {
+    func searchable(debouncedText: Binding<String>, debouncedSeconds: TimeInterval = 0.5) -> some View {
+        modifier(DebouncedSearchable(debouncedText: debouncedText, debouncedSeconds: debouncedSeconds))
+    }
+}
