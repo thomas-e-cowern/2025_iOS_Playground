@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            TimelineView(.animation) { timeline in
+            TimelineView(.animation(minimumInterval: 1 / 20)) { timeline in
                 Canvas { context, size in
                     let clock = ClockAngles(for: timeline.date)
                     
@@ -45,8 +45,25 @@ struct ContentView: View {
                     
                     // Draw the numbers
                     drawHours(in: context, radius: radius)
+                    
+                    // Center ring
+                    let rect = CGRect(x: -innerBlackRingSize / 2, y: -innerBlackRingSize / 2, width: innerBlackRingSize, height: innerBlackRingSize)
+                    context.stroke(Circle().path(in: rect), with: .color(.primary), lineWidth: centerSize)
+                    
+                    let centerPiece = Circle().path(in: rect.insetBy(dx: centerSize, dy: centerSize))
+                    context.fill(centerPiece, with: .color(.white))
+                    context.blendMode = .clear
+                    context.fill(centerPiece, with: .color(.white))
+                    context.blendMode = .normal
+                    
+                    // Second hand
+                    let secondLine = Capsule().offset(x: 0, y: -radius / 6).rotation(clock.second, anchor: .top).path(in: CGRect(x: -secondHandWidth / 2, y: 0, width: secondHandWidth, height: secondHandLength))
+                    
+                    context.fill(secondLine, with: .color(.orange))
+                    
                 }
             }
+//            .frame(width: 100, height: 100)
         }
         .padding()
     }
@@ -87,6 +104,11 @@ struct ContentView: View {
     }
 }
 
-#Preview {
+#Preview("Light Mode") {
     ContentView()
+}
+
+#Preview("Dark Mode") {
+    ContentView()
+        .preferredColorScheme(.dark)
 }
