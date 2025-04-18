@@ -42,12 +42,16 @@ struct ContentView: View {
                     // Draw the hands
                     drawHand(in: context, radius: radius, length: minuteHandLength, angle: clock.minute)
                     drawHand(in: context, radius: radius, length: hourHandLength, angle: clock.hour)
+                    
+                    // Draw the numbers
+                    drawHours(in: context, radius: radius)
                 }
             }
         }
         .padding()
     }
     
+    // MARK: - Methods and functions
     func drawHand(in context: GraphicsContext, radius: Double, length: Double, angle: Angle) {
         let width = radius / 30
 
@@ -58,6 +62,28 @@ struct ContentView: View {
         let hand = Capsule().offset(x: 0, y: radius / 5).rotation(angle, anchor: .top).path(in: CGRect(x: -width, y: 0, width: width * 2, height: length))
         
         context.fill(hand, with: .color(.primary))
+    }
+    
+    func drawHours(in context: GraphicsContext, radius: Double) {
+        let textSpace = CGSize(width: 200, height: 200)
+        let textSize = radius / 4
+        let textOffset = radius * 0.75
+        
+        // Adding the numbers
+        for i in 1...12 {
+            var contextCopy = context
+            let text = Text(String(i)).font(.system(size: textSize)).bold()
+            let resolvedText = contextCopy.resolve(text)
+            
+            // Center the text
+            let textSize = resolvedText.measure(in: textSpace)
+            contextCopy.translateBy(x: -textSize.width / 2, y: -textSize.height / 2)
+            
+            // Draw the numbers
+            let point = CGPoint(x: 0, y: -textOffset).applying(CGAffineTransform(rotationAngle: Double(i) * .pi / 6))
+            
+            contextCopy.draw(resolvedText, in: CGRect(origin: point, size: textSpace))
+        }
     }
 }
 
