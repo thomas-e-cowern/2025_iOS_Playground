@@ -6,17 +6,24 @@
 //
 import SwiftUI
 
-struct AppControllerKey: @preconcurrency EnvironmentKey {
-    @MainActor
-    static let defaultValue = AppController()
-}
+// Create a key for our controller and using injection
+//struct AppControllerKey: @preconcurrency EnvironmentKey {
+//    @MainActor
+//    static let defaultValue = AppController()
+//}
+//
+//extension EnvironmentValues {
+//    var appController: AppController {
+//        get {
+//            self[AppControllerKey.self]
+//        } set {
+//            self[AppControllerKey.self] = newValue
+//        }
+//    }
+//}
 
+// Using the @Entry macro to do the same thing.
 extension EnvironmentValues {
-    var appController: AppController {
-        get {
-            self[AppControllerKey.self]
-        } set {
-            self[AppControllerKey.self] = newValue
-        }
-    }
+    @Entry
+    var appController = AppController()
 }
