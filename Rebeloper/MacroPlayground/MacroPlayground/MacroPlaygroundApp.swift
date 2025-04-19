@@ -14,8 +14,10 @@ struct MacroPlaygroundApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(appController)
+            NavigationStack {
+                ContentView()
+            }
+            .environment(appController)
         }
     }
 }

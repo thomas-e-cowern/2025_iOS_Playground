@@ -9,5 +9,5 @@ import SwiftUI
 
 @Observable
 class AppController {
-    var text: String = "Hello World"
+    var text: String = "Hello Tom"
 }
