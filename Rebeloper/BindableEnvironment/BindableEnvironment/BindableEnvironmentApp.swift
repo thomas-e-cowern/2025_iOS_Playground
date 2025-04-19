@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct BindableEnvironmentApp: App {
+    
+    @State private var appContoller = AppController()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(appContoller)
         }
     }
 }
