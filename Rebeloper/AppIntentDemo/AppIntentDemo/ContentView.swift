@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import _AppIntents_SwiftUI
 
 struct ContentView: View {
     
@@ -14,8 +15,12 @@ struct ContentView: View {
     
     @FocusState private var focusedField: FocusedField?
     
+    @AppStorage("isVisible") private var isVisible: Bool = true
+    
     var body: some View {
         VStack {
+            SiriTipView(intent: FocusedTextFieldIntent(), isVisible: $isVisible)
+                .padding()
             Spacer()
             
             TextField("Email", text: $email)
