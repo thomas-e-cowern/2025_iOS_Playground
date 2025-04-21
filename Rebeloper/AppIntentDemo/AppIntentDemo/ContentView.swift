@@ -28,6 +28,9 @@ struct ContentView: View {
         }
         .textFieldStyle(.roundedBorder)
         .padding()
+        .onChange(of: AppIntentController.shared.focusedField) { _, newValue in
+            focusedField = newValue
+        }
     }
 }
 
