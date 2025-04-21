@@ -8,13 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var email: String = ""
+    @State private var password: String = ""
+    
+    @FocusState private var focusedField: FocusedField?
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Spacer()
+            
+            TextField("Email", text: $email)
+                .focused($focusedField, equals: .email)
+            
+            SecureField("Password", text: $password)
+                .focused($focusedField, equals: .password)
+            
+            
         }
+        .textFieldStyle(.roundedBorder)
         .padding()
     }
 }
