@@ -16,7 +16,7 @@ struct FocusedTextFieldIntent: AppIntent {
     @Parameter(title: "Focused Field") var focusedField: String
     
     func perform() async throws -> some IntentResult {
-        AppIntentController.shared.focusedField = FocusedField.password
+        AppIntentController.shared.focusedField = FocusedField.none
         return .result()
     }
 }
