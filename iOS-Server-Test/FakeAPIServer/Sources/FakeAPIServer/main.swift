@@ -9,11 +9,17 @@ let server = HttpServer()
 server["/users"] = { request in
     let json = """
         [
-            {id: 1, name: "Alice"},
-            {id: 2, name: "Bob"}
+            {
+                "id": 1,
+                "name": "Alice"
+            },
+            {
+                "id": 2,
+                "name": "Bob"
+            }
         ]
         """
-    return HttpResponse.ok(.json(json))
+    return HttpResponse.ok(.text(json))
 }
 
 do {
