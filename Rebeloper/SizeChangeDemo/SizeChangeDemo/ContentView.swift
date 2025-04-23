@@ -24,8 +24,10 @@ struct ContentView: View {
             Color.orange
                 .frame(height: height)
             
+            
+            Spacer()
+            
         } //: End of VStack
-        .padding()
     }
 }
 
