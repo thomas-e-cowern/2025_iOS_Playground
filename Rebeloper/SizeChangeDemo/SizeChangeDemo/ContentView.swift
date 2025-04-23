@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var height: CGFloat = 100
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
+            Button("Resize") {
+                if height == 100 {
+                    height = CGFloat.random(in: 100...600)
+                } else {
+                    height = 100
+                }
+            }
+            
+            Color.orange
+                .frame(height: height)
+            
+        } //: End of VStack
         .padding()
     }
 }
