@@ -1,4 +1,26 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
 
-print("Hello, world!")
+import Foundation
+import Swifter
+
+let server = HttpServer()
+
+server["/users"] = { request in
+    let json = """
+        [
+            {id: 1, name: "Alice"},
+            {id: 2, name: "Bob"}
+        ]
+        """
+    return HttpResponse.ok(.json(json))
+}
+
+do {
+    try server.start(8080)
+    RunLoop.main.run()
+} catch {
+    print("💥💥💥 Failed to start server: \(error.localizedDescription) 💥💥💥")
+}
+
+
