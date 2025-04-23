@@ -23,7 +23,9 @@ struct ContentView: View {
             
             Color.orange
                 .frame(height: height)
-            
+                .readsize { size in
+                    print(size.height)
+                }
             
             Spacer()
             
