@@ -10,8 +10,12 @@ import SwiftUI
 extension View {
     func readsize(onChange: @escaping (CGSize) -> Void) -> some View {
         background(
-            
+            GeometryReader(content: { geometryProxy in
+                Color.clear
+                    .preference(key: SizePreferenceKey.self, value: geometryProxy.size)
+            })
         )
+        .onPreferenceChange(SizePreferenceKey.self, perform: onChange)
     }
 }
 
