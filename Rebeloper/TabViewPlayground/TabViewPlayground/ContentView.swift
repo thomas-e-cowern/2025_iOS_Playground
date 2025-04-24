@@ -7,21 +7,31 @@
 
 import SwiftUI
 
+enum Tabs {
+    case archery
+    case badminton
+    case baseball
+}
+
 struct ContentView: View {
     
-    @State private var selectedTabIndex: Int = 0
+    @State private var selectedTabIndex: Tabs = .baseball
     
     var body: some View {
-        TabView {
-            Tab("Archery", systemImage: "figure.archery") {
+        TabView(selection: $selectedTabIndex) {
+            Tab("Archery", systemImage: "figure.archery", value: Tabs.archery) {
                 ArcheryView()
             }
+//            .badge(10)
+            .badge("")
+
             
-            Tab("Badminton", systemImage: "figure.badminton") {
+            Tab("Badminton", systemImage: "figure.badminton", value: Tabs.badminton) {
                 BadmintonView()
             }
+
             
-            Tab("Baseball", systemImage: "figure.baseball") {
+            Tab("Baseball", systemImage: "figure.baseball", value: Tabs.baseball) {
                 BaseballView()
             }
         }
