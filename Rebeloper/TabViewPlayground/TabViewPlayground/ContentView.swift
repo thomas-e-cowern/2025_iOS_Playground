@@ -15,10 +15,14 @@ enum Tabs {
 
 struct ContentView: View {
     
-    @State private var selectedTabIndex: Tabs = .baseball
+//    @State private var selectedTabIndex: Tabs = .baseball
+    @Environment(AppController.self) private var appController
     
     var body: some View {
-        TabView(selection: $selectedTabIndex) {
+        
+        @Bindable var appController = appController
+        
+        TabView(selection: $appController.selectedTabIndex) {
             Tab("Archery", systemImage: "figure.archery", value: Tabs.archery) {
                 ArcheryView()
             }
