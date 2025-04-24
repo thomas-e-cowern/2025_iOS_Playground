@@ -18,6 +18,11 @@ struct ContentView: View {
 //    @State private var selectedTabIndex: Tabs = .baseball
     @Environment(AppController.self) private var appController
     
+    init() {
+            UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(.primary)
+            UIPageControl.appearance().pageIndicatorTintColor = UIColor(.secondary)
+    }
+    
     var body: some View {
         
         @Bindable var appController = appController
@@ -39,6 +44,7 @@ struct ContentView: View {
                 BaseballView()
             }
         }
+        .tabViewStyle(.page(indexDisplayMode: .always))
     }
 }
 
