@@ -17,7 +17,9 @@ struct BadmintonView: View {
                 .foregroundStyle(.secondary)
             
             Button("Switch to archery") {
-                appController.selectedTabIndex = .archery
+                withAnimation {
+                    appController.selectedTabIndex = .archery
+                }
             }
         }
     }
