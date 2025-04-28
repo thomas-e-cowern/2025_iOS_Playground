@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var password: String = ""
+    @State private var showPassword: Bool = false
     
     var body: some View {
         VStack {
@@ -18,14 +19,20 @@ struct ContentView: View {
                     TextField("Password", text: $password)
                     SecureField("Password", text: $password)
                 }
-                .textFieldStyle(.roundedBorder)
+                
                 
                 Button {
-                    // More to come...
+                    showPassword.toggle()
                 } label: {
-                    Image(systemName: "eye.slash")
+                    Image(systemName: showPassword ? "eye.slash" :"eye")
                 }
-
+                .buttonStyle(.plain)
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 9)
+            .overlay {
+                RoundedRectangle(cornerRadius: 7)
+                    .stroke(.secondary, lineWidth: 1)
             }
         }
         .padding()
