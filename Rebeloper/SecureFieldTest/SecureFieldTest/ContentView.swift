@@ -17,7 +17,9 @@ struct ContentView: View {
             HStack {
                 ZStack {
                     TextField("Password", text: $password)
+                        .opacity(showPassword ? 1 : 0)
                     SecureField("Password", text: $password)
+                        .opacity(showPassword ? 0 : 1)
                 }
                 
                 
