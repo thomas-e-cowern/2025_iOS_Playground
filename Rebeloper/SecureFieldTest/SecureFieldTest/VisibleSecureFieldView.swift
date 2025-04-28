@@ -22,12 +22,22 @@ struct VisibleSecureFieldView: View {
             
             Spacer(minLength: 0)
             
+            // Show password
             Button {
                 showPassword.toggle()
             } label: {
                 Image(systemName: showPassword ? "eye.slash" :"eye")
             }
             .buttonStyle(.plain)
+            
+            // Clear password
+            Button {
+                text = ""
+            } label: {
+                Image(systemName: "x.circle")
+            }
+            .buttonStyle(.plain)
+            
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 9)
