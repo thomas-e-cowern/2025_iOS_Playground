@@ -13,8 +13,20 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            SecureField("Password", text: $password)
+            HStack {
+                ZStack {
+                    TextField("Password", text: $password)
+                    SecureField("Password", text: $password)
+                }
                 .textFieldStyle(.roundedBorder)
+                
+                Button {
+                    // More to come...
+                } label: {
+                    Image(systemName: "eye.slash")
+                }
+
+            }
         }
         .padding()
     }
