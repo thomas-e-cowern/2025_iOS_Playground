@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var password: String = ""
-    @State private var showPassword: Bool = false
     
     var body: some View {
         VStack {
