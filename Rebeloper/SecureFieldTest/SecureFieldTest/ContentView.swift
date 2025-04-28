@@ -14,28 +14,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                ZStack {
-                    TextField("Password", text: $password)
-                        .opacity(showPassword ? 1 : 0)
-                    SecureField("Password", text: $password)
-                        .opacity(showPassword ? 0 : 1)
-                }
-                
-                
-                Button {
-                    showPassword.toggle()
-                } label: {
-                    Image(systemName: showPassword ? "eye.slash" :"eye")
-                }
-                .buttonStyle(.plain)
-            }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 9)
-            .overlay {
-                RoundedRectangle(cornerRadius: 7)
-                    .stroke(.secondary, lineWidth: 1)
-            }
+            VisibleSecureFieldView(text: $password)
         }
         .padding()
     }
