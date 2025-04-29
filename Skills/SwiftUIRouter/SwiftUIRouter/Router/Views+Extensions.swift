@@ -14,7 +14,7 @@ struct RouterViewModifier: ViewModifier {
         Group {
             switch route {
             case .firstView:
-                FirstView()
+                FirstView(name: "Bill")
             case .secondView:
                 SecondView()
             case .thirdView:

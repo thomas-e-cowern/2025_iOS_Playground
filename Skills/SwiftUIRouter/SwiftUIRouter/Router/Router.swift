@@ -10,8 +10,8 @@ import SwiftUI
 import Observation
 
 // Step one create an enum for each view
-enum Route: Hashable {
-    case firstView
+enum Route: Hashable{
+    case firstView(name: String)
     case secondView
     case thirdView
 }
@@ -22,7 +22,7 @@ class Router {
     var path = NavigationPath()
     
     func navigateToFirstVIew() {
-        path.append(Route.firstView)
+        path.append(Route.firstView(name: ""))
     }
     
     func navigateToSecindVIew() {

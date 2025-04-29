@@ -39,9 +39,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    
-    @Previewable @Environment(Router.self) var router
-    
     ContentView()
-        .environment(router)
 }

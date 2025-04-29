@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct FirstView: View {
+    
+    let name: String
+    
     var body: some View {
         Text("First View")
+        Text(name)
     }
 }
 
 #Preview {
-    FirstView()
+    FirstView(name: "Benny")
 }
