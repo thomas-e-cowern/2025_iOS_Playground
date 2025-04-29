@@ -21,6 +21,7 @@ struct RouterViewModifier: ViewModifier {
                 ThirdView()
             }
         }
+        .environment(router)
     }
     
     func body(content: Content) -> some View {
@@ -35,3 +36,9 @@ struct RouterViewModifier: ViewModifier {
     }
 }
 
+// Step four add the extension to the view
+extension View {
+    func withRouter() -> some View {
+        modifier(RouterViewModifier())
+    }
+}
