@@ -14,6 +14,12 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            if selectedImage != nil {
+                Image(uiImage: selectedImage!)
+                    .resizable()
+                    .scaledToFit()
+            }
+            
             Button {
                 isShowingImagePicker.toggle()
             } label: {
