@@ -8,12 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var selectedImage: UIImage?
+    @State private var isShowingImagePicker: Bool = false
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button {
+                isShowingImagePicker.toggle()
+            } label: {
+                Text("Pick Image")
+            }
+            .sheet(isPresented: $isShowingImagePicker) {
+                UIImagePicker(selectedImage: $selectedImage)
+                    .ignoresSafeArea()
+            }
+
         }
         .padding()
     }
