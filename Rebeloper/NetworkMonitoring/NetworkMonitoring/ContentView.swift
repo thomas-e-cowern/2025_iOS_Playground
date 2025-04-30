@@ -8,12 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @Environment(\.network) var network
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            if network.isConnected {
+                Image(systemName: "hand.thumbsup")
+                    .imageScale(.large)
+                    .foregroundStyle(.tint)
+                Text("Connected")
+            } else {
+                Image(systemName: "hand.thumbsdown")
+                    .imageScale(.large)
+                    .foregroundStyle(.tint)
+                Text("Not Connected")
+            }
         }
         .padding()
     }
