@@ -12,6 +12,7 @@ struct NetworkMonitoringApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .listenToNetwork()
         }
     }
 }
