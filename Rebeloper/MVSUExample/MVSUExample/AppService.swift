@@ -10,7 +10,7 @@ import SwiftUI
 class AppService {
     var profile: Profile = Profile()
     
-    func changeName(name: String) {
-        profile.name = name
+    func changeName() {
+        profile.name = APIUtility.fetchName()
     }
 }
