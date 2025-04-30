@@ -24,3 +24,9 @@ class NetworkObserver {
 extension EnvironmentValues {
     @Entry var network = NetworkObserver()
 }
+
+extension View {
+    func listenToNetwork() -> some View {
+        environment(\.network, .init())
+    }
+}
