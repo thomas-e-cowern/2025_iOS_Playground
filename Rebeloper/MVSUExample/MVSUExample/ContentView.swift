@@ -22,3 +22,14 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
+extension ContentView {
+    @Observable
+    class ViewModel {
+        var profile: Profile = Profile()
+        
+        func changeName() {
+            profile.name = "New Name"
+        }
+    }
+}
