@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct MVSUExampleApp: App {
+    
+    @State private var appService: AppService = AppService()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(appService)
         }
     }
 }
