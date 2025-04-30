@@ -8,14 +8,47 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var viewModel: ViewModel = ViewModel()
+    @State private var name: String = ""
+    @State private var isEmpty: Bool = true
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Hello, world!")
+            
+            if !name.isEmpty {
+                Text("Hello \(viewModel.profile.name)")
+            } else {
+                Text("Enter your name below")
+            }
+            
+            Button {
+                viewModel.changeName(name: name)
+                isEmpty.toggle()
+            } label: {
+                Text("Change Name")
+            }
+            
+            Spacer()
+                .frame(height: 24)
+            
+            TextField("Enter your name", text: $name)
+                .textFieldStyle(.roundedBorder)
+            
+            Button {
+                name = ""
+                isEmpty.toggle()
+            } label: {
+                Text("Clear name")
+            }
+            .disabled(isEmpty)
+
         }
         .padding()
+        .buttonStyle(.borderedProminent)
     }
 }
 
@@ -28,8 +61,8 @@ extension ContentView {
     class ViewModel {
         var profile: Profile = Profile()
         
-        func changeName() {
-            profile.name = "New Name"
+        func changeName(name: String) {
+            profile.name = name
         }
     }
 }
