@@ -37,10 +37,22 @@ struct ContentView: View {
             .task {
                 await apiService.fetchUsers()
             }
+            .toolbar {
+                Button {
+                    Task {
+                        await apiService.fetchUsers()
+                    }
+                } label: {
+                    Text("Reload")
+                }
+
+            }
         }
     }
 }
 
 #Preview {
-    ContentView()
+    NavigationStack {
+        ContentView()
+    }
 }
