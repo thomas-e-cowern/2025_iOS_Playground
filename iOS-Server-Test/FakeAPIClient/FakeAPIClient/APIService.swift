@@ -19,7 +19,18 @@ class APIService {
         }
         
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+            let (data, response) = try await URLSession.shared.data(from: url)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("No HTTP response")
+                return
+            }
+            
+            guard (200..<300).contains(httpResponse.statusCode) else {
+                print("Http Response status code is not in the 2xx range: \(httpResponse.statusCode)")
+                return
+            }
+            
             users = try JSONDecoder().decode([User].self, from: data)
         } catch {
             print("Error decoding data: \(error.localizedDescription)")
