@@ -24,6 +24,7 @@ server["/users"] = { request in
         ]
         """
     sleep(4)
+    
     return HttpResponse.ok(.text(json))
 }
 
