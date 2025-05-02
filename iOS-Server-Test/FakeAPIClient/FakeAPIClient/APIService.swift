@@ -13,6 +13,10 @@ enum FetchState {
     case error(String)
 }
 
+struct ServerError: Decodable {
+    let error: String
+}
+
 @Observable
 class APIService {
     var state: FetchState = .idle
@@ -37,6 +41,12 @@ class APIService {
             
             guard (200..<300).contains(httpResponse.statusCode) else {
                 state = .error("Error fetching data: \(httpResponse.statusCode)")
+                
+                if let error = try? JSONDecoder().decode(ServerError.self, from: data) {
+                    state = .error(error.error)
+                } else {
+                    state = .error("Error fetching data: \(httpResponse.statusCode)")
+                }
                 return
             }
             
