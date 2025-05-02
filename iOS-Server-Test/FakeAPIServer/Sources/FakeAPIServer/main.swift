@@ -6,6 +6,10 @@ import Swifter
 
 let server = HttpServer()
 
+server["/"] = { request in
+    return HttpResponse.ok(.text("Hello, World!"))
+}
+
 server["/users"] = { request in
     let json = """
         [
