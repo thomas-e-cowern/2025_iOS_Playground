@@ -14,12 +14,23 @@ struct ContentView: View {
     var body: some View {
         VStack {
             NavigationStack {
-                List(apiService.users) { user in
-                    HStack {
-                        Image(systemName: "globe")
-                            .imageScale(.large)
-                            .foregroundStyle(.tint)
-                        Text(user.name)
+                Group {
+                    switch apiService.state {
+                    case .idle:
+                        List(apiService.users) { user in
+                            HStack {
+                                Image(systemName: "globe")
+                                    .imageScale(.large)
+                                    .foregroundStyle(.tint)
+                                Text(user.name)
+                            }
+                        }
+                    case .loading:
+                        ProgressView()
+                            .controlSize(.large)
+                    case .error(let error):
+                        Text(error)
+                            .foregroundStyle(.red)
                     }
                 }
             }
