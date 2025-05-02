@@ -26,6 +26,25 @@ server["/users"] = { request in
     return HttpResponse.ok(.text(json))
 }
 
+//server.notFoundHandler = { request in
+//    return HttpResponse.notFound
+//}
+
+func jsonError(_ code: Int, _ message: String) -> HttpResponse {
+    return HttpResponse.raw(code, "Error", ["Content-Type": "application/json"]) { writer in
+        let body = """
+        {
+            "error": "\(message)"
+        }
+        """
+        do {
+            try writer.write(Data(body.utf8))
+        } catch {
+            print("Error writing JSON body: \(error.localizedDescription)")
+        }
+    }
+}
+
 do {
     try server.start(8080)
     RunLoop.main.run()
