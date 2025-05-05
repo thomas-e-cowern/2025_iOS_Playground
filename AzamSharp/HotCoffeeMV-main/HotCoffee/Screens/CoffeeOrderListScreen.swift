@@ -9,13 +9,12 @@ import SwiftUI
 
 struct CoffeeOrderListScreen: View {
     
-    @Environment(\.httpClient) private var httpClient
+    @Environment(CoffeeStore.self) private var coffeeStore
     
     @State private var isPresented: Bool = false
-    @State private var orders: [CoffeeOrder] = []
     
     var body: some View {
-        List(orders) { order in
+        List(coffeeStore.orders) { order in
             NavigationLink(value: order) {
                 Text(order.name)
             }
@@ -25,7 +24,7 @@ struct CoffeeOrderListScreen: View {
         })
         .task {
             do {
-                try await loadOrders()
+                try await coffeeStore.loadOrders()
             } catch {
                 print(error.localizedDescription)
             }
@@ -38,22 +37,17 @@ struct CoffeeOrderListScreen: View {
                 }
             })
             .sheet(isPresented: $isPresented, content: {
-                AddCoffeeOrderScreen(orders: $orders)
+//                AddCoffeeOrderScreen(orders: $orders)
 //                AddCoffeeOrderScreen { order in
 //                    orders.append(order)
 //                }
             })
-    }
-    
-    private func loadOrders() async throws {
-        let resource = Resource(url: APIs.orders.url, modelType: [CoffeeOrder].self)
-        orders = try await httpClient.load(resource)
     }
 }
 
 #Preview {
     NavigationStack {
         CoffeeOrderListScreen()
-            .environment(\.httpClient, HTTPClient())
+            .environment(CoffeeStore(httpClient: HTTPClient()))
     }
 }
