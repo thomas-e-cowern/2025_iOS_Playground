@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddCoffeeOrderScreen: View {
     
-    let addOrderVM: AddOrderViewModel
+    @Environment(\.httpClient) private var httpClient
     @Environment(\.dismiss) private var dismiss
     
     @State private var name: String = ""
@@ -18,8 +18,10 @@ struct AddCoffeeOrderScreen: View {
     @State private var size: CoffeeSize = .medium
     @State private var saving: Bool = false
     
+    var onSave: (CoffeeOrder) -> Void
+    
     private var isFormValid: Bool {
-        return true 
+        return true
     }
     
     var body: some View {
@@ -41,13 +43,9 @@ struct AddCoffeeOrderScreen: View {
                 }.buttonStyle(.borderedProminent)
                     .task(id: saving) {
                         if saving {
-                            do {
-                                try await addOrderVM.placeOrder(name: name, coffeeName: coffeeName, total: total, size: size)
-                                saving = false
-                                dismiss()
-                            } catch {
-                                print(error.localizedDescription)
-                            }
+                            await placeOrder()
+                            saving = false
+                            dismiss()
                         }
                     }
                 
@@ -55,8 +53,23 @@ struct AddCoffeeOrderScreen: View {
             }
         }
     }
+    
+    private func placeOrder() async {
+        do {
+            let newOrder = CoffeeOrder(name: name, coffeeName: coffeeName, total: total, size: size)
+            let newOrderData = try JSONEncoder().encode(newOrder)
+            
+            let resource = Resource(url: APIs.addOrder.url, method: .post(newOrderData), modelType: CoffeeOrder.self)
+            let orderResponse = try await httpClient.load(resource)
+            onSave(orderResponse)
+        } catch {
+            print("Error in place order: \(error.localizedDescription)")
+        }
+    }
 }
 
 #Preview {
-    AddCoffeeOrderScreen(addOrderVM: AddOrderViewModel(httpClient: HTTPClient(), onSave: { _ in }))
+    AddCoffeeOrderScreen { _ in
+        // More to come...
+    }
 }
