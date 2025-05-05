@@ -14,7 +14,7 @@ struct HotCoffeeApp: App {
             NavigationStack {
                 CoffeeOrderListScreen()
             }
-            .environment(\.httpClient, HTTPClient())
+            .environment(CoffeeStore(httpClient: HTTPClient()))
         }
     }
 }
