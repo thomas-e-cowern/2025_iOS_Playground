@@ -10,9 +10,9 @@ import SwiftUI
 struct AddCoffeeOrderScreen: View {
     
     // Alternate way of doing it...
-    @Binding var orders: [CoffeeOrder]
+//    @Binding var orders: [CoffeeOrder]
     
-    @Environment(\.httpClient) private var httpClient
+    @Environment(CoffeeStore.self) private var coffeeStore
     @Environment(\.dismiss) private var dismiss
     
     @State private var name: String = ""
@@ -60,12 +60,7 @@ struct AddCoffeeOrderScreen: View {
     private func placeOrder() async {
         do {
             let newOrder = CoffeeOrder(name: name, coffeeName: coffeeName, total: total, size: size)
-            let newOrderData = try JSONEncoder().encode(newOrder)
-            
-            let resource = Resource(url: APIs.addOrder.url, method: .post(newOrderData), modelType: CoffeeOrder.self)
-            let orderResponse = try await httpClient.load(resource)
-            orders.append(orderResponse)
-//            onSave(orderResponse)
+            try await coffeeStore.placeOrder(coffeeOrder: newOrder)
         } catch {
             print("Error in place order: \(error.localizedDescription)")
         }
@@ -73,8 +68,6 @@ struct AddCoffeeOrderScreen: View {
 }
 
 #Preview {
-//    AddCoffeeOrderScreen { _ in
-//        // More to come...
-//    }
-    AddCoffeeOrderScreen(orders: .constant([]))
+    AddCoffeeOrderScreen()
+        .environment(CoffeeStore(httpClient: HTTPClient()))
 }
