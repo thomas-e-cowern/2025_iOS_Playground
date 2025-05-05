@@ -38,9 +38,9 @@ struct CoffeeOrderListScreen: View {
                 }
             })
             .sheet(isPresented: $isPresented, content: {
-//                AddCoffeeOrderScreen(addOrderVM: AddOrderViewModel(httpClient: HTTPClient(), onSave: { coffeeOrder in
-//                    coffeeOrderListVM.orders.append(coffeeOrder)
-//                }))
+                AddCoffeeOrderScreen { order in
+                    orders.append(order)
+                }
             })
     }
     
