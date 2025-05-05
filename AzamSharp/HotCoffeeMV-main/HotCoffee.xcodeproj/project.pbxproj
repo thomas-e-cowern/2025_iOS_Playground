@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4DD38D492DC912A70010406E /* HttpClientKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD38D482DC9129E0010406E /* HttpClientKey.swift */; };
 		8D4A0DB92BB8466900589B32 /* CoffeeOrderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4A0DB82BB8466900589B32 /* CoffeeOrderListViewModel.swift */; };
 		8D4A0DBB2BB84A9B00589B32 /* AddOrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4A0DBA2BB84A9B00589B32 /* AddOrderViewModel.swift */; };
 		8DDA14092A8A8B3B00741F53 /* HotCoffeeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDA14082A8A8B3B00741F53 /* HotCoffeeApp.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4DD38D482DC9129E0010406E /* HttpClientKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClientKey.swift; sourceTree = "<group>"; };
 		8D4A0DB82BB8466900589B32 /* CoffeeOrderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeOrderListViewModel.swift; sourceTree = "<group>"; };
 		8D4A0DBA2BB84A9B00589B32 /* AddOrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrderViewModel.swift; sourceTree = "<group>"; };
 		8DDA14052A8A8B3B00741F53 /* HotCoffee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HotCoffee.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +48,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4DD38D472DC912910010406E /* EnvironmentValues */ = {
+			isa = PBXGroup;
+			children = (
+				4DD38D482DC9129E0010406E /* HttpClientKey.swift */,
+			);
+			path = EnvironmentValues;
+			sourceTree = "<group>";
+		};
 		8D4A0DB72BB8464E00589B32 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +84,7 @@
 		8DDA14072A8A8B3B00741F53 /* HotCoffee */ = {
 			isa = PBXGroup;
 			children = (
+				4DD38D472DC912910010406E /* EnvironmentValues */,
 				8D4A0DB72BB8464E00589B32 /* View Models */,
 				8DDA14222A8A8CC100741F53 /* Models */,
 				8DDA141C2A8A8C1500741F53 /* Screens */,
@@ -200,6 +211,7 @@
 			files = (
 				8DDA14092A8A8B3B00741F53 /* HotCoffeeApp.swift in Sources */,
 				8DDA141E2A8A8C2600741F53 /* CoffeeOrderListScreen.swift in Sources */,
+				4DD38D492DC912A70010406E /* HttpClientKey.swift in Sources */,
 				8D4A0DBB2BB84A9B00589B32 /* AddOrderViewModel.swift in Sources */,
 				8DDA14282A8A920D00741F53 /* AddCoffeeOrderScreen.swift in Sources */,
 				8DDA141B2A8A8BD800741F53 /* APIs.swift in Sources */,
