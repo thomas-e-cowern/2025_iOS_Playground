@@ -12,8 +12,9 @@ struct HotCoffeeApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                CoffeeOrderListScreen(coffeeOrderListVM: CoffeeOrderListViewModel(httpClient: HTTPClient()))
+                CoffeeOrderListScreen()
             }
+            .environment(\.httpClient, HTTPClient())
         }
     }
 }
