@@ -38,9 +38,10 @@ struct CoffeeOrderListScreen: View {
                 }
             })
             .sheet(isPresented: $isPresented, content: {
-                AddCoffeeOrderScreen { order in
-                    orders.append(order)
-                }
+                AddCoffeeOrderScreen(orders: $orders)
+//                AddCoffeeOrderScreen { order in
+//                    orders.append(order)
+//                }
             })
     }
     
