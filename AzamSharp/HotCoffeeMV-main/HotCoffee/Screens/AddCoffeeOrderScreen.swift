@@ -9,6 +9,9 @@ import SwiftUI
 
 struct AddCoffeeOrderScreen: View {
     
+    // Alternate way of doing it...
+    @Binding var orders: [CoffeeOrder]
+    
     @Environment(\.httpClient) private var httpClient
     @Environment(\.dismiss) private var dismiss
     
@@ -18,7 +21,7 @@ struct AddCoffeeOrderScreen: View {
     @State private var size: CoffeeSize = .medium
     @State private var saving: Bool = false
     
-    var onSave: (CoffeeOrder) -> Void
+//    var onSave: (CoffeeOrder) -> Void
     
     private var isFormValid: Bool {
         return true
@@ -61,7 +64,8 @@ struct AddCoffeeOrderScreen: View {
             
             let resource = Resource(url: APIs.addOrder.url, method: .post(newOrderData), modelType: CoffeeOrder.self)
             let orderResponse = try await httpClient.load(resource)
-            onSave(orderResponse)
+            orders.append(orderResponse)
+//            onSave(orderResponse)
         } catch {
             print("Error in place order: \(error.localizedDescription)")
         }
@@ -69,7 +73,8 @@ struct AddCoffeeOrderScreen: View {
 }
 
 #Preview {
-    AddCoffeeOrderScreen { _ in
-        // More to come...
-    }
+//    AddCoffeeOrderScreen { _ in
+//        // More to come...
+//    }
+    AddCoffeeOrderScreen(orders: .constant([]))
 }
