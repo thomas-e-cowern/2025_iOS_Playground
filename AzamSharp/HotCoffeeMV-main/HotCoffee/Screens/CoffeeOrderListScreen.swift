@@ -9,17 +9,13 @@ import SwiftUI
 
 struct CoffeeOrderListScreen: View {
     
-//    @Environment(\.httpClient) private var httpClient
+    @Environment(\.httpClient) private var httpClient
     
-    let coffeeOrderListVM: CoffeeOrderListViewModel
     @State private var isPresented: Bool = false
-    
-    init(coffeeOrderListVM: CoffeeOrderListViewModel) {
-        self.coffeeOrderListVM = coffeeOrderListVM
-    }
+    @State private var orders: [CoffeeOrder] = []
     
     var body: some View {
-        List(coffeeOrderListVM.orders) { order in
+        List(orders) { order in
             NavigationLink(value: order) {
                 Text(order.name)
             }
@@ -29,7 +25,7 @@ struct CoffeeOrderListScreen: View {
         })
         .task {
             do {
-                try await coffeeOrderListVM.loadOrders()
+                try await loadOrders()
             } catch {
                 print(error.localizedDescription)
             }
@@ -42,15 +38,21 @@ struct CoffeeOrderListScreen: View {
                 }
             })
             .sheet(isPresented: $isPresented, content: {
-                AddCoffeeOrderScreen(addOrderVM: AddOrderViewModel(httpClient: HTTPClient(), onSave: { coffeeOrder in
-                    coffeeOrderListVM.orders.append(coffeeOrder)
-                }))
+//                AddCoffeeOrderScreen(addOrderVM: AddOrderViewModel(httpClient: HTTPClient(), onSave: { coffeeOrder in
+//                    coffeeOrderListVM.orders.append(coffeeOrder)
+//                }))
             })
+    }
+    
+    private func loadOrders() async throws {
+        let resource = Resource(url: APIs.orders.url, modelType: [CoffeeOrder].self)
+        orders = try await httpClient.load(resource)
     }
 }
 
 #Preview {
     NavigationStack {
-        CoffeeOrderListScreen(coffeeOrderListVM: CoffeeOrderListViewModel(httpClient: HTTPClient()))
+        CoffeeOrderListScreen()
+            .environment(\.httpClient, HTTPClient())
     }
 }
