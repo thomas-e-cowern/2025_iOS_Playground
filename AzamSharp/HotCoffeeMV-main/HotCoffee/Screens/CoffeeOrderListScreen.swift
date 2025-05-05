@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CoffeeOrderListScreen: View {
     
+//    @Environment(\.httpClient) private var httpClient
+    
     let coffeeOrderListVM: CoffeeOrderListViewModel
     @State private var isPresented: Bool = false
     
