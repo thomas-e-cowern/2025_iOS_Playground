@@ -79,6 +79,7 @@ struct ContentView: View {
                 }
             }
             HStack {
+                
                 TextField("Name", text: $name)
                 Spacer()
                 Picker("Types", selection: $type) {
@@ -96,8 +97,16 @@ struct ContentView: View {
                 let expense = Expense(name: name, type: type.rawValue, cost: cost, isDeletable: false)
                 expenseTracker.expenses.items.append(expense)
                 print(expenseTracker.expenses.items.count)
+                clearFields()
             }
+            
         }
+    }
+    
+    func clearFields() {
+        self.name = ""
+        self.type = .Grocery
+        self.cost = 0
     }
 }
 
