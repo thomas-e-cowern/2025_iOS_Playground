@@ -8,6 +8,17 @@
 import SwiftUI
 import Observation
 
+enum ExpenseTypes: String, CaseIterable, Identifiable {
+    var id: Self { self }
+    
+    case Grocery = "Grocery"
+    case Personal = "Personal"
+    case Business = "Business"
+    case Entertainment = "Entertainment"
+    
+    var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue) }
+}
+
 struct Expense : Identifiable {
     var id = UUID()
     var name: String
@@ -47,6 +58,9 @@ class ExpenseTracker {
 struct ContentView: View {
     
     @State private var expenseTracker = ExpenseTracker()
+    @State private var name: String = ""
+    @State private var type: ExpenseTypes = .Grocery
+    @State private var cost: Double = 0.0
     
     var body: some View {
         VStack {
@@ -64,9 +78,22 @@ struct ContentView: View {
                         .font(.caption)
                 }
             }
+            HStack {
+                TextField("Name", text: $name)
+                Spacer()
+                Picker("Types", selection: $type) {
+                    ForEach(ExpenseTypes.allCases) { type in
+                        Text(type.localizedName)
+                    }
+                }
+                Spacer()
+                TextField("Cost", value: $cost, formatter: NumberFormatter())
+                
+            }
+            .padding()
             
             Button("Add Expense") {
-                let expense = Expense(name: "Bread", type: "Groceries", cost: 4.50, isDeletable: false)
+                let expense = Expense(name: name, type: type.rawValue, cost: cost, isDeletable: false)
                 expenseTracker.expenses.items.append(expense)
                 print(expenseTracker.expenses.items.count)
             }
