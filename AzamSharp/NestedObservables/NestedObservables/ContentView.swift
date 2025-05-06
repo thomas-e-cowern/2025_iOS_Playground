@@ -52,7 +52,17 @@ struct ContentView: View {
         VStack {
             
             List(expenseTracker.expenses.items) { item in
-                Text(item.name)
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text(item.name)
+                            .font(.headline)
+                        Spacer()
+                        Text("$\(item.cost.formatted())")
+                            .font(.headline)
+                    }
+                    Text(item.type)
+                        .font(.caption)
+                }
             }
             
             Button("Add Expense") {
@@ -61,7 +71,6 @@ struct ContentView: View {
                 print(expenseTracker.expenses.items.count)
             }
         }
-        .padding()
     }
 }
 
