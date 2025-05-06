@@ -1,0 +1,152 @@
+
+
+
+//
+//  ContentView.swift
+//  NestedObservables
+//
+//  Created by Mohammad Azam on 4/8/24.
+//
+
+import SwiftUI
+
+struct Expense : Identifiable {
+    var id = UUID()
+    var name: String
+    var type: String
+    var cost: Double
+    var isDeletable: Bool
+}
+
+class Expenses: ObservableObject{
+    @Published var name: String
+    @Published var items: [Expense]
+
+    init() {
+        name = "John Smith"
+        items = [
+            Expense(name: "Lunch", type: "Business", cost: 25.47, isDeletable: true),
+            Expense(name: "Taxi", type: "Business", cost: 17.0, isDeletable: true),
+            Expense(name: "Sports Tickets", type: "Personal", cost: 75.0, isDeletable: false)
+        ]
+    }
+    
+    func addExpense(_ expense: Expense) {
+        items.append(expense)
+    }
+    
+}
+
+class ExpenseTracker: ObservableObject {
+    
+    @Published var name: String = ""
+    @Published var expenses: Expenses
+    
+    init() {
+        expenses = Expenses()
+    }
+
+}
+
+struct ContentView: View {
+    
+    @EnvironmentObject private var expenseTracker: ExpenseTracker
+    
+    var body: some View {
+        VStack {
+            
+            List(expenseTracker.expenses.items) { item in
+                Text(item.name)
+            }
+            
+            Button("Add Expense") {
+                expenseTracker.expenses.addExpense(Expense(name: "Milk", type: "Groceries", cost: 4.50, isDeletable: false))
+            }
+        }
+        .padding()
+    }
+}
+
+#Preview {
+    ContentView()
+        .environmentObject(ExpenseTracker())
+}
+
+
+
+
+//
+//  ContentView.swift
+//  NestedObservables
+//
+//  Created by Mohammad Azam on 4/8/24.
+//
+
+import SwiftUI
+import Observation
+
+struct Expense : Identifiable {
+    var id = UUID()
+    var name: String
+    var type: String
+    var cost: Double
+    var isDeletable: Bool
+}
+
+@Observable
+class Expenses {
+    
+    var name: String
+    var items: [Expense]
+
+    init() {
+        name = "John Smith"
+        items = [
+            Expense(name: "Lunch", type: "Business", cost: 25.47, isDeletable: true),
+            Expense(name: "Taxi", type: "Business", cost: 17.0, isDeletable: true),
+            Expense(name: "Sports Tickets", type: "Personal", cost: 75.0, isDeletable: false)
+        ]
+    }
+    
+    func addExpense(_ expense: Expense) {
+        items.append(expense)
+    }
+    
+}
+
+@Observable
+class ExpenseTracker {
+    
+    var name: String = ""
+    var expenses: Expenses
+    
+    init() {
+        expenses = Expenses()
+    }
+
+}
+
+struct ContentView: View {
+    
+    @Environment(ExpenseTracker.self) private var expenseTracker: ExpenseTracker
+    
+    var body: some View {
+        VStack {
+            
+            List(expenseTracker.expenses.items) { item in
+                Text(item.name)
+            }
+            
+            Button("Add Expense") {
+                expenseTracker.expenses.addExpense(Expense(name: "Milk", type: "Groceries", cost: 4.50, isDeletable: false))
+            }
+        }
+        .padding()
+    }
+}
+
+#Preview {
+    ContentView()
+        .environment(ExpenseTracker())
+}
+
