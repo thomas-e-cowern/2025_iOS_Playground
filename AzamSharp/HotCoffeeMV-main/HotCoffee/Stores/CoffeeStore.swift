@@ -12,7 +12,6 @@ class CoffeeStore {
     let httpClient: HTTPClient
     
     var orders: [CoffeeOrder] = []
-    var employees: [Employee] = []
     
     init(httpClient: HTTPClient) {
         self.httpClient = httpClient
@@ -28,16 +27,5 @@ class CoffeeStore {
         let resource = Resource(url: APIs.addOrder.url, method: .post(newOrderData), modelType: CoffeeOrder.self)
         let savedCoffeeOrder = try await httpClient.load(resource)
         orders.append(savedCoffeeOrder)
-    }
-    
-    func addEmployee(name: String, role: String, department: String) {
-        let employee = Employee(id: UUID(), name: name, role: role, department: department)
-        employees.append(employee)
-    }
-    
-    func getEmployeesByDepartment(department: String) -> [Employee] {
-        return employees.filter {
-            $0.department == department
-        }
     }
 }
