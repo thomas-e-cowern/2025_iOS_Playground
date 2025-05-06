@@ -12,7 +12,7 @@ struct AddCoffeeOrderScreen: View {
     // Alternate way of doing it...
 //    @Binding var orders: [CoffeeOrder]
     
-    @Environment(CoffeeStore.self) private var coffeeStore
+    @Environment(OrderingStore.self) private var coffeeStore
     @Environment(\.dismiss) private var dismiss
     
     @State private var name: String = ""
@@ -69,5 +69,5 @@ struct AddCoffeeOrderScreen: View {
 
 #Preview {
     AddCoffeeOrderScreen()
-        .environment(CoffeeStore(httpClient: HTTPClient()))
+        .environment(OrderingStore(httpClient: HTTPClient()))
 }
