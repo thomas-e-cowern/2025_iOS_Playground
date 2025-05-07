@@ -9,5 +9,5 @@ import Observation
 
 @Observable
 class PatientManagementStore {
-    // More to come...
+    var patients: [Patient] = []
 }
