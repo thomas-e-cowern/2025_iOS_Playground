@@ -23,4 +23,9 @@ class PatientManagementStore {
     func patientByID(_ id: UUID) -> Patient? {
         return nil
     }
+    
+    func allergiesByPatientID(_ id: UUID) async throws -> [Allergy] {
+        let allergies: [Allergy] = try await httpClient.load(.allergies(id))
+        return allergies
+    }
 }
