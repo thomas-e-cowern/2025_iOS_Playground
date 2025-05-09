@@ -7,7 +7,7 @@
 import Foundation
 
 struct Patient: Identifiable {
-    let id: UUID?
+    let id: UUID
     let name: String
     let dateOfBirth: Date
 }
