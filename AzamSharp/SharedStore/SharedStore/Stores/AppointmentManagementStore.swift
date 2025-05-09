@@ -16,7 +16,8 @@ class AppointmentManagementStore {
         self.httpClient = httpClient
     }
     
-    func scheduleAppointment(_ patient: Patient) async throws {
-        // More to come...
+    func scheduleAppointment(_ patient: Patient) async throws -> Appointment {
+        let allergies: [Allergy] = try await httpClient.load(.allergies(patient.id))
+        return Appointment(patient: patient, allergies: allergies)
     }
 }
