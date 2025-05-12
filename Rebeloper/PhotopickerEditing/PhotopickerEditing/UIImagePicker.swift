@@ -20,6 +20,8 @@ struct UIImagePicker: UIViewControllerRepresentable {
     
     @Binding var selectedImage: UIImage?
     
+    let imageSourceType: ImageSourceType = .photoLibrary
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(parent: self, selectedImage: $selectedImage)
     }
@@ -28,8 +30,16 @@ struct UIImagePicker: UIViewControllerRepresentable {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = context.coordinator
         imagePicker.allowsEditing = true
-        imagePicker.mediaTypes = ["public.image"]
-        imagePicker.sourceType = .photoLibrary
+        
+        switch imageSourceType {
+        case .camera:
+            imagePicker.sourceType = .camera
+            imagePicker.cameraCaptureMode = .photo
+        case .photoLibrary:
+            imagePicker.mediaTypes = ["public.image"]
+            imagePicker.sourceType = .photoLibrary
+        }
+        
         return imagePicker
     }
     
@@ -63,5 +73,5 @@ struct UIImagePicker: UIViewControllerRepresentable {
             }
         }
     }
-
+    
 }
