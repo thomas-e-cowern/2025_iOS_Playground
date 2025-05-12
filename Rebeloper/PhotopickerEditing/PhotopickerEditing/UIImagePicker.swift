@@ -20,7 +20,7 @@ struct UIImagePicker: UIViewControllerRepresentable {
     
     @Binding var selectedImage: UIImage?
     
-    let imageSourceType: ImageSourceType = .photoLibrary
+    let imageSourceType: ImageSourceType
     
     func makeCoordinator() -> Coordinator {
         Coordinator(parent: self, selectedImage: $selectedImage)
