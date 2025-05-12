@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+enum ImageSourceType: String, Identifiable {
+    var id: String { self.rawValue }
+    case camera
+    case photoLibrary
+    
+}
+
 struct UIImagePicker: UIViewControllerRepresentable {
     
     @Environment(\.dismiss) private var dismiss
