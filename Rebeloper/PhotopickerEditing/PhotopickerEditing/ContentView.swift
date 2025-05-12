@@ -26,7 +26,7 @@ struct ContentView: View {
                 Text("Pick Image")
             }
             .sheet(isPresented: $isShowingImagePicker) {
-                UIImagePicker(selectedImage: $selectedImage)
+                UIImagePicker(selectedImage: $selectedImage, imageSourceType: ImageSourceType.photoLibrary)
                     .ignoresSafeArea()
             }
 
