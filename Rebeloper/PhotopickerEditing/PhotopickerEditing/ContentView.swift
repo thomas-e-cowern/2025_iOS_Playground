@@ -10,8 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var selectedImage: UIImage?
-    @State private var isShowingImagePicker: Bool = false
-    
+
     var body: some View {
         VStack {
             if selectedImage != nil {
@@ -19,17 +18,9 @@ struct ContentView: View {
                     .resizable()
                     .scaledToFit()
             }
-            
-            Button {
-                isShowingImagePicker.toggle()
-            } label: {
-                Text("Pick Image")
+            SelectionImagePicker(selectedImage: $selectedImage) {
+                Text("Pick an image")
             }
-            .sheet(isPresented: $isShowingImagePicker) {
-                UIImagePicker(selectedImage: $selectedImage, imageSourceType: ImageSourceType.photoLibrary)
-                    .ignoresSafeArea()
-            }
-
         }
         .padding()
     }
