@@ -12,10 +12,11 @@ struct SelectionImagePicker<Label: View>: View {
     @ViewBuilder var label: () -> Label
     
     var body: some View {
-        Text("SelectionImagePicker")
+        Button {
+            
+        } label: {
+            label()
+        }
+        .buttonStyle(.plain)
     }
-}
-
-#Preview {
-    SelectionImagePicker()
 }
