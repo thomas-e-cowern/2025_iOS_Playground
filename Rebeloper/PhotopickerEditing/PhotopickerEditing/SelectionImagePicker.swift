@@ -6,7 +6,11 @@
 //
 import SwiftUI
 
-struct SelectionImagePicker: View {
+struct SelectionImagePicker<Label: View>: View {
+    
+    @Binding var selectedImage: UIImage?
+    @ViewBuilder var label: () -> Label
+    
     var body: some View {
         Text("SelectionImagePicker")
     }
