@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var isResultSuccessfull: Bool = false
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button("Toggle Result") {
+                isResultSuccessfull.toggle()
+            }
         }
         .padding()
     }
