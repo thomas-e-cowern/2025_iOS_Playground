@@ -30,6 +30,12 @@ struct ContentView: View {
             Button("Toggle Result") {
                 isResultSuccessfull.toggle()
             }
+            
+            if isResultSuccessfull {
+                ResultView.success
+            } else {
+                ResultView.failure(NSError(domain: "", code: 0, userInfo: nil))
+            }
         }
         .padding()
     }
