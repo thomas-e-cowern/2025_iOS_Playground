@@ -14,7 +14,12 @@ enum ResultView: View {
     var body: some View {
         switch self {
         case .success:
-            Text("Success!")
+            VStack {
+                Text("Success!")
+                ForEach(0..<10) { index in
+                    Text("Count: \(index)")
+                }
+            }
         case .failure(let error):
             Text("Error: \(error.localizedDescription)")
         }
