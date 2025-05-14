@@ -7,9 +7,18 @@
 
 import SwiftUI
 
-enum ResultView {
+enum ResultView: View {
     case success
-    case failure
+    case failure(Error)
+    
+    var body: some View {
+        switch self {
+        case .success:
+            Text("Success!")
+        case .failure(let error):
+            Text("Error: \(error.localizedDescription)")
+        }
+    }
 }
 
 struct ContentView: View {
