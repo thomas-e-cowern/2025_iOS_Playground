@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+enum ResultView {
+    case success
+    case failure
+}
+
 struct ContentView: View {
     
     @State private var isResultSuccessfull: Bool = false
