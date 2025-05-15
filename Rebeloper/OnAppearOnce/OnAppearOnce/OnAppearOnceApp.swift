@@ -14,6 +14,7 @@ struct OnAppearOnceApp: App {
             NavigationStack {
                 ContentView()
             }
+            .environment(OnFirstAppearObservable())
         }
     }
 }
