@@ -14,7 +14,12 @@ struct ContentView: View {
                 Image(systemName: "globe")
                     .imageScale(.large)
                     .foregroundStyle(.tint)
-                Text("Hello, world!")
+                Toggle(isOn: .constant(true)) {
+                    Text("This is on...")
+                }
+                Toggle(isOn: .constant(false)) {
+                    Text("This is off...")
+                }
             }
         }
         .padding()
