@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         VStack {
             GroupBox {
@@ -21,11 +24,18 @@ struct ContentView: View {
                     Text("This is off...")
                 }
             }
+            .background(colorScheme == .dark ? Color.black : Color.gray)
         }
         .padding()
     }
 }
 
-#Preview {
+#Preview("Light Mode") {
     ContentView()
+        .preferredColorScheme(.light)
+}
+
+#Preview("Dark Mode") {
+    ContentView()
+        .preferredColorScheme(.dark)
 }
