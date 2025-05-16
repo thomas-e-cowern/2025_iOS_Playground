@@ -13,7 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            GroupBox(label: Text("Something")) {
+            GroupBox(label: Label("People...", systemImage: "person")) {
                 Image(systemName: "globe")
                     .imageScale(.large)
                     .foregroundStyle(.tint)
