@@ -25,8 +25,8 @@ struct ContentView: View {
                 }
             } label: {
                 Label("Now Playing", systemImage: "music.note")
-                    .foregroundStyle(.pink)
             }
+            .groupBoxStyle(.music)
 
             
         }
