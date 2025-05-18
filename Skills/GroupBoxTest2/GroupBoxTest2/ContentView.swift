@@ -10,13 +10,14 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            GroupBox {
+            GroupBox("My Content") {
                 Image(systemName: "globe")
                     .foregroundStyle(Color.red)
                     .imageScale(.large)
                     .foregroundStyle(.tint)
                 Text("Hello, world!  This is an examle of a Group Box and its contents. With a little image.  Of Course")
             }
+            .frame(width: 300)
             
         }
         .padding()
