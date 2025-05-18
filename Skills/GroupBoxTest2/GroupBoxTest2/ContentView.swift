@@ -20,8 +20,7 @@ struct ContentView: View {
             .frame(width: 300)
             
             GroupBox {
-                Text("Title: Into the Mystic")
-                Text("Artist: Van Morrison")
+                MusicPlayerView()
             } label: {
                 Label("Now Playing", systemImage: "music.note")
             }
