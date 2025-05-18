@@ -20,9 +20,12 @@ struct ContentView: View {
             .frame(width: 300)
             
             GroupBox {
-                MusicPlayerView()
+                GroupBox {
+                    MusicPlayerView()
+                }
             } label: {
                 Label("Now Playing", systemImage: "music.note")
+                    .foregroundStyle(.pink)
             }
 
             
@@ -31,6 +34,12 @@ struct ContentView: View {
     }
 }
 
-#Preview {
+#Preview("Light Mode") {
     ContentView()
+        .preferredColorScheme(.light)
+}
+
+#Preview("Dark Mode") {
+    ContentView()
+        .preferredColorScheme(.dark)
 }
