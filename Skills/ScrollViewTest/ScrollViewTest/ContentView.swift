@@ -24,7 +24,9 @@ struct ContentView: View {
                             .foregroundStyle(colors[(Int(circle.description) ?? 0) - 1])
                             .scrollTransition { content, phase in
                                 content
-                                    .opacity(phase.isIdentity ? 1.0 : 0.2)
+                                    .opacity(phase.isIdentity ? 1.0 : 0.0)
+                                    .scaleEffect(x: phase.isIdentity ? 1.0 : 0.3, y: phase.isIdentity ? 1.0 : 0.3)
+                                    .offset(y: phase.isIdentity ? 0 : 30)
                             }
                     }
                 }
