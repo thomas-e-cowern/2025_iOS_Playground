@@ -24,9 +24,12 @@ struct ContentView: View {
                             .foregroundStyle(colors[(Int(circle.description) ?? 0) - 1])
                     }
                 }
+                .scrollTargetLayout()
             }
+            .contentMargins(16, for: .scrollContent)
+            .scrollTargetBehavior(.paging)
         }
-        .contentMargins(16, for: .scrollContent)
+        
     }
 }
 
