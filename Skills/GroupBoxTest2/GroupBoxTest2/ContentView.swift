@@ -9,28 +9,35 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            GroupBox("My Content") {
-                Image(systemName: "globe")
-                    .foregroundStyle(Color.red)
-                    .imageScale(.large)
-                    .foregroundStyle(.tint)
-                Text("Hello, world!  This is an examle of a Group Box and its contents. With a little image.  Of Course")
-            }
-            .frame(width: 300)
+        ZStack {
             
-            GroupBox {
-                GroupBox {
-                    MusicPlayerView()
+            RoundedRectangle(cornerRadius: 6)
+                .foregroundStyle(.pink.gradient.opacity(0.8))
+                .ignoresSafeArea()
+            
+            VStack {
+                GroupBox("My Content") {
+                    Image(systemName: "globe")
+                        .foregroundStyle(Color.red)
+                        .imageScale(.large)
+                        .foregroundStyle(.tint)
+                    Text("Hello, world!  This is an examle of a Group Box and its contents. With a little image.  Of Course")
                 }
-            } label: {
-                Label("Now Playing", systemImage: "music.note")
+                .frame(width: 300)
+                
+                GroupBox {
+                    GroupBox {
+                        MusicPlayerView()
+                    }
+                } label: {
+                    Label("Now Playing", systemImage: "music.note")
+                }
+                .groupBoxStyle(.music)
+                
+                
             }
-            .groupBoxStyle(.music)
-
-            
+            .padding()
         }
-        .padding()
     }
 }
 
