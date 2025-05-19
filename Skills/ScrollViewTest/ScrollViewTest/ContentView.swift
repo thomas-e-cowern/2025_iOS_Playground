@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
+    
     private var colors: [Color] = [.pink, .red, .blue, .gray, .green, .orange, .teal, .yellow, .black, .indigo]
     
     var body: some View {
@@ -17,7 +19,8 @@ struct ContentView: View {
                 HStack {
                     ForEach(1..<11) { circle in
                         Circle()
-                            .frame(width: 100, height: 100)
+                            .containerRelativeFrame(.horizontal,
+                                                    count: verticalSizeClass == .regular ? 2 : 4, spacing: 16)
                             .foregroundStyle(colors[(Int(circle.description) ?? 0) - 1])
                     }
                 }
