@@ -22,6 +22,10 @@ struct ContentView: View {
                             .containerRelativeFrame(.horizontal,
                                                     count: verticalSizeClass == .regular ? 2 : 4, spacing: 16)
                             .foregroundStyle(colors[(Int(circle.description) ?? 0) - 1])
+                            .scrollTransition { content, phase in
+                                content
+                                    .opacity(phase.isIdentity ? 1.0 : 0.2)
+                            }
                     }
                 }
                 .scrollTargetLayout()
