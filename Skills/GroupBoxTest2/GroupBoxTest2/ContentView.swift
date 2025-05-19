@@ -28,6 +28,7 @@ struct ContentView: View {
                 GroupBox {
                     GroupBox {
                         MusicPlayerView()
+                            .groupBoxStyle(.music)
                     }
                 } label: {
                     Label("Now Playing", systemImage: "music.note")
