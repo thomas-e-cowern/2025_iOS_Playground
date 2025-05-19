@@ -26,7 +26,7 @@ struct ContentView: View {
                 }
             }
         }
-        .padding()
+        .contentMargins(16, for: .scrollContent)
     }
 }
 
