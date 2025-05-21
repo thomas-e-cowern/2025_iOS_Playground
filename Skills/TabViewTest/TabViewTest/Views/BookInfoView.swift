@@ -9,7 +9,26 @@ import SwiftUI
 
 struct BookInfoView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack(alignment: .top) {
+            Image("bookCover")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 120)
+                .padding(.leading)
+            
+            VStack(alignment: .leading) {
+                Text("To Have and Have Not")
+                    .font(.headline)
+                
+                Text("Ernest Hemingway")
+                    .font(.subheadline)
+                
+                BookInfoButtonsView()
+            }
+            
+            Spacer()
+        }
+        .padding(.vertical)
     }
 }
 
