@@ -9,7 +9,25 @@ import SwiftUI
 
 struct BookInfoButtonsView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Button {
+                // More to come...
+            } label: {
+                Image(systemName: "bookmark")
+            }
+            .font(.title2)
+            
+            HorizontalButtonsView(label: "Sample", hasStroke: true) {
+                // More to come...
+            }
+            
+            HorizontalButtonsView(label: "View", hasStroke: false) {
+                // More to come...
+            }
+
+        }
+        .foregroundStyle(.primary)
+        .padding(.vertical)
     }
 }
 
