@@ -8,11 +8,37 @@
 import SwiftUI
 
 struct HorizontalButtonsView: View {
+    
+    let label: String
+    let hasStroke: Bool
+    let action: () -> Void
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: action) {
+            Text(label)
+                .fontWeight(.semibold)
+                .foregroundStyle(hasStroke ? .primary : Color(.systemBackground))
+                .padding(.vertical, 4)
+                .padding(.horizontal)
+        }
+        .background(
+            ZStack {
+                Capsule()
+                    .foregroundStyle(hasStroke ? .clear : .primary)
+                
+                if  hasStroke {
+                    Capsule()
+                        .stroke(.primary, lineWidth: 2)
+                }
+            }
+        )
     }
 }
 
-#Preview {
-    HorizontalButtonsView()
+#Preview("Has stroke") {
+    HorizontalButtonsView(label: "Test label", hasStroke: true, action: {})
+}
+
+#Preview("No stroke") {
+    HorizontalButtonsView(label: "Test label", hasStroke: false, action: {})
 }
