@@ -9,7 +9,12 @@ import SwiftUI
 
 struct DiscussionListView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            ForEach(0..<5) { _ in
+                DiscussionListRowView()
+            }
+        }
+        .listStyle(.plain)
     }
 }
 
