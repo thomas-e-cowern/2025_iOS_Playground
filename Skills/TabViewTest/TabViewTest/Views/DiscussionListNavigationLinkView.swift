@@ -9,7 +9,33 @@ import SwiftUI
 
 struct DiscussionListNavigationLinkView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            UnevenRoundedRectangle(topLeadingRadius: 12, bottomTrailingRadius: 12)
+                .foregroundStyle(Color(.systemGray))
+            
+            NavigationLink(destination: Text("Coming Soon")) {
+                HStack(alignment: .top) {
+                    Circle()
+                        .frame(width: 12)
+                        .foregroundStyle(.purple)
+                        .offset(y: 5)
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Discussion List")
+                            .font(.headline)
+                        Text("View all discussions")
+                            .font(.caption)
+                            .foregroundStyle(Color(.systemGray))
+                    }
+                    
+                    Spacer()
+                    
+                    DiscussionListAvatarsView()
+                }
+                .padding()
+            }
+            .padding(.trailing)
+        }
     }
 }
 
