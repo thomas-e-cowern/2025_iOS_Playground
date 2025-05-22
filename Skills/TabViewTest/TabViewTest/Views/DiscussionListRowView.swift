@@ -9,7 +9,22 @@ import SwiftUI
 
 struct DiscussionListRowView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            HStack(alignment: .top) {
+                Text("Club Lobby")
+                    .font(.headline)
+                
+                Spacer()
+                
+                Label("42", systemImage: "message")
+                    .font(.subheadline)
+                    .foregroundStyle(.primary)
+            }
+            
+            DiscussionListNavigationLinkView()
+        }
+        .padding(.vertical)
+        .listRowSeparator(.hidden)
     }
 }
 
