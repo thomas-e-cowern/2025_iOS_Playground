@@ -12,23 +12,30 @@ struct SettingsView: View {
     @Environment(\.showToast) var showToast
     @Environment(\.dismiss) var dismiss
     
+    @State private var isLoggedIn: Bool = true
+    
     var body: some View {
         VStack(spacing: 10) {
-            Group {
-                Text("Settings")
-                    .font(.title)
-                
-                HStack {
-                    Image(systemName: "person")
-                    Text("John Smith")
+            if isLoggedIn {
+                Group {
+                    Text("Settings")
+                        .font(.title)
+                    
+                    HStack {
+                        Image(systemName: "person")
+                        Text("John Smith")
+                    }
                 }
+            } else {
+                Text("Please log in to view settings")
             }
             
             Spacer()
                 .frame(height: 50)
             
-            Button("Log Out") {
+            Button(isLoggedIn ? "Log Out" : "Log In") {
                 showToast(.info("You are now logged out..."))
+                isLoggedIn.toggle()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute:{
                     dismiss()
                 })
