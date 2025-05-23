@@ -12,6 +12,7 @@ struct ToastExampleApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .withToast()
         }
     }
 }
