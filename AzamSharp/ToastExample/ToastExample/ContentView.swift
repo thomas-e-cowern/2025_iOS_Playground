@@ -11,14 +11,24 @@ struct ContentView: View {
     
     @Environment(\.showToast) private var showToast
     
+    @State private var isPresented: Bool = false
+    
     var body: some View {
         VStack {
             Button("Show Toast") {
                 showToast(.success("Successful"))
             }
+            
+            Button("Show Settings") {
+                isPresented.toggle()
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
+        .sheet(isPresented: $isPresented) {
+            SettingsView()
+                .withToast()
+        }
     }
 }
 
