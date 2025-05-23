@@ -6,6 +6,19 @@
 //
 import SwiftUI
 
+struct ShowToastAction {
+    typealias Action = (ToastType) -> Void
+    let action: Action
+    
+    func callAsFunction(_ type: ToastType) {
+        action(type)
+    }
+}
+
+extension EnvironmentValues {
+    @Entry var showToast = ShowToastAction(action: { _ in })
+}
+
 struct ToastView: View {
     
     let type: ToastType
