@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @Environment(\.showToast) var showToast
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         VStack(spacing: 10) {
             Group {
@@ -24,13 +28,18 @@ struct SettingsView: View {
                 .frame(height: 50)
             
             Button("Log Out") {
-                // More to come...
+                showToast(.info("You are now logged out..."))
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute:{
+                    dismiss()
+                })
             }
             .buttonStyle(.bordered)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
 #Preview {
     SettingsView()
+        .withToast()
 }
