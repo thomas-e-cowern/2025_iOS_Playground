@@ -8,17 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @Environment(\.showToast) private var showToast
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button("Show Toast") {
+                showToast(.success("Successful"))
+            }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .withToast()
 }
