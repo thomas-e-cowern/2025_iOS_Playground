@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var networkMonitor = NetworkMonitor()
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
+            Text("Network Monitor!")
+            Image(systemName: networkMonitor.isConnected ? "wifi" : "wifi.slash")
                 .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+                .foregroundStyle(networkMonitor.isConnected ? .green : .red)
+            
+            if networkMonitor.isCellular {
+                Image(systemName: "candybarphone")
+            }
         }
         .padding()
+        .onAppear {
+            networkMonitor.start()
+        }
+        .onDisappear {
+            networkMonitor.stop()
+        }
     }
 }
 
