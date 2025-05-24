@@ -10,8 +10,8 @@ import Observation
 
 @Observable
 final class NetworkMonitor {
-    private var isConnected: Bool = false
-    private var isCellular: Bool = false
+    var isConnected: Bool = false
+    var isCellular: Bool = false
     
     private let nwMonitor = NWPathMonitor()
     private let workerQueue = DispatchQueue.global()
