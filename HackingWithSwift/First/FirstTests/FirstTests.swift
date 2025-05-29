@@ -15,4 +15,16 @@ struct FirstTests {
         #expect(student.isAtSchool == false)
     }
 
+    @Test func studentGoesToSchool() async throws {
+        var student = Student()
+        student.goToSchool()
+        #expect(student.isAtSchool == true)
+    }
+
+    @Test func studentLeavesSchool() async throws {
+        var student = Student()
+        student.goToSchool()
+        student.leaveSchool()
+        #expect(student.isAtSchool == false)
+    }
 }
