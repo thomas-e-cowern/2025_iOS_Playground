@@ -19,6 +19,7 @@ struct ContentView: View {
                         WordRowView(word: word)
                     }
                 }
+                .listStyle(.plain)
             }
             .padding()
             .onAppear {
@@ -30,7 +31,18 @@ struct ContentView: View {
                     saveInitialValues(to: defaults)
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        // More to come...
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+
+                }
+            }
             .navigationTitle("POLYGLOT")
+            
         }
     }
     
