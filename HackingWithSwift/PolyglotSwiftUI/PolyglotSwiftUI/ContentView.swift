@@ -11,6 +11,9 @@ struct ContentView: View {
     
     @State var words: [String] = []
     @State var showAddWords: Bool = false
+    @State var newWords: [String] = []
+    @State var baseWord: String = ""
+    @State var translatedWord: String = ""
     
     var body: some View {
         NavigationStack {
@@ -39,12 +42,17 @@ struct ContentView: View {
                     } label: {
                         Image(systemName: "plus")
                     }
-
+                    
                 }
             }
-            .sheet(isPresented: $showAddWords, content: {
-                Text("Added!")
-                    .presentationDetents([.medium])
+            .alert("Add a new word pair.", isPresented: $showAddWords, actions: {
+                TextField("New Word", text: $baseWord)
+                TextField("Translation", text: $translatedWord)
+                Button("OK") {
+                    words.append("\(baseWord)::\(translatedWord)")
+                    baseWord = ""
+                    translatedWord = ""
+                }
             })
             .navigationTitle("POLYGLOT")
             
@@ -61,7 +69,7 @@ struct ContentView: View {
         words.append("pig::le cochon")
         words.append("rabbit::le lapin")
         words.append("sheep::le mouton")
-
+        
         defaults.set(words, forKey: "Words")
     }
 }
