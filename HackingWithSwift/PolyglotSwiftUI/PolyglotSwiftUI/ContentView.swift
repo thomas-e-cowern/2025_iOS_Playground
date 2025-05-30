@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @State var words: [String] = []
+    @State var showAddWords: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -34,13 +35,17 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        // More to come...
+                        showAddWords.toggle()
                     } label: {
                         Image(systemName: "plus")
                     }
 
                 }
             }
+            .sheet(isPresented: $showAddWords, content: {
+                Text("Added!")
+                    .presentationDetents([.medium])
+            })
             .navigationTitle("POLYGLOT")
             
         }
