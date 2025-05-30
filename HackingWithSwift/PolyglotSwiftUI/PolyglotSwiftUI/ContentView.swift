@@ -10,14 +10,31 @@ import SwiftUI
 struct ContentView: View {
     
     @State var words: [String] = []
+    @State private var showWord: Bool = false
     
     var body: some View {
         NavigationStack {
             VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundStyle(.tint)
-                Text("Hello, world!")
+                List {
+                    ForEach(words, id: \.self) { word in
+                        let split = word.split(separator: "::")
+                        HStack {
+                            Text("\(split[0])")
+                                .font(.title)
+                                .onTapGesture {
+                                    showWord.toggle()
+                                }
+                            Spacer()
+                            if showWord {
+                                Text("\(split[1])")
+                                    .font(.title)
+                                    
+                            } else {
+                                EmptyView()
+                            }
+                        }
+                    }
+                }
             }
             .padding()
             .onAppear {
