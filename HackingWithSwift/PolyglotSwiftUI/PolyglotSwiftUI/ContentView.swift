@@ -50,6 +50,7 @@ struct ContentView: View {
                 TextField("Translation", text: $translatedWord)
                 Button("OK") {
                     words.append("\(baseWord)::\(translatedWord)")
+                    saveWords()
                     baseWord = ""
                     translatedWord = ""
                 }
@@ -70,6 +71,11 @@ struct ContentView: View {
         words.append("rabbit::le lapin")
         words.append("sheep::le mouton")
         
+        defaults.set(words, forKey: "Words")
+    }
+    
+    func saveWords() {
+        let defaults = UserDefaults.standard
         defaults.set(words, forKey: "Words")
     }
 }
