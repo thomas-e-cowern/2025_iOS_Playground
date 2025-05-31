@@ -25,8 +25,9 @@ struct ContentView: View {
                     .onDelete(perform: delete)
                 }
                 .listStyle(.plain)
+                .scrollIndicators(.hidden)
+                
             }
-            .padding()
             .onAppear {
                 let defaults = UserDefaults.standard
                 
