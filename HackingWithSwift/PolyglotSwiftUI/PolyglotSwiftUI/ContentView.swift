@@ -22,6 +22,7 @@ struct ContentView: View {
                     ForEach(words, id: \.self) { word in
                         WordRowView(word: word)
                     }
+                    .onDelete(perform: delete)
                 }
                 .listStyle(.plain)
             }
@@ -77,6 +78,11 @@ struct ContentView: View {
     func saveWords() {
         let defaults = UserDefaults.standard
         defaults.set(words, forKey: "Words")
+    }
+    
+    func delete(at offsets: IndexSet) {
+        words.remove(atOffsets: offsets)
+        saveWords()
     }
 }
 
