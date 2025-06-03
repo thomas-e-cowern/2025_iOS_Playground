@@ -7,7 +7,11 @@
 
 import SwiftUI
 
-fileprivate struct FloatingTabBar: View {
+struct FloatingTabBar<Value: CaseIterable & Hashable>: View where Value.AllCases: RandomAccessCollection {
+    
+    @Binding var activeTab: Value
+    var config: FloatingTabConfig
+    
     var body: some View {
         Text("Hello, World!")
     }

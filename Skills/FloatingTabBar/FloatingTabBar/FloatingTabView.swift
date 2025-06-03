@@ -42,6 +42,9 @@ struct FloatingTabView<Content: View, Value: CaseIterable & Hashable>: View wher
                     }
                 }
             }
+            
+            FloatingTabBar(activeTab: $selection, config: config)
+            
         }
     }
 }
