@@ -7,15 +7,30 @@
 
 import SwiftUI
 
+enum AppTab: String, CaseIterable {
+    case memories = "Memories"
+    case library = "Library"
+    case albums = "Albums"
+    case search = "Search"
+}
+
 struct ContentView: View {
+    
+    @State private var activeTab: AppTab = .library
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        FloatingTabView(selection: $activeTab) { tab, tabBarHeight in
+            switch tab {
+            case .memories:
+                Text("Memories")
+            case .library:
+                Text("Library")
+            case .albums:
+                Text("Albums")
+            case .search:
+                Text("Search")
+            }
         }
-        .padding()
     }
 }
 
