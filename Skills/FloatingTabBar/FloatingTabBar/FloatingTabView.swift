@@ -34,7 +34,7 @@ struct FloatingTabView<Content: View, Value: CaseIterable & Hashable>: View wher
                             // Old type tab bar
                             .tag(tab)
                             // Hide default toolbar
-                            .toolbarVisibility(.hidden, for: .tabBar)
+                            .toolbar(.hidden, for: .tabBar)
                     }
                 }
             }
