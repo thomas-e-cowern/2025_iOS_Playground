@@ -12,6 +12,9 @@ struct FloatingTabBar<Value: CaseIterable & Hashable & FloatingTabProtocol>: Vie
     @Binding var activeTab: Value
     var config: FloatingTabConfig
     
+    // For tab sliding effect
+    @Namespace private var animation
+    
     var body: some View {
         HStack {
             ForEach(Value.allCases, id: \.hashValue) { tab in
@@ -24,13 +27,35 @@ struct FloatingTabBar<Value: CaseIterable & Hashable & FloatingTabProtocol>: Vie
                     .contentShape(.rect)
                     .background {
                         if isActive {
-                            Capsule()
+                            Capsule(style: .continuous)
                                 .fill(config.activeBackgrounTint.gradient)
+                                .matchedGeometryEffect(id: "ACTIVETAB", in: animation)
                         }
                     }
+                    .onTapGesture {
+                        activeTab = tab
+                    }
+                    .padding(.vertical, config.insetAmount)
             }
         }
+        .padding(.horizontal, config.insetAmount)
         .frame(height: 50)
+        .background {
+            ZStack {
+                if config.isTranslucent {
+                    Rectangle()
+                        .fill(.ultraThinMaterial)
+                } else {
+                    Rectangle()
+                        .fill(.background)
+                }
+                
+                Rectangle()
+                    .fill(config.backgroundColor)
+            }
+        }
+        .clipShape(.capsule(style: .continuous))
+        .animation(config.tabAnimation, value: activeTab)
     }
 }
 
