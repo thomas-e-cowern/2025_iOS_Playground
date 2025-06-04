@@ -20,5 +20,6 @@ struct LibraryView: View {
             }
             .navigationTitle("Library")
         }
+        .hideFloatingTabBar(hideTabBar)
     }
 }

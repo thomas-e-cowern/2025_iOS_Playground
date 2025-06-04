@@ -37,7 +37,7 @@ struct ContentView: View {
             case .memories:
                 Text("Memories")
             case .library:
-                Text("Library")
+                LibraryView()
             case .albums:
                 Text("Albums")
             case .search:

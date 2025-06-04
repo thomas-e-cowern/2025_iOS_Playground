@@ -20,6 +20,7 @@ struct FloatingTabView<Content: View, Value: CaseIterable & Hashable & FloatingT
     var body: some View {
         
         @StateObject var helper: FloatingTabViewHelper = .init()
+        @State var tabBarSize: CGSize = .zero
         
         ZStack(alignment: .bottom) {
             if #available(iOS 18, *) {
@@ -27,8 +28,8 @@ struct FloatingTabView<Content: View, Value: CaseIterable & Hashable & FloatingT
                 TabView(selection: $selection) {
                     ForEach(Value.allCases, id: \.hashValue) { tab in
                         Tab.init(value: tab) {
-                            content(tab, 0)
-                                // Hide default toolbar
+                            content(tab, tabBarSize.height)
+                            // Hide default toolbar
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
                     }
@@ -37,10 +38,10 @@ struct FloatingTabView<Content: View, Value: CaseIterable & Hashable & FloatingT
                 // Old tab view
                 TabView(selection: $selection) {
                     ForEach(Value.allCases, id: \.hashValue) { tab in
-                        content(tab, 0)
-                            // Old type tab bar
+                        content(tab, tabBarSize.height)
+                        // Old type tab bar
                             .tag(tab)
-                            // Hide default toolbar
+                        // Hide default toolbar
                             .toolbar(.hidden, for: .tabBar)
                     }
                 }
@@ -51,6 +52,15 @@ struct FloatingTabView<Content: View, Value: CaseIterable & Hashable & FloatingT
             FloatingTabBar(activeTab: $selection, config: config)
                 .padding(.horizontal, config.hPadding)
                 .padding(.vertical, config.bPadding)
+                .onGeometryChange(for: CGSize.self) {
+                    $0.size
+                } action: { newValue in
+                    tabBarSize = newValue
+                }
+                .offset(y: helper.hideTabBar ? (tabBarSize.height + 100) : 0)
+                .animation(config.tabAnimation, value: helper.hideTabBar)
+            
+            
         }
         .environmentObject(helper)
     }
@@ -70,8 +80,11 @@ struct HideFloatingTabBarModifier: ViewModifier {
                 helper.hideTabBar = newValue
             }
     }
-    
-    private func concat() {
-        
+}
+
+extension View {
+    func hideFloatingTabBar(_ status: Bool) -> some View {
+        self
+            .modifier(HideFloatingTabBarModifier(status: status))
     }
 }
