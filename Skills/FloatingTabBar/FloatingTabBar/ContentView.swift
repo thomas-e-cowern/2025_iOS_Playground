@@ -7,11 +7,24 @@
 
 import SwiftUI
 
-enum AppTab: String, CaseIterable {
+enum AppTab: String, CaseIterable, FloatingTabProtocol {
     case memories = "Memories"
     case library = "Library"
     case albums = "Albums"
     case search = "Search"
+    
+    var symbolImage: String {
+        switch self {
+        case .memories:
+            return "photo"
+        case .library:
+            return "book.closed"
+        case .albums:
+            return "square.stack.fill"
+        case .search:
+            return "magnifyingglass"
+        }
+    }
 }
 
 struct ContentView: View {
