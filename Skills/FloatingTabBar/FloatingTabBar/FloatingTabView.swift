@@ -18,6 +18,9 @@ struct FloatingTabView<Content: View, Value: CaseIterable & Hashable & FloatingT
     }
     
     var body: some View {
+        
+        @StateObject var helper: FloatingTabViewHelper = .init()
+        
         ZStack(alignment: .bottom) {
             if #available(iOS 18, *) {
                 // New tab view
@@ -43,11 +46,13 @@ struct FloatingTabView<Content: View, Value: CaseIterable & Hashable & FloatingT
                 }
             }
             
+            
+            
             FloatingTabBar(activeTab: $selection, config: config)
                 .padding(.horizontal, config.hPadding)
                 .padding(.vertical, config.bPadding)
-            
         }
+        .environmentObject(helper)
     }
 }
 
