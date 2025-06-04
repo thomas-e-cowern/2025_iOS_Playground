@@ -7,13 +7,30 @@
 
 import SwiftUI
 
-struct FloatingTabBar<Value: CaseIterable & Hashable>: View where Value.AllCases: RandomAccessCollection {
+struct FloatingTabBar<Value: CaseIterable & Hashable & FloatingTabProtocol>: View where Value.AllCases: RandomAccessCollection {
     
     @Binding var activeTab: Value
     var config: FloatingTabConfig
     
     var body: some View {
-        Text("Hello, World!")
+        HStack {
+            ForEach(Value.allCases, id: \.hashValue) { tab in
+                let isActive = activeTab == tab
+                
+                Image(systemName: tab.symbolImage)
+                    .font(.title3)
+                    .foregroundStyle(isActive ? config.activeTint : config.inactiveTint)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .contentShape(.rect)
+                    .background {
+                        if isActive {
+                            Capsule()
+                                .fill(config.activeBackgrounTint.gradient)
+                        }
+                    }
+            }
+        }
+        .frame(height: 50)
     }
 }
 
@@ -25,4 +42,8 @@ struct FloatingTabConfig {
     var backgroundColor: Color = .gray.opacity(0.1)
     var insetAmount: CGFloat = 6
     var isTranslucent: Bool = true
+}
+
+protocol FloatingTabProtocol {
+    var symbolImage: String { get }
 }
