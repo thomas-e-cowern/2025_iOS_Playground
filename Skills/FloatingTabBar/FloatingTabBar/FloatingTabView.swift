@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct FloatingTabView<Content: View, Value: CaseIterable & Hashable>: View where Value.AllCases: RandomAccessCollection {
+struct FloatingTabView<Content: View, Value: CaseIterable & Hashable & FloatingTabProtocol>: View where Value.AllCases: RandomAccessCollection {
     @Binding var selection: Value
     var config: FloatingTabConfig
     var content: (Value, CGFloat) -> Content
