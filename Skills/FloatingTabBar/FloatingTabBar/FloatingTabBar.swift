@@ -15,16 +15,19 @@ struct FloatingTabBar<Value: CaseIterable & Hashable & FloatingTabProtocol>: Vie
     // For tab sliding effect
     @Namespace private var animation
     
+    // For symbol effect
+    @State private var toggleSymbolEffect: [Bool] = Array(repeating: false, count: Value.allCases.count)
+    
     var body: some View {
         HStack {
             ForEach(Value.allCases, id: \.hashValue) { tab in
                 let isActive = activeTab == tab
+                let index = (Value.allCases.firstIndex(of: tab) as? Int) ?? 0
                 
                 Image(systemName: tab.symbolImage)
-                    .font(.title3)
                     .foregroundStyle(isActive ? config.activeTint : config.inactiveTint)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .contentShape(.rect)
+                    .symbolEffect(.bounce.byLayer.down, value: toggleSymbolEffect[index])
+                    .modifier(ImageModifier())
                     .background {
                         if isActive {
                             Capsule(style: .continuous)
@@ -34,6 +37,7 @@ struct FloatingTabBar<Value: CaseIterable & Hashable & FloatingTabProtocol>: Vie
                     }
                     .onTapGesture {
                         activeTab = tab
+                        toggleSymbolEffect[index].toggle()
                     }
                     .padding(.vertical, config.insetAmount)
             }
@@ -67,6 +71,8 @@ struct FloatingTabConfig {
     var backgroundColor: Color = .gray.opacity(0.1)
     var insetAmount: CGFloat = 6
     var isTranslucent: Bool = true
+    var hPadding: CGFloat = 15
+    var bPadding: CGFloat = 5
 }
 
 protocol FloatingTabProtocol {
