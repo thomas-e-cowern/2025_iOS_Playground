@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct CustomTabBarApp: App {
+    
+    @State private var router = Router()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack(path: $router.path) {
+                ContentView()
+            }
+            .environment(router)
         }
     }
 }

@@ -7,17 +7,12 @@
 
 import SwiftUI
 
-struct Home: View {
-    
-    let backgroundGradient = LinearGradient(
-        colors: [Color.red, Color.blue],
-        startPoint: .top, endPoint: .bottom)
-    
+struct Home: View, Hashable {
     var body: some View {
         ZStack {
+            Spacer()
             VStack {
                 Text("Home")
-                
             }
         }
     }
