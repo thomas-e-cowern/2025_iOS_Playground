@@ -11,6 +11,7 @@ struct CustomTabBar: View {
     @Binding var index: Int
     
     var body: some View {
+        
         HStack {
             Button {
                 self.index = 0
@@ -18,6 +19,7 @@ struct CustomTabBar: View {
                 Image(systemName: "house")
             }
             .foregroundStyle(Color.blue.opacity(self.index == 0 ? 1 : 0.2))
+            
             
             Spacer(minLength: 0)
             
@@ -45,7 +47,7 @@ struct CustomTabBar: View {
                 }
             }
             .offset(y: -25)
-
+            
             Spacer()
             
             Button {
@@ -63,10 +65,11 @@ struct CustomTabBar: View {
                 Image(systemName: "person")
             }
             .foregroundStyle(Color.blue.opacity(self.index == 3 ? 1 : 0.2))
-
+            
         }
         .padding(.horizontal, 35)
         .background(Color.white)
         .offset(y: 12)
+        
     }
 }
