@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var index: Int = 0
+    
     var body: some View {
         VStack {
             Spacer()
             
-            CustomTabBar()
+            CustomTabBar(index: $index)
         }
     }
 }
