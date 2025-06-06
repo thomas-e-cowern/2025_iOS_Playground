@@ -7,7 +7,21 @@
 import SwiftUI
 
 struct Favorites: View {
+    let backgroundColor: Color = Color.blue.opacity(0.2)
+    
     var body: some View {
-        Text("Favorites")
+        NavigationStack {
+            ZStack {
+                backgroundColor
+                VStack {
+                    Text("Favorites")
+                }
+            }
+            .ignoresSafeArea(.all)
+        }
     }
+}
+
+#Preview {
+    Favorites()
 }

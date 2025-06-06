@@ -11,13 +11,14 @@ struct CustomTabBar: View {
     @Binding var index: Int
     
     var body: some View {
-
+        VStack {
             HStack {
                 Button {
                     self.index = 0
-
+                    
                 } label: {
-                    Image(systemName: "house")
+                    Image(systemName: self.index == 0 ? "house.fill" :"house")
+                        .font(.title2)
                 }
                 .foregroundStyle(Color.blue.opacity(self.index == 0 ? 1 : 0.2))
                 
@@ -26,7 +27,8 @@ struct CustomTabBar: View {
                 Button {
                     self.index = 1
                 } label: {
-                    Image(systemName: "magnifyingglass")
+                    Image(systemName: self.index == 1 ? "magnifyingglass.circle.fill" : "magnifyingglass")
+                        .font(self.index == 1 ? .largeTitle : .title2)
                 }
                 .foregroundStyle(Color.blue.opacity(self.index == 1 ? 1 : 0.2))
                 
@@ -53,7 +55,8 @@ struct CustomTabBar: View {
                 Button {
                     self.index = 2
                 } label: {
-                    Image(systemName: "heart")
+                    Image(systemName: self.index == 2 ? "heart.fill" :"heart")
+                        .font(.title2)
                 }
                 .foregroundStyle(Color.blue.opacity(self.index == 2 ? 1 : 0.2))
                 
@@ -62,12 +65,16 @@ struct CustomTabBar: View {
                 Button {
                     self.index = 3
                 } label: {
-                    Image(systemName: "person")
+                    Image(systemName: self.index == 3 ? "person.fill" :"person")
+                        .font(.title2)
                 }
                 .foregroundStyle(Color.blue.opacity(self.index == 3 ? 1 : 0.2))
                 
             }
             .padding(.horizontal, 35)
+            
             .background(Color.white)
+        }
+        .offset(y: -15)
     }
 }
