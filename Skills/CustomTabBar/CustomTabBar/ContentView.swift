@@ -30,6 +30,7 @@ struct ContentView: View {
             
             CustomTabBar(index: $index)
         }
+        .ignoresSafeArea(.all)
     }
 }
 
