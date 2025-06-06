@@ -14,6 +14,20 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Spacer()
+            
+            switch index {
+            case 0:
+                Home()
+            case 1:
+                Search()
+            case 2:
+                Favorites()
+            case 3:
+                Friends()
+            default :
+                Home()
+            }
+            
             CustomTabBar(index: $index)
         }
     }
