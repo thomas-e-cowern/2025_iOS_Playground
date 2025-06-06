@@ -27,8 +27,8 @@ struct CustomTabBar: View {
                 Button {
                     self.index = 1
                 } label: {
-                    Image(systemName: self.index == 1 ? "magnifyingglass.circle.fill" : "magnifyingglass")
-                        .font(self.index == 1 ? .largeTitle : .title2)
+                    Image(systemName: self.index == 1 ? "magnifyingglass.circle.fill" : "magnifyingglass.circle")
+                        .font(.title)
                 }
                 .foregroundStyle(Color.blue.opacity(self.index == 1 ? 1 : 0.2))
                 
