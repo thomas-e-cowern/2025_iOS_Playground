@@ -8,12 +8,22 @@
 import SwiftUI
 
 struct Home: View, Hashable {
+    
+    let backgroundColor: Color = Color.red.opacity(0.2)
+    
     var body: some View {
-        ZStack {
-            Spacer()
-            VStack {
-                Text("Home")
+        NavigationStack {
+            ZStack {
+                backgroundColor
+                VStack {
+                    Text("Home")
+                }
             }
+            .ignoresSafeArea(.all)
         }
     }
+}
+
+#Preview {
+    Home()
 }
