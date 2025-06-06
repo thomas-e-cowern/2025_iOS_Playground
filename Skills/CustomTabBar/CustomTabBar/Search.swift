@@ -8,7 +8,21 @@
 import SwiftUI
 
 struct Search: View {
+    let backgroundColor: Color = Color.gray.opacity(0.4)
+    
     var body: some View {
-        Text("Search")
+        NavigationStack {
+            ZStack {
+                backgroundColor
+                VStack {
+                    Text("Search")
+                }
+            }
+            .ignoresSafeArea(.all)
+        }
     }
+}
+
+#Preview {
+    Search()
 }
