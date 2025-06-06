@@ -8,7 +8,21 @@
 import SwiftUI
 
 struct Friends: View {
+    let backgroundColor: Color = Color.orange.opacity(0.2)
+    
     var body: some View {
-        Text("Friends")
+        NavigationStack {
+            ZStack {
+                backgroundColor
+                VStack {
+                    Text("Friends")
+                }
+            }
+            .ignoresSafeArea(.all)
+        }
     }
+}
+
+#Preview {
+    Friends()
 }
