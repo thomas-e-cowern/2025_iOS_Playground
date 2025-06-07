@@ -12,13 +12,18 @@ struct ContentView: View {
     @State private var articles: [Article] = []
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {
+                List(articles) { article in
+                    NavigationLink(article.title, value: article)
+                }
+                .navigationDestination(for: Article.self) { article in
+                    Text(article.text)
+                }
+            }
+            .task(loadArticles)
+            .padding()
         }
-        .padding()
     }
     
     func loadArticles() async {
