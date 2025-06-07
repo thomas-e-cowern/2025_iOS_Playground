@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var articles: [Article] = []
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -16,6 +19,17 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .padding()
+    }
+    
+    func loadArticles() async {
+        do {
+            let url = URL(string: "https://www.hackingwithswift.com/samples/news")!
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let decoder = JSONDecoder()
+            articles = try decoder.decode([Article].self, from: data)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
 
