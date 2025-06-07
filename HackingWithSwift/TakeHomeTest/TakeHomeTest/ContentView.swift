@@ -43,6 +43,7 @@ struct ContentView: View {
                     }
                 }
                 .navigationDestination(for: Article.self, destination: ArticleView.init)
+                .navigationTitle("Take Home Test")
             }
             .task(loadArticles)
             .padding()
