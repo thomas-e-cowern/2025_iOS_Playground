@@ -11,8 +11,39 @@ struct ArticleView: View {
     var article: Article
     
     var body: some View {
-        Text(article.text)
+        ScrollView {
+            
+            AsyncImage(url: article.image) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                default:
+                    Image(systemName: "newspaper")
+                }
+            }
+            
+            VStack(alignment: .leading, spacing: 20) {
+                Text(article.title)
+                    .font(.title)
+                
+                Text(article.description)
+                    .font(.headline)
+                    .foregroundStyle(.secondary)
+                
+                Divider()
+                
+                Text(article.text)
+                    
+            }
             .padding()
+            
+        }
+        .navigationTitle(article.section)
+        .navigationBarTitleDisplayMode(.inline)
     }
     
 }
