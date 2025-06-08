@@ -16,19 +16,7 @@ struct ContentView: View {
             
             switch viewModel.loadState {
             case .failed:
-                ContentUnavailableView {
-                    Text("Load Error")
-                        .font(.headline)
-                } description: {
-                    Text("There was an error loading the articles. Please try again later.")
-                } actions: {
-                    Button("Try Again....") {
-                        Task {
-                            await viewModel.loadArticles()
-                        }
-                    }
-                }
-                
+                LoadFailed(error: viewModel.loadError, retry: viewModel.loadArticles)
             default:
                 if viewModel.articles.isEmpty {
                     ProgressView {
@@ -36,9 +24,13 @@ struct ContentView: View {
                             .controlSize(.extraLarge)
                     }
                 } else {
-                    List(viewModel.articles, rowContent: ArticleRow.init)
+                    List(viewModel.filteredArticles, rowContent: ArticleRow.init)
                     .navigationDestination(for: Article.self, destination: ArticleView.init)
                     .navigationTitle("Take Home Test")
+                    .refreshable {
+                        await viewModel.loadArticles()
+                    }
+                    .searchable(text: $viewModel.filterText, prompt: "Search articles..")
                 }
             }
         }
