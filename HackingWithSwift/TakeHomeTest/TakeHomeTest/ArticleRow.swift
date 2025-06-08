@@ -13,18 +13,7 @@ struct ArticleRow: View {
     var body: some View {
         NavigationLink(value: article) {
             HStack {
-                AsyncImage(url: article.thumbnail) { phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView()
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .scaledToFill()
-                    default:
-                        Image(systemName: "newspaper")
-                    }
-                }
+                ArticleImage(url: article.thumbnail)
                 .frame(width: 80, height: 80)
                 .clipShape(.rect(cornerRadius: 10))
                 .scaledToFit()
