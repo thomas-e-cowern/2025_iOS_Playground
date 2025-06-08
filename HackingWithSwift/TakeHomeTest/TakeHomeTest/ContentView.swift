@@ -13,14 +13,36 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                List(viewModel.articles, rowContent: ArticleRow.init)
-                .navigationDestination(for: Article.self, destination: ArticleView.init)
-                .navigationTitle("Take Home Test")
+            
+            switch viewModel.loadState {
+            case .failed:
+                ContentUnavailableView {
+                    Text("Load Error")
+                        .font(.headline)
+                } description: {
+                    Text("There was an error loading the articles. Please try again later.")
+                } actions: {
+                    Button("Try Again....") {
+                        Task {
+                            await viewModel.loadArticles()
+                        }
+                    }
+                }
+                
+            default:
+                if viewModel.articles.isEmpty {
+                    ProgressView {
+                        Text("Loading...")
+                            .controlSize(.extraLarge)
+                    }
+                } else {
+                    List(viewModel.articles, rowContent: ArticleRow.init)
+                    .navigationDestination(for: Article.self, destination: ArticleView.init)
+                    .navigationTitle("Take Home Test")
+                }
             }
-            .task(viewModel.loadArticles)
-            .padding()
         }
+        .task(viewModel.loadArticles)
     }
 }
 
