@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var articles: [Article] = []
+    @State private var viewModel = ViewModel()
     
     var body: some View {
         NavigationStack {
             VStack {
-                List(articles) { article in
+                List(viewModel.articles, id: \.self) { article in
                     NavigationLink(value: article) {
                         HStack {
                             AsyncImage(url: article.thumbnail) { phase in
@@ -45,20 +45,8 @@ struct ContentView: View {
                 .navigationDestination(for: Article.self, destination: ArticleView.init)
                 .navigationTitle("Take Home Test")
             }
-            .task(loadArticles)
+            .task(viewModel.loadArticles)
             .padding()
-        }
-    }
-    
-    func loadArticles() async {
-        do {
-            let url = URL(string: "https://www.hackingwithswift.com/samples/news")!
-            let (data, _) = try await URLSession.shared.data(from: url)
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
-            articles = try decoder.decode([Article].self, from: data)
-        } catch {
-            print("Error in loadArticles: \(error.localizedDescription)")
         }
     }
 }
