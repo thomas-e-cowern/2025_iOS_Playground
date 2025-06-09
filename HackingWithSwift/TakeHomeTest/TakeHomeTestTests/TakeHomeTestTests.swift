@@ -13,14 +13,14 @@ import Foundation
 struct TakeHomeTestTests {
 
     @Test func viewModelStartsEmpty() async throws {
-        let viewModel = ContentView.ViewModel()
+        let viewModel = ContentView.ViewModel(session: try createMockURLSession())
         
         #expect(viewModel.articles.isEmpty, "There should be not article initially")
         #expect(viewModel.loadState == .loading, "The viewModel should be loading")
     }
     
     @Test func viewModelLoadsArticle() async throws {
-        let viewModel = ContentView.ViewModel()
+        let viewModel = ContentView.ViewModel(session: try createMockURLSession())
         await viewModel.loadArticles()
         
         // Same test different ways
@@ -32,14 +32,14 @@ struct TakeHomeTestTests {
     }
     
     @Test func viewModelNoFiltering() async throws {
-        let viewModel = ContentView.ViewModel()
+        let viewModel = ContentView.ViewModel(session: try createMockURLSession())
         await viewModel.loadArticles()
         
         #expect(viewModel.filteredArticles == viewModel.articles, "No filter, all articles should be shown")
     }
     
     @Test func viewModelFilterOne() async throws {
-        let viewModel = ContentView.ViewModel()
+        let viewModel = ContentView.ViewModel(session: try createMockURLSession())
         await viewModel.loadArticles()
         viewModel.filterText = viewModel.articles.first?.title ?? ""
         
@@ -47,10 +47,19 @@ struct TakeHomeTestTests {
     }
 
     @Test func viewModelFilterEmpty() async throws {
-        let viewModel = ContentView.ViewModel()
+        let viewModel = ContentView.ViewModel(session: try createMockURLSession())
         await viewModel.loadArticles()
         viewModel.filterText = "XXX NOT HAPPENING"
         
         #expect(viewModel.filteredArticles.count == 0, "No articles should remain after filtering")
+    }
+    
+    func createMockURLSession() throws -> URLSessionMock {
+        let articles = [Article.example]
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+
+        let articleData = try encoder.encode(articles)
+        return URLSessionMock(data: articleData)
     }
 }
