@@ -21,23 +21,6 @@
 		4DB8AA862DF4786400DD4F7F /* TakeHomeTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TakeHomeTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		4DBE99CB2DF6F79E00CE1FB9 /* Exceptions for "TakeHomeTest" folder in "TakeHomeTest" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				DataFetching.swift,
-			);
-			target = 4DB8AA852DF4786400DD4F7F /* TakeHomeTest */;
-		};
-		4DBE99CC2DF6F79E00CE1FB9 /* Exceptions for "TakeHomeTest" folder in "TakeHomeTestTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				DataFetching.swift,
-			);
-			target = 4D62B2B82DF608A6005F1570 /* TakeHomeTestTests */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4D62B2BA2DF608A6005F1570 /* TakeHomeTestTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -46,10 +29,6 @@
 		};
 		4DB8AA882DF4786400DD4F7F /* TakeHomeTest */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				4DBE99CB2DF6F79E00CE1FB9 /* Exceptions for "TakeHomeTest" folder in "TakeHomeTest" target */,
-				4DBE99CC2DF6F79E00CE1FB9 /* Exceptions for "TakeHomeTest" folder in "TakeHomeTestTests" target */,
-			);
 			path = TakeHomeTest;
 			sourceTree = "<group>";
 		};

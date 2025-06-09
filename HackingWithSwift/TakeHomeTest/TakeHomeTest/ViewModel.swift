@@ -23,6 +23,12 @@ extension ContentView {
         
         var filterText = ""
         
+        private var urlSession: any DataFetching
+        
+        init(session: any DataFetching = URLSession.shared) {
+            self.urlSession = session
+        }
+        
         var filteredArticles: [Article] {
             if filterText.isEmpty {
                 articles
@@ -35,7 +41,7 @@ extension ContentView {
             loadState = .loading
             do {
                 let url = URL(string: "https://www.hackingwithswift.com/samples/news")!
-                let (data, _) = try await URLSession.shared.data(from: url)
+                let (data, _) = try await urlSession.data(from: url)
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .iso8601
                 articles = try decoder.decode([Article].self, from: data)
