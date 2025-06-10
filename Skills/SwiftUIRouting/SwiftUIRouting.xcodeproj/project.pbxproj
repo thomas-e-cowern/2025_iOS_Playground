@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4D09C7912DF8815A00941AC9 /* AppRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D09C7902DF8815A00941AC9 /* AppRoutes.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		4D09C7672DF862A400941AC9 /* SwiftUIRouting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIRouting.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D09C7902DF8815A00941AC9 /* AppRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoutes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +37,7 @@
 		4D09C75E2DF862A400941AC9 = {
 			isa = PBXGroup;
 			children = (
+				4D09C7902DF8815A00941AC9 /* AppRoutes.swift */,
 				4D09C7692DF862A400941AC9 /* SwiftUIRouting */,
 				4D09C7682DF862A400941AC9 /* Products */,
 			);
@@ -119,6 +125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D09C7912DF8815A00941AC9 /* AppRoutes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
