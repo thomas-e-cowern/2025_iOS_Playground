@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct Home: View {
+    
+    @EnvironmentObject var router: Router<AppRoutes>
+    
     var body: some View {
         VStack {
             HStack {
@@ -18,7 +21,7 @@ struct Home: View {
             }
             
             Button {
-                // More to come...
+                router.navigate(to: .profile)
             } label: {
                 Text("Profile")
                     .frame(maxWidth: .infinity, minHeight: 45)
@@ -50,4 +53,5 @@ struct Home: View {
 
 #Preview {
     Home()
+        .environmentObject(Router<AppRoutes>())
 }

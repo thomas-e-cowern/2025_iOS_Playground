@@ -9,7 +9,12 @@ import SwiftUI
 
 struct Notifications: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Image(systemName: "antenna.radiowaves.left.and.right.circle.fill")
+                .font(.largeTitle)
+            Text("Notifications View")
+                .font(.largeTitle)
+        }
     }
 }
 

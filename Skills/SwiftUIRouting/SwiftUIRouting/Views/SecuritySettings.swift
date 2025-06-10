@@ -9,7 +9,12 @@ import SwiftUI
 
 struct SecuritySettings: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Image(systemName: "lock.shield")
+                .font(.largeTitle)
+            Text("Security Settings View")
+                .font(.largeTitle)
+        }
     }
 }
 

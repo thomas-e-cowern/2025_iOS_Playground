@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @EnvironmentObject var router: Router<AppRoutes>
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            RoutingView(stack: $router.stack) {
+                Home()
+            }
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(Router<AppRoutes>())
 }
