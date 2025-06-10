@@ -29,7 +29,7 @@ struct Home: View {
             .buttonStyle(.borderedProminent)
             
             Button {
-                // More to come...
+                router.navigate(to: .settings)
             } label: {
                 Text("Settings")
                     .frame(maxWidth: .infinity, minHeight: 45)
@@ -37,7 +37,7 @@ struct Home: View {
             .buttonStyle(.borderedProminent)
             
             Button {
-                // More to come...
+                router.navigate(to: .notifications)
             } label: {
                 Text("Notifications")
                     .frame(maxWidth: .infinity, minHeight: 45)
