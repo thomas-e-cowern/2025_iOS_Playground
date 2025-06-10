@@ -22,3 +22,30 @@ public protocol RoutableObject: AnyObject {
     
     func navigateToRoot()
 }
+
+extension RoutableObject {
+    public func navigate(to destination: Destination) {
+        stack.append(destination)
+    }
+    
+    public func navigate(to destinations: [Destination]) {
+        stack += destinations
+    }
+    
+    public func navigateBack(_ count: Int) {
+        guard count > 0 else { return }
+        
+        let newCount = min(count, stack.count)
+        stack.removeLast(newCount)
+    }
+    
+    public func navigateBack(to destination: Destination) {
+        if let index = stack.lastIndex(of: destination), index < stack.count {
+            stack.removeLast(stack.count - index - 1)
+        }
+    }
+    
+    public func navigateToRoot() {
+        stack.removeAll()
+    }
+}
