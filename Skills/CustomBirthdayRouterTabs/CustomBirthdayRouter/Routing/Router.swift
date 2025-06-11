@@ -14,6 +14,8 @@ enum Route: Hashable {
     case favorites
     case homeOne
     case homeTwo
+    case favoritesOne
+    case favoritesTwo
 }
 
 @Observable
@@ -46,7 +48,12 @@ struct RouterViewModifier: ViewModifier {
                 HomeOne()
             case .homeTwo:
                 HomeTwo()
+            case .favoritesOne:
+                FavoritesOne()
+            case .favoritesTwo:
+                FavoritesTwo()
             }
+        
         }
         .environment(router)
     }

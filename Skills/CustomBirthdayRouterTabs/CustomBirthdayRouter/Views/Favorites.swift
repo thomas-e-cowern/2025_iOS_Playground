@@ -19,9 +19,9 @@ struct Favorites: View {
             }
             
             Button {
-                router.popToRoot()
+                router.navigateTo(route: .favoritesOne)
             } label: {
-                Text("Back to where you started")
+                Text("Off to Favorites one")
             }
 
         }
