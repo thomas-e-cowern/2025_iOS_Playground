@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct Settings: View {
+    
+    @Environment(Router.self) var router
+    
     var body: some View {
-        HStack {
-            Image(systemName: "gear")
-            Text("Settings")
+        VStack {
+            HStack {
+                Image(systemName: "gear")
+                Text("Settings")
+            }
+            
+            Button {
+                router.navigateTo(route: .favorites)
+            } label: {
+                Text("Go to Favorites")
+            }
+
         }
     }
 }
 
 #Preview {
     Settings()
+        .withRouter()
 }

@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct Favorites: View {
+    
+    @Environment(Router.self) var router
+    
     var body: some View {
-        HStack {
-            Image(systemName: "heart")
-            Text("Favorites")
+        VStack {
+            HStack {
+                Image(systemName: "heart")
+                Text("Favorites")
+            }
+            
+            Button {
+                router.popToRoot()
+            } label: {
+                Text("Back to where you started")
+            }
+
         }
     }
 }
 
 #Preview {
     Favorites()
+        .withRouter()
 }

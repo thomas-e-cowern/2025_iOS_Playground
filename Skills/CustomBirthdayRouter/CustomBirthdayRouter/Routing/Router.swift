@@ -21,6 +21,10 @@ class Router {
     func navigateTo(route: Route) {
         path.append(route)
     }
+    
+    func popToRoot() {
+        path.removeLast(path.count)
+    }
 }
 
 struct RouterViewModifier: ViewModifier {
