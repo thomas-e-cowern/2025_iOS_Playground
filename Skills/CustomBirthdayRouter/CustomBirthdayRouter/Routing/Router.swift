@@ -27,7 +27,7 @@ struct RouterViewModifier: ViewModifier {
 
     @State private var router = Router()
     
-    func navigateTo(route: Route) -> some View {
+    func navigate(route: Route) -> some View {
         Group {
             switch route {
             case .home:
@@ -46,7 +46,7 @@ struct RouterViewModifier: ViewModifier {
             content
                 .environment(router)
                 .navigationDestination(for: Route.self) { route in
-                    navigateTo(route: route)
+                    navigate(route: route)
                 }
         }
     }

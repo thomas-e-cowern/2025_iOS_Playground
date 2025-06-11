@@ -12,6 +12,7 @@ struct CustomBirthdayRouterApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .withRouter()
         }
     }
 }
