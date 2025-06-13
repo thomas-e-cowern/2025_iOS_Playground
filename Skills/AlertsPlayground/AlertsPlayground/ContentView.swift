@@ -10,6 +10,11 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var isShowingNetworkAlert = false
+    @State private var isShowingDataAlert = false
+    @State private var isShowingLoginAlert = false
+    @State private var error: MyAppError = .noNetwork
+    
+    @State private var valueString: String = ""
     
     var body: some View {
         VStack(spacing: 40) {
@@ -35,15 +40,31 @@ struct ContentView: View {
             }
             
             Button {
-                // More to come...
+                isShowingDataAlert.toggle()
             } label: {
                 Text("Enter Data")
             }
+            .alert("Enter Value", isPresented: $isShowingDataAlert) {
+                TextField("Enter item value", text: $valueString)
+                Button("Submit") {
+                    print(valueString)
+                }
+                
+                Button("Cancel", role: .cancel) { }
+            } message: {
+                Text("Enter the dollar value of your item")
+            }
             
             Button {
-                // More to come...
+                isShowingLoginAlert.toggle()
+                error = .invalidUsername
             } label: {
                 Text("Log in")
+            }
+            .alert(isPresented: $isShowingLoginAlert, error: error) { error in
+                
+            } message: { error in
+                Text(error.failureReason ?? "Unknown error")
             }
 
         }
