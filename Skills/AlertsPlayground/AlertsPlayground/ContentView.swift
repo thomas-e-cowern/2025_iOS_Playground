@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var error: MyAppError = .noNetwork
     
     @State private var valueString: String = ""
+    @State private var randomError = RandomizeErrors()
     
     var body: some View {
         VStack(spacing: 40) {
@@ -57,7 +58,7 @@ struct ContentView: View {
             
             Button {
                 isShowingLoginAlert.toggle()
-                error = .invalidUsername
+                error = randomError.giveMeAnError()
             } label: {
                 Text("Log in")
             }

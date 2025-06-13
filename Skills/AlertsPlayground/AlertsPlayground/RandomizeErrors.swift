@@ -10,9 +10,9 @@ import Foundation
 struct RandomizeErrors {
     
     func giveMeAnError() -> MyAppError {
-        var errorArray: [MyAppError] = [.noNetwork, .invalidPassword, .invalidUsername]
+        let errorArray: [MyAppError] = [.noNetwork, .invalidPassword, .invalidUsername]
         
-        var randomNumber = Int.random(in: 0..<errorArray.count)
+        let randomNumber = Int.random(in: 0..<errorArray.count)
         
         return errorArray[randomNumber]
     }
