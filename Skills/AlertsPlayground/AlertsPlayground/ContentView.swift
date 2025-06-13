@@ -19,7 +19,17 @@ struct ContentView: View {
                 Text("Fetch Data")
             }
             .alert("No Network", isPresented: $isShowingNetworkAlert) {
+                Button("Try again later") {
+                    // Do whatever to try again
+                }
                 
+                Button("Delete", role: .destructive) {
+                    // Delete whatever...
+                }
+                
+                Button("Cancel", role: .cancel) {
+                    // Don't have to do shit...
+                }
             } message: {
                 Text("No network connection. Please try again later.")
             }
