@@ -17,6 +17,7 @@ struct Resource<T: Codable> {
     var headers: [String: String]? = nil
     var modelType: T.Type
 }
+
 enum HTTPMethod {
     case get([URLQueryItem])
     case post(Data?)
@@ -34,5 +35,54 @@ enum HTTPMethod {
         case .put:
             return "PUT"
         }
+    }
+}
+
+struct HTTPClient {
+    
+    func load<T>(_ resource: Resource<T>) async throws -> T {
+        
+        var request = URLRequest(url: resource.url)
+        
+        switch resource.method {
+        case .get(let queryItems):
+            var components = URLComponents(url: request.url!, resolvingAgainstBaseURL: true)!
+            components.queryItems = queryItems
+            guard let url = components.url else {
+                throw URLError(.badServerResponse)
+            }
+            
+            request = URLRequest(url: url)
+            
+        case .post(let data):
+            request.httpMethod = resource.method.name
+            request.httpBody = data
+            
+        case .delete:
+            request.httpMethod = resource.method.name
+            
+        case .put(let data):
+            request.httpMethod = resource.method.name
+            request.httpBody = data
+
+           }
+        
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = ["Content-Type": "application/json"]
+        let session = URLSession(configuration: configuration)
+        
+        let (data, response) = try await session.data(for: request)
+        
+        guard let _ = response as? HTTPURLResponse else {
+            print("Error with response....")
+            throw URLError(.badServerResponse)
+        }
+        
+        guard let result = try? JSONDecoder().decode(resource.modelType, from: data) else {
+            throw URLError(.unknown)
+        }
+        
+        print("Result: \(result)")
+        return result
     }
 }
