@@ -15,7 +15,7 @@ struct PreviewData {
         
         // Find the file
         guard let file = Bundle.main.url(forResource: filename, withExtension: "json") else {
-            fatalError("Couldn't find \(filename).json in the main buncle")
+            fatalError("Couldn't find \(filename).json in the main bundle")
         }
         
         // Load data

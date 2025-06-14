@@ -49,7 +49,7 @@ struct HTTPClient {
             var components = URLComponents(url: request.url!, resolvingAgainstBaseURL: true)!
             components.queryItems = queryItems
             guard let url = components.url else {
-                throw URLError(.badServerResponse)
+                throw NetworkError.invalidURL
             }
             
             request = URLRequest(url: url)
@@ -73,13 +73,15 @@ struct HTTPClient {
         
         let (data, response) = try await session.data(for: request)
         
+        print("Data: \(data), Response: \(response)")
+        
         guard let _ = response as? HTTPURLResponse else {
             print("Error with response....")
-            throw URLError(.badServerResponse)
+            throw NetworkError.invalidResponse
         }
         
         guard let result = try? JSONDecoder().decode(resource.modelType, from: data) else {
-            throw URLError(.unknown)
+            throw NetworkError.decodingError
         }
         
         print("Result: \(result)")
