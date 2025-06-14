@@ -8,17 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    let httpClient: HTTPClient
+    @State private var products: [Product] = []
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            List(products, id: \.id) { product in
+                Text(product.title)
+            }
+            .onAppear {
+                Task {
+                    await loadProducts()
+                }
+            }
         }
         .padding()
+    }
+    
+    private func loadProducts() async {
+        let response = Resource(url: URL(string: "https://api.escuelajs.co/api/v1/products")!, modelType: [Product].self)
+        do {
+            products = try await httpClient.load(response)
+        } catch {
+            print("Problem in loadProducts in ContentView \(error)")
+        }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(httpClient: HTTPClient())
 }
