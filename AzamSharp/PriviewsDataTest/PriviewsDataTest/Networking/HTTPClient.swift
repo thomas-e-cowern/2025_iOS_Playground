@@ -38,7 +38,7 @@ enum HTTPMethod {
     }
 }
 
-struct HTTPClient {
+struct HTTPClient: HTTPClientProtocol {
     
     func load<T>(_ resource: Resource<T>) async throws -> T {
         
@@ -72,8 +72,6 @@ struct HTTPClient {
         let session = URLSession(configuration: configuration)
         
         let (data, response) = try await session.data(for: request)
-        
-        print("Data: \(data), Response: \(response)")
         
         guard let _ = response as? HTTPURLResponse else {
             print("Error with response....")
