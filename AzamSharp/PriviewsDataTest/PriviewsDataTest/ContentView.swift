@@ -9,31 +9,29 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let httpClient: HTTPClient
-    @State private var products: [Product] = []
+    @Environment(ProductStore.self) private var productStore
     
     var body: some View {
         VStack {
-            List(products, id: \.id) { product in
+            List(productStore.products, id: \.id) { product in
                 Text(product.title)
             }
             .task {
                 await loadProducts()
             }
         }
-        .padding()
     }
     
-    private func loadProducts() async  {
-        let response = Resource(url: API.productsUrl, modelType: [Product].self)
+    private func loadProducts() async {
         do {
-            products = try await httpClient.load(response)
+            try await productStore.loadProducts()
         } catch {
-            print("Problem in loadProducts in ContentView \(error)")
+            print("Error in loadingProducts: \(error.localizedDescription)")
         }
     }
 }
 
 #Preview {
-    ContentView(httpClient: HTTPClient())
+    ContentView()
+        .environment(ProductStore(httpClient: HTTPClient()))
 }

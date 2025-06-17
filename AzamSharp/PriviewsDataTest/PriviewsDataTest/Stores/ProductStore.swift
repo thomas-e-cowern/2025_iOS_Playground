@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Observation
 
 @MainActor
 @Observable
@@ -13,9 +14,8 @@ class ProductStore {
     let httpClient: HTTPClient
     var products: [Product] = []
     
-    init(httpClient: HTTPClient, products: [Product]) {
+    init(httpClient: HTTPClient) {
         self.httpClient = httpClient
-        self.products = products
     }
     
     func loadProducts() async throws {

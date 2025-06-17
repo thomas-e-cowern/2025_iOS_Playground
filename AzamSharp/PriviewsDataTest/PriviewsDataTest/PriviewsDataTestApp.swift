@@ -11,7 +11,9 @@ import SwiftUI
 struct PriviewsDataTestApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(httpClient: HTTPClient())
+            ContentView()
+                .environment(ProductStore(httpClient: HTTPClient()))
+            
         }
     }
 }
