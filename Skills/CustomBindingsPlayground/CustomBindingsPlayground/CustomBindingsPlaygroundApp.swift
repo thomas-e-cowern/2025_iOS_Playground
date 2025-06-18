@@ -11,7 +11,7 @@ import SwiftUI
 struct CustomBindingsPlaygroundApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            StartTab()
         }
     }
 }

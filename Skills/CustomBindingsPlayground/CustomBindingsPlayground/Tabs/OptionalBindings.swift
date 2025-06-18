@@ -10,7 +10,15 @@ import SwiftUI
 struct OptionalBindings: View {
     @State private var name: String?
     @State private var age: Int?
-    @State private var selectedDate: Date = Date.now
+    @State private var selectedDate: Date?
+    
+    private var dateBinding: Binding<Date> {
+        .init(
+            get: { selectedDate ?? Date() },
+            set: { selectedDate = $0 }
+        )
+    }
+    
     var body: some View {
         NavigationStack {
             Text("TextFields can only be bound to non-optional strings or optional other Types when using the format option.  If the bound values are optional, a custom binding must be used.")
@@ -50,8 +58,24 @@ struct OptionalBindings: View {
                     }
                 }
                 Section("Optional Dates") {
-                    DatePicker("Select Date", selection: $selectedDate,
-                               displayedComponents: .date)
+                    if selectedDate != nil {
+                        HStack {
+                            DatePicker("Select Date", selection: dateBinding,
+                                       displayedComponents: .date)
+                            Button {
+                                selectedDate = nil
+                            } label: {
+                                Image(systemName: "xmark.circle.fill")
+                            }
+
+                        }
+                    } else {
+                        LabeledContent("Select Date") {
+                            Button("Add Date") {
+                                selectedDate = Date.now
+                            }
+                        }
+                    }
                 }
             }
             
