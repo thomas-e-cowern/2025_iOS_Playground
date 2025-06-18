@@ -13,6 +13,13 @@ class ViewModel {
     var middleName: String?
     var lastName: String
     
+    var middleBinding: Binding<String> {
+        Binding(
+            get: { self.middleName ?? "" },
+            set: { self.middleName = $0.isEmpty ? nil : $0 }
+        )
+    }
+    
     init(firstName: String, middleName: String? = nil, lastName: String) {
         self.firstName = firstName
         self.middleName = middleName
