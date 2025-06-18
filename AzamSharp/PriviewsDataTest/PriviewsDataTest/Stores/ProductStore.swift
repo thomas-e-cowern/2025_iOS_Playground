@@ -11,10 +11,10 @@ import Observation
 @MainActor
 @Observable
 class ProductStore {
-    let httpClient: HTTPClient
+    let httpClient: HTTPClientProtocol
     var products: [Product] = []
     
-    init(httpClient: HTTPClient) {
+    init(httpClient: HTTPClientProtocol) {
         self.httpClient = httpClient
     }
     
