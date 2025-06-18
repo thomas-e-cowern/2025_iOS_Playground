@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OptionalBindings: View {
     @State private var name: String?
-    @State private var age: Int = 0
+    @State private var age: Int?
     @State private var selectedDate: Date = Date.now
     var body: some View {
         NavigationStack {
@@ -22,7 +22,7 @@ struct OptionalBindings: View {
                     TextField( "Enter Name",
                                text: Binding(
                                 // The best way
-                                get: { name ?? "" }, set: { name = $0.isEmpty ? "nil" : $0 }
+                                get: { name ?? "" }, set: { name = $0.isEmpty ? "" : $0 }
                                 // the shorter way
 //                                set: { entry in
 //                                    name = entry.isEmpty ? "nil" : entry
@@ -42,8 +42,12 @@ struct OptionalBindings: View {
                 }
                 Section("Optional Numeric TextField") {
                     TextField( "Enter Age", value: $age, format: .number)
-                    Text("\(age)")
-                        .valueDisplay()
+                    if let age {
+                        Text("\(age)")
+                            .valueDisplay()
+                    } else {
+                        Text("nil")
+                    }
                 }
                 Section("Optional Dates") {
                     DatePicker("Select Date", selection: $selectedDate,
