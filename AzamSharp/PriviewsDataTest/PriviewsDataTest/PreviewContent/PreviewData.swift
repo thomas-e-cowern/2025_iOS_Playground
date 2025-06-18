@@ -10,7 +10,7 @@ import Foundation
 struct PreviewData {
     
     static func load<T: Decodable>(_ filename: String, as type: T.Type = T.self) -> T {
-        
+        print("Inside PreviewData.load()\n")
         let data: Data
         
         // Find the file

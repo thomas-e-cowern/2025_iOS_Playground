@@ -82,7 +82,6 @@ struct HTTPClient: HTTPClientProtocol {
             throw NetworkError.decodingError
         }
         
-        print("Result: \(result)")
         return result
     }
 }

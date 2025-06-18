@@ -13,7 +13,6 @@ struct PriviewsDataTestApp: App {
         WindowGroup {
             ContentView()
                 .environment(ProductStore(httpClient: HTTPClient()))
-            
         }
     }
 }

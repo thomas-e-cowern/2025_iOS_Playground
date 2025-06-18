@@ -17,21 +17,15 @@ struct ContentView: View {
                 Text(product.title)
             }
             .task {
-                await loadProducts()
+                try? await productStore.loadProducts()
             }
-        }
-    }
-    
-    private func loadProducts() async {
-        do {
-            try await productStore.loadProducts()
-        } catch {
-            print("Error in loadingProducts: \(error.localizedDescription)")
         }
     }
 }
 
 #Preview {
-    ContentView()
-        .environment(ProductStore(httpClient: HTTPClient()))
+    NavigationStack {
+        ContentView()
+    }
+    .environment(ProductStore(httpClient: MockHTTPClient()))
 }
