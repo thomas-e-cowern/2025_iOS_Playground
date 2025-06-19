@@ -31,10 +31,10 @@ struct ContentView: View {
                     .background(Color.gray)
                 
                 ellipseButton(image: icons[0])
-                    .buttonStyle(DepthButtonStyle(foregroundColor: .red, backgroundColor: .green))
+                    .buttonStyle(DepthButtonStyle(foregroundColor: .green, backgroundColor: .green.opacity(0.5)))
                 
                 rectangleButton()
-                    .buttonStyle(DepthButtonStyle(foregroundColor: .red, backgroundColor: .green, cornerRadius: 10))
+                    .buttonStyle(DepthButtonStyle(foregroundColor: .green, backgroundColor: .green.opacity(0.4), cornerRadius: 10))
             }
         }
     }
