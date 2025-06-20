@@ -20,9 +20,6 @@ struct HomeView: View {
             }
         }
         .padding(.horizontal, 2)
-        .onAppear {
-            healthManager.fetchSteps()
-        }
     }
 }
 

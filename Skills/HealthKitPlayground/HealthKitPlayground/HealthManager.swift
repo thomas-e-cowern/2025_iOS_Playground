@@ -17,13 +17,16 @@ class HealthManager {
     
     init () {
         let steps = HKQuantityType(.stepCount)
+        let calories = HKQuantityType(.activeEnergyBurned)
         
-        let healthTypes: Set<HKQuantityType> = [steps]
+        let healthTypes: Set<HKQuantityType> = [steps, calories]
         
         Task {
             do {
                 try await healthStore.requestAuthorization(toShare: [], read: healthTypes)
                 print("Trying....")
+                fetchSteps()
+                fetchCalories()
             } catch {
                 print("Error fetching health data in HealthManager: \(error.localizedDescription)")
             }
@@ -43,6 +46,25 @@ class HealthManager {
             
             DispatchQueue.main.async {
                 self.activities["Today's Steps"] = activity
+            }
+        }
+        healthStore.execute(query)
+    }
+    
+    func fetchCalories() {
+        let calories = HKQuantityType(.activeEnergyBurned)
+        let predicate = HKQuery.predicateForSamples(withStart: Date.startOfDay, end: Date())
+        let query = HKStatisticsQuery(quantityType: calories, quantitySamplePredicate: predicate) { _, result, error in
+            guard let quantity = result?.sumQuantity(), error == nil else {
+                print("Error fetching todays calories....")
+                return
+            }
+            let calorieCount = quantity.doubleValue(for: .kilocalorie())
+            print("Calorie count; \(calorieCount)")
+            let activity = Activity(id: 1, title: "Today's Calories", subtitle: "Goal: 2,000", imageName: "hand.thumbsup.fill", amount: calorieCount.formattedToString())
+            
+            DispatchQueue.main.async {
+                self.activities["Today's Calories"] = activity
             }
         }
         healthStore.execute(query)
