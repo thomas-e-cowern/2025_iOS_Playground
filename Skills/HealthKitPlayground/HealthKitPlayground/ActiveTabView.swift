@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ActiveTabView: View {
+    @Environment(HealthManager.self) var healthManager
     
     @State var selectedTab = "Home"
     
@@ -26,4 +27,5 @@ struct ActiveTabView: View {
 
 #Preview {
     ActiveTabView()
+        .environment(HealthManager())
 }

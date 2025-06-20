@@ -21,6 +21,7 @@ class HealthManager {
         Task {
             do {
                 try await healthStore.requestAuthorization(toShare: [], read: healthTypes)
+                print("Trying....")
             } catch {
                 print("Error fetching health data in HealthManager: \(error.localizedDescription)")
             }
