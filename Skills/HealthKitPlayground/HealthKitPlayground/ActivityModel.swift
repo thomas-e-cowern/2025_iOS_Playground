@@ -13,4 +13,8 @@ struct Activity {
     let subtitle: String
     let imageName: String
     let amount: String
+    
+    static let example: [Activity] = [
+        Activity(id: 0, title: "Steps", subtitle: "Goal: 10,000", imageName: "figure.walk", amount: "6,295")
+    ]
 }

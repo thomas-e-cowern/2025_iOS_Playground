@@ -14,10 +14,10 @@ struct HomeView: View {
     var body: some View {
         VStack {
             LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 2)) {
-                ActivityCard()
+                ActivityCard(activity: Activity.example[0])
                     .environment(healthManager)
                 
-                ActivityCard()
+                ActivityCard(activity: Activity.example[0])
             }
         }
         .padding(.horizontal, 2)
