@@ -16,6 +16,10 @@ struct ActiveTabView: View {
             Tab("Home", systemImage: "house", value: "Home") {
                 HomeView()
             }
+            
+            Tab("Content View", systemImage: "plus", value: "Content") {
+                ContentView()
+            }
         }
     }
 }
