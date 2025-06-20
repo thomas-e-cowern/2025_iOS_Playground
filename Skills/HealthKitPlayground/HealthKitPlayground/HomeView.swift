@@ -1,5 +1,5 @@
 //
-//  Home.swift
+//  HomeView.swift
 //  HealthKitPlayground
 //
 //  Created by Thomas Cowern on 6/20/25.
