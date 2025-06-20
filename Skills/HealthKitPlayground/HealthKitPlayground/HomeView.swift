@@ -14,13 +14,15 @@ struct HomeView: View {
     var body: some View {
         VStack {
             LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 2)) {
-                ActivityCard(activity: Activity.example[0])
-                    .environment(healthManager)
-                
-                ActivityCard(activity: Activity.example[0])
+                ForEach(healthManager.activities.sorted(by: { $0.value.id < $1.value.id }), id: \.key) { activity in
+                    ActivityCard(activity: activity.value)
+                }
             }
         }
         .padding(.horizontal, 2)
+        .onAppear {
+            healthManager.fetchSteps()
+        }
     }
 }
 

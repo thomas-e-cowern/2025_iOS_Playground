@@ -14,7 +14,7 @@ struct HealthKitPlaygroundApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ActiveTabView()
                 .environment(HealthManager())
         }
     }
