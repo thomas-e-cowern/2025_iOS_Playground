@@ -15,6 +15,11 @@ class HealthManager {
     
     var activities: [String : Activity] = [:]
     
+    var mockActivities: [String : Activity] = [
+        "todaySteps" : Activity(id: 0, title: "Today's Steps", subtitle: "Goal: 10,000", imageName: "figure.walk", amount: "6,392"),
+        "todayCalories" : Activity(id: 1, title: "Today's Calories", subtitle: "Goal: 2,000", imageName: "hand.thumbsup.fill", amount: "1,234")
+    ]
+    
     init () {
         let steps = HKQuantityType(.stepCount)
         let calories = HKQuantityType(.activeEnergyBurned)

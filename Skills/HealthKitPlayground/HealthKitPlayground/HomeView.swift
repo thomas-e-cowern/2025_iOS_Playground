@@ -13,8 +13,9 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
+            Text("Welcome")
             LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 2)) {
-                ForEach(healthManager.activities.sorted(by: { $0.value.id < $1.value.id }), id: \.key) { activity in
+                ForEach(healthManager.mockActivities.sorted(by: { $0.value.id < $1.value.id }), id: \.key) { activity in
                     ActivityCard(activity: activity.value)
                 }
             }
