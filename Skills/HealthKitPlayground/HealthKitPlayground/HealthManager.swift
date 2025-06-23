@@ -23,8 +23,9 @@ class HealthManager {
     init () {
         let steps = HKQuantityType(.stepCount)
         let calories = HKQuantityType(.activeEnergyBurned)
+        let workout = HKObjectType.workoutType()
         
-        let healthTypes: Set<HKQuantityType> = [steps, calories]
+        let healthTypes: Set = [steps, calories, workout]
         
         Task {
             do {
@@ -32,6 +33,7 @@ class HealthManager {
                 print("Trying....")
                 fetchSteps()
                 fetchCalories()
+                fetchWeeklyRunStats()
             } catch {
                 print("Error fetching health data in HealthManager: \(error.localizedDescription)")
             }
@@ -51,6 +53,25 @@ class HealthManager {
             
             DispatchQueue.main.async {
                 self.activities["Today's Steps"] = activity
+            }
+        }
+        healthStore.execute(query)
+    }
+    
+    func fetchWeeklyRunStats() {
+        let workout = HKSampleType.workoutType()
+        let predicate = HKQuery.predicateForSamples(withStart: Date.startOfWeek, end: Date())
+        let query = HKSampleQuery(sampleType: workout, predicate: predicate, limit: 25, sortDescriptors: nil) { _, results, error in
+            guard let workouts = results as? [HKWorkout], error == nil else {
+                print("Error getting weekly run stats")
+                return
+            }
+            
+            for workout in workouts {
+                print("Stats: \(workout.allStatistics.keys)")
+                print("Stats: \(workout.allStatistics.values)")
+                print("Activities: \(workout.workoutActivities.count)")
+                print("Type: \(workout.workoutActivityType)")
             }
         }
         healthStore.execute(query)
@@ -80,6 +101,13 @@ class HealthManager {
 extension Date {
     static var startOfDay: Date {
         Calendar.current.startOfDay(for: Date())
+    }
+    
+    static var startOfWeek: Date {
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date())
+        components.weekday = 1 
+        return calendar.date(from: components)!
     }
 }
 
