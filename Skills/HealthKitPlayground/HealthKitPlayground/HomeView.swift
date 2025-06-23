@@ -14,6 +14,10 @@ struct HomeView: View {
     var body: some View {
         VStack {
             Text("Welcome")
+                .font(.title.bold())
+                .padding()
+                .foregroundStyle(.secondary)
+            
             LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 2)) {
                 ForEach(healthManager.mockActivities.sorted(by: { $0.value.id < $1.value.id }), id: \.key) { activity in
                     ActivityCard(activity: activity.value)
@@ -21,6 +25,7 @@ struct HomeView: View {
             }
         }
         .padding(.horizontal, 2)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     }
 }
 
