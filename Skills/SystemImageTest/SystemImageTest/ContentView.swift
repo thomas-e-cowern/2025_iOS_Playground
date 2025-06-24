@@ -7,16 +7,30 @@
 
 import SwiftUI
 
+enum Icons: String, CaseIterable, Identifiable {
+    case star = "star.fill"
+    case swirl = "swirl.circle.righthalf.filled.inverse"
+    case circle = "circle.dotted.circle.fill"
+    case person = "person.fill"
+    case sun = "sun.min.fill"
+    var id: Self { self }
+}
+
 struct ContentView: View {
     
-    @State private var symbols: [String] = ["star.fill", "swirl.circle.righthalf.filled.inverse", "circle.dotted.circle.fill", "person.fill", "sun.min.fill"]
+    @State private var selectedIcon: Icons = .star
     
     var body: some View {
         VStack {
-            ForEach(symbols, id: \.self) { symbol in
-                Image(systemName: symbol)
-                    .padding(10)
+            List {
+                Picker("Icons", selection: $selectedIcon) {
+                    ForEach(Icons.allCases) { icon in
+                        Image(systemName: icon.rawValue)
+                    }
+                }
             }
+            
+            Image(systemName: selectedIcon.rawValue)
         }
         .padding()
     }
