@@ -24,8 +24,9 @@ class HealthManager {
         let steps = HKQuantityType(.stepCount)
         let calories = HKQuantityType(.activeEnergyBurned)
         let workout = HKObjectType.workoutType()
+        let weight = HKQuantityType(.bodyMass)
         
-        let healthTypes: Set = [steps, calories, workout]
+        let healthTypes: Set = [steps, calories, workout, weight]
         
         Task {
             do {
@@ -34,6 +35,7 @@ class HealthManager {
                 fetchSteps()
                 fetchCalories()
                 fetchWeeklyRunStats()
+                fetchWeight()
             } catch {
                 print("Error fetching health data in HealthManager: \(error.localizedDescription)")
             }
@@ -102,6 +104,21 @@ class HealthManager {
         healthStore.execute(query)
     }
     
+    func fetchWeight() {
+        let weight = HKQuantityType(.bodyMass)
+        let predicate = HKQuery.predicateForSamples(withStart: nil, end: nil)
+        let query = HKStatisticsQuery(quantityType: weight, quantitySamplePredicate: predicate) { _, result, error in
+            guard let quantity = result, error == nil else {
+                print("Error fetching weight....")
+                return
+            }
+            
+            
+            
+        }
+        healthStore.execute(query)
+    }
+    
 }
 
 extension Date {
@@ -113,6 +130,21 @@ extension Date {
         let calendar = Calendar.current
         var components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date())
         components.weekday = 1 
+        return calendar.date(from: components)!
+    }
+    
+    static var startOfMonth: Date {
+        let calendar = Calendar.current
+        var components = Calendar.current.dateComponents([.year, .month], from: Date())
+        components.day = 1
+        return calendar.date(from: components)!
+    }
+    
+    static var startOfYear: Date {
+        let calendar = Calendar.current
+        var components = Calendar.current.dateComponents([.year], from: Date())
+        components.month = 1
+        components.day = 1
         return calendar.date(from: components)!
     }
 }
