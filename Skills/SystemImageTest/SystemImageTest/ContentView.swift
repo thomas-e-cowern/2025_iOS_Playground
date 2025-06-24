@@ -19,6 +19,7 @@ enum Icons: String, CaseIterable, Identifiable {
 struct ContentView: View {
     
     @State private var selectedIcon: Icons = .star
+    @State private var selectedColor: Color = .red
     
     var body: some View {
         VStack {
@@ -28,9 +29,18 @@ struct ContentView: View {
                         Image(systemName: icon.rawValue)
                     }
                 }
+                .pickerStyle(.menu)
             }
             
+            VStack {
+                ColorPicker("Set the Icon color", selection: $selectedColor)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        
+            
             Image(systemName: selectedIcon.rawValue)
+                .font(.largeTitle)
+                .foregroundStyle(selectedColor)
         }
         .padding()
     }
