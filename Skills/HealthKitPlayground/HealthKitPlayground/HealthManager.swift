@@ -67,11 +67,17 @@ class HealthManager {
                 return
             }
             
+            var count: Int = 0
             for workout in workouts {
-                print("Stats: \(workout.allStatistics.keys)")
-                print("Stats: \(workout.allStatistics.values)")
-                print("Activities: \(workout.workoutActivities.count)")
-                print("Type: \(workout.workoutActivityType)")
+                let duration = Int(workout.duration)/60
+                count += duration
+            }
+            
+            
+            let activity = Activity(id: 1, title: "Walking", subtitle: "This week", imageName: "figure.walk", amount: "\(count) minutes")
+            
+            DispatchQueue.main.async {
+                self.activities["Walking"] = activity
             }
         }
         healthStore.execute(query)

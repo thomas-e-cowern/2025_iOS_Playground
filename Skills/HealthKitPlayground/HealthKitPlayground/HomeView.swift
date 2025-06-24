@@ -19,7 +19,7 @@ struct HomeView: View {
                 .foregroundStyle(.secondary)
             
             LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 2)) {
-                ForEach(healthManager.mockActivities.sorted(by: { $0.value.id < $1.value.id }), id: \.key) { activity in
+                ForEach(healthManager.activities.sorted(by: { $0.value.id < $1.value.id }), id: \.key) { activity in
                     ActivityCard(activity: activity.value)
                 }
             }
