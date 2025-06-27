@@ -23,7 +23,7 @@ struct ConverterTests {
         #expect(output == expected)
     }
     
-    @Test func checkTwoHundredTwoFarenheitIsOneHundredCelcius() {
+    @Test func checkTwoHundredTwelveFarenheitIsOneHundredCelcius() {
         // Given
         let sut = Converter()
         let input: Double = 212
