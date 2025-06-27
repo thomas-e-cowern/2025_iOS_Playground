@@ -36,4 +36,17 @@ struct ConverterTests {
         // Then
         #expect(output.isApproximatelyEqual(to: expected, absoluteTolerance: 0.00001))
     }
+    
+    @Test func checkOneHundredFarenheitIsThirtySevenCelcius() {
+        // Given
+        let sut = Converter()
+        let input: Double = 100
+        let expected: Double = 37.77777
+        
+        // When
+        let output: Double = sut.convertToCelsius(farenheit: input)
+        
+        // Then
+        #expect(output.isApproximatelyEqual(to: expected, absoluteTolerance: 0.00001))
+    }
 }
