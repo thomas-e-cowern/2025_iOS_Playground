@@ -7,6 +7,7 @@
 
 import Testing
 @testable import First
+import Numerics
 
 struct ConverterTests {
 
@@ -20,7 +21,7 @@ struct ConverterTests {
         let output: Double = sut.convertToCelsius(farenheit: input)
         
         // Then
-        #expect(output == expected)
+        #expect(output.isApproximatelyEqual(to: expected, absoluteTolerance: 0.00001))
     }
     
     @Test func checkTwoHundredTwelveFarenheitIsOneHundredCelcius() {
@@ -33,6 +34,6 @@ struct ConverterTests {
         let output: Double = sut.convertToCelsius(farenheit: input)
         
         // Then
-        #expect(output == expected)
+        #expect(output.isApproximatelyEqual(to: expected, absoluteTolerance: 0.00001))
     }
 }
