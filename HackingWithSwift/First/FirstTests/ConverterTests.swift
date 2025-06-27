@@ -10,15 +10,29 @@ import Testing
 
 struct ConverterTests {
 
-    @Test func farenheitToCelcius() {
+    @Test func checkThirtyTwoFarenheitIsZeroCelcius() {
+        // Given
         let sut = Converter()
+        let input: Double = 32
+        let expected: Double = 0
         
-        let input1: Double = 32
-        let expected1: Double = 0
-        #expect(sut.convertToCelsius(farenheit: input1) == expected1)
+        // When
+        let output: Double = sut.convertToCelsius(farenheit: input)
         
-        let input2: Double = 212
-        let expected2: Double = 100
-        #expect(sut.convertToCelsius(farenheit: input2) == expected2)
+        // Then
+        #expect(output == expected)
+    }
+    
+    @Test func checkTwoHundredTwoFarenheitIsOneHundredCelcius() {
+        // Given
+        let sut = Converter()
+        let input: Double = 212
+        let expected: Double = 100
+        
+        // When
+        let output: Double = sut.convertToCelsius(farenheit: input)
+        
+        // Then
+        #expect(output == expected)
     }
 }
