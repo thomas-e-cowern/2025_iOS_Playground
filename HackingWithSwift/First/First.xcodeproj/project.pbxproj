@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4DAC714A2E0EE56B0044C40B /* Numerics in Frameworks */ = {isa = PBXBuildFile; productRef = 4DAC71492E0EE56B0044C40B /* Numerics */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		4D1465122DE8A3EF00B74A43 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -59,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DAC714A2E0EE56B0044C40B /* Numerics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +140,7 @@
 			);
 			name = FirstTests;
 			packageProductDependencies = (
+				4DAC71492E0EE56B0044C40B /* Numerics */,
 			);
 			productName = FirstTests;
 			productReference = 4D1465112DE8A3EF00B74A43 /* FirstTests.xctest */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 4D1464FB2DE8A3ED00B74A43;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				4DAC71482E0EE56B0044C40B /* XCRemoteSwiftPackageReference "swift-numerics" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4D1465052DE8A3ED00B74A43 /* Products */;
 			projectDirPath = "";
@@ -558,6 +567,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4DAC71482E0EE56B0044C40B /* XCRemoteSwiftPackageReference "swift-numerics" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-numerics.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4DAC71492E0EE56B0044C40B /* Numerics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4DAC71482E0EE56B0044C40B /* XCRemoteSwiftPackageReference "swift-numerics" */;
+			productName = Numerics;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4D1464FC2DE8A3ED00B74A43 /* Project object */;
 }
