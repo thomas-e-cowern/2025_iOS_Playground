@@ -36,10 +36,23 @@ struct ContentView: View {
 
             }
             .navigationDestination(for: Int.self) { value in
-                Text("Int Value: \(value)")
+                VStack {
+                    Text("Int Value: \(value)")
+                    Button {
+                        path.removeLast()
+                    } label: {
+                        Text("Back to home...")
+                    }
+
+                }
             }
             .navigationDestination(for: String.self) { value in
                 Text("String Value: \(value)")
+                Button {
+                    path.removeLast()
+                } label: {
+                    Text("Back to home...")
+                }
             }
         }
     }
