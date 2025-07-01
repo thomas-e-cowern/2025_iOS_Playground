@@ -14,20 +14,27 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path: $path) {
             List {
-                NavigationLink(value: 0) {
-                    Text("Navigate to 0")
-                }
+//                NavigationLink(value: 0) {
+//                    Text("Navigate to 0")
+//                }
+//                
+//                NavigationLink(value: "Zero") {
+//                    Text("Navigate to zero")
+//                }
                 
-                NavigationLink(value: "Zero") {
-                    Text("Navigate to zero")
+                Button {
+                    path.append(0)
+                } label: {
+                    Text("Navigate")
                 }
+
             }
             .navigationDestination(for: Int.self) { value in
                 Text("\(value)")
             }
-            .navigationDestination(for: String.self) { value in
-                Text("\(value)")
-            }
+//            .navigationDestination(for: String.self) { value in
+//                Text("\(value)")
+//            }
         }
     }
 }
