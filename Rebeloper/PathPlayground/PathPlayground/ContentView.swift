@@ -25,16 +25,22 @@ struct ContentView: View {
                 Button {
                     path.append(0)
                 } label: {
-                    Text("Navigate")
+                    Text("Navigate to 0")
+                }
+                
+                Button {
+                    path.append("Zero")
+                } label: {
+                    Text("Navigate to Zero")
                 }
 
             }
             .navigationDestination(for: Int.self) { value in
-                Text("\(value)")
+                Text("Int Value: \(value)")
             }
-//            .navigationDestination(for: String.self) { value in
-//                Text("\(value)")
-//            }
+            .navigationDestination(for: String.self) { value in
+                Text("String Value: \(value)")
+            }
         }
     }
 }
