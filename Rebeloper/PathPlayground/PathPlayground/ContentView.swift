@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var path = NavigationPath()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack(path: $path) {
+            List {
+                NavigationLink(value: 0) {
+                    Text("Navigate to 0")
+                }
+                
+                NavigationLink(value: "Zero") {
+                    Text("Navigate to zero")
+                }
+            }
+            .navigationDestination(for: Int.self) { value in
+                Text("\(value)")
+            }
+            .navigationDestination(for: String.self) { value in
+                Text("\(value)")
+            }
         }
-        .padding()
     }
 }
 
