@@ -47,11 +47,13 @@ struct ContentView: View {
                 }
             }
             .navigationDestination(for: String.self) { value in
-                Text("String Value: \(value)")
-                Button {
-                    path.removeLast()
-                } label: {
-                    Text("Back to home...")
+                VStack {
+                    Text("String Value: \(value)")
+                    Button {
+                        path = NavigationPath()
+                    } label: {
+                        Text("Back to home...")
+                    }
                 }
             }
         }
