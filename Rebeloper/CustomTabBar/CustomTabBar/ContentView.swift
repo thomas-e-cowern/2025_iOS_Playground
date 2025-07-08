@@ -27,7 +27,11 @@ struct ContentView: View {
                     EmptyView()
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            CustomTabBar(selectedTab: $selectedTab, animation: animation)
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
