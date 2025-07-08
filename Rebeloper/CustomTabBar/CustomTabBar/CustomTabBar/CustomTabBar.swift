@@ -15,7 +15,16 @@ struct CustomTabBar: View {
     let tabs: [String] = ["Home", "Search", "Account"]
     
     var body: some View {
-        Text("Custom Tab Bar")
+        HStack {
+            ForEach(tabs, id: \.self) { tab in
+                tabItem(for: tab)
+            }
+        }
+        .padding(.horizontal, 20)
+        .padding(.top, 10)
+        .padding(.bottom, 20)
+        .background(Color(.systemBackground).shadow(radius: 5))
+        
     }
     
     private func icon(for tabs: String) -> String {
@@ -29,6 +38,10 @@ struct CustomTabBar: View {
         default:
             return "quationmark"
         }
+    }
+    
+    private func tabItem(for tab: String) -> some View {
+        Text(tab)
     }
 }
 
