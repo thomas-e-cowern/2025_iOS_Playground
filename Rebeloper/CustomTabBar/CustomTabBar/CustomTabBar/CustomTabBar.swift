@@ -41,7 +41,35 @@ struct CustomTabBar: View {
     }
     
     private func tabItem(for tab: String) -> some View {
-        Text(tab)
+        VStack {
+            
+            if selectedTab == tab {
+                Capsule()
+                    .fill(Color.blue)
+                    .matchedGeometryEffect(id: "tabbar", in: animation)
+                    .frame(height: 4)
+                    .offset(y: -8)
+            } else {
+                Color.clear
+                    .frame(height: 4)
+            }
+            
+            Button {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                    selectedTab = tab
+                }
+            } label: {
+                Image(systemName: icon(for: tab))
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundStyle(selectedTab == tab ? .blue : .gray)
+            }
+
+            
+            Text(tab)
+                .font(.caption)
+                .foregroundStyle(selectedTab == tab ? .blue : .gray)
+        }
+        .frame(maxWidth: .infinity)
     }
 }
 
