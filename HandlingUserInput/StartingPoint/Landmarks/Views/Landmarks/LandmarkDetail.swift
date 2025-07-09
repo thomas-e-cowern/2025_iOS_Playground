@@ -8,9 +8,17 @@ A view showing the details for a landmark.
 import SwiftUI
 
 struct LandmarkDetail: View {
+    
+    @Environment(ModelData.self) var modelData
     var landmark: Landmark
+    
+    var landmarkIndex: Int {
+        modelData.landmarks.firstIndex(where: { $0.id == landmark.id })!
+    }
 
     var body: some View {
+        @Bindable var modelData = modelData
+        
         ScrollView {
             MapView(coordinate: landmark.locationCoordinate)
                 .frame(height: 300)
@@ -20,8 +28,11 @@ struct LandmarkDetail: View {
                 .padding(.bottom, -130)
 
             VStack(alignment: .leading) {
-                Text(landmark.name)
-                    .font(.title)
+                HStack {
+                    Text(landmark.name)
+                        .font(.title)
+                    FavoriteButton(isSet: $modelData.landmarks[landmarkIndex].isFavorite)
+                }
 
                 HStack {
                     Text(landmark.park)
@@ -45,8 +56,9 @@ struct LandmarkDetail: View {
 }
 
 #Preview {
-    let landmarks = ModelData().landmarks
+    let modelData = ModelData()
     return Group {
-        LandmarkDetail(landmark: landmarks[0])
+        LandmarkDetail(landmark: modelData.landmarks.first!)
+            .environment(modelData)
     }
 }
