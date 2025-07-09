@@ -6,19 +6,52 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
+    
+    @Environment(\.modelContext) var modelContext
+    @State private var sortOrder = [SortDescriptor(\Person.name)]
+    @State private var path = [Person]()
+    @Query var people: [Person]
+    @State private var searchText = ""
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack(path: $path) {
+           PeopleView(searchString: searchText, sortOrder: sortOrder)
+            .navigationTitle("FaceFacts")
+            .navigationDestination(for: Person.self) { person in
+                EditPersonView(person: person)
+            }
+            .toolbar {
+                Button("Add Person", systemImage: "plus", action: addPerson)
+                Menu("Sort", systemImage: "arrow.up.arrow.down") {
+                    Picker("Sort", selection: $sortOrder) {
+                        Text("Name (A-Z)")
+                            .tag([SortDescriptor(\Person.name)])
+
+                        Text("Name (Z-A)")
+                            .tag([SortDescriptor(\Person.name, order: .reverse)])
+                    }
+                }
+            }
+            .searchable(text: $searchText)  
         }
-        .padding()
+    }
+    
+    func addPerson() {
+        let person = Person(name: "", emailAddress: "", details: "")
+        modelContext.insert(person)
+        path.append(person)
     }
 }
 
-#Preview {
+#Preview("Empty List") {
     ContentView()
+        .modelContainer(for: Person.self, inMemory: true)
+}
+
+#Preview("With Data") {
+    ContentView()
+        .modelContainer(for: Person.self, inMemory: true)
 }
