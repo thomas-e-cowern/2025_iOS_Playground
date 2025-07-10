@@ -12,7 +12,7 @@ struct ContentView: View {
     
     @Environment(\.modelContext) var modelContext
     @State private var sortOrder = [SortDescriptor(\Person.name)]
-    @State private var path = [Person]()
+    @State private var path = NavigationPath()
     @Query var people: [Person]
     @State private var searchText = ""
     
@@ -21,7 +21,7 @@ struct ContentView: View {
            PeopleView(searchString: searchText, sortOrder: sortOrder)
             .navigationTitle("FaceFacts")
             .navigationDestination(for: Person.self) { person in
-                EditPersonView(person: person)
+                EditPersonView(navigationPath: $path, person: person)
             }
             .toolbar {
                 Button("Add Person", systemImage: "plus", action: addPerson)
