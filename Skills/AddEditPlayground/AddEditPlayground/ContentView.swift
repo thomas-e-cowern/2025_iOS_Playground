@@ -13,7 +13,9 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @State private var sortOrder = [SortDescriptor(\Person.name)]
     @State private var path = NavigationPath()
+    @State private var showEventsList: Bool = false
     @Query var people: [Person]
+    @Query var events: [Event]
     @State private var searchText = ""
     
     var body: some View {
@@ -23,17 +25,35 @@ struct ContentView: View {
             .navigationDestination(for: Person.self) { person in
                 EditPersonView(navigationPath: $path, person: person)
             }
+            .navigationDestination(isPresented: $showEventsList, destination: {
+                ListEventsView(events: events)
+            })
             .toolbar {
-                Button("Add Person", systemImage: "plus", action: addPerson)
-                Menu("Sort", systemImage: "arrow.up.arrow.down") {
-                    Picker("Sort", selection: $sortOrder) {
-                        Text("Name (A-Z)")
-                            .tag([SortDescriptor(\Person.name)])
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        showEventsList.toggle()
+                    } label: {
+                        Text("Show Events")
+                    }
 
-                        Text("Name (Z-A)")
-                            .tag([SortDescriptor(\Person.name, order: .reverse)])
+                }
+               
+                ToolbarItem {
+                    Button("Add Person", systemImage: "plus", action: addPerson)
+                }
+                
+                ToolbarItem {
+                    Menu("Sort", systemImage: "arrow.up.arrow.down") {
+                        Picker("Sort", selection: $sortOrder) {
+                            Text("Name (A-Z)")
+                                .tag([SortDescriptor(\Person.name)])
+
+                            Text("Name (Z-A)")
+                                .tag([SortDescriptor(\Person.name, order: .reverse)])
+                        }
                     }
                 }
+                
             }
             .searchable(text: $searchText)  
         }
