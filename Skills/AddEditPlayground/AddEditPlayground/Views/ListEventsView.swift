@@ -18,7 +18,7 @@ struct ListEventsView: View {
     var body: some View {
         VStack {
             EventView(searchString: searchText, sortOrder: sortOrder)
-            
+                .searchable(text: $searchText)
         }
         .navigationTitle("Event List")
         .overlay {

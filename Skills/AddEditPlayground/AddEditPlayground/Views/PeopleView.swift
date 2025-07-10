@@ -40,6 +40,11 @@ struct PeopleView: View {
         for offset in offsets {
             let person = people[offset]
             modelContext.delete(person)
+            do {
+                try modelContext.save()
+            } catch {
+                print("Unable to delete people: \(error.localizedDescription)")
+            }
         }
     }
 }

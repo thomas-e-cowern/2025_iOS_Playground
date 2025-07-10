@@ -55,7 +55,12 @@ struct ContentView: View {
                 }
                 
             }
-            .searchable(text: $searchText)  
+            .overlay {
+                if people.isEmpty {
+                    ContentUnavailableView("You don't have any people yet!", systemImage: "person", description: Text("Add a person to begin the list!"))
+                }
+            }
+            .searchable(text: $searchText)
         }
     }
     
