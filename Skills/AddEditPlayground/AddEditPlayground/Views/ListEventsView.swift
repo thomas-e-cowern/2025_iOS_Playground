@@ -10,32 +10,25 @@ import SwiftUI
 struct ListEventsView: View {
     
     @Environment(\.modelContext) var modelContext
-    
+    @State private var searchText = ""
+    @State private var sortOrder = [SortDescriptor(\Event.name)]
+    @State private var showEditEvent: Bool = false
     var events: [Event]
     
     var body: some View {
-        List {
-            ForEach(events, id: \.self) { event in
-                Text(event.name)
-            }
-            .onDelete(perform: deleteEvent)
+        VStack {
+            EventView(searchString: searchText, sortOrder: sortOrder)
+            
         }
         .navigationTitle("Event List")
-    }
-    
-    func deleteEvent(at offsets: IndexSet) {
-        for offset in offsets {
-            let event = events[offset]
-            modelContext.delete(event)
-            do {
-                try modelContext.save()
-            } catch {
-                print("Unable to delete event: \(error.localizedDescription)")
+        .overlay {
+            if events.isEmpty {
+                ContentUnavailableView("You don't have any events yet!", systemImage: "list.clipboard", description: Text("Add an event to begin the list!"))
             }
         }
     }
 }
 
 #Preview {
-    ListEventsView(events: [Event(name: "1909 Party", location: "Clematis"), Event(name: "Superbowl", location: "O'Sheas")])
+    ListEventsView(events: [Event(name: "First Event", location: "Home"), Event(name: "Second Event", location: "School")])
 }

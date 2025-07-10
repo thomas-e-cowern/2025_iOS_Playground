@@ -15,8 +15,13 @@ struct EditEventView: View {
     
     var body: some View {
         Form {
-            TextField("Name of event", text: $event.name)
-            TextField("Location", text: $event.location)
+            Section("Name of event") {
+                TextField("Name of event", text: $event.name)
+            }
+            Section("Location") {
+                TextField("Location", text: $event.location)
+            }
+            
         }
         .navigationTitle(event.name == "" ? "Add Event" : "Edit Event")
         .navigationBarTitleDisplayMode(.inline)
