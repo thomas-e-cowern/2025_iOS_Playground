@@ -11,13 +11,20 @@ struct EditEventView: View {
     
     @Bindable var event: Event
     
+    @Environment(\.modelContext) var modelContext
+    
     var body: some View {
         Form {
             TextField("Name of event", text: $event.name)
             TextField("Location", text: $event.location)
         }
-        .navigationTitle("Edit Event")
+        .navigationTitle(event.name == "" ? "Add Event" : "Edit Event")
         .navigationBarTitleDisplayMode(.inline)
+        .onDisappear() {
+            if event.name.isEmpty {
+                modelContext.delete(event)
+            }
+        }
     }
 }
 

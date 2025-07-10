@@ -66,6 +66,7 @@ struct EditPersonView: View {
         let event = Event(name: "", location: "")
         modelContext.insert(event)
         navigationPath.append(event)
+        
     }
 }
 
