@@ -60,13 +60,17 @@ struct EditPersonView: View {
         .navigationDestination(for: Event.self) { event in
             EditEventView(event: event)
         }
+        .onDisappear() {
+            if person.name.isEmpty {
+                modelContext.delete(person)
+            }
+        }
     }
     
     func addEvent() {
         let event = Event(name: "", location: "")
         modelContext.insert(event)
         navigationPath.append(event)
-        
     }
 }
 
