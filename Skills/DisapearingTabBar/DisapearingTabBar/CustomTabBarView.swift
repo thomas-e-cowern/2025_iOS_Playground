@@ -9,7 +9,22 @@ import SwiftUI
 
 struct CustomTabBarView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            HStack(spacing: 45) {
+                Image(systemName: "house")
+                    .font(.title)
+                Image(systemName: "calendar")
+                    .font(.title)
+                Image(systemName: "bubble")
+                    .font(.title)
+                Image(systemName: "person")
+                    .font(.title)
+            }
+            .foregroundStyle(.white)
+            .padding()
+            .background(Color.gray)
+            .clipShape(.capsule)
+        }
     }
 }
 
