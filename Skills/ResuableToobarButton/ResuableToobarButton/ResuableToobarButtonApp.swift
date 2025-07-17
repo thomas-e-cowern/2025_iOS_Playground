@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct ResuableToobarButtonApp: App {
+    
+    let thanks: [Thanks] = []
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .modelContainer(for: Thanks.self)
         }
     }
 }
