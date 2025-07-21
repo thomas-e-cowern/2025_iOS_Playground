@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LongPressButton: View {
     
+    @GestureState private var pressed = false
+    
     var backgroundColor: Color = .clear
     var foregroundColor: Color = .primary
     var strokeColor: Color = .red
@@ -27,8 +29,18 @@ struct LongPressButton: View {
             )
             .overlay(
                 Circle()
+                    .trim(from: 0, to: pressed ? 1 : 0)
+                    .rotation(.init(degrees: -90))
                     .stroke(strokeColor, style: StrokeStyle(lineWidth: strokeWidth, lineCap: .round))
+                
             )
+            .gesture(
+                LongPressGesture(minimumDuration: 0.5)
+                    .updating($pressed) { new, existing, transaction in
+                        existing = new
+                    }
+            )
+            .animation(.linear, value: pressed)
     }
 }
 
