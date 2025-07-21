@@ -11,10 +11,12 @@ struct LongPressButton: View {
     
     @GestureState private var pressed = false
     
+    let image: Image
     var backgroundColor: Color = .clear
     var foregroundColor: Color = .primary
     var strokeColor: Color = .red
     var strokeWidth: CGFloat = 6
+    var action: () -> Void
     
     var body: some View {
         Image(systemName: "star")
@@ -39,11 +41,14 @@ struct LongPressButton: View {
                     .updating($pressed) { new, existing, transaction in
                         existing = new
                     }
+                    .onEnded { _ in
+                        action()
+                    }
             )
             .animation(.linear, value: pressed)
     }
 }
 
 #Preview {
-    LongPressButton()
+    LongPressButton(image: Image(systemName: "star"), action: {})
 }
