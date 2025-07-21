@@ -42,6 +42,8 @@ struct LongPressButton: View {
                         existing = new
                     }
                     .onEnded { _ in
+                        let generator = UINotificationFeedbackGenerator()
+                        generator.notificationOccurred(.success)
                         action()
                     }
             )

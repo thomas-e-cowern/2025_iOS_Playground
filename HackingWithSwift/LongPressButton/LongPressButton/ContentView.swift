@@ -10,7 +10,9 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            LongPressButton()
+            LongPressButton(image: Image(systemName: "bolt.fill")) {
+                print("Activated!")
+            }
         }
         .padding()
     }
