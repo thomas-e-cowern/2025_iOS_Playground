@@ -18,6 +18,8 @@ struct LongPressButton: View {
         Image(systemName: "star")
             .font(.title)
             .foregroundColor(foregroundColor)
+            .accessibility(addTraits: .isButton)
+            .accessibility(removeTraits: .isImage)
             .padding()
             .background(
                 Circle()
