@@ -9,20 +9,23 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ScrollView {
-            VStack {
+        List {
+            Section(header:
                 StretchingHeader {
                     Image("mountains")
                         .resizable()
                         .scaledToFill()
+
+                    Text("Meh")
                 }
                 .frame(height: 200)
-
-                Text("Photo by David Klaasen")
-                    .font(.title)
+            ) {
+                ForEach(0..<20) { i in
+                    Text("Row \(i)")
+                }
             }
         }
-        .edgesIgnoringSafeArea(.top)
+        .listStyle(InsetGroupedListStyle())
     }
 }
 
