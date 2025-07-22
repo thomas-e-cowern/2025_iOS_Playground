@@ -29,7 +29,3 @@ struct StretchingHeader<Content: View>: View {
         }
     }
 }
-
-#Preview {
-    StretchingHeader<<#Content: View#>>()
-}
