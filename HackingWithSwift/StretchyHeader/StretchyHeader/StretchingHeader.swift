@@ -21,9 +21,13 @@ struct StretchingHeader<Content: View>: View {
         return min(0, -y)
     }
     
+    init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content
+    }
+    
     var body: some View {
         GeometryReader { geo in
-            content()
+            VStack(content: content)
                 .frame(width: geo.size.width, height: height(for: geo))
                 .offset(y: offset(for: geo))
         }
