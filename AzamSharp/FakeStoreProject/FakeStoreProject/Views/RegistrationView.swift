@@ -13,6 +13,10 @@ struct RegistrationView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     
+    private var isValid: Bool {
+        validate().isEmpty
+    }
+    
     private func validate() -> [String] {
         var errors: [String] = []
         
@@ -24,7 +28,7 @@ struct RegistrationView: View {
             errors.append("Email cannot be emtpy.")
         }
         
-        if password.isEmpty{
+        if !password.isValidPassword{
             errors.append("Password must be at least 8 characters long.")
         }
         
@@ -44,7 +48,7 @@ struct RegistrationView: View {
                 // More to come...
             } label: {
                 Text("Register")
-            }
+            }.disabled(!isValid)
 
         }
     }
