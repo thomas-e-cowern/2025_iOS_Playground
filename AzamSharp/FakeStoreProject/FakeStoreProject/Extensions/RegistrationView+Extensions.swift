@@ -9,9 +9,9 @@ import SwiftUI
 
 extension RegistrationView {
     struct RegistrationForm {
-        @State var name: String = ""
-        @State var email: String = ""
-        @State var password: String = ""
+        var name: String = ""
+        var email: String = ""
+        var password: String = ""
         
         var isValid: Bool {
             validate().isEmpty
