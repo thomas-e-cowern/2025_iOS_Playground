@@ -17,7 +17,7 @@ extension RegistrationView {
             validate().isEmpty
         }
         
-        private func validate() -> [String] {
+        func validate() -> [String] {
             var errors: [String] = []
             
             if name.isEmptyOrWhitespace {
