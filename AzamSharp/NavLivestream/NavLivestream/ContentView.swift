@@ -8,17 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    let names = ["Bob", "Alice", "Fred", "Mike", "Stephen"]
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            List(names, id: \.self) { name in
+                NavigationLink {
+                    DetailView(name: name)
+                } label: {
+                    Text(name)
+                }
+
+            }
         }
-        .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    NavigationStack {
+        ContentView()
+    }
 }
