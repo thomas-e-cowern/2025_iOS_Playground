@@ -7,11 +7,18 @@
 
 import Foundation
 
-struct ResistrationResponse: Encodable  {
+struct ResistrationResponse: Codable  {
     let id: Int
     let email: String
     let password: String
     let name: String
     let avatar: URL
     let role: String
+}
+
+struct RegistrationRequest: Codable {
+    let email: String
+    let password: String
+    let name: String
+    let avatar: URL
 }

@@ -11,7 +11,7 @@ struct AuthenticationService {
     
     let httpClient = HTTPClient()
     
-    func register(name: String, email: String, password: String) {
+    func register(name: String, email: String, password: String) -> ResistrationResponse {
         
     }
     
