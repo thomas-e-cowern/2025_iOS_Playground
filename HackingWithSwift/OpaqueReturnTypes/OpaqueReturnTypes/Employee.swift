@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Employee {
+protocol Employee: Equatable {
     
 }
 
@@ -19,6 +19,6 @@ struct Boss: Employee {
     
 }
 
-func login() -> Employee {
+func login() -> some Employee {
     return Coder()
 }
