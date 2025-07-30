@@ -14,7 +14,7 @@ struct TipKitDemoApp: App {
         WindowGroup {
             ContentView()
                 .task {
-                    try? Tips.resetDatastore()
+//                    try? Tips.resetDatastore()
                     try? Tips.configure(
                         [
                             .displayFrequency(.immediate),
