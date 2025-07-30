@@ -12,10 +12,14 @@ struct ContentView: View {
     
     @State private var colors = MockData.colors
     let addColorTip = AddColorTip()
+    let setFavoriteTip = SetFavoriteTip()
     
     var body: some View {
         NavigationStack {
             ScrollView {
+                TipView(setFavoriteTip)
+                    .tipImageStyle(.red)
+                    .tipBackground(.teal.opacity(0.5))
                 ForEach(colors, id: \.self) { color in
                     RoundedRectangle(cornerRadius: 10)
                         .fill(color.gradient)
@@ -23,8 +27,16 @@ struct ContentView: View {
                         .contextMenu {
                             Button("Favorite") {
                                 // More to come...
+                                Task {
+                                    await SetFavoriteTip.setFavoriteEvent.donate()
+                                }
                             }
                         }
+                }
+            }
+            .onAppear {
+                Task {
+                    await SetFavoriteTip.colorsViewVisitedEvent.donate()
                 }
             }
             .padding()
@@ -32,6 +44,7 @@ struct ContentView: View {
             .toolbar {
                 Button {
                     colors.insert(.random, at: 0)
+                    addColorTip.invalidate(reason: .actionPerformed)
                 } label: {
                     Image(systemName: "plus")
                 }
