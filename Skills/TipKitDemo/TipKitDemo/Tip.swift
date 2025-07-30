@@ -14,12 +14,12 @@ struct AddColorTip: Tip {
         Text("Add Color")
     }
     
-    var description: Text {
-        Text("Add color to your list.")
+    var message: Text? {
+        Text("Add a color to your list.")
     }
     
     var image: Image? {
-        Image(systemName: "paintpallete")
+        Image(systemName: "paintpalette.fill")
     }
     
 }
