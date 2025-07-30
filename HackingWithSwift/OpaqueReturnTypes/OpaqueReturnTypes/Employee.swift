@@ -12,7 +12,11 @@ protocol Employee: Equatable {
 }
 
 struct Coder: Employee {
+    var name: String = ""
     
+    init() {
+        print("Name: \(name)")
+    }
 }
 
 struct Boss: Employee {

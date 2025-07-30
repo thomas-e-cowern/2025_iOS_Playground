@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    
+    
     var body: some View {
         Text("Hello, World!")
             .padding()
@@ -15,6 +18,8 @@ struct ContentView: View {
             .foregroundColor(Color.white)
             .onTapGesture {
                 print(type(of: self.body))
+                let employee = login()
+                print(employee)
             }
     }
 }
