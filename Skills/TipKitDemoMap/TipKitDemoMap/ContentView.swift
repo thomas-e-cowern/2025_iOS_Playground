@@ -7,10 +7,13 @@
 
 import SwiftUI
 import MapKit
+import TipKit
 
 struct ContentView: View {
     
     private let images :[String] = ["carrousel.1", "carrousel.2", "carrousel.3", "carrousel.4"]
+    
+    private let popoverTip = PopoverTipView()
     
     @State private var currentIndex:Int = 0
     @GestureState private var dragOffset:CGFloat = 0
@@ -24,13 +27,14 @@ struct ContentView: View {
                         .ignoresSafeArea()
                 }
                 .overlay (
-                    getCarouselImage()
-                    , alignment: .bottom)
+                    getCarouselImage(),
+                    alignment: .bottom
+                )
                 
                 .overlay(
-                    getInfoButton()
-                    ,alignment: .topTrailing )
-                
+                    getInfoButton(),
+                    alignment: .topTrailing
+                )
                 .gesture(
                     DragGesture()
                         .onEnded({ value in
@@ -95,10 +99,19 @@ struct ContentView: View {
 
             }
             .padding()
+            .popoverTip(popoverTip)
             
         }
 }
 
 #Preview {
     ContentView()
+        .task {
+            try? Tips.resetDatastore()
+            
+            try? Tips.configure([
+                .displayFrequency(.immediate),
+                .datastoreLocation(.applicationDefault)
+            ])
+        }
 }
