@@ -11,6 +11,7 @@ import TipKit
 
 struct ContentView: View {
     
+    private var inlinePopoverTip = InlinePopoverTipView()
     private let images :[String] = ["carrousel.1", "carrousel.2", "carrousel.3", "carrousel.4"]
     
     private let popoverTip = PopoverTipView()
@@ -99,7 +100,8 @@ struct ContentView: View {
 
             }
             .padding()
-            .popoverTip(popoverTip)
+//            .popoverTip(popoverTip)
+            .popoverTip(inlinePopoverTip)
             
         }
 }
