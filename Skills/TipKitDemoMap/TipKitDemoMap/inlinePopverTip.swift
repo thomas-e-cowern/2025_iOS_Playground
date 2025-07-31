@@ -9,9 +9,20 @@ import SwiftUI
 import TipKit
 
 struct inlinePopverTip: View {
+    
+    private var inlinePopoverTip = InlinePopoverTipView()
+    @State private var showAlert: Bool = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+                .popoverTip(inlinePopoverTip)
+        }
+        .alert("Alert!", isPresented: $showAlert) {
+            Button("Ok") {  }
+        }
     }
+        
 }
 
 struct InlinePopoverTipView: Tip {
@@ -39,7 +50,7 @@ struct InlinePopoverTipView: Tip {
     
     @Sendable
     func executeAction() {
-        print("Executed....")
+        print("Action executed")
     }
 }
 
