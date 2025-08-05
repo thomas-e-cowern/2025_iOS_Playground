@@ -31,11 +31,7 @@ struct ContentView: View {
                 
                 let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
                 
-                UNUserNotificationCenter.current().add(request) { error in
-                    if let error {
-                        print(error.localizedDescription)
-                    }
-                }
+                UNUserNotificationCenter.current().add(request)
             }
         }
         .padding()
