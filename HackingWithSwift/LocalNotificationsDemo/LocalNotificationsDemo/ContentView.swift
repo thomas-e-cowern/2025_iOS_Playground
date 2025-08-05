@@ -22,7 +22,20 @@ struct ContentView: View {
             }
             
             Button("Schedule Notification") {
+                let content = UNMutableNotificationContent()
+                content.title = "Are you thankful for anything?"
+                content.subtitle = "Add something to your Thankful List..."
+                content.sound = UNNotificationSound.default
                 
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+                
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                
+                UNUserNotificationCenter.current().add(request) { error in
+                    if let error {
+                        print(error.localizedDescription)
+                    }
+                }
             }
         }
         .padding()
