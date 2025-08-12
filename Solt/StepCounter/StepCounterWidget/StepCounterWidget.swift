@@ -50,7 +50,7 @@ struct StepCounterWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 4) {
             Text("4,790")
             Text("steps")
             Spacer()
@@ -60,7 +60,21 @@ struct StepCounterWidgetEntryView : View {
                 Text("176 days")
             }
             
-            Rectangle()
+            VStack(spacing: 2) {
+                HStack(spacing: 3) {
+                    ForEach(1..<6, id: \.self) { _ in
+                        Rectangle()
+                            .frame(maxHeight: 5)
+                    }
+                }
+                
+                HStack(spacing: 3) {
+                    ForEach(1..<6, id: \.self) { _ in
+                        Rectangle()
+                            .frame(maxHeight: 5)
+                    }
+                }
+            }
         }
     }
 }
