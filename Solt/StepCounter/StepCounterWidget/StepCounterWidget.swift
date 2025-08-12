@@ -50,12 +50,17 @@ struct StepCounterWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        VStack {
-            Text("Time:")
-            Text(entry.date, style: .time)
-
-            Text("Favorite Emoji:")
-            Text(entry.configuration.favoriteEmoji)
+        VStack(alignment: .leading) {
+            Text("4,790")
+            Text("steps")
+            Spacer()
+            
+            HStack {
+                Image(systemName: "shoeprints.fill")
+                Text("176 days")
+            }
+            
+            Rectangle()
         }
     }
 }
