@@ -66,7 +66,7 @@ struct StepCounterWidgetEntryView : View {
             .font(.system(size: 14).monospaced())
             .padding(.bottom, 4)
             
-            StepProgressView()
+            StepProgressView(progress: 4)
             
         }
         .foregroundStyle(.green)
@@ -74,22 +74,22 @@ struct StepCounterWidgetEntryView : View {
 }
 
 struct StepProgressView: View {
+    
+    let progress: Int
+    let rows: Int = 2
+    let segmentsPerRow: Int = 5
+    
     var body: some View {
         VStack(spacing: 2) {
-            HStack(spacing: 3) {
-                ForEach(1..<6, id: \.self) { _ in
-                    Rectangle()
-                        .frame(maxHeight: 5)
+            ForEach(1...rows, id: \.self) { row in
+                HStack(spacing: 3) {
+                    ForEach(1...segmentsPerRow, id: \.self) { _ in
+                        Rectangle()
+                            .frame(maxHeight: 5)
+                            .foregroundStyle(.secondary)
+                    }
                 }
             }
-            
-            HStack(spacing: 3) {
-                ForEach(1..<6, id: \.self) { _ in
-                    Rectangle()
-                        .frame(maxHeight: 5)
-                }
-            }
-            .foregroundStyle(.secondary)
         }
     }
 }
