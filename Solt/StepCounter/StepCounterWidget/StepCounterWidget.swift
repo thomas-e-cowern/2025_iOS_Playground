@@ -55,6 +55,7 @@ struct StepCounterWidgetEntryView : View {
                 .font(.system(size: 24, weight: .bold).monospaced())
             Text("steps")
                 .font(.system(size: 20).monospaced())
+                .foregroundStyle(.secondary)
             
             Spacer()
             
@@ -79,8 +80,10 @@ struct StepCounterWidgetEntryView : View {
                             .frame(maxHeight: 5)
                     }
                 }
+                .foregroundStyle(.secondary)
             }
         }
+        .foregroundStyle(.green)
     }
 }
 
@@ -90,7 +93,7 @@ struct StepCounterWidget: Widget {
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
             StepCounterWidgetEntryView(entry: entry)
-                .containerBackground(.fill.tertiary, for: .widget)
+                .containerBackground(.black, for: .widget)
         }
     }
 }
