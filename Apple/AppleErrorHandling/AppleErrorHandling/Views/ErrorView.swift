@@ -12,7 +12,20 @@ struct ErrorView: View {
     let errorWrapper: ErrorWrapper
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("An error has occurred!")
+                .font(.title)
+                .padding(.bottom)
+            Text(errorWrapper.error.localizedDescription)
+                .font(.headline)
+            Text(errorWrapper.guidance)
+                .font(.caption)
+                .padding(.top)
+            Spacer()
+        }
+        .padding()
+        .background(.ultraThinMaterial)
+        .cornerRadius(16)
     }
 }
 
