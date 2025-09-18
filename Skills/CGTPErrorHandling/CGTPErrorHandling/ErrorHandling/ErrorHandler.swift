@@ -18,8 +18,9 @@ struct UserError: Identifiable, Equatable {
 
 /// Observable handler you can put in the environment
 @MainActor
-final class ErrorHandler: ObservableObject {
-    @Published var current: UserError?
+@Observable
+final class ErrorHandler {
+    var current: UserError?
 
     /// Call this from anywhere you catch an Error
     func handle(_ error: Error, context: String? = nil) {
@@ -90,28 +91,40 @@ enum AppError: Error {
 
     var title: String {
         switch self {
-        case .validation: return "Check Your Input"
-        case .notFound:    return "Not Found"
-        case .unauthorized:return "Sign In Required"
-        case .unknown:     return "Oops"
+        case .validation: 
+            return "Check Your Input"
+        case .notFound:    
+            return "Not Found"
+        case .unauthorized:
+            return "Sign In Required"
+        case .unknown:     
+            return "Oops"
         }
     }
 
     var message: String {
         switch self {
-        case .validation(let msg): return msg
-        case .notFound:            return "We couldn’t find what you were looking for."
-        case .unauthorized:        return "You don’t have permission to do that."
-        case .unknown:             return "An unexpected error occurred."
+        case .validation(let msg):
+            return msg
+        case .notFound:            
+            return "We couldn’t find what you were looking for."
+        case .unauthorized:        
+            return "You don’t have permission to do that."
+        case .unknown:             
+            return "An unexpected error occurred."
         }
     }
 
     var suggestion: String {
         switch self {
-        case .validation: return "Please fix the highlighted fields and try again."
-        case .notFound:   return "Try a different item or refresh."
-        case .unauthorized:return "Please sign in and try again."
-        case .unknown:    return "Please try again."
+        case .validation: 
+            return "Please fix the highlighted fields and try again."
+        case .notFound:   
+            return "Try a different item or refresh."
+        case .unauthorized:
+            return "Please sign in and try again."
+        case .unknown:    
+            return "Please try again."
         }
     }
 }
