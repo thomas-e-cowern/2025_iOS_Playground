@@ -17,7 +17,7 @@ struct ErrorAlert: Identifiable {
 @Observable
 class ErrorHandling {
     
-    private var currentAlert: ErrorAlert?
+    var currentAlert: ErrorAlert?
     
     func handle(error: Error) {
         currentAlert = ErrorAlert(message: error.localizedDescription)
