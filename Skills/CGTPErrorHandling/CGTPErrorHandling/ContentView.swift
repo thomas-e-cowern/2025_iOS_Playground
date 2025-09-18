@@ -30,12 +30,42 @@ struct ContentView: View {
             Button("Simulate validation error") {
                 errorHandler.handle(AppError.validation(message: "Please enter a valid email address."))
             }
+            
+            Button("Simulate offline") {
+                Task {
+                    do {
+                        _ = try await fakeNoInternet()
+                    } catch {
+                        errorHandler.handle(error)
+                    }
+                }
+            }
+            
+            Button("Simulate timed out") {
+                Task {
+                    do {
+                        _ = try await fakeTooLong()
+                    } catch {
+                        errorHandler.handle(error)
+                    }
+                }
+            }
         }
         .padding()
     }
     
     private func fakeNetworkCall() async throws -> String {
         try await Task.sleep(nanoseconds: 300_000_000)
+        throw URLError(.timedOut)
+    }
+    
+    private func fakeNoInternet() async throws -> String {
+        try await Task.sleep(nanoseconds: 300_000_000)
+        throw URLError(.notConnectedToInternet)
+    }
+    
+    private func fakeTooLong() async throws -> String {
+        try await Task.sleep(nanoseconds: 900_000_000)
         throw URLError(.timedOut)
     }
 }
