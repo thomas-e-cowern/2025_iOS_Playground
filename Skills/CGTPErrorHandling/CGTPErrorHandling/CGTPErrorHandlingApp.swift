@@ -11,18 +11,13 @@ import SwiftUI
 struct CGTPErrorHandlingApp: App {
     
     @State private var errorHandling = ErrorHandling()
+    @State private var errorHandler = ErrorHandler()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(errorHandling)
-                .alert(item: $errorHandling.currentAlert) { alert in
-                    Alert(
-                        title: Text("Error"),
-                        message: Text(alert.message),
-                        dismissButton: .default(Text("OK"), action: alert.dismissAction)
-                    )
-                }
+                .environment(errorHandler)
+                .errorAlerts(using: errorHandler)
         }
     }
 }
