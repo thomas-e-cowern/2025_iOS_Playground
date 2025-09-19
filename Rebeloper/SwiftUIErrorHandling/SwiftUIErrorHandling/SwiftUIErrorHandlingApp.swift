@@ -15,8 +15,9 @@ struct SwiftUIErrorHandlingApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .modifier(ErrorAlertsViewModifier())
-                .environment(\.errorAlerts, errorAlerts)
+//                .modifier(ErrorAlertsViewModifier())
+//                .environment(\.errorAlerts, errorAlerts)
+                .usesErrorAlerts()
         }
         
     }
