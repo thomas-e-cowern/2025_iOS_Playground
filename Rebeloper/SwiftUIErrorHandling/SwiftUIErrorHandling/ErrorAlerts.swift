@@ -65,11 +65,22 @@ struct ErrorAlertsViewModifier: ViewModifier {
                     isPresented = true
                 }
             }
-
     }
 }
 
-#Preview {
-    Text("Hello, world!")
-        .modifier(ErrorAlertsViewModifier())
+struct UsesErrorAlertVIewModifier: ViewModifier {
+    
+    @State private var errorAlerts = ErrorAlerts()
+    
+    func body(content: Content) -> some View {
+        content
+            .modifier(ErrorAlertsViewModifier())
+            .environment(\.errorAlerts, errorAlerts)
+    }
+}
+
+extension View {
+    func usesErrorAlerts() -> some View {
+        modifier(UsesErrorAlertVIewModifier())
+    }
 }
