@@ -24,6 +24,18 @@ struct ContentView: View {
             } label: {
                 Text("Network Error")
             }
+            
+            Button {
+                errorAlerts.present(NetworkError.unauthorized, title: NetworkError.unauthorized.title)
+            } label: {
+                Text("Network Error: Unauthorized")
+            }
+
+            Button {
+                errorAlerts.present(NetworkError.notFound)
+            } label: {
+                Text("Not found")
+            }
 
         }
         .padding()
