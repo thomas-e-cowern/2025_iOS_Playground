@@ -8,12 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var isErrorPresented: Bool = false
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button {
+                isErrorPresented.toggle()
+            } label: {
+                Text("Present Error")
+            }
+            .alert("Error", isPresented: $isErrorPresented) {
+                Button("Ok") {
+                    
+                }
+            } message: {
+                Text(MyError.custom.localizedDescription)
+            }
+
         }
         .padding()
     }
