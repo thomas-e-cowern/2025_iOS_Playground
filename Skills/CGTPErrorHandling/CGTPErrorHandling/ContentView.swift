@@ -50,6 +50,16 @@ struct ContentView: View {
                     }
                 }
             }
+            
+            Button("Simulate cannot find host") {
+                Task {
+                    do {
+                        _ = try await fakeCanfFindHost()
+                    } catch {
+                        errorHandler.handle(error)
+                    }
+                }
+            }
         }
         .padding()
     }
@@ -67,6 +77,11 @@ struct ContentView: View {
     private func fakeTooLong() async throws -> String {
         try await Task.sleep(nanoseconds: 900_000_000)
         throw URLError(.timedOut)
+    }
+    
+    private func fakeCanfFindHost() async throws -> String {
+        try await Task.sleep(nanoseconds: 900_000_000)
+        throw URLError(.cannotFindHost)
     }
 }
 
