@@ -9,21 +9,20 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var isErrorPresented: Bool = false
+    @Environment(\.errorAlerts) private var errorAlerts
     
     var body: some View {
         VStack {
             Button {
-                isErrorPresented.toggle()
+                errorAlerts.present(MyError.custom)
             } label: {
-                Text("Present Error")
+                Text("Present Custom Error")
             }
-            .alert("Error", isPresented: $isErrorPresented) {
-                Button("Ok") {
-                    
-                }
-            } message: {
-                Text(MyError.custom.localizedDescription)
+
+            Button {
+                errorAlerts.present(MyError.networkError, title: MyError.networkError.title ?? "Error")
+            } label: {
+                Text("Network Error")
             }
 
         }
@@ -33,4 +32,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environment(ErrorAlerts())
 }
