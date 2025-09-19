@@ -13,7 +13,7 @@ enum NetworkError: Error {
     case invalidResponse
     case unauthorized
     case notFound
-    case undefined(Data, HTTPURLResponse)
+    case undefined(data: String, response: Int)
 }
 
 extension NetworkError: LocalizedError {
@@ -31,7 +31,24 @@ extension NetworkError: LocalizedError {
         case .notFound:
             return NSLocalizedString("Resource not found (404).", comment: "notFoundError")
         case .undefined(let data, let response):
-            return "An unexpected error occurred. Status code: \(response.statusCode)"
+            return "An unexpected error occurred. Status code: \(response).  Data: \(data)"
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .badRequest:
+            return "Bad Request"
+        case .decodingError(_):
+            return "Decoding Error"
+        case .invalidResponse:
+            return "Invaldi Response"
+        case .unauthorized:
+            return "Unathorized Title"
+        case .notFound:
+            return "Not Found"
+        case .undefined(data: let data, response: let response):
+            return "Undefinded Error. Status code: \(response).  Data: \(data)"
         }
     }
 }
