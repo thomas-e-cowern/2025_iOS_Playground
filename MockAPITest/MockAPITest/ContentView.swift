@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    let mockCapsule: [CapsuleElement] = load("CapsuleData.json")
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            ForEach(mockCapsule, id: \.self) { capsule in
+                Text(capsule.status)
+            }
         }
         .padding()
     }
