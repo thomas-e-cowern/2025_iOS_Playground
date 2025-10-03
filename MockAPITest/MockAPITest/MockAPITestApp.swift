@@ -12,6 +12,7 @@ struct MockAPITestApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.userRepository, MockUserRepository()) 
         }
     }
 }
