@@ -19,3 +19,19 @@ struct UserNP {
 
 // requires use of nil for passwrod
 let bob = UserNP(name: "Bob", password: nil)
+
+
+let newScore: Int? = nil
+let maxScore = 50
+
+if newScore == maxScore {
+    print("You matched the high score!")
+}
+
+
+struct UserEmpty { }
+let a: UserEmpty? = UserEmpty()
+let b: UserEmpty? = UserEmpty()
+// print(a == b) fails becuase UserEmpty is not equatable
+
+
