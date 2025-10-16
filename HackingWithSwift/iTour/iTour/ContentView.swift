@@ -13,29 +13,29 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     
     @State private var path = [Destination]()
-    
-    @Query var destinations: [Destination]
+    @State private var sortOrder = SortDescriptor(\Destination.name)
     
     var body: some View {
         VStack {
             NavigationStack(path: $path) {
-                List {
-                    ForEach(destinations) { destination in
-                        NavigationLink(value: destination) {
-                            VStack(alignment: .leading) {
-                                Text(destination.name)
-                                    .font(.headline)
-                                
-                                Text(destination.date.formatted(date: .long, time: .shortened))
-                            }
-                        }
-                    }
-                    .onDelete(perform: deleteDestinations)
-                }
+                DestinationListingView(sort: sortOrder)
                 .navigationTitle("iTour")
                 .toolbar {
-                    Button("Add Samples", action: addSamples)
+//                    Button("Add Samples", action: addSamples)
                     Button("Add Destination", systemImage: "plus", action: addDestination)
+                    Menu("Sort", systemImage: "arrow.up.arrow.down") {
+                        Picker("Sort", selection: $sortOrder) {
+                            Text("Name")
+                                .tag(SortDescriptor(\Destination.name))
+
+                            Text("Priority")
+                                .tag(SortDescriptor(\Destination.priority, order: .reverse))
+
+                            Text("Date")
+                                .tag(SortDescriptor(\Destination.date))
+                        }
+                        .pickerStyle(.inline)
+                    }
                 }
                 .navigationDestination(for: Destination.self) { destination in
                     EditDestinationView(destination: destination)
@@ -53,13 +53,6 @@ struct ContentView: View {
         modelContext.insert(rome)
         modelContext.insert(florence)
         modelContext.insert(naples)
-    }
-    
-    func deleteDestinations(_ indexSet: IndexSet) {
-        for index in indexSet {
-            let destination = destinations[index]
-            modelContext.delete(destination)
-        }
     }
     
     func addDestination() {
