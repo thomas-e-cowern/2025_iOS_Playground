@@ -17,6 +17,8 @@ private extension String {
 struct EditDestinationView: View {
     @Environment(\.modelContext) private var modelContext
     @Bindable var destination: Destination
+    
+    @State private var newSightName = ""
 
     var body: some View {
         Form {
@@ -32,6 +34,19 @@ struct EditDestinationView: View {
                 }
                 .pickerStyle(.segmented)
             }
+            
+            Section("Sights") {
+                ForEach(destination.sights) { sight in
+                    Text(sight.name)
+                }
+                .onDelete(perform: deleteSight)
+
+                HStack {
+                    TextField("Add a new sight in \(destination.name)", text: $newSightName)
+
+                    Button("Add", action: addSight)
+                }
+            }
         }
         .navigationTitle(destination.name.isBlank ? "Add Destination" : "Edit Destination")
         .navigationBarTitleDisplayMode(.inline)
@@ -44,9 +59,30 @@ struct EditDestinationView: View {
             }
         }
     }
+    
+    func addSight() {
+        guard newSightName.isEmpty == false else { return }
+
+        withAnimation {
+            let sight = Sight(name: newSightName)
+            destination.sights.append(sight)
+            newSightName = ""
+        }
+    }
+    
+    func deleteSight(_ indexSet: IndexSet) {
+        for index in indexSet.sorted(by: >) {
+            let sightToDelete = destination.sights[index]
+            modelContext.delete(sightToDelete)
+            destination.sights.remove(at: index)
+            do {
+                try modelContext.save()
+            } catch {
+                print("Failed to delete sight in EditDestinationView: deleteSight")
+            }
+        }
+    }
 }
-
-
 
 #Preview {
     do {
