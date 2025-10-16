@@ -14,6 +14,10 @@ struct DestinationListingView: View {
     
     @Query var destinations: [Destination]
     
+    init(sort: SortDescriptor<Destination>) {
+        _destinations = Query(sort: [sort])
+    }
+    
     var body: some View {
         List {
             ForEach(destinations) { destination in
@@ -39,5 +43,5 @@ struct DestinationListingView: View {
 }
 
 #Preview {
-    DestinationListingView()
+    DestinationListingView(sort: SortDescriptor(\Destination.name))
 }
