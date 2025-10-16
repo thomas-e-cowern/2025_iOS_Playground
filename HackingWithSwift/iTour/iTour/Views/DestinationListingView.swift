@@ -14,10 +14,6 @@ struct DestinationListingView: View {
     
     @Query var destinations: [Destination]
     
-//    init(sort: SortDescriptor<Destination>) {
-//        _destinations = Query(sort: [sort])
-//    }
-    
     init(sort: SortDescriptor<Destination>, searchString: String) {
         _destinations = Query(filter: #Predicate {
             if searchString.isEmpty {
