@@ -47,6 +47,14 @@ struct ContentView: View {
                     print("There was an error getting headlines and messages: \(error.localizedDescription)")
                 }
             }
+            .task {
+                do { 
+                    let city = try await networkManager.fetch(.city)
+                    print(city)
+                } catch {
+                    print("Error getting cities: \(error.localizedDescription)")
+                }
+            }
         }
     }
 }
