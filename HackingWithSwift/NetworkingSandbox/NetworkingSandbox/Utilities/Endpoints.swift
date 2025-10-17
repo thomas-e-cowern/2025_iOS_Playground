@@ -7,9 +7,15 @@
 
 import Foundation
 
-struct Endpoint {
+struct Endpoint<T: Decodable> {
     var url: URL
+    var type: T.Type
+}
 
-    static let headlines = Endpoint(url: URL(string: "https://hws.dev/headlines.json")!)
-    static let messages = Endpoint(url: URL(string: "https://hws.dev/messages.json")!)
+extension Endpoint where T == [News] {
+    static let headlines = Endpoint(url: URL(string: "https://hws.dev/headlines.json")!, type: [News].self)
+}
+
+extension Endpoint where T == [Message] {
+    static let messages = Endpoint(url: URL(string: "https://hws.dev/messages.json")!, type: [Message].self)
 }
