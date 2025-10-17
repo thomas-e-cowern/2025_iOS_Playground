@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    let networkManager = NetworkManager()
+    
     @State private var headlines = [News]()
     @State private var messages = [Message]()
     
@@ -39,16 +41,13 @@ struct ContentView: View {
             }
             .task {
                 do {
-                    let headlinesURL = URL(string: "https://hws.dev/headlines.json")!
-                    let messagesURL = URL(string: "https://hws.dev/messages.json")!
-
-                    let (headlineData, _) = try await URLSession.shared.data(from: headlinesURL)
-                    let (messageData, _) = try await URLSession.shared.data(from: messagesURL)
+                    let headlineData = try await networkManager.fetch(.headlines)
+                    let messageData = try await networkManager.fetch(.messages)
 
                     headlines = try JSONDecoder().decode([News].self, from: headlineData)
                     messages = try JSONDecoder().decode([Message].self, from: messageData)
                 } catch {
-                    print("Error handling is a smart move!")
+                    print("There was an error getting headlines and messages: \(error.localizedDescription)")
                 }
             }
         }
