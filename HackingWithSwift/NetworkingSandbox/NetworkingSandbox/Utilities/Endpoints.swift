@@ -10,6 +10,8 @@ import Foundation
 struct Endpoint<T: Decodable> {
     var url: URL
     var type: T.Type
+    var method = HTTPMethod.get
+    var headers = [String: String]()
 }
 
 extension Endpoint where T == [News] {
