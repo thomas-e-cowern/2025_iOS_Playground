@@ -9,8 +9,8 @@ import Foundation
 
 struct NetworkManager {
     func fetch<T>(_ resource: Endpoint<T>) async throws -> T {
-        var request = URLRequest(url: resource.url)
-        var (data, response) = try await URLSession.shared.data(for: request)
+        let request = URLRequest(url: resource.url)
+        let (data, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
             print("Invalid response type")
