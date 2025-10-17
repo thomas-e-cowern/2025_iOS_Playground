@@ -30,7 +30,7 @@ struct NetworkManager {
         request.allHTTPHeaderFields = [:]
         request.httpBody = data
         request.allHTTPHeaderFields = resource.headers
-        let (data, response) = try await environment.session.data(for: request)
+        var (data, response) = try await environment.session.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
             print("Invalid response type")
@@ -40,6 +40,15 @@ struct NetworkManager {
         if (200...299).contains(httpResponse.statusCode) {
             // Request was successful
             print("Status code: \(httpResponse.statusCode)")
+            
+            if let keyPath = resource.keyPath {
+                if let rootObject = try JSONSerialization.jsonObject(with: data) as? NSDictionary {
+                    if let nestedObject = rootObject.value(forKeyPath: keyPath) {
+                        data = try JSONSerialization.data(withJSONObject: nestedObject, options: .fragmentsAllowed)
+                    }
+                }
+            }
+            
             // Process data
             let decoder = JSONDecoder()
             return try decoder.decode(T.self, from: data)

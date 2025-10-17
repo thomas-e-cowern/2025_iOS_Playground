@@ -12,6 +12,7 @@ struct Endpoint<T: Decodable> {
     var type: T.Type
     var method = HTTPMethod.get
     var headers = [String: String]()
+    var keyPath: String?
 }
 
 extension Endpoint where T == [News] {
@@ -20,4 +21,8 @@ extension Endpoint where T == [News] {
 
 extension Endpoint where T == [Message] {
     static let messages = Endpoint(path: "messages.json", type: [Message].self)
+}
+
+extension Endpoint where T == String {
+    static let city = Endpoint(path: "nested.json", type: String.self, keyPath: "response.user.address.city")
 }
