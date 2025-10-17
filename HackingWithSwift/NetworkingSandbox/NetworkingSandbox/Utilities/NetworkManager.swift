@@ -1,0 +1,31 @@
+//
+//  NetworkManager.swift
+//  NetworkingSandbox
+//
+//  Created by Thomas Cowern on 10/17/25.
+//
+
+import Foundation
+
+struct NetworkManager {
+    func fetch(_ resource: Endpoint) async throws -> Data {
+        var request = URLRequest(url: resource.url)
+        var (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            print("Invalid response type")
+            throw URLError(.badServerResponse)
+        }
+        
+        if (200...299).contains(httpResponse.statusCode) {
+            // Request was successful
+            print("Status code: \(httpResponse.statusCode)")
+            // Process data
+            return data
+        } else {
+            // Server returned an error status code
+            print("Server error: \(httpResponse.statusCode)")
+            throw URLError(.badServerResponse)
+        }
+    }
+}
