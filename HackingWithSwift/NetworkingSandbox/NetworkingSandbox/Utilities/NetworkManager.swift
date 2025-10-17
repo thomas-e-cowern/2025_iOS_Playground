@@ -49,4 +49,28 @@ struct NetworkManager {
             throw URLError(.badServerResponse)
         }
     }
+    
+    // Adds retry support if desired
+    func fetch<T>(_ resource: Endpoint<T>, with data: Data? = nil, attempts: Int, retryDelay: Double = 1) async throws -> T {
+        do {
+            print("Attempting to fetch (Attempts remaining: \(attempts)")
+            return try await fetch(resource, with: data)
+        } catch {
+            if attempts > 1 {
+                try await Task.sleep(for: .milliseconds(Int(retryDelay * 1000)))
+                return try await fetch(resource, with: data, attempts: attempts - 1, retryDelay: retryDelay)
+            } else {
+                throw error
+            }
+        }
+    }
+    
+    // Returns a default value - which doesn't exist at this point.
+    func fetch<T>(_ resource: Endpoint<T>, with data: Data? = nil, defaultValue: T) async throws -> T {
+        do {
+            return try await fetch(resource, with: data)
+        } catch {
+            return defaultValue
+        }
+    }
 }
