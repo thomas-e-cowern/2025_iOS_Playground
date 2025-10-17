@@ -7,9 +7,22 @@
 
 import Foundation
 
+enum HTTPMethod: String {
+    case delete, get, patch, post, put
+
+    var rawValue: String {
+        String(describing: self).uppercased()
+    }
+}
+
 struct NetworkManager {
-    func fetch<T>(_ resource: Endpoint<T>) async throws -> T {
-        let request = URLRequest(url: resource.url)
+    
+    func fetch<T>(_ resource: Endpoint<T>, with data: Data? = nil) async throws -> T {
+        var request = URLRequest(url: resource.url)
+        request.httpMethod = resource.method.rawValue
+        request.allHTTPHeaderFields = [:]
+        request.httpBody = data
+        request.allHTTPHeaderFields = resource.headers
         let (data, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
