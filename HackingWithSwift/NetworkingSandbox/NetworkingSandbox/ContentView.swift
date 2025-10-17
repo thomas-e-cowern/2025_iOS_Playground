@@ -22,18 +22,18 @@ struct ContentView: View {
                         VStack(alignment: .leading) {
                             Text(headline.title)
                                 .font(.headline)
-
+                            
                             Text(headline.strap)
                         }
                     }
                 }
-
+                
                 Section("Messages") {
                     ForEach(messages) { message in
                         VStack(alignment: .leading) {
                             Text(message.from)
                                 .font(.headline)
-
+                            
                             Text(message.text)
                         }
                     }
@@ -41,11 +41,8 @@ struct ContentView: View {
             }
             .task {
                 do {
-                    let headlineData = try await networkManager.fetch(.headlines)
-                    let messageData = try await networkManager.fetch(.messages)
-
-                    headlines = try JSONDecoder().decode([News].self, from: headlineData)
-                    messages = try JSONDecoder().decode([Message].self, from: messageData)
+                    headlines = try await networkManager.fetch(.headlines)
+                    messages = try await networkManager.fetch(.messages)
                 } catch {
                     print("There was an error getting headlines and messages: \(error.localizedDescription)")
                 }
