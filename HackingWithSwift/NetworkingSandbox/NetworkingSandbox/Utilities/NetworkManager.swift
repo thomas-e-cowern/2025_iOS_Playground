@@ -8,7 +8,7 @@
 import Foundation
 
 struct NetworkManager {
-    func fetch(_ resource: Endpoint) async throws -> Data {
+    func fetch<T>(_ resource: Endpoint<T>) async throws -> T {
         var request = URLRequest(url: resource.url)
         var (data, response) = try await URLSession.shared.data(for: request)
         
@@ -21,7 +21,8 @@ struct NetworkManager {
             // Request was successful
             print("Status code: \(httpResponse.statusCode)")
             // Process data
-            return data
+            let decoder = JSONDecoder()
+            return try decoder.decode(T.self, from: data)
         } else {
             // Server returned an error status code
             print("Server error: \(httpResponse.statusCode)")
