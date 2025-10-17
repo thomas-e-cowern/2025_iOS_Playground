@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let networkManager = NetworkManager()
+    @Environment(\.networkManager) var networkManager
     
     @State private var headlines = [News]()
     @State private var messages = [Message]()
