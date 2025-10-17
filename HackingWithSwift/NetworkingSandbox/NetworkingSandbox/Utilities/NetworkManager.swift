@@ -17,13 +17,20 @@ enum HTTPMethod: String {
 
 struct NetworkManager {
     
+    var environment: AppEnvironment
+    
     func fetch<T>(_ resource: Endpoint<T>, with data: Data? = nil) async throws -> T {
-        var request = URLRequest(url: resource.url)
+        
+        guard let url = URL(string: resource.path, relativeTo: environment.baseURL) else {
+            throw URLError(.unsupportedURL)
+        }
+        
+        var request = URLRequest(url: url)
         request.httpMethod = resource.method.rawValue
         request.allHTTPHeaderFields = [:]
         request.httpBody = data
         request.allHTTPHeaderFields = resource.headers
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await environment.session.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
             print("Invalid response type")
