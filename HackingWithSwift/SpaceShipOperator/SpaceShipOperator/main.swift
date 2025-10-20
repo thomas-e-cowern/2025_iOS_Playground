@@ -9,17 +9,29 @@ import Foundation
 
 infix operator <=>
 
-func <=><T: Comparable>(lhs: T, rhs: T) -> Int {
+//func <=><T: Comparable>(lhs: T, rhs: T) -> Int {
+//    if lhs < rhs {
+//        return -1
+//    }
+//
+//    if lhs > rhs {
+//        return 1
+//    }
+//
+//    return 0
+//}
+func <=><T: Comparable>(lhs: T, rhs: T) -> ComparisonResult {
     if lhs < rhs {
-        return -1
+        return .orderedAscending
     }
     
     if lhs > rhs {
-        return 1
+        return .orderedDescending
     }
     
-    return 0
+    return .orderedSame
 }
+
 
 let left = 7
 let right = 6
