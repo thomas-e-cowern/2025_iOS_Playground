@@ -37,4 +37,4 @@ let left = 7
 let right = 6
 
 let result = left <=> right
-print(result)
+print(result.rawValue)
