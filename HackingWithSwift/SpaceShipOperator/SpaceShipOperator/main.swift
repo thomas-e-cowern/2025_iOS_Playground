@@ -20,3 +20,9 @@ func <=><T: Comparable>(lhs: T, rhs: T) -> Int {
     
     return 0
 }
+
+let left = 7
+let right = 6
+
+let result = left <=> right
+print(result)
