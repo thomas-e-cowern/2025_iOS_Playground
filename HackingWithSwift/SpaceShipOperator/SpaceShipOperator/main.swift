@@ -7,5 +7,16 @@
 
 import Foundation
 
-print("Hello, World!")
+infix operator <=>
 
+func <=><T: Comparable>(lhs: T, rhs: T) -> Int {
+    if lhs < rhs {
+        return -1
+    }
+    
+    if lhs > rhs {
+        return 1
+    }
+    
+    return 0
+}
