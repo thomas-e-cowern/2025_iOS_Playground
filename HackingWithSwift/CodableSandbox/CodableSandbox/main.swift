@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Employee: Decodable {
+struct Employee {
     var id: Int
     var name: String
     var age: Int
@@ -25,6 +25,16 @@ extension Employee: Decodable {
         let name: String
         let currentAge: Int
         let country: String
+    }
+    
+    init(from decoder: Decoder) throws {
+        do {
+            let employee = try EmployeeV2(from: decoder)
+            self.init(id: employee.id, name: employee.name, age: employee.currentAge, country: employee.country)
+        } catch {
+            let employee = try EmployeeV1(from: decoder)
+            self.init(id: employee.id, name: employee.name, age: employee.age, country: "")
+        }
     }
 }
 
