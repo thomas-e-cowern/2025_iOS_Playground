@@ -13,6 +13,21 @@ struct Employee: Decodable {
     var age: Int
 }
 
+extension Employee: Decodable {
+    private struct EmployeeV1: Decodable {
+        let id: Int
+        let name: String
+        let age: Int
+    }
+
+    private struct EmployeeV2: Decodable {
+        let id: Int
+        let name: String
+        let currentAge: Int
+        let country: String
+    }
+}
+
 let json = """
 {
     "id": 13,
