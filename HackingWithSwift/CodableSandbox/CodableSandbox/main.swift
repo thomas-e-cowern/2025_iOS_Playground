@@ -11,6 +11,7 @@ struct Employee {
     var id: Int
     var name: String
     var age: Int
+    var country: String?
 }
 
 extension Employee: Decodable {
@@ -51,5 +52,4 @@ let jsonData = Data(json.utf8)
 let decoder = JSONDecoder()
 let employee = try decoder.decode(Employee.self, from: jsonData)
 
-print("\(employee.name) is \(employee.age) years old.")
-
+print("\(employee.name) is \(employee.age) years old. Country: \(employee.country ?? "N/A")")
