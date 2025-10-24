@@ -16,6 +16,13 @@ struct ContentView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
+                
+                Image(uiImage: UIImage(named: "welcome") ?? UIImage())
+                    .resizable()
+                    .scaledToFit()
+                    .cornerRadius(10)
+                    .accessibilityHidden(true)
+                
                 Text("Welcome to \(Text("AwesomeApp").foregroundColor(.accentColor))")
                     .multilineTextAlignment(.center)
                     .font(.largeTitle.bold())
