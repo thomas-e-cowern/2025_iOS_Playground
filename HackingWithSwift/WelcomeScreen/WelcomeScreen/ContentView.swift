@@ -14,31 +14,39 @@ struct ContentView: View {
     @State private var features: [Feature] = []
     
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Welcome to AwesomeApp")
-                .multilineTextAlignment(.center)
-                .font(.largeTitle.bold())
-
-            ForEach(features) { feature in
-                HStack {
-                    Image(systemName: feature.image)
-                        .frame(width: 44)
-                        .font(.title)
-                        .foregroundColor(.blue)
-                        .accessibilityHidden(true)
-
-                    VStack(alignment: .leading) {
-                        Text(feature.title)
-                            .font(.headline)
-
-                        Text(feature.description)
-                            .foregroundColor(.secondary)
+        ScrollView {
+            VStack(spacing: 20) {
+                Text("Welcome to \(Text("AwesomeApp").foregroundColor(.accentColor))")
+                    .multilineTextAlignment(.center)
+                    .font(.largeTitle.bold())
+                
+                ForEach(features) { feature in
+                    HStack {
+                        Image(systemName: feature.image)
+                            .frame(width: 44)
+                            .font(.title)
+                            .foregroundColor(.blue)
+                            .accessibilityHidden(true)
+                        
+                        VStack(alignment: .leading) {
+                            Text(feature.title)
+                                .font(.headline)
+                            
+                            Text(feature.description)
+                                .foregroundColor(.secondary)
+                        }
+                        .accessibilityElement(children: .combine)
                     }
-                    .accessibilityElement(children: .combine)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-            }   //: End of ForEach
-            
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }   //: End of ForEach
+            }
+            .padding()
+            .onAppear {
+                features = loadJSONData(filename: "features") ?? []
+            }
+        }
+        
+        VStack {
             Text("Any important small print here.")
                 .font(.footnote)
                 .foregroundColor(.secondary)
@@ -48,12 +56,8 @@ struct ContentView: View {
                 .background(Color.blue)
                 .foregroundColor(.white)
                 .cornerRadius(10)
-            
         }
         .padding()
-        .onAppear {
-            features = loadJSONData(filename: "features") ?? []
-        }
     }
     
     func loadJSONData(filename: String) -> [Feature]? {
@@ -78,4 +82,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .accentColor(Color(red: 0.9, green: 0, blue: 0, opacity: 1))
 }
