@@ -1,0 +1,17 @@
+[
+    {
+        "title": "Great feature",
+        "description": "This one is great, you're going to love using it so much.",
+        "image": "pencil.circle"
+    },
+    {
+        "title": "Second feature",
+        "description": "If you liked the first one, wait until you see this.",
+        "image": "sun.max"
+    },
+    {
+        "title": "One last feature",
+        "description": "It's tempting to write a lot of text here, but please don't.",
+        "image": "keyboard"
+    }
+]
