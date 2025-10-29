@@ -9,9 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        CustomerListView(customers: Customer.sampleCustomers)
-        .padding()
+        VStack {
+            CustomerListView(customers: Customer.sampleCustomers)
+                .navigationDestination(for: Customer.self) { customer in
+                    CustomerDetailVIew(customer: customer)
+                }
+        }
         .navigationTitle("Customer List Screen")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
