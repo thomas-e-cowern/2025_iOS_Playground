@@ -14,7 +14,7 @@ struct CustomerListView: View {
     var body: some View {
         List {
             ForEach(customers) { customer in
-                Text(customer.name)
+                CustomerCellView(customer: customer)
             }
         }
     }
