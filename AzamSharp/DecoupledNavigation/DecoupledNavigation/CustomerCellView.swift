@@ -12,7 +12,10 @@ struct CustomerCellView: View {
     let customer: Customer
     
     var body: some View {
-        Text(customer.name)
+        VStack(alignment: .leading) {
+            Text(customer.name)
+            Text(customer.address)
+        }
     }
 }
 
