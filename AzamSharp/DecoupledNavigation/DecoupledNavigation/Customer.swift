@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Customer {
+struct Customer: Identifiable {
     let id = UUID()
     let name: String
 }
