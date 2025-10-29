@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct CustomerListView: View {
+    
+    let customers: [Customer]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            ForEach(customers) { customer in
+                Text(customer.name)
+            }
+        }
     }
 }
 
 #Preview {
-    CustomerListView()
+    CustomerListView(customers: Customer.sampleCustomers)
 }
