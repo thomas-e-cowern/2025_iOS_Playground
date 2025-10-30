@@ -7,9 +7,22 @@
 
 import SwiftUI
 
+
 struct DataHeaderView: View {
-    fileprivate func nameHeaderTextView() -> HStack<TupleView<(VStack<TupleView<(some View, some View)>>, Spacer, VStack<TupleView<(Text, Button<some View>)>>)>> {
-        return HStack {
+    
+    @Environment(DateManager.self) var dateManager
+    
+    var body: some View {
+        ZStack {
+            VStack {
+                nameHeaderTextView()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func nameHeaderTextView() -> HStack<TupleView<(VStack<TupleView<(some View, some View)>>, Spacer, VStack<TupleView<(Text, Button<some View>)>>)>> {
+        HStack {
             VStack(alignment: .listRowSeparatorLeading, spacing: 0) {
                 Text("Hi Tom")
                     .font(.title)
@@ -17,7 +30,7 @@ struct DataHeaderView: View {
                     .foregroundStyle(.black)
                     .padding(4)
                 
-                Text("Whats up today?")
+                Text(dateManager.selectedDate == Calendar.current.startOfDay(for: Date()) ? "Whats up today?" : "Planning for the future")
                     .font(.caption)
                     .fontWeight(.light)
                     .foregroundStyle(.black)
@@ -26,14 +39,17 @@ struct DataHeaderView: View {
             
             Spacer()
             
-            VStack(alignment: .trailing, spacing: 0) {
-                Text("dataManager.selectedDate.monthToString()")
+            VStack(alignment: .trailing, spacing: 10) {
+                Text(dateManager.selectedDate == Calendar.current.startOfDay(for: Date()) ? "Whats up today?" : "Planning for the future")
                     .font(.system(size: 10))
                     .fontWeight(.heavy)
                     .foregroundStyle(.black)
                 
                 Button {
-                    // More to come...
+                    withAnimation(.linear(duration: 0.2)) {
+                        dateManager.selectToday()
+                    }
+                    
                 } label: {
                     Text("Today")
                         .font(.system(size: 16))
@@ -46,16 +62,9 @@ struct DataHeaderView: View {
             }
         }
     }
-    
-    var body: some View {
-        ZStack {
-            VStack {
-                nameHeaderTextView()
-            }
-        }
-    }
 }
 
 #Preview {
     DataHeaderView()
+        .environment(DateManager())
 }
