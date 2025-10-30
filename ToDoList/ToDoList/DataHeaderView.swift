@@ -14,8 +14,16 @@ struct DataHeaderView: View {
                 HStack {
                     VStack(alignment: .listRowSeparatorLeading, spacing: 0) {
                         Text("Hi Tom")
+                            .font(.title)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.black)
+                            .padding(4)
                         
                         Text("Whats up today?")
+                            .font(.caption)
+                            .fontWeight(.light)
+                            .foregroundStyle(.black)
+                            .padding(4)
                     }
                     
                     Spacer()
