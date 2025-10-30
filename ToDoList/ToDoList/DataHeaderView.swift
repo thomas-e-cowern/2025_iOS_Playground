@@ -40,7 +40,7 @@ struct DataHeaderView: View {
             Spacer()
             
             VStack(alignment: .trailing, spacing: 10) {
-                Text(dateManager.selectedDate == Calendar.current.startOfDay(for: Date()) ? "Whats up today?" : "Planning for the future")
+                Text(dateManager.selectedDate.monthToString())
                     .font(.system(size: 10))
                     .fontWeight(.heavy)
                     .foregroundStyle(.black)
