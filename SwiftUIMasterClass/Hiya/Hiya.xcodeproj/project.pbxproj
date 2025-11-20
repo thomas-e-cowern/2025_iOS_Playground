@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4D4A22A82ECF964A00FC24B1 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A22A72ECF964A00FC24B1 /* AppIcon.icon */; };
+		4D4A22AD2ECF966200FC24B1 /* LaunchScreenIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A22A92ECF966200FC24B1 /* LaunchScreenIcon.png */; };
+		4D4A22AE2ECF966200FC24B1 /* LaunchScreenIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A22AA2ECF966200FC24B1 /* LaunchScreenIcon@2x.png */; };
+		4D4A22AF2ECF966200FC24B1 /* LaunchScreenIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A22AB2ECF966200FC24B1 /* LaunchScreenIcon@3x.png */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		4D4A227B2ECF918300FC24B1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,11 +34,28 @@
 		4D4A226D2ECF918200FC24B1 /* Hiya.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hiya.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D4A227A2ECF918300FC24B1 /* HiyaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HiyaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D4A22842ECF918300FC24B1 /* HiyaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HiyaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D4A22A72ECF964A00FC24B1 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+		4D4A22A92ECF966200FC24B1 /* LaunchScreenIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreenIcon.png; sourceTree = "<group>"; };
+		4D4A22AA2ECF966200FC24B1 /* LaunchScreenIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchScreenIcon@2x.png"; sourceTree = "<group>"; };
+		4D4A22AB2ECF966200FC24B1 /* LaunchScreenIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchScreenIcon@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4D4A22982ECF931A00FC24B1 /* Exceptions for "Hiya" folder in "Hiya" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 4D4A226C2ECF918200FC24B1 /* Hiya */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4D4A226F2ECF918200FC24B1 /* Hiya */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4D4A22982ECF931A00FC24B1 /* Exceptions for "Hiya" folder in "Hiya" target */,
+			);
 			path = Hiya;
 			sourceTree = "<group>";
 		};
@@ -79,6 +103,8 @@
 				4D4A227D2ECF918300FC24B1 /* HiyaTests */,
 				4D4A22872ECF918300FC24B1 /* HiyaUITests */,
 				4D4A226E2ECF918200FC24B1 /* Products */,
+				4D4A22A72ECF964A00FC24B1 /* AppIcon.icon */,
+				4D4A22AC2ECF966200FC24B1 /* launch-screen */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,6 +116,16 @@
 				4D4A22842ECF918300FC24B1 /* HiyaUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		4D4A22AC2ECF966200FC24B1 /* launch-screen */ = {
+			isa = PBXGroup;
+			children = (
+				4D4A22A92ECF966200FC24B1 /* LaunchScreenIcon.png */,
+				4D4A22AA2ECF966200FC24B1 /* LaunchScreenIcon@2x.png */,
+				4D4A22AB2ECF966200FC24B1 /* LaunchScreenIcon@3x.png */,
+			);
+			path = "launch-screen";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +248,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D4A22A82ECF964A00FC24B1 /* AppIcon.icon in Resources */,
+				4D4A22AD2ECF966200FC24B1 /* LaunchScreenIcon.png in Resources */,
+				4D4A22AE2ECF966200FC24B1 /* LaunchScreenIcon@2x.png in Resources */,
+				4D4A22AF2ECF966200FC24B1 /* LaunchScreenIcon@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,11 +440,11 @@
 				DEVELOPMENT_TEAM = 56F54J4H3N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Hiya/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -432,11 +472,11 @@
 				DEVELOPMENT_TEAM = 56F54J4H3N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Hiya/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
