@@ -12,11 +12,13 @@ struct ContentView: View {
     
     private var largeLanguageModel = SystemLanguageModel.default
     
+    @State private var response: String = ""
+    
     var body: some View {
         VStack {
             switch largeLanguageModel.availability {
             case .available:
-                Text("Available")
+                Text(response)
             case .unavailable(.deviceNotEligible):
                 Text("Youre device is not AppleIntelligence capable")
             case .unavailable(.appleIntelligenceNotEnabled):
