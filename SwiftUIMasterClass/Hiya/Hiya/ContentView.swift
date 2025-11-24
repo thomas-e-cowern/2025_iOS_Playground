@@ -36,7 +36,16 @@ struct ContentView: View {
             Spacer()
             
             Button {
-                // More to come...
+                Task {
+                    let prompt = "Say hi in a fun way"
+                    
+                    do {
+                        let reply = try await session.respond(to: prompt)
+                        response = reply.content
+                    } catch {
+                        response = "Failed to get response: \(error.localizedDescription)"
+                    }
+                }
             } label: {
                 Text("Welcome")
                     .font(.largeTitle)
