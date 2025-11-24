@@ -33,6 +33,18 @@ struct ContentView: View {
             }
             
             Spacer()
+            
+            Button {
+                // More to come...
+            } label: {
+                Text("Welcome")
+                    .font(.largeTitle)
+                    .padding()
+            }
+            .buttonStyle(.borderedProminent)
+            .buttonSizing(.flexible)
+            .glassEffect(.regular.interactive())
+
         }
         .padding()
     }
