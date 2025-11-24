@@ -11,6 +11,7 @@ import FoundationModels
 struct ContentView: View {
     
     private var largeLanguageModel = SystemLanguageModel.default
+    private var session = LanguageModelSession()
     
     @State private var response: String = ""
     
