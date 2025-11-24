@@ -47,6 +47,7 @@ struct ContentView: View {
 
         }
         .padding()
+        .tint(.purple)
     }
 }
 
