@@ -23,6 +23,8 @@ struct ContentView: View {
             switch largeLanguageModel.availability {
             case .available:
                 Text(response)
+                    .multilineTextAlignment(.center)
+                    .font(.largeTitle.bold())
             case .unavailable(.deviceNotEligible):
                 Text("Youre device is not AppleIntelligence capable")
             case .unavailable(.appleIntelligenceNotEnabled):
