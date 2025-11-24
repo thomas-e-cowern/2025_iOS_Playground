@@ -16,6 +16,9 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            
+            Spacer()
+            
             switch largeLanguageModel.availability {
             case .available:
                 Text(response)
@@ -28,6 +31,8 @@ struct ContentView: View {
             case .unavailable(_):
                 Text("The AI feature is not available for an unknown reason")
             }
+            
+            Spacer()
         }
         .padding()
     }
