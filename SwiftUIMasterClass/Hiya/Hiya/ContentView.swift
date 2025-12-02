@@ -14,6 +14,7 @@ struct ContentView: View {
     private var session = LanguageModelSession()
     
     @State private var response: String = ""
+    @State private var isLoading: Bool = false
     
     var body: some View {
         VStack {
@@ -46,6 +47,9 @@ struct ContentView: View {
             
             Button {
                 Task {
+                    isLoading = true
+                    defer { isLoading = false }
+                    
                     let prompt = "Say hi in a fun way"
                     
                     do {
