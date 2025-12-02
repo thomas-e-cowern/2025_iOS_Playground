@@ -29,7 +29,7 @@ struct ContentView: View {
                         .font(.title)
                 } else {
                     Text(response)
-                        .foregroundStyle(.tertiary)
+                        .font(.largeTitle)
                         .multilineTextAlignment(.center)
                 }
             case .unavailable(.deviceNotEligible):
