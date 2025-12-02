@@ -24,6 +24,13 @@ struct ContentView: View {
             case .available:
                 if response.isEmpty {
                     Text("Tap the button to get a fun response.")
+                        .foregroundStyle(.tertiary)
+                        .multilineTextAlignment(.center)
+                        .font(.title)
+                } else {
+                    Text(response)
+                        .foregroundStyle(.tertiary)
+                        .multilineTextAlignment(.center)
                 }
             case .unavailable(.deviceNotEligible):
                 Text("Youre device is not AppleIntelligence capable")
