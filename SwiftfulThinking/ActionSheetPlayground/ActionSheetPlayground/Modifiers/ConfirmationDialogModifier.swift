@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct confirmationDialogModifier<Actions: View>: ViewModifier {
+struct ConfirmationDialogModifier<Actions: View>: ViewModifier {
     @Binding var isPresented: Bool
     let title: Text
     let message: Text?
