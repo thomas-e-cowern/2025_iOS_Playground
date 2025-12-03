@@ -18,10 +18,24 @@ struct ContentView: View {
             } label: {
                 Text("Click me!")
             }
-            .confirmationDialog("Dialog Title", isPresented: $showConfirmationDialog) {
-                Text("Dialog Body")
-            }
-
+            Button("Delete Item") {
+                showConfirmationDialog = true
+                    }
+                    .confirmationDialog(
+                        Text("Confirm Deletion"),
+                        isPresented: $showConfirmationDialog,
+                        titleVisibility: .visible
+                    ) {
+                        Button("Delete", role: .destructive) {
+                            // Perform deletion action here
+                            print("Item deleted!")
+                        }
+                        Button("Cancel", role: .cancel) {
+                            // Dismiss dialog without action
+                        }
+                    } message: {
+                        Text("This action cannot be undone.")
+                    }
         }
         .padding()
     }
