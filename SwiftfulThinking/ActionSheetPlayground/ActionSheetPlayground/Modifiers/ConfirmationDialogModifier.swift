@@ -11,13 +11,14 @@ struct ConfirmationDialogModifier<Actions: View>: ViewModifier {
     @Binding var isPresented: Bool
     let title: Text
     let message: Text?
+    let titleVisibility: Visibility
     @ViewBuilder let actions: () -> Actions
     
     func body(content: Content) -> some View {
         content.confirmationDialog(
             title,
             isPresented: $isPresented,
-            titleVisibility: .automatic
+            titleVisibility: titleVisibility
         ) {
             actions()
         } message: {
