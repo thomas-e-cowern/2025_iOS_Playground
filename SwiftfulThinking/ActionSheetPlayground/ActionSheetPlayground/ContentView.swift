@@ -8,12 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var showConfirmationDialog: Bool = false
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button {
+                showConfirmationDialog.toggle()
+            } label: {
+                Text("Click me!")
+            }
+            .confirmationDialog("Dialog Title", isPresented: $showConfirmationDialog) {
+                Text("Dialog Body")
+            }
+
         }
         .padding()
     }
