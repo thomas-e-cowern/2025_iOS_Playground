@@ -1,5 +1,5 @@
 //
-//  DeleteButton.swift
+//  CustomButton.swift
 //  ActionSheetPlayground
 //
 //  Created by Thomas Cowern on 12/4/25.
@@ -7,9 +7,11 @@
 
 import SwiftUI
 
-struct DeleteButton: View {
+struct CustomButton: View {
     var text: String
     var icon: String
+    var fontColor: Color
+    var backgroundColor: Color
     var clicked: (() -> Void)
     
     var body: some View {
@@ -19,16 +21,16 @@ struct DeleteButton: View {
                 
                 Image(systemName: icon)
             }
-            .foregroundColor(Color.red)
+            .foregroundColor(fontColor)
             .padding()
-            .background(Color.red.opacity(0.2))
+            .background(backgroundColor.opacity(0.2))
             .cornerRadius(16)
         }
     }
 }
 
 #Preview {
-    DeleteButton(text: "Delete", icon: "trash", clicked: {
-        print("Deleted...")
+    CustomButton(text: "Custom Button", icon: "star", fontColor: .green, backgroundColor: .green, clicked: {
+        print("Custom button has been clicked")
     })
 }
