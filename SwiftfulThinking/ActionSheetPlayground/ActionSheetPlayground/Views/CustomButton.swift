@@ -21,6 +21,7 @@ struct CustomButton: View {
                 
                 Image(systemName: icon)
             }
+            .frame(maxWidth: .infinity)
             .foregroundColor(fontColor)
             .padding()
             .background(backgroundColor.opacity(0.2))

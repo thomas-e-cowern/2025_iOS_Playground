@@ -19,6 +19,7 @@ struct DeleteButton: View {
                 
                 Image(systemName: "trash")
             }
+            .frame(maxWidth: .infinity)
             .foregroundColor(Color.red)
             .padding()
             .background(Color.red.opacity(0.2))
