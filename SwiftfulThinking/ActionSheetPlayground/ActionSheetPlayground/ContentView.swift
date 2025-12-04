@@ -49,6 +49,10 @@ struct ContentView: View {
                 } label: {
                     Text("Print something")
                 }
+                
+                DeleteButton(clicked: {
+                    print("Deleted from CV")
+                })
 
             }
             
