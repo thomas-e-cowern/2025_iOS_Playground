@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct DeleteButton: View {
-    var text: String
-    var icon: String
+//    var text: String
+//    var icon: String
     var clicked: (() -> Void)
     
     var body: some View {
         Button(action: clicked) {
             HStack {
-                Text(text)
+                Text("Delete")
                 
-                Image(systemName: icon)
+                Image(systemName: "trash")
             }
             .foregroundColor(Color.red)
             .padding()
@@ -28,7 +28,7 @@ struct DeleteButton: View {
 }
 
 #Preview {
-    DeleteButton(text: "Delete", icon: "trash", clicked: {
+    DeleteButton(clicked: {
         print("Deleted...")
     })
 }
