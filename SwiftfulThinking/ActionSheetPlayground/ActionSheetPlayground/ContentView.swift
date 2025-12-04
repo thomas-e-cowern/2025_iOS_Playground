@@ -11,6 +11,7 @@ struct ContentView: View {
     
     @State var showConfirmationDialog: Bool = false
     @State var showModifierDialog: Bool = false
+    @State var showSheet: Bool = false
     
     var body: some View {
         VStack {
@@ -60,6 +61,17 @@ struct ContentView: View {
                 })
 
             }
+            
+            Button {
+                showSheet.toggle()
+            } label: {
+                Text("Show custom sheet view")
+            }
+            .sheet(isPresented: $showSheet) {
+                CustomSheetView(title: "Custom Actions", message: "These are the custom actions that you can now take...")
+                    .presentationDetents([.fraction(0.30)])
+            }
+
             
 
         }
