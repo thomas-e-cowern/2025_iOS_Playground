@@ -43,7 +43,8 @@ struct ContentView: View {
             } label: {
                 Text("Show modifier dialog")
             }
-            .customConfirmationDialog(isPresented: $showModifierDialog, title: Text("Custom Modifier Title"), message: Text("This is the custom modifier message"), titleVisibility: .hidden) {
+            .customConfirmationDialog(isPresented: $showModifierDialog, title: Text("Custom Modifier Title"), message: Text("This is the custom modifier message"), titleVisibility: .visible) {
+                
                 Button {
                     print("Check this out")
                 } label: {
@@ -52,6 +53,10 @@ struct ContentView: View {
                 
                 DeleteButton(clicked: {
                     print("Deleted from CV")
+                })
+                
+                CustomButton(text: "Share", icon: "square.and.arrow.up", fontColor: .green, backgroundColor: .green.opacity(0.2), clicked: {
+                    print("Shared...")
                 })
 
             }
