@@ -11,11 +11,17 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
+                .font(.title)
             Text("Hello, world!")
+                .font(.headline)
+            Text("Using the context menu")
+                .font(.subheadline)
         }
         .padding()
+        .background(Color.blue)
+        .foregroundStyle(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        
     }
 }
 
