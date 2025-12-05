@@ -16,11 +16,6 @@ struct ContentView: View {
     var body: some View {
         VStack {
             
-            Image(systemName: "heart.fill")
-                .foregroundStyle(heartColor)
-                .font(.system(size: heartSize))
-                .padding()
-            
             VStack {
                 Image(systemName: "globe")
                     .font(.title)
@@ -71,7 +66,12 @@ struct ContentView: View {
                 }
                 
                 
-            })
+            }) // MARK: End of contextMenu
+            
+            Image(systemName: "heart.fill")
+                .foregroundStyle(heartColor)
+                .font(.system(size: heartSize))
+                .padding()
         }
 //        .contextMenu {
 //            Text("This should be the context menu")
