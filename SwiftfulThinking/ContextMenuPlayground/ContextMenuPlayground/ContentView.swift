@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var color: Color = .purple
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -18,7 +21,7 @@ struct ContentView: View {
                 .font(.subheadline)
         }
         .padding()
-        .background(Color.purple)
+        .background(color)
         .foregroundStyle(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .contextMenu(menuItems: {
@@ -29,10 +32,25 @@ struct ContentView: View {
             }
 
             Button {
-                print("You clicked button 2")
+                print("You changed the color")
+                if color == .purple {
+                    color = .red
+                } else {
+                    color = .purple
+                }
             } label: {
                 Text("Button 2")
             }
+            
+            Button {
+                print("You clicked the heart")
+            } label: {
+                HStack {
+                    Text("Heart me!")
+                    Image(systemName: "heart")
+                }
+            }
+
 
         })
 //        .contextMenu {
