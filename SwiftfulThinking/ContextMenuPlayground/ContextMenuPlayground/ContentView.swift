@@ -18,13 +18,22 @@ struct ContentView: View {
                 .font(.subheadline)
         }
         .padding()
-        .background(Color.blue)
+        .background(Color.purple)
         .foregroundStyle(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .contextMenu(menuItems: {
-            Text("Menu Item 1")
-            Text("Menu Item 2")
-            Text("Menu Item 3")
+            Button {
+                print("You clicked try me...")
+            } label: {
+                Label("Try me...", systemImage: "flame.fill")
+            }
+
+            Button {
+                print("You clicked button 2")
+            } label: {
+                Text("Button 2")
+            }
+
         })
 //        .contextMenu {
 //            Text("This should be the context menu")
