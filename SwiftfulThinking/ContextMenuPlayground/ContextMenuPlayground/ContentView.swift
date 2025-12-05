@@ -21,7 +21,14 @@ struct ContentView: View {
         .background(Color.blue)
         .foregroundStyle(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 8))
-        
+        .contextMenu(menuItems: {
+            Text("Menu Item 1")
+            Text("Menu Item 2")
+            Text("Menu Item 3")
+        })
+//        .contextMenu {
+//            Text("This should be the context menu")
+//        }
     }
 }
 
