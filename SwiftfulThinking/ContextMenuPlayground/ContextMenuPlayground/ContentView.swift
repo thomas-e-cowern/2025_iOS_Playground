@@ -11,13 +11,14 @@ struct ContentView: View {
     
     @State var color: Color = .purple
     @State var heartColor: Color = .red
+    @State var heartSize: CGFloat = 80
     
     var body: some View {
         VStack {
             
             Image(systemName: "heart.fill")
                 .foregroundStyle(heartColor)
-                .font(.system(size: 80))
+                .font(.system(size: heartSize))
                 .padding()
             
             VStack {
@@ -35,6 +36,11 @@ struct ContentView: View {
             .contextMenu(menuItems: {
                 Button {
                     print("You clicked try me...")
+                    if heartSize == 80 {
+                        heartSize = 160
+                    } else {
+                        heartSize = 80
+                    }
                 } label: {
                     Label("Try me...", systemImage: "flame.fill")
                 }
