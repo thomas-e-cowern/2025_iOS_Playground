@@ -10,6 +10,7 @@ import Foundation
 enum AppError: LocalizedError, Equatable, Identifiable {
     case networkError(String)
     case parsingError(String)
+    case connectionError(String)
     case unknownError
 
     var id: String { errorDescription ?? UUID().uuidString }
@@ -20,6 +21,8 @@ enum AppError: LocalizedError, Equatable, Identifiable {
             return "Network error: \(details)"
         case .parsingError(let details):
             return "Parsing failed: \(details)"
+        case .connectionError(let details):
+            return "There was an error connecting... \(details)"
         case .unknownError:
             return "An unknown error occurred."
         }
