@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @Environment(ErrorCenter.self) private var errorCenter
+    
     var body: some View {
         NavigationStack {
             List {
@@ -17,6 +19,10 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Home")
+            
+            Button("Trigger Conenction Error") {
+                errorCenter.handle(AppError.connectionError("We are unable to connect at this time. Please try again later."))
+            }
         }
         .globalErrorAlert()
     }
