@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct DetailsView: View {
+    @Environment(ErrorCenter.self) private var errorCenter
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 16) {
+            Button("Trigger Network Error") {
+                errorCenter.handle(AppError.networkError("No Internet"))
+            }
+
+            NavigationLink("Go deeper") {
+                DeepView()
+            }
+        }
+        .padding()
+        .navigationTitle("Details")
     }
 }
 
