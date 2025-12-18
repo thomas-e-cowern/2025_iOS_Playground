@@ -8,17 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List {
+                NavigationLink("Go to Details") {
+                    DetailsView()
+                }
+            }
+            .navigationTitle("Home")
         }
-        .padding()
+        .globalErrorAlert()
     }
 }
 
 #Preview {
     ContentView()
+        .environment(ErrorCenter())
 }
