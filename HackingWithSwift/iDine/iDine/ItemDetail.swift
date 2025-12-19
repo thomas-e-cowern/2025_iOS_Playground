@@ -13,13 +13,28 @@ struct ItemDetail: View {
     
     var body: some View {
         VStack {
-            Image(item.mainImage)
-            Text(item.name)
+            ZStack(alignment: .bottomTrailing) {
+                Image(item.mainImage)
+                    .resizable()
+                    .scaledToFit()
+                Text("Photo by \(item.photoCredit)")
+                    .padding(4)
+                    .background(.black)
+                    .foregroundStyle(.white)
+                    .offset(x: -5, y: -5)
+            }
+            Text(item.description)
+                .padding()
+            
+            Spacer()
         }
         .navigationTitle(item.name)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 #Preview {
-    ItemDetail(item: MenuItem.example)
+    NavigationStack {
+        ItemDetail(item: MenuItem.example)
+    }
 }
