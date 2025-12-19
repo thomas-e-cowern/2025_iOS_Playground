@@ -11,6 +11,8 @@ struct ItemRow: View {
     
     var item: MenuItem
     
+    let colors: [String: Color] = ["D": .purple, "G": .black, "N": .red, "S": .blue, "V": .green]
+    
     var body: some View {
         HStack(spacing: 10) {
             Image(item.thumbnailImage)
@@ -20,6 +22,18 @@ struct ItemRow: View {
                 Text(item.name)
                     .font(.headline)
                 Text("$\(item.price)")
+            }
+            
+            Spacer()
+            
+            ForEach(item.restrictions, id: \.self) { restriction in
+                Text(restriction)
+                    .font(.caption)
+                    .fontWeight(.bold)
+                    .padding(5)
+                    .background(colors[restriction, default: .black])
+                    .foregroundStyle(.white)
+                    .clipShape(Circle())
             }
         }
     }
