@@ -31,8 +31,10 @@ struct ContentView: View {
     }
 }
 
+
 #Preview {
     NavigationStack {
         ContentView()
     }
+    .environment(Order())
 }
