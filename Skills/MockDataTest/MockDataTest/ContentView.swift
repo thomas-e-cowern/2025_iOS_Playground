@@ -9,20 +9,21 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.dataService) private var dataService
-    @State private var items: [Item] = []
+//    @State private var items: [Item] = []
+    @State private var products: [Product] = []
     @State private var isLoading = false
 
     var body: some View {
         VStack {
             List {
-                ForEach(items) { item in
-                    Text(item.name)
+                ForEach(products) { product in
+                    Text(product.title)
                 }
             }
         }
         .task {
             isLoading = true
-            items = try! await dataService.fetchItems()
+            products = try! await dataService.fetchItems()
             isLoading = false
         }
     }

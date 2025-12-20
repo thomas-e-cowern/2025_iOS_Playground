@@ -12,9 +12,11 @@ struct MockDataTestApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                #if !DEBUG
-                .environment(\.dataService, RealDataService())
-                #endif
+//                .environment(\.dataService, RealDataService())
+                .environment(\.dataService, MockDataService())
+//                #if !DEBUG
+//                .environment(\.dataService, RealDataService())
+//                #endif
         }
     }
 }

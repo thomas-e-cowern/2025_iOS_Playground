@@ -6,7 +6,11 @@
 //
 
 
+//protocol DataService {
+//    func fetchItems() async throws -> [Item]
+//    // Add other API methods here (e.g., saveItem, deleteItem)
+//}
+
 protocol DataService {
-    func fetchItems() async throws -> [Item]
-    // Add other API methods here (e.g., saveItem, deleteItem)
+    func fetchItems() async throws -> [Product]
 }
