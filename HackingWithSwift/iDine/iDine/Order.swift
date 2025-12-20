@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@Observable
 class Order {
     var items = [MenuItem]()
 
