@@ -27,9 +27,11 @@ struct OrderView: View {
                         Text("Your order is empty")
                     } else {
                         ForEach(order.items) { item in
-                            Text(item.name)
-                            Spacer()
-                            Text("$\(item.price)")
+                            HStack {
+                                Text(item.name)
+                                Spacer()
+                                Text("$\(item.price)")
+                            }
                         }
                     }
                 }

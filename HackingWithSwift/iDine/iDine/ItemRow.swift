@@ -41,5 +41,4 @@ struct ItemRow: View {
 
 #Preview {
     ItemRow(item: MenuItem.example)
-        .environment(Order())
 }
