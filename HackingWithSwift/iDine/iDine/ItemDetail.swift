@@ -11,6 +11,8 @@ struct ItemDetail: View {
     
     var item: MenuItem
     
+    @Environment(Order.self) private var order
+    
     var body: some View {
         VStack {
             ZStack(alignment: .bottomTrailing) {
@@ -26,6 +28,13 @@ struct ItemDetail: View {
             Text(item.description)
                 .padding()
             
+            Button {
+                order.add(item: item)
+            } label: {
+                Text("Add To Order")
+            }
+
+            
             Spacer()
         }
         .navigationTitle(item.name)
@@ -36,5 +45,6 @@ struct ItemDetail: View {
 #Preview {
     NavigationStack {
         ItemDetail(item: MenuItem.example)
+            .environment(Order())
     }
 }
