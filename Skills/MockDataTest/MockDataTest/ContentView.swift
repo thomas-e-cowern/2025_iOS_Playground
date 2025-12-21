@@ -17,7 +17,7 @@ struct ContentView: View {
         VStack {
             List {
                 ForEach(products) { product in
-                    Text(product.title)
+                    ProductRow(product: product)
                 }
             }
         }
