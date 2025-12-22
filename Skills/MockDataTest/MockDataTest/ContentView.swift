@@ -9,23 +9,23 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.dataService) private var dataService
-//    @State private var items: [Item] = []
     @State private var products: [Product] = []
     @State private var isLoading = false
+    var jsonProducts: [Product] = load("Products")
 
     var body: some View {
         VStack {
             List {
-                ForEach(products) { product in
+                ForEach(jsonProducts) { product in
                     ProductRow(product: product)
                 }
             }
         }
-        .task {
-            isLoading = true
-            products = try! await dataService.fetchItems()
-            isLoading = false
-        }
+//        .task {
+//            isLoading = true
+//            products = try! await dataService.fetchItems()
+//            isLoading = false
+//        }
     }
 }
 
