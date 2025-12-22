@@ -13,7 +13,9 @@ struct MockDataTestApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.dataService, RealDataService())
-//                .environment(\.dataService, MockDataService())
+            #if DEBUG
+                .environment(\.dataService, MockDataService())
+            #endif
         }
     }
 }

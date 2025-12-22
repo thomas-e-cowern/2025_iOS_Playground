@@ -12,11 +12,11 @@ class MockDataService: DataService {
         // Simulate network delay
         try? await Task.sleep(for: .seconds(1))
         return [
-            Product(id: 11, title: "Classic Red Baseball Cap", slug: "Classic Red Baseball Cap", price: 35, description: "Elevate your casual wardrobe with this timeless red baseball cap. Crafted from durable fabric, it features a comfortable fit with an adjustable strap at the back, ensuring one size fits all. Perfect for sunny days or adding a sporty touch to your outfit.", category: Category(id: 1, name: "change", slug: "change", image: "cBuLvBi"), images: [
-                "cBuLvBi", "kKc9A5p", "N1GkCIR"
+            Product(id: 11, title: "Classic Red Baseball Cap", slug: "Classic Red Baseball Cap", price: 35, description: "Elevate your casual wardrobe with this timeless red baseball cap. Crafted from durable fabric, it features a comfortable fit with an adjustable strap at the back, ensuring one size fits all. Perfect for sunny days or adding a sporty touch to your outfit.", category: Category(id: 1, name: "change", slug: "change", image: "https://i.imgur.com/QkIa5tT.jpeg"), images: [
+                "https://i.imgur.com/cBuLvBi.jpeg", "https://i.imgur.com/N1GkCIR.jpeg", "https://i.imgur.com/kKc9A5p.jpeg"
             ]),
-            Product(id: 12, title: "Classic Black Baseball Cap", slug: "Classic Black Baseball Cap", price: 58, description: "Elevate your casual wear with this timeless black baseball cap. Made with high-quality, breathable fabric, it features an adjustable strap for the perfect fit. Whether you’re out for a jog or just running errands, this cap adds a touch of style to any outfit.", category: Category(id: 1, name: "change", slug: "change", image: "KeqG6r4"), images: [
-                "KeqG6r4", "xGQOw3p", "https://i.imgur.com/oO5OUjb.jpeg"
+            Product(id: 12, title: "Classic Black Baseball Cap", slug: "Classic Black Baseball Cap", price: 58, description: "Elevate your casual wear with this timeless black baseball cap. Made with high-quality, breathable fabric, it features an adjustable strap for the perfect fit. Whether you’re out for a jog or just running errands, this cap adds a touch of style to any outfit.", category: Category(id: 1, name: "change", slug: "change", image: "https://i.imgur.com/QkIa5tT.jpeg"), images: [
+                "https://i.imgur.com/KeqG6r4.jpeg", "https://i.imgur.com/xGQOw3p.jpeg", "https://i.imgur.com/oO5OUjb.jpeg"
             ])
         ]
     }
