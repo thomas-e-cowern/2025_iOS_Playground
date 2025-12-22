@@ -9,6 +9,7 @@ import Foundation
 
 class RealDataService: DataService {
     func fetchItems() async throws -> [Product] {
+        print("Inside RealDataService")
         guard let url = URL(string: "https://api.escuelajs.co/api/v1/products/") else {
             throw URLError(.badURL)
         }
