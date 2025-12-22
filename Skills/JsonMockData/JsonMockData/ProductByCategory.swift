@@ -18,16 +18,20 @@ struct ProductByCategory: View {
             List {
                 ForEach(products) { product in
                     HStack {
-                        AsyncImage(url: URL(string: product.images.first ?? "")) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        } placeholder: {
-                            ProgressView()
+                        NavigationLink {
+                            ProductDetail(product: product)
+                        } label: {
+                            AsyncImage(url: URL(string: product.images.first ?? "")) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                            } placeholder: {
+                                ProgressView()
+                            }
+                            .frame(width: 80, height: 80)
+                            Text(product.title)
+                                .font(.title)
                         }
-                        .frame(width: 80, height: 80)
-                        Text(product.title)
-                            .font(.title)
                     }
                 }
             }
@@ -37,5 +41,7 @@ struct ProductByCategory: View {
 }
 
 #Preview {
-    ProductByCategory(category: Category(id: 1, name: "Rocks", slug: "rocks", image: "https://picsum.photos/200"))
+    NavigationStack {
+        ProductByCategory(category: Category(id: 1, name: "Rocks", slug: "rocks", image: "https://picsum.photos/200"))
+    }
 }
