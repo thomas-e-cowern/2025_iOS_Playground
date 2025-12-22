@@ -10,14 +10,17 @@ import SwiftUI
 struct ContentView: View {
     
     @State var products: [Product] = load("products.json")
+    @State var categories: [Category] = load("categories.json")
     
     var body: some View {
         NavigationStack {
             VStack {
                 List {
-                    ForEach(products) { product in
-                        HStack {
-                            AsyncImage(url: URL(string: product.images.first ?? "")) { image in
+                    ForEach(categories) { category in
+                        NavigationLink {
+                            ProductByCategory(category: category)
+                        } label: {
+                            AsyncImage(url: URL(string: category.image)) { image in
                                 image
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
@@ -25,17 +28,19 @@ struct ContentView: View {
                                 ProgressView()
                             }
                             .frame(width: 80, height: 80)
-                            Text(product.title)
+                            Text(category.name)
                                 .font(.title)
                         }
                     }
                 }
             }
-            .navigationTitle("Products")
+            .navigationTitle("Categories")
         }
     }
 }
 
 #Preview {
-    ContentView()
+    NavigationStack {
+        ContentView()
+    }
 }
