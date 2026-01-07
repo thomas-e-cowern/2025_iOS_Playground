@@ -48,3 +48,28 @@ struct ContentView: View {
         ContentView()
     }
 }
+
+struct LinkViewModifier<Destination: View>: ViewModifier {
+    
+    @Binding var isPresented: Bool
+    let onDismiss: (() -> Void)?
+    @ViewBuilder var destination: () -> Destination
+    
+    init(isPresented: Binding<Bool>, onDismiss: (() -> Void)? = nil, destination: @escaping () -> Destination) {
+        self._isPresented = isPresented
+        self.onDismiss = onDismiss
+        self.destination = destination
+    }
+    
+    func body(content: Content) -> some View {
+        content
+            .navigationDestination(isPresented: $isPresented) {
+                destination()
+            }
+            .onChange(of: isPresented) { _, newValue in
+                if !isPresented {
+                    onDismiss?()
+                }
+            }
+    }
+}
