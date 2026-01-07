@@ -30,8 +30,11 @@ struct ContentView: View {
                 Label("Navigate", systemImage: "arrow.right")
             }
             .linkTarget(isPresented: $isPresented) {
+                print("Dismissed")
+            } destination: {
                 DestinationView()
             }
+
 
         }
         .padding()
