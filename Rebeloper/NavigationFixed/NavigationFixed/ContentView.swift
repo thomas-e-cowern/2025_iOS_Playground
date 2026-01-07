@@ -10,34 +10,40 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var isPresented: Bool = false
+    @State private var names: [String] = ["Jerry", "Ken", "Diana", "Sophie", "Maria", "Michael", "Sam", "Lila"]
     
     var body: some View {
-        VStack {
+        NavigationStack {
+            VStack {
+                List(names, id: \.self) { name in
+                    Button {
+                        isPresented.toggle()
+                    } label: {
+                        Label(name, systemImage: "arrow.right")
+                    }
+                }
+                .linkTarget(isPresented: $isPresented) {
+                    print("Dismissed")
+                } destination: {
+                    Text(name)
+                }
+            }
+        }
+        
+//        VStack {
 //            Button {
 //                isPresented.toggle()
 //            } label: {
-//                Label("Click here....", systemImage: "house")
+//                Label("Navigate", systemImage: "arrow.right")
 //            }
-//            .sheet(isPresented: $isPresented) {
+//            .linkTarget(isPresented: $isPresented) {
 //                print("Dismissed")
-//            } content: {
+//            } destination: {
 //                DestinationView()
 //            }
-            
-            Button {
-                isPresented.toggle()
-            } label: {
-                Label("Navigate", systemImage: "arrow.right")
-            }
-            .linkTarget(isPresented: $isPresented) {
-                print("Dismissed")
-            } destination: {
-                DestinationView()
-            }
-
-
-        }
-        .padding()
+//        }
+        
+//        .padding()
     }
 }
 
@@ -65,7 +71,7 @@ struct LinkViewModifier<Destination: View>: ViewModifier {
                 destination()
             }
             .onChange(of: isPresented) { _, newValue in
-                if !isPresented {
+                if !newValue {
                     onDismiss?()
                 }
             }
@@ -81,3 +87,4 @@ extension View {
         modifier(LinkViewModifier(isPresented: isPresented, onDismiss: onDismiss, destination: destination))
     }
 }
+
