@@ -13,21 +13,33 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+//            Button {
+//                isPresented.toggle()
+//            } label: {
+//                Label("Click here....", systemImage: "house")
+//            }
+//            .sheet(isPresented: $isPresented) {
+//                print("Dismissed")
+//            } content: {
+//                DestinationView()
+//            }
+            
             Button {
                 isPresented.toggle()
             } label: {
-                Label("Click here....", systemImage: "house")
+                Label("Navigate", systemImage: "arrow.right")
             }
-            .sheet(isPresented: $isPresented) {
-                print("Dismissed")
-            } content: {
+            .navigationDestination(isPresented: $isPresented) {
                 DestinationView()
             }
+
         }
         .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    NavigationStack {
+        ContentView()
+    }
 }
