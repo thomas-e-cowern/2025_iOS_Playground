@@ -29,13 +29,8 @@ struct ContentView: View {
             } label: {
                 Label("Navigate", systemImage: "arrow.right")
             }
-            .navigationDestination(isPresented: $isPresented) {
+            .linkTarget(isPresented: $isPresented) {
                 DestinationView()
-            }
-            .onChange(of: isPresented) { _, newValue in
-                if !isPresented {
-                    print("Dismissed")
-                }
             }
 
         }
