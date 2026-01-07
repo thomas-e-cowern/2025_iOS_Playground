@@ -73,3 +73,13 @@ struct LinkViewModifier<Destination: View>: ViewModifier {
             }
     }
 }
+
+extension View {
+    func linkTarget<Destination: View>(
+        isPresented: Binding<Bool>,
+        onDismiss: (() -> Void)? = nil,
+        @ViewBuilder destination: @escaping () -> Destination
+    ) -> some View {
+        modifier(LinkViewModifier(isPresented: isPresented, onDismiss: onDismiss, destination: destination))
+    }
+}
