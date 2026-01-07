@@ -13,37 +13,37 @@ struct ContentView: View {
     @State private var names: [String] = ["Jerry", "Ken", "Diana", "Sophie", "Maria", "Michael", "Sam", "Lila"]
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                List(names, id: \.self) { name in
-                    Button {
-                        isPresented.toggle()
-                    } label: {
-                        Label(name, systemImage: "arrow.right")
-                    }
-                }
-                .linkTarget(isPresented: $isPresented) {
-                    print("Dismissed")
-                } destination: {
-                    Text(name)
-                }
+//        NavigationStack {
+//            VStack {
+//                List(names, id: \.self) { name in
+//                    Button {
+//                        isPresented.toggle()
+//                    } label: {
+//                        Label(name, systemImage: "arrow.right")
+//                    }
+//                }
+//                .linkTarget(isPresented: $isPresented) {
+//                    print("Dismissed")
+//                } destination: {
+//                    Text(name)
+//                }
+//            }
+//        }
+//        
+        VStack {
+            Button {
+                isPresented.toggle()
+            } label: {
+                Label("Navigate", systemImage: "arrow.right")
+            }
+            .linkTarget(isPresented: $isPresented) {
+                print("Dismissed")
+            } destination: {
+                DestinationView()
             }
         }
         
-//        VStack {
-//            Button {
-//                isPresented.toggle()
-//            } label: {
-//                Label("Navigate", systemImage: "arrow.right")
-//            }
-//            .linkTarget(isPresented: $isPresented) {
-//                print("Dismissed")
-//            } destination: {
-//                DestinationView()
-//            }
-//        }
-        
-//        .padding()
+        .padding()
     }
 }
 
