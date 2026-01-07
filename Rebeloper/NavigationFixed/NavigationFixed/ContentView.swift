@@ -18,6 +18,11 @@ struct ContentView: View {
             } label: {
                 Label("Click here....", systemImage: "house")
             }
+            .sheet(isPresented: $isPresented) {
+                print("Dismissed")
+            } content: {
+                DestinationView()
+            }
         }
         .padding()
     }
