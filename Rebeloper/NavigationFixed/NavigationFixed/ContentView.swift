@@ -32,6 +32,11 @@ struct ContentView: View {
             .navigationDestination(isPresented: $isPresented) {
                 DestinationView()
             }
+            .onChange(of: isPresented) { _, newValue in
+                if !isPresented {
+                    print("Dismissed")
+                }
+            }
 
         }
         .padding()
