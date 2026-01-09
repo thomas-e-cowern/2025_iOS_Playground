@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct AdvancedRoutingApp: App {
+    
+    @State private var routerManager = NavigationRouter()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                ContentView()
+            }
+            .environment(routerManager)
         }
     }
 }
+
