@@ -5,7 +5,7 @@
 //  Created by Thomas Cowern on 1/9/26.
 //
 
-import Foundation
+import SwiftUI
 
 enum Destination: Hashable {
     case tab(TabDestination)
@@ -15,8 +15,8 @@ enum Destination: Hashable {
 
 enum TabDestination: String, Hashable {
     case home
-    case calendar
-    case profile
+    case favorites
+    case settings
 }
 
 enum PushDestination: Hashable {
@@ -37,5 +37,25 @@ enum SheetDestination: Identifiable, Hashable {
         default:
             return "Home"
         }
+    }
+}
+
+@ViewBuilder
+func view(for destination: PushDestination) -> some View {
+    switch destination {
+    case .favoriteList:
+        Favorites()
+    case .settingsDetail(section: let section):
+        Settings()
+    }
+}
+
+@ViewBuilder
+func view(for destination: SheetDestination) -> some View {
+    switch destination {
+    case .favoriteList:
+        Favorites()
+    case .settingsDetail(section: let section):
+        Settings()
     }
 }
