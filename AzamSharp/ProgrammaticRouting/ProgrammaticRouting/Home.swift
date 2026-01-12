@@ -9,7 +9,12 @@ import SwiftUI
 
 struct Home: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            List(1...10, id: \.self) { index in
+                NavigationLink("Home \(index)", destination: Text("Home Page number \(index)"))
+            }
+            .navigationTitle("Home")
+        }
     }
 }
 
