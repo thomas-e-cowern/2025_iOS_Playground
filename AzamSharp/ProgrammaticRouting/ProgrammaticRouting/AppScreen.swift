@@ -33,7 +33,7 @@ extension AppScreen {
     var destination: some View {
         switch self {
         case .home:
-            Text("Home")
+            Home()
         case .favorites:
             Text("Favorites")
         case .settings:
