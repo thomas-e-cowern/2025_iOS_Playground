@@ -35,9 +35,9 @@ extension AppScreen {
         case .home:
             Home()
         case .favorites:
-            Text("Favorites")
+            Favorites()
         case .settings:
-            Text("Settings")
+            Settings()
         }
     }
 }
