@@ -9,10 +9,13 @@ import SwiftUI
 
 struct Favorites: View {
     
-    @State private var routes: [BirdRoute] = []
+    @Environment(Router.self) private var router
     
     var body: some View {
-        NavigationStack(path: $routes) {
+        
+        @Bindable var router = router
+        
+        NavigationStack(path: $router.birdRoutes) {
             VStack {
                 List(1...10, id: \.self) { index in
                     NavigationLink("Favorites \(index)", destination: Text("Favorites Page number \(index)"))
@@ -20,14 +23,14 @@ struct Favorites: View {
                 .navigationTitle("Favorites")
                 
                 Button("Go to details") {
-                    routes.append(.details(id: 2))
+                    router.birdRoutes.append(.details(id: 1))
                 }
                 .navigationDestination(for: BirdRoute.self) { route in
                     switch route {
                     case .home:
                         Home()
-                    case .details(id: 2):
-                        BirdView(bird: Birds.example[2])
+                    case .details(id: 1):
+                        BirdView(bird: Birds.example[1])
                     default:
                         Home()
                     }
@@ -39,4 +42,5 @@ struct Favorites: View {
 
 #Preview {
     Favorites()
+        .environment(Router())
 }
