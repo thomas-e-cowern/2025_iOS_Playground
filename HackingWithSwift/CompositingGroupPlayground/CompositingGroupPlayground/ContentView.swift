@@ -25,6 +25,8 @@ struct ContentView: View {
                 .frame(width: 200, height: 200)
                 .offset(x: -50, y: -50)
         }
+        .compositingGroup()
+        .opacity(0.25)
     }
 }
 
