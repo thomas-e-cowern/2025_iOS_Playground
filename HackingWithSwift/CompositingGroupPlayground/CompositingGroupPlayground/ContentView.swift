@@ -15,7 +15,7 @@ struct ContentView: View {
                 .foregroundStyle(.white)
                 .padding()
                 .background(.blue)
-                .clipped()
+                .compositingGroup()
                 .shadow(color: .black, radius: 5)
         }
         .padding()
