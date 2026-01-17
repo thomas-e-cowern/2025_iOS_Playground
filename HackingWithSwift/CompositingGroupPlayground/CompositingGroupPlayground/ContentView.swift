@@ -12,7 +12,7 @@ struct ContentView: View {
         ZStack {
             Circle()
                 .fill((Color(red: 1, green: 0, blue: 0)))
-                .frame(width: 300, height: 200)
+                .frame(width: 200, height: 200)
                 .offset(x: 0, y: 50)
             
             Circle()
@@ -25,7 +25,8 @@ struct ContentView: View {
                 .frame(width: 200, height: 200)
                 .offset(x: -50, y: -50)
         }
-        .compositingGroup()
+//        .compositingGroup()
+        .drawingGroup(opaque: false, colorMode: .nonLinear)
         .opacity(0.25)
     }
 }
